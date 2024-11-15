@@ -1,1 +1,17 @@
 @import './normalize-css.css';
+
+:root {
+  --color-primary: #FF4646;
+  --color-primary-10: #ff464610;
+  --color-dark: #181C29;
+  --color-white: #FFFFFF;
+  --color-white-40: #FFFFFF40;
+  --color-white-20: #FFFFFF20;
+  --color-purple: #4361FF;
+  --color-pink: #FF43F7;
+  --color-green: #06A44F;
+  --color-content-background: #ECF3F8;
+  --color-overlay: #181C2980;
+
+       
+}
