@@ -34,6 +34,7 @@
   font-weight: 600;
   line-height: 152%; /* 36.48px */
   letter-spacing: 3.84px;
+  text-transform: uppercase;
 }
 .header-3 {
   font-family: Montserrat;
@@ -227,5 +228,41 @@ body {
     row-gap: 12px;
     color: var(--color-white);
     text-align: center;
+  }
+}
+
+.about {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 648px;
+  padding: 60px 8px;
+
+  .about-block {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: var(--color-white);
+    overflow: hidden;
+
+    .about-block-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+      row-gap: 20px;
+
+      .text-caption {
+        color: var(--color-primary);
+      }
+
+      .text-p {
+        max-width: 426px;
+      }
+    }
+
+    .about-block-img {
+      border-radius: 20px;
+    }
   }
 }
