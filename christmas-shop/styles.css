@@ -348,3 +348,27 @@ body {
     }
   }
 }
+
+.gift {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 555px;
+  padding: var(--padding);
+
+  .gift-block {}
+}
+.ready {
+  background: url('./image/bg-snow.png') no-repeat center/contain,
+              url('./image/bg-forest.png') no-repeat bottom/contain,
+  var(--color-primary);
+  min-height: 670px;
+  padding: var(--padding);
+  .ready-block {}
+}
+.footer {
+  background: var(--color-white);
+  min-height: 500px;
+  padding: var(--padding);
+  .footer-block {
+ 
+  }
+}
