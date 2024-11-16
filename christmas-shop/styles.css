@@ -16,6 +16,8 @@
   --color-green: #06a44f;
   --color-content-background: #ecf3f8;
   --color-overlay: #181c2980;
+
+  --padding: 60px 8px;
 }
 
 .header-1 {
@@ -99,6 +101,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  text-transform: uppercase;
 }
 
 .button {
@@ -234,7 +237,7 @@ body {
 .about {
   background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
   min-height: 648px;
-  padding: 60px 8px;
+  padding: var(--padding);
 
   .about-block {
     display: flex;
@@ -263,6 +266,85 @@ body {
 
     .about-block-img {
       border-radius: 20px;
+    }
+  }
+}
+
+.become {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 490px;
+  padding: var(--padding);
+  overflow: hidden;
+
+  .become-block {
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    margin: 0 auto;
+    row-gap: 20px;
+
+    .become-block-text {
+      text-align: center;
+
+      .text-caption {
+        margin-bottom: 12px;
+      }
+    }
+
+    .slider {
+      height: 200px;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      column-gap: 21px;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: flex-end;
+      column-gap: 20px;
+
+      .button-arrow {
+        width: 56px;
+        aspect-ratio: 1;
+        border-radius: 20px;
+        border: solid 1px var(--color-white);
+        background: var(--color-primary);
+        color: var(--color-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background .2s ease-in;
+
+        &:first-child svg {
+          transform: scaleX(-1);
+        }
+        
+        &:hover {
+          background: var(--color-white);
+          border: solid 1px var(--color-white);
+          cursor: pointer;
+
+          svg {
+            color: var(--color-primary);
+          }
+        }
+        
+        &.inactive {
+          border-color: var(--color-white-40);
+          color: var(--color-white-40);
+          pointer-events:none;
+          
+          svg {
+            color: var(--color-white-40);
+          }
+        }
+      }
     }
   }
 }
