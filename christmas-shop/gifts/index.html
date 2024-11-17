@@ -8,14 +8,14 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
   </style>
-  <title>Home</title>
-  <link rel="stylesheet" href="./styles.css">
+  <title>Gifts</title>
+  <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
   <div class="container">
     <header class="header">
-      <a href="/" class="logo">
+      <a href="../" class="logo">
         <div class="logo-svg">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <g>
@@ -36,136 +36,118 @@
       <nav class="header-menu">
         <ul class="header-menu-list text-header">
           <li class="header-menu-item">
-            <a href="./gifts/" class="header-menu-link">gifts</a>
+            <a href="/" class="header-menu-link current">gifts</a>
           </li>
           <li class="header-menu-item">
-            <a href="#about" class="header-menu-link">about</a>
+            <a href="../#about" class="header-menu-link">about</a>
           </li>
           <li class="header-menu-item">
-            <a href="#best" class="header-menu-link">best</a>
+            <a href="../#best" class="header-menu-link">best</a>
           </li>
           <li class="header-menu-item">
-            <a href="#contacts" class="header-menu-link">contacts</a>
+            <a href="#contacts-gift" class="header-menu-link">contacts</a>
           </li>
         </ul>
       </nav>
     </header>
     <main>
-      <section class="christmas">
-        <div class="christmas-block">
-          <p class="text-caption">Merry Christmas</p>
-          <h1 class="header-1">Gift yourself the magic of new possibilities</h1>
-          <button class="button button-black text-as">Explore Magical Gifts</button>
-          <p class="text-caption">and Happy New Year</p>
+      <section class="gifts">
+        <h1 class="header-1">Achieve health, <br> harmony, and <br> inner strength</h1>
+        <div class="gifts-controls">
+          <button class="button-red text-as current">all</button>
+          <button class="button-red text-as">for work</button>
+          <button class="button-red text-as">for health</button>
+          <button class="button-red text-as">for harmony</button>
         </div>
-      </section>
-      <section class="about" id="about">
-        <div class="about-block">
-          <div class="about-block-content">
-            <p class="text-caption">About</p>
-            <h2 class="header-2">Unleash your inner superhero!</h2>
-            <p class="text-p">This New Year marks the beginning of your journey to inner harmony and new strengths. We
-              offer unique gifts that will help you improve your life.</p>
-          </div>
-          <img src="./image/santa.png" alt="Santa with snowman" class="about-block-img">
-        </div>
-      </section>
-      <section class="become">
-        <div class="become-block">
-          <div class="become-block-text">
-            <p class="text-caption">Become Happier!</p>
-            <h2 class="header-2">in the new 2025</h2>
-          </div>
-          <div class="slider">
-            <span class="text-slider">live</span>
-            <img src="./image/snowman.png" alt="snowman" class="slider-img">
-            <span class="text-slider">create</span>
-            <img src="./image/christmas-trees.png" alt="christmas trees" class="slider-img">
-            <span class="text-slider">love</span>
-            <img src="./image/christmas-tree-ball.png" alt="christmas tree ball" class="slider-img">
-            <span class="text-slider">live</span>
-            <img src="./image/snowman.png" alt="snowman" class="slider-img">
-          </div>
-          <div class="slider-controls">
-            <button class="button-arrow inactive">
-              <svg class="svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 7H13.5M13.5 7L7.5 1M13.5 7L7.5 13" stroke="currentColor" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            <button class="button-arrow">
-              <svg class="svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 7H13.5M13.5 7L7.5 1M13.5 7L7.5 13" stroke="currentColor" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-          </div>
-
-        </div>
-      </section>
-      <section class="gift" id="best">
-        <div class="gift-block">
-          <div class="gift-block-content">
-            <p class="text-caption">Best Gifts</p>
-            <h2 class="header-2">especially for you</h2>
-          </div>
-          <div class="gift-block-list">
-            <div class="gift-block-item">
-              <img class="gift-block-img" src="./image/gift-for-work.png" alt="christmas ball - gift for work">
-              <div class="gift-block-content">
-                <h3 class="header-4 work">For work</h3>
-                <h4 class="header-3">Console.log Guru</h4>
-              </div>
-            </div>
-            <div class="gift-block-item">
-              <img class="gift-block-img" src="./image/gift-for-health.png" alt="christmas ball - gift for work">
-              <div class="gift-block-content">
-                <h3 class="header-4 health">For health</h3>
-                <h4 class="header-3">Hydration Bot</h4>
-              </div>
-            </div>
-            <div class="gift-block-item">
-              <img class="gift-block-img" src="./image/gift-for-work.png" alt="christmas ball - gift for work">
-              <div class="gift-block-content">
-                <h3 class="header-4 work">For work</h3>
-                <h4 class="header-3">Merge Master</h4>
-              </div>
-            </div>
-            <div class="gift-block-item">
-              <img class="gift-block-img" src="./image/gift-for-harmony.png" alt="christmas ball - gift for work">
-              <div class="gift-block-content">
-                <h3 class="header-4 harmony">For harmony</h3>
-                <h4 class="header-3">Spontaneous Coding Philosopher</h4>
-              </div>
+        <div class="gifts-market">
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-work.png" alt="christmas ball - gift for work">
+            <div class="gift-block-content">
+              <h3 class="header-4 work">For work</h3>
+              <h4 class="header-3">Console.log Guru</h4>
             </div>
           </div>
-        </div>
-      </section>
-      <section class="ready">
-        <div class="ready-block">
-          <h2 class="header-2">Ready to start your <br> journey to a better <br> version of yourself?</h2>
-          <button class="button button-black text-as">Explore Magical Gifts</button>
-          <div class="ready-block-content">
-            <p class="text-caption">The New Year is Coming Soon...</p>
-            <div class="ready-block-timer">
-              <span class="header-2">47</span>
-              <span class="header-2">5</span>
-              <span class="header-2">34</span>
-              <span class="header-2">12</span>
-              <span class="header-4">days</span>
-              <span class="header-4">hours</span>
-              <span class="header-4">minutes</span>
-              <span class="header-4">seconds</span>
-
-
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-health.png" alt="christmas ball - gift for health">
+            <div class="gift-block-content">
+              <h3 class="header-4 health">For health</h3>
+              <h4 class="header-3">Step Master</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-work.png" alt="christmas ball - gift for work">
+            <div class="gift-block-content">
+              <h3 class="header-4 work">For work</h3>
+              <h4 class="header-3">Bug Magnet</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-work.png" alt="christmas ball - gift for work">
+            <div class="gift-block-content">
+              <h3 class="header-4 work">For work</h3>
+              <h4 class="header-3">Shortcut Cheater</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-health.png" alt="christmas ball - gift for health">
+            <div class="gift-block-content">
+              <h3 class="header-4 health">For health</h3>
+              <h4 class="header-3">Posture Levitation</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-harmony.png" alt="christmas ball - gift for harmony">
+            <div class="gift-block-content">
+              <h3 class="header-4 harmony">For harmony</h3>
+              <h4 class="header-3">Bug Acceptance Guru</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-health.png" alt="christmas ball - gift for health">
+            <div class="gift-block-content">
+              <h3 class="header-4 health">For health</h3>
+              <h4 class="header-3">Snack Resister</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-harmony.png" alt="christmas ball - gift for harmony">
+            <div class="gift-block-content">
+              <h3 class="header-4 harmony">For harmony</h3>
+              <h4 class="header-3">Error Laugher</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-health.png" alt="christmas ball - gift for health">
+            <div class="gift-block-content">
+              <h3 class="header-4 health">For health</h3>
+              <h4 class="header-3">Hydration Bot</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-work.png" alt="christmas ball - gift for work">
+            <div class="gift-block-content">
+              <h3 class="header-4 work">For work</h3>
+              <h4 class="header-3">Merge Master</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-harmony.png" alt="christmas ball - gift for harmony">
+            <div class="gift-block-content">
+              <h3 class="header-4 harmony">For harmony</h3>
+              <h4 class="header-3">Joy Charger</h4>
+            </div>
+          </div>
+          <div class="gift-block-item">
+            <img class="gift-block-img" src="../image/gift-for-harmony.png" alt="christmas ball - gift for harmony">
+            <div class="gift-block-content">
+              <h3 class="header-4 harmony">For harmony</h3>
+              <h4 class="header-3">Spontaneous Coding Philosopher</h4>
             </div>
           </div>
         </div>
       </section>
     </main>
-    <footer class="footer" id="contacts">
+    <footer class="footer" id="contacts-gift">
       <div class="footer-list">
         <div class="footer-list-item">
           <a href="tel:+375291112233">
@@ -1069,7 +1051,6 @@
       </div>
     </footer>
   </div>
-  <script src="./script.js"></script>
 </body>
 
 </html>
