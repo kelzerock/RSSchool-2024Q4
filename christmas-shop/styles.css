@@ -1,0 +1,374 @@
+@import "./normalize-css.css";
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #ff4646;
+  --color-primary-10: #ff464610;
+  --color-dark: #181c29;
+  --color-white: #ffffff;
+  --color-white-40: #ffffff40;
+  --color-white-20: #ffffff20;
+  --color-purple: #4361ff;
+  --color-pink: #ff43f7;
+  --color-green: #06a44f;
+  --color-content-background: #ecf3f8;
+  --color-overlay: #181c2980;
+
+  --padding: 60px 8px;
+}
+
+.header-1 {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 48px */
+  letter-spacing: 5.76px;
+  text-transform: uppercase;
+}
+.header-2 {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 152%; /* 36.48px */
+  letter-spacing: 3.84px;
+  text-transform: uppercase;
+}
+.header-3 {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 152%; /* 24.32px */
+  letter-spacing: 1.28px     ;
+}
+.header-4 {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 15.6px */
+  letter-spacing: 0.6px;
+}
+.text-p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 148%;
+}
+.text-al {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 152%; /* 36.48px */
+  letter-spacing: 3.84px;
+}
+.text-as {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 15.6px */
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.text-header {
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 15.6px */
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.text-caption {
+  font-family: Allura;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 24px */
+  letter-spacing: 1.2px;
+}
+.text-slider {
+  font-family: Montserrat;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.button {
+  padding: 20px 32px;
+  border-radius: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-black {
+  color: var(--color-white);
+  background-color: var(--color-dark);
+  outline: none;
+  border: none;
+  transition: color .2s ease-in, background-color .2s ease-in;
+  
+  &:hover {
+    color: var(--color-dark);
+    background-color: var(--color-white);
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5 ,h6 {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-white);
+  height: 100%;
+  font-size: 16px;
+  margin: 0;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 12px 82px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 20px;
+    position: relative;
+
+    .logo-svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 24px;
+
+      svg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .header-menu {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+
+    .header-menu-list {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+
+      .header-menu-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        border-radius: 12px;
+        transition: background-color 0.3s ease-in, color 0.3s ease-in;
+
+        &:hover {
+          color: var(--color-primary);
+          background-color: var(--color-primary-10);
+        }
+      }
+    }
+  }
+}
+
+.christmas {
+  border-radius: 20px 20px 0 0;
+  min-height: 524px;
+  padding: 60px 8px;
+  background: url("./image/bg-ball.png") no-repeat center/cover,
+    url("./image/bg-snow.png") no-repeat center/cover,
+    var(--color-primary);
+
+  .christmas-block {
+    width: 430px;
+    margin: 0 auto;
+    padding-block: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 12px;
+    color: var(--color-white);
+    text-align: center;
+  }
+}
+
+.about {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 648px;
+  padding: var(--padding);
+
+  .about-block {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    justify-content: center;
+    border-radius: 20px;
+    background-color: var(--color-white);
+    overflow: hidden;
+
+    .about-block-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+      row-gap: 20px;
+
+      .text-caption {
+        color: var(--color-primary);
+      }
+
+      .text-p {
+        max-width: 426px;
+      }
+    }
+
+    .about-block-img {
+      border-radius: 20px;
+    }
+  }
+}
+
+.become {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 490px;
+  padding: var(--padding);
+  overflow: hidden;
+
+  .become-block {
+    display: flex;
+    flex-direction: column;
+    max-width: 1280px;
+    margin: 0 auto;
+    row-gap: 20px;
+
+    .become-block-text {
+      text-align: center;
+
+      .text-caption {
+        margin-bottom: 12px;
+      }
+    }
+
+    .slider {
+      height: 200px;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      column-gap: 21px;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: flex-end;
+      column-gap: 20px;
+
+      .button-arrow {
+        width: 56px;
+        aspect-ratio: 1;
+        border-radius: 20px;
+        border: solid 1px var(--color-white);
+        background: var(--color-primary);
+        color: var(--color-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background .2s ease-in;
+
+        &:first-child svg {
+          transform: scaleX(-1);
+        }
+        
+        &:hover {
+          background: var(--color-white);
+          border: solid 1px var(--color-white);
+          cursor: pointer;
+
+          svg {
+            color: var(--color-primary);
+          }
+        }
+        
+        &.inactive {
+          border-color: var(--color-white-40);
+          color: var(--color-white-40);
+          pointer-events:none;
+          
+          svg {
+            color: var(--color-white-40);
+          }
+        }
+      }
+    }
+  }
+}
+
+.gift {
+  background: url('./image/bg-snow.png') no-repeat center/contain, var(--color-primary);
+  min-height: 555px;
+  padding: var(--padding);
+
+  .gift-block {}
+}
+.ready {
+  background: url('./image/bg-snow.png') no-repeat center/contain,
+              url('./image/bg-forest.png') no-repeat bottom/contain,
+  var(--color-primary);
+  min-height: 670px;
+  padding: var(--padding);
+  .ready-block {}
+}
+.footer {
+  background: var(--color-white);
+  min-height: 500px;
+  padding: var(--padding);
+  .footer-block {
+ 
+  }
+}
