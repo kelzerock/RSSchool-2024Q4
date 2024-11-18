@@ -465,8 +465,10 @@ body {
 
   .gift-block-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    column-gap: 12px;
+    gap: 12px;
+
   }
 }
 
@@ -650,4 +652,9 @@ body {
     grid-auto-rows: auto;
     gap: 12px;
   }
+}
+
+
+@media screen and (max-width: 992px) {
+  
 }
