@@ -21,6 +21,7 @@
   --border-radius: 20px;
 
   --transition: .3s;
+  --bg-transition: background 1s ease-in;
 }
 
 .header-1 {
@@ -366,6 +367,7 @@ body {
   min-height: 490px;
   padding: var(--padding);
   overflow: hidden;
+  transition: var(--bg-transition);
 
   .become-block {
     display: flex;
@@ -447,6 +449,7 @@ body {
     var(--color-primary);
   min-height: 555px;
   padding: var(--padding);
+  transition: var(--bg-transition);
 
   .gift-block {
     display: flex;
@@ -657,4 +660,28 @@ body {
 
 @media screen and (max-width: 992px) {
   
+
+  .become {
+    background: url("./image/bg-snow.png") repeat 970px 0px / cover,
+    var(--color-primary);
+  }
+
+  .gift {
+    background: url("./image/bg-snow.png") repeat 1475px 0px/cover,
+    var(--color-primary);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  
+  .become {
+    background: url("./image/bg-snow.png") repeat 500px 0px / cover,
+    var(--color-primary);
+
+  }
+
+  .gift {
+    background: url("./image/bg-snow.png") repeat 2130px 0px/cover,
+    var(--color-primary);
+  }
 }
