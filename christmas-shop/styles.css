@@ -329,6 +329,7 @@ body {
   padding: 60px 8px;
   background: url("./image/bg-ball.png") no-repeat center/cover,
     url("./image/bg-snow.png") no-repeat center/cover, var(--color-primary);
+  transition: var(--bg-transition);
 
   .christmas-block {
     width: 430px;
