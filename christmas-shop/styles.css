@@ -20,7 +20,7 @@
   --padding: 60px 8px;
   --border-radius: 20px;
 
-  --transition: .3s;
+  --transition: 0.3s;
   --bg-transition: background 1s ease-in;
 }
 
@@ -126,7 +126,8 @@
   background-color: var(--color-dark);
   outline: none;
   border: none;
-  transition: color var(--transition) ease-in, background-color var(--transition) ease-in;
+  transition: color var(--transition) ease-in,
+    background-color var(--transition) ease-in;
 
   &:hover {
     color: var(--color-dark);
@@ -141,7 +142,8 @@
   outline: none;
   border: none;
   color: var(--color-white);
-  transition: color var(--transition) ease-in, background-color var(--transition) ease-in;
+  transition: color var(--transition) ease-in,
+    background-color var(--transition) ease-in;
 
   &:hover {
     background-color: var(--color-white-20);
@@ -283,9 +285,9 @@ body {
     background-color: var(--color-white);
 
     .header-burger-button-line {
-     width: 20px;
-     height: 1px;
-     background-color: var(--color-dark);
+      width: 20px;
+      height: 1px;
+      background-color: var(--color-dark);
     }
   }
 
@@ -306,7 +308,8 @@ body {
         padding: 12px 20px;
         border-radius: 12px;
         color: var(--color-dark);
-        transition: background-color var(--transition) ease-in, color var(--transition) ease-in;
+        transition: background-color var(--transition) ease-in,
+          color var(--transition) ease-in;
 
         &.current {
           color: var(--color-primary);
@@ -345,14 +348,16 @@ body {
 }
 
 .about {
-  background: url("./image/bg-snow.png") repeat -60px 0px/cover,
+  background: url("./image/bg-snow.png") repeat -60px 0px / cover,
     var(--color-primary);
   min-height: 648px;
   padding: var(--padding);
+  display: flex;
 
   .about-block {
     display: flex;
     max-width: 1280px;
+    width: 100%;
     margin: 0 auto;
     justify-content: center;
     border-radius: 20px;
@@ -377,12 +382,23 @@ body {
 
     .about-block-img {
       border-radius: 20px;
+      overflow: hidden;
+      max-height: 528px;
+
+      img {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+        height: 100%;
+      }
     }
   }
 }
 
 .become {
-  background: url("./image/bg-snow.png") repeat 0px -56px/cover,
+  background: url("./image/bg-snow.png") repeat 0px -56px / cover,
     var(--color-primary);
   min-height: 490px;
   padding: var(--padding);
@@ -465,7 +481,7 @@ body {
 }
 
 .gift {
-  background: url("./image/bg-snow.png") repeat 0px -25px/cover,
+  background: url("./image/bg-snow.png") repeat 0px -25px / cover,
     var(--color-primary);
   min-height: 555px;
   padding: var(--padding);
@@ -491,12 +507,11 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-
   }
 }
 
 .ready {
-  background: url("./image/bg-snow.png") repeat -85px 0px/cover,
+  background: url("./image/bg-snow.png") repeat -85px 0px / cover,
     url("./image/bg-forest.png") no-repeat bottom/contain, var(--color-primary);
   min-height: 670px;
   padding: var(--padding);
@@ -677,7 +692,6 @@ body {
   }
 }
 
-
 @media screen and (max-width: 992px) {
   .header {
     padding: 12px 8px;
@@ -687,63 +701,80 @@ body {
   }
 
   .christmas {
-    background: url(./image/bg-ball.png) no-repeat center / cover, url(./image/bg-snow.png) repeat 1010px 0px / cover, var(--color-primary);
+    background: url(./image/bg-ball.png) no-repeat center / cover,
+      url(./image/bg-snow.png) repeat 1010px 0px / cover, var(--color-primary);
+  }
 
+  .about {
+    .about-block {
+      .about-block-content {
+        max-width: 376px;
+      }
+      .about-block-img {
+        img {}
+      }
+    }
   }
 
   .become {
     background: url("./image/bg-snow.png") repeat 970px 0px / cover,
-    var(--color-primary);
+      var(--color-primary);
   }
 
   .gift {
-    background: url("./image/bg-snow.png") repeat 1475px 0px/cover,
-    var(--color-primary);
+    background: url("./image/bg-snow.png") repeat 1475px 0px / cover,
+      var(--color-primary);
   }
 
   .ready {
-    background: url("./image/bg-snow.png") repeat 1190px 0px/cover,
-    url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+    background: url("./image/bg-snow.png") repeat 1190px 0px / cover,
+      url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
   }
 
   .footer {
-
     .footer-list {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(3, auto);
     }
   }
-
-
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .christmas {
-    background: url(./image/bg-ball.png) no-repeat top / cover,  
-    url(./image/bg-snow.png) repeat -500px 0px / cover, 
-    var(--color-primary);
+    background: url(./image/bg-ball.png) no-repeat top / cover,
+      url(./image/bg-snow.png) repeat -500px 0px / cover, var(--color-primary);
     min-height: 572px;
 
     .christmas-block {
       width: auto;
     }
   }
-  
+
+  .about {
+    .about-block {
+      flex-direction: column;
+      .about-block-content {
+        max-width: none;
+        padding: 60px 20px;
+      }
+      .about-block-img {
+        img {}
+      }
+    }
+  }
+
   .become {
     background: url("./image/bg-snow.png") repeat -395px 0px / cover,
-    var(--color-primary);
-
+      var(--color-primary);
   }
 
   .gift {
-    background: url("./image/bg-snow.png") repeat 2130px 0px/cover,
-    var(--color-primary);
+    background: url("./image/bg-snow.png") repeat 2130px 0px / cover,
+      var(--color-primary);
   }
 
   .ready {
-    background: url("./image/bg-snow.png") repeat 1035px 0px/cover,
-    url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+    background: url("./image/bg-snow.png") repeat 1035px 0px / cover,
+      url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
   }
-
-
 }
