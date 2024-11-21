@@ -244,13 +244,14 @@ body {
   gap: 12px;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
   .logo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-    padding: 2px 20px;
+    padding: 8px 20px;
     position: relative;
 
     .text-header {
@@ -267,6 +268,24 @@ body {
         width: 100%;
         height: auto;
       }
+    }
+  }
+
+  .burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 8px;
+    width: 40px;
+    aspect-ratio: 1;
+    border: none;
+    background-color: var(--color-white);
+
+    .header-burger-button-line {
+     width: 20px;
+     height: 1px;
+     background-color: var(--color-dark);
     }
   }
 
@@ -659,7 +678,17 @@ body {
 
 
 @media screen and (max-width: 992px) {
-  
+  .header {
+    padding: 12px 8px;
+    .header-menu {
+      display: none;
+    }
+  }
+
+  .christmas {
+    background: url(./image/bg-ball.png) no-repeat center / cover, url(./image/bg-snow.png) repeat 1010px 0px / cover, var(--color-primary);
+
+  }
 
   .become {
     background: url("./image/bg-snow.png") repeat 970px 0px / cover,
@@ -670,12 +699,37 @@ body {
     background: url("./image/bg-snow.png") repeat 1475px 0px/cover,
     var(--color-primary);
   }
+
+  .ready {
+    background: url("./image/bg-snow.png") repeat 1190px 0px/cover,
+    url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+  }
+
+  .footer {
+
+    .footer-list {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, auto);
+    }
+  }
+
+
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 500px) {
+  .christmas {
+    background: url(./image/bg-ball.png) no-repeat top / cover,  
+    url(./image/bg-snow.png) repeat -500px 0px / cover, 
+    var(--color-primary);
+    min-height: 572px;
+
+    .christmas-block {
+      width: auto;
+    }
+  }
   
   .become {
-    background: url("./image/bg-snow.png") repeat 500px 0px / cover,
+    background: url("./image/bg-snow.png") repeat -395px 0px / cover,
     var(--color-primary);
 
   }
@@ -684,4 +738,11 @@ body {
     background: url("./image/bg-snow.png") repeat 2130px 0px/cover,
     var(--color-primary);
   }
+
+  .ready {
+    background: url("./image/bg-snow.png") repeat 1035px 0px/cover,
+    url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+  }
+
+
 }
