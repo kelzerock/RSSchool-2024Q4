@@ -207,6 +207,10 @@ body {
   height: 100%;
   font-size: 16px;
   margin: 0;
+
+  &.lock {
+    overflow: hidden;
+  }
 }
 
 main {
@@ -219,6 +223,8 @@ main {
     var(--color-white) 99%,
     var(--color-white) 100%
   );
+  overflow: hidden;
+  position: relative;
 }
 
 .container {
@@ -637,38 +643,7 @@ main {
 }
 
 @media screen and (max-width: 992px) {
-  .header {
-    padding: 12px 8px;
-    .header-menu {
-      display: none;
-    }
-
-    .burger {
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      row-gap: 8px;
-      width: 40px;
-      aspect-ratio: 1;
-      border: none;
-      background-color: var(--color-white);
-
-      .header-burger-button-line {
-        width: 20px;
-        height: 1px;
-        background-color: var(--color-dark);
-        transition: transform 0.4s ease-in;
-
-        &:first-child.active {
-          transform: rotate(45deg) translateY(2px) translateX(4px);
-        }
-        &:last-child.active {
-          transform: rotate(-45deg) translateY(-2px) translateX(4px);
-        }
-      }
-    }
-  }
+  
 
   .christmas {
     background: url(./image/bg-ball.png) no-repeat center / cover,
@@ -705,6 +680,41 @@ main {
     .footer-list {
       grid-template-columns: 1fr;
       grid-template-rows: repeat(3, auto);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 12px 8px;
+    .header-menu {
+      display: none;
+    }
+
+    .burger {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 8px;
+      width: 40px;
+      aspect-ratio: 1;
+      border: none;
+      background-color: var(--color-white);
+
+      .header-burger-button-line {
+        width: 20px;
+        height: 1px;
+        background-color: var(--color-dark);
+        transition: transform 0.4s ease-in;
+
+        &:first-child.active {
+          transform: rotate(45deg) translateY(2px) translateX(4px);
+        }
+        &:last-child.active {
+          transform: rotate(-45deg) translateY(-2px) translateX(4px);
+        }
+      }
     }
   }
 }
@@ -841,6 +851,40 @@ main {
 
     &:hover .gift-block-content .header-3 {
       color: var(--color-primary);
+    }
+  }
+}
+
+.burger-menu {
+  position: absolute;
+  right: -110%;
+  height: calc(100vh - 64px);
+  width: 100%;
+  background-color: var(--color-white);
+  transition: transform 0.3s ease-in;
+  z-index: 2;
+
+  &.active {
+    transform: translateX(-110%);
+  }
+
+  nav,
+  ul {
+    height: 100%;
+    width: 100%;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 8px;
+  }
+  .burger-menu-item {
+    padding: 12px 20px;
+    .burger-menu-link {
+      color: var(--color-dark);
     }
   }
 }
