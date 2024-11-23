@@ -209,6 +209,10 @@ body {
   margin: 0;
 }
 
+main {
+  background: linear-gradient(0deg, var(--color-white) 0%, var(--color-white) 1%, var(--color-primary) 2%, var(--color-primary) 98%, var(--color-white) 99%, var(--color-white) 100%);
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
