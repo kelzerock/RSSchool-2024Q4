@@ -207,6 +207,7 @@ body {
   height: 100%;
   font-size: 16px;
   margin: 0;
+  position: relative;
 
   &.lock {
     overflow: hidden;
@@ -228,8 +229,13 @@ main {
 }
 
 .container {
+  display: block;
   max-width: 1440px;
   margin: 0 auto;
+
+  &.load {
+    display: none;
+  }
 }
 
 .header {
@@ -886,5 +892,29 @@ main {
     .burger-menu-link {
       color: var(--color-dark);
     }
+  }
+}
+
+.loading {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background: var(--color-white);
+  overflow: hidden;
+
+  &.stop {
+    display: none;
+  }
+
+  svg{
+    color: var(--color-primary);
+    width: 20vw;
+    aspect-ratio: 1;
+    margin: 20px;
+    display:inline-block;
   }
 }

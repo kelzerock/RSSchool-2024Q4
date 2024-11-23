@@ -1,5 +1,7 @@
 "use strict";
 
+
+//router
 let arr = document.querySelectorAll(".button-black");
 
 arr.forEach((el) => {
@@ -24,10 +26,13 @@ const burger = document.querySelector(".burger");
 const burgerMenu = document.querySelector(".burger-menu ");
 const burgerMenuItems = document.querySelectorAll(".burger-menu-item")
 
+const lockBody = () => bodyHTML.classList.toggle("lock");
+
+
 const toggleActiveStatus = () => {
   burgerLines.forEach(el => el.classList.toggle("active"));
   burgerMenu.classList.toggle("active");
-  bodyHTML.classList.toggle("lock");
+  lockBody();
 }
 
 burger.onclick = () => {
@@ -51,3 +56,14 @@ window.addEventListener("resize", (event) => {
     }
   }
 })
+
+
+//loading
+window.onload = () => {
+  document.querySelector(".container").classList.remove("load");
+  
+  setTimeout(()=>{
+    document.querySelector(".loading").classList.add("stop");
+    lockBody();
+  }, 500)
+}
