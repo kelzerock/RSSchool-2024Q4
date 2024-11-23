@@ -1,26 +1,24 @@
 @import "./normalize-css.css";
+@import "./constants.css";
+
+/* scroll */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-white);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark);
+}
 
 * {
   box-sizing: border-box;
-}
-
-:root {
-  --color-primary: #ff4646;
-  --color-primary-10: #ff464610;
-  --color-dark: #181c29;
-  --color-white: #ffffff;
-  --color-white-40: #ffffff40;
-  --color-white-20: #ffffff20;
-  --color-purple: #4361ff;
-  --color-pink: #ff43f7;
-  --color-green: #06a44f;
-  --color-content-background: #ecf3f8;
-  --color-overlay: #181c2980;
-
-  --padding: 60px 8px;
-  --border-radius: 20px;
-
-  --transition: .3s;
 }
 
 .header-1 {
@@ -113,11 +111,6 @@
 .button {
   padding: 20px 32px;
   border-radius: 20px;
-  /* display: inline; */
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .button-black {
@@ -125,12 +118,8 @@
   background-color: var(--color-dark);
   outline: none;
   border: none;
-  transition: color var(--transition) ease-in, background-color var(--transition) ease-in;
-
-  &:hover {
-    color: var(--color-dark);
-    background-color: var(--color-white);
-  }
+  transition: color var(--transition) ease-in,
+    background-color var(--transition) ease-in;
 }
 
 .button-red {
@@ -140,12 +129,8 @@
   outline: none;
   border: none;
   color: var(--color-white);
-  transition: color var(--transition) ease-in, background-color var(--transition) ease-in;
-
-  &:hover {
-    background-color: var(--color-white-20);
-    cursor: pointer;
-  }
+  transition: color var(--transition) ease-in,
+    background-color var(--transition) ease-in;
 
   &.current {
     background-color: var(--color-white-20);
@@ -160,14 +145,6 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover .gift-block-content .header-3 {
-    color: var(--color-primary);
-  }
 
   .gift-block-img {
     width: 100%;
@@ -232,6 +209,10 @@ body {
   margin: 0;
 }
 
+main {
+  background: linear-gradient(0deg, var(--color-white) 0%, var(--color-white) 1%, var(--color-primary) 2%, var(--color-primary) 98%, var(--color-white) 99%, var(--color-white) 100%);
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -243,13 +224,14 @@ body {
   gap: 12px;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
   .logo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-    padding: 2px 20px;
+    padding: 8px 20px;
     position: relative;
 
     .text-header {
@@ -269,6 +251,10 @@ body {
     }
   }
 
+  .burger {
+    display: none;
+  }
+
   .header-menu {
     flex-grow: 1;
     display: flex;
@@ -286,17 +272,13 @@ body {
         padding: 12px 20px;
         border-radius: 12px;
         color: var(--color-dark);
-        transition: background-color var(--transition) ease-in, color var(--transition) ease-in;
+        transition: background-color var(--transition) ease-in,
+          color var(--transition) ease-in;
 
         &.current {
           color: var(--color-primary);
           background-color: var(--color-primary-10);
           pointer-events: none;
-        }
-
-        &:hover {
-          color: var(--color-primary);
-          background-color: var(--color-primary-10);
         }
       }
     }
@@ -309,6 +291,7 @@ body {
   padding: 60px 8px;
   background: url("./image/bg-ball.png") no-repeat center/cover,
     url("./image/bg-snow.png") no-repeat center/cover, var(--color-primary);
+  transition: var(--bg-transition);
 
   .christmas-block {
     width: 430px;
@@ -324,14 +307,16 @@ body {
 }
 
 .about {
-  background: url("./image/bg-snow.png") no-repeat center/contain,
+  background: url("./image/bg-snow.png") repeat -60px 0px / cover,
     var(--color-primary);
   min-height: 648px;
   padding: var(--padding);
+  display: flex;
 
   .about-block {
     display: flex;
     max-width: 1280px;
+    width: 100%;
     margin: 0 auto;
     justify-content: center;
     border-radius: 20px;
@@ -356,16 +341,28 @@ body {
 
     .about-block-img {
       border-radius: 20px;
+      overflow: hidden;
+      max-height: 528px;
+
+      img {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: auto;
+        height: 100%;
+      }
     }
   }
 }
 
 .become {
-  background: url("./image/bg-snow.png") no-repeat center/contain,
+  background: url("./image/bg-snow.png") repeat 0px -56px / cover,
     var(--color-primary);
   min-height: 490px;
   padding: var(--padding);
   overflow: hidden;
+  transition: var(--bg-transition);
 
   .become-block {
     display: flex;
@@ -418,16 +415,6 @@ body {
           transform: scaleX(-1);
         }
 
-        &:hover {
-          background: var(--color-white);
-          border: solid 1px var(--color-white);
-          cursor: pointer;
-
-          svg {
-            color: var(--color-primary);
-          }
-        }
-
         &.inactive {
           border-color: var(--color-white-40);
           color: var(--color-white-40);
@@ -443,17 +430,18 @@ body {
 }
 
 .gift {
-  background: url("./image/bg-snow.png") no-repeat center/contain,
+  background: url("./image/bg-snow.png") repeat 0px -25px / cover,
     var(--color-primary);
   min-height: 555px;
   padding: var(--padding);
+  transition: var(--bg-transition);
 
   .gift-block {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    row-gap: 20px;
+    row-gap: 18px;
     color: var(--color-white);
 
     .gift-block-content {
@@ -465,15 +453,16 @@ body {
 
   .gift-block-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    column-gap: 12px;
+    gap: 12px;
   }
 }
 
 .ready {
-  background: url("./image/bg-snow.png") no-repeat center/contain,
+  background: url("./image/bg-snow.png") repeat -85px 0px / cover,
     url("./image/bg-forest.png") no-repeat bottom/contain, var(--color-primary);
-  min-height: 670px;
+  min-height: 668px;
   padding: var(--padding);
   border-radius: 0 0 20px 20px;
 
@@ -493,8 +482,6 @@ body {
       row-gap: 8px;
       justify-content: flex-start;
       align-items: center;
-    }
-    .text-caption {
     }
     .ready-block-timer {
       display: grid;
@@ -541,7 +528,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 12px;
+    gap: 12px;
 
     .footer-list-item {
       flex-grow: 1;
@@ -560,15 +547,6 @@ body {
         .text-al,
         .header-3 {
           transition: color var(--transition) ease-in;
-        }
-
-        &:hover {
-          cursor: pointer;
-
-          .text-al,
-          .header-3 {
-            color: var(--color-primary);
-          }
         }
       }
     }
@@ -602,22 +580,12 @@ body {
             color: var(--color-dark);
             transition: color var(--transition) ease-in;
           }
-
-          &:hover svg {
-            color: var(--color-primary);
-          }
         }
       }
-    }
-    .text-p {
     }
     .text-caption {
       color: var(--color-dark);
       transition: color 0.2s ease-in;
-
-      &:hover {
-        color: var(--color-primary);
-      }
     }
   }
 }
@@ -649,5 +617,214 @@ body {
     grid-template-columns: repeat(4, auto);
     grid-auto-rows: auto;
     gap: 12px;
+  }
+}
+
+@media screen and (max-width: 1370px) {
+  .gifts {
+    .gifts-market {
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header {
+    padding: 12px 8px;
+    .header-menu {
+      display: none;
+    }
+
+    .burger {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 8px;
+      width: 40px;
+      aspect-ratio: 1;
+      border: none;
+      background-color: var(--color-white);
+
+      .header-burger-button-line {
+        width: 20px;
+        height: 1px;
+        background-color: var(--color-dark);
+      }
+    }
+  }
+
+  .christmas {
+    background: url(./image/bg-ball.png) no-repeat center / cover,
+      url(./image/bg-snow.png) repeat 1010px 0px / cover, var(--color-primary);
+  }
+
+  .about {
+    background: url("./image/bg-snow.png") repeat -395px 0px / cover,
+      var(--color-primary);
+    .about-block {
+      .about-block-content {
+        max-width: 376px;
+      }
+    }
+  }
+
+  .become {
+    background: url("./image/bg-snow.png") repeat 970px 0px / cover,
+      var(--color-primary);
+  }
+
+  .gift {
+    background: url(./image/bg-snow.png) repeat 1470px -5px / cover,
+      var(--color-primary);
+  }
+
+  .ready {
+    background: url("./image/bg-snow.png") repeat 1190px 0px / cover,
+      url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+  }
+
+  .footer {
+    padding: 60px 8px;
+    .footer-list {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, auto);
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .christmas {
+    background: url(./image/bg-ball.png) no-repeat top / cover,
+      url(./image/bg-snow.png) repeat -500px 0px / cover, var(--color-primary);
+    min-height: 572px;
+
+    .christmas-block {
+      width: auto;
+    }
+  }
+
+  .about {
+    .about-block {
+      flex-direction: column;
+      .about-block-content {
+        max-width: none;
+        padding: 60px 20px;
+      }
+    }
+  }
+
+  .become {
+    background: url("./image/bg-snow.png") repeat -395px 0px / cover,
+      var(--color-primary);
+  }
+
+  .gift {
+    background: url("./image/bg-snow.png") repeat 2130px 0px / cover,
+      var(--color-primary);
+  }
+
+  .ready {
+    background: url("./image/bg-snow.png") repeat 1035px 0px / cover,
+      url("./image/bg-forest.png") no-repeat bottom/cover, var(--color-primary);
+  }
+
+  .gifts {
+    .gifts-market {
+      grid-template-columns: repeat(1, auto);
+    }
+
+    .gifts-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 0;
+    }
+  }
+
+  .button-red {
+    padding: 12px 8px;
+  }
+}
+
+@media (hover: hover) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+
+  .button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .button-black {
+    &:hover {
+      color: var(--color-dark);
+      background-color: var(--color-white);
+    }
+  }
+
+  .button-red {
+    &:hover {
+      background-color: var(--color-white-20);
+      cursor: pointer;
+    }
+  }
+
+  .header-menu-link {
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-primary-10);
+    }
+  }
+
+  .button-arrow:hover {
+    background: var(--color-white);
+    border: solid 1px var(--color-white);
+    cursor: pointer;
+
+    svg {
+      color: var(--color-primary);
+    }
+  }
+
+  .footer-list-item a:hover {
+    cursor: pointer;
+
+    .text-al,
+    .header-3 {
+      color: var(--color-primary);
+    }
+  }
+
+  .footer {
+    .footer-content {
+      .footer-content-list .footer-content-item {
+        .footer-content-link:hover svg {
+          color: var(--color-primary);
+        }
+      }
+
+      .text-caption:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  .burger {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .gift-block-item {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover .gift-block-content .header-3 {
+      color: var(--color-primary);
+    }
   }
 }
