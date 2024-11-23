@@ -41,17 +41,6 @@ burgerMenu.onclick = (event) => {
   }
 }
 
-// burgerMenuItems.forEach((el) => {
-//   el.onclick = () => {
-//     toggleActiveStatus();
-//   }
-// })
-
-// burgerMenu.addEventListener("click", () => {
-//   console.log(event.currentTarget)
-//   console.log(event.target)
-//   toggleActiveStatus();
-// })
 
 
 window.addEventListener("resize", (event) => {
