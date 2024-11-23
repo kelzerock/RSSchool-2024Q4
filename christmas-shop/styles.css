@@ -210,7 +210,15 @@ body {
 }
 
 main {
-  background: linear-gradient(0deg, var(--color-white) 0%, var(--color-white) 1%, var(--color-primary) 2%, var(--color-primary) 98%, var(--color-white) 99%, var(--color-white) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-white) 0%,
+    var(--color-white) 1%,
+    var(--color-primary) 2%,
+    var(--color-primary) 98%,
+    var(--color-white) 99%,
+    var(--color-white) 100%
+  );
 }
 
 .container {
@@ -650,6 +658,14 @@ main {
         width: 20px;
         height: 1px;
         background-color: var(--color-dark);
+        transition: transform 0.4s ease-in;
+
+        &:first-child.active {
+          transform: rotate(45deg) translateY(2px) translateX(4px);
+        }
+        &:last-child.active {
+          transform: rotate(-45deg) translateY(-2px) translateX(4px);
+        }
       }
     }
   }
