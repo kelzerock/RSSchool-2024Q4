@@ -17,11 +17,6 @@
   background: var(--color-dark);
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -116,11 +111,6 @@
 .button {
   padding: 20px 32px;
   border-radius: 20px;
-  /* display: inline; */
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .button-black {
@@ -130,11 +120,6 @@
   border: none;
   transition: color var(--transition) ease-in,
     background-color var(--transition) ease-in;
-
-  &:hover {
-    color: var(--color-dark);
-    background-color: var(--color-white);
-  }
 }
 
 .button-red {
@@ -146,11 +131,6 @@
   color: var(--color-white);
   transition: color var(--transition) ease-in,
     background-color var(--transition) ease-in;
-
-  &:hover {
-    background-color: var(--color-white-20);
-    cursor: pointer;
-  }
 
   &.current {
     background-color: var(--color-white-20);
@@ -165,14 +145,6 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover .gift-block-content .header-3 {
-    color: var(--color-primary);
-  }
 
   .gift-block-img {
     width: 100%;
@@ -303,11 +275,6 @@ body {
           color: var(--color-primary);
           background-color: var(--color-primary-10);
           pointer-events: none;
-        }
-
-        &:hover {
-          color: var(--color-primary);
-          background-color: var(--color-primary-10);
         }
       }
     }
@@ -444,16 +411,6 @@ body {
           transform: scaleX(-1);
         }
 
-        &:hover {
-          background: var(--color-white);
-          border: solid 1px var(--color-white);
-          cursor: pointer;
-
-          svg {
-            color: var(--color-primary);
-          }
-        }
-
         &.inactive {
           border-color: var(--color-white-40);
           color: var(--color-white-40);
@@ -587,15 +544,6 @@ body {
         .header-3 {
           transition: color var(--transition) ease-in;
         }
-
-        &:hover {
-          cursor: pointer;
-
-          .text-al,
-          .header-3 {
-            color: var(--color-primary);
-          }
-        }
       }
     }
   }
@@ -628,20 +576,12 @@ body {
             color: var(--color-dark);
             transition: color var(--transition) ease-in;
           }
-
-          &:hover svg {
-            color: var(--color-primary);
-          }
         }
       }
     }
     .text-caption {
       color: var(--color-dark);
       transition: color 0.2s ease-in;
-
-      &:hover {
-        color: var(--color-primary);
-      }
     }
   }
 }
@@ -701,10 +641,6 @@ body {
       aspect-ratio: 1;
       border: none;
       background-color: var(--color-white);
-
-      &:hover {
-        cursor: pointer;
-      }
 
       .header-burger-button-line {
         width: 20px;
@@ -804,22 +740,87 @@ body {
 
   .button-red {
     padding: 12px 8px;
-    border-radius: 12px;
-    background: var(--color-primary);
-    outline: none;
-    border: none;
-    color: var(--color-white);
-    transition: color var(--transition) ease-in,
-      background-color var(--transition) ease-in;
+  }
+}
 
+@media (hover: hover) {
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+
+  .button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .button-black {
+    &:hover {
+      color: var(--color-dark);
+      background-color: var(--color-white);
+    }
+  }
+
+  .button-red {
     &:hover {
       background-color: var(--color-white-20);
       cursor: pointer;
     }
+  }
 
-    &.current {
-      background-color: var(--color-white-20);
-      pointer-events: none;
+  .header-menu-link {
+    &:hover {
+      color: var(--color-primary);
+      background-color: var(--color-primary-10);
+    }
+  }
+
+  .button-arrow:hover {
+    background: var(--color-white);
+    border: solid 1px var(--color-white);
+    cursor: pointer;
+
+    svg {
+      color: var(--color-primary);
+    }
+  }
+
+  .footer-list-item a:hover {
+    cursor: pointer;
+
+    .text-al,
+    .header-3 {
+      color: var(--color-primary);
+    }
+  }
+
+  .footer {
+    .footer-content {
+      .footer-content-list .footer-content-item {
+        .footer-content-link:hover svg {
+          color: var(--color-primary);
+        }
+      }
+
+      .text-caption:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  .burger {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .gift-block-item {
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover .gift-block-content .header-3 {
+      color: var(--color-primary);
     }
   }
 }
