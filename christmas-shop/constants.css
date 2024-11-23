@@ -1,0 +1,19 @@
+:root {
+  --color-primary: #ff4646;
+  --color-primary-10: #ff464610;
+  --color-dark: #181c29;
+  --color-white: #ffffff;
+  --color-white-40: #ffffff40;
+  --color-white-20: #ffffff20;
+  --color-purple: #4361ff;
+  --color-pink: #ff43f7;
+  --color-green: #06a44f;
+  --color-content-background: #ecf3f8;
+  --color-overlay: #181c2980;
+
+  --padding: 60px 8px;
+  --border-radius: 20px;
+
+  --transition: 0.3s;
+  --bg-transition: background 1s ease-in;
+}
