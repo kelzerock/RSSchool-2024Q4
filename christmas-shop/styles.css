@@ -864,17 +864,22 @@ main {
 .burger-menu {
   position: absolute;
   right: -110%;
-  height: calc(100vh - 64px);
+  height: calc(100% - 64px);
   width: 100%;
   background-color: var(--color-white);
-  transition: transform 0.3s ease-in;
+  transition: transform .5s ease-in;
   z-index: 2;
+  display: flex;
+  justify-content: center;
+  opacity: 1;
 
   &.active {
     transform: translateX(-110%);
   }
 
-  nav,
+  nav {
+    height: calc(100vh - 64px);
+  }
   ul {
     height: 100%;
     width: 100%;
@@ -911,10 +916,40 @@ main {
   }
 
   svg{
-    color: var(--color-primary);
+    fill: var(--color-primary);
     width: 20vw;
     aspect-ratio: 1;
     margin: 20px;
     display:inline-block;
+    vertical-align: baseline;
+  }
+
+  .bars-loader .morphing-bar {
+    color: var(--color-primary);
+    transform-origin: center;
+    animation: morphingBar var(--animation-tr) ease-in-out infinite;
+  }
+  
+  .bars-loader .morphing-bar-left {
+    animation-delay: calc(var(--animation-tr) / 2.5);
+  }
+  
+  .bars-loader .morphing-bar-center {
+    animation-delay: calc(var(--animation-tr) / 5);
+  }
+  
+  .bars-loader .morphing-bar-right {
+    animation-delay: calc(var(--animation-tr) / 7.5);
+  }
+  
+}
+
+
+@keyframes morphingBar {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.2);
   }
 }

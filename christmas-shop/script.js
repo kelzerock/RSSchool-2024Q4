@@ -65,5 +65,5 @@ window.onload = () => {
   setTimeout(()=>{
     document.querySelector(".loading").classList.add("stop");
     lockBody();
-  }, 500)
+  }, 1000)
 }
