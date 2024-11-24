@@ -407,6 +407,9 @@ main {
       align-items: center;
       justify-content: flex-start;
       column-gap: 21px;
+      position: relative;
+      right: 0px;
+      transition: right .5s ease-in-out;
 
       img {
         height: 100%;
