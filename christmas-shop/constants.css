@@ -15,5 +15,6 @@
   --border-radius: 20px;
 
   --transition: 0.3s;
-  --bg-transition: background 1s ease-in;
+  --bg-transition: background .5s ease-in;
+  --animation-tr: .8s;
 }
