@@ -649,8 +649,6 @@ main {
 }
 
 @media screen and (max-width: 992px) {
-  
-
   .christmas {
     background: url(./image/bg-ball.png) no-repeat center / cover,
       url(./image/bg-snow.png) repeat 1010px 0px / cover, var(--color-primary);
@@ -811,13 +809,19 @@ main {
     }
   }
 
-  .button-arrow:hover {
-    background: var(--color-white);
-    border: solid 1px var(--color-white);
-    cursor: pointer;
+  .become {
+    .become-block {
+      .slider-controls {
+        .button-arrow:hover {
+          background: var(--color-white);
+          border: solid 1px var(--color-white);
+          cursor: pointer;
 
-    svg {
-      color: var(--color-primary);
+          svg {
+            color: var(--color-primary);
+          }
+        }
+      }
     }
   }
 
@@ -867,7 +871,7 @@ main {
   height: calc(100% - 64px);
   width: 100%;
   background-color: var(--color-white);
-  transition: transform .5s ease-in;
+  transition: transform 0.5s ease-in;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -915,12 +919,12 @@ main {
     display: none;
   }
 
-  svg{
+  svg {
     fill: var(--color-primary);
     width: 20vw;
     aspect-ratio: 1;
     margin: 20px;
-    display:inline-block;
+    display: inline-block;
     vertical-align: baseline;
   }
 
@@ -929,24 +933,23 @@ main {
     transform-origin: center;
     animation: morphingBar var(--animation-tr) ease-in-out infinite;
   }
-  
+
   .bars-loader .morphing-bar-left {
     animation-delay: calc(var(--animation-tr) / 2.5);
   }
-  
+
   .bars-loader .morphing-bar-center {
     animation-delay: calc(var(--animation-tr) / 5);
   }
-  
+
   .bars-loader .morphing-bar-right {
     animation-delay: calc(var(--animation-tr) / 7.5);
   }
-  
 }
 
-
 @keyframes morphingBar {
-  0%, 100% {
+  0%,
+  100% {
     transform: scaleY(1);
   }
   50% {
