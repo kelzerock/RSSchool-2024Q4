@@ -1,6 +1,6 @@
 "use strict"
 import { nameConst } from "./data/const.js";
-import { getRandomItems } from "./data/utils.js";
+import { createElemGift, getRandomItems } from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -127,6 +127,7 @@ arrowButtons.forEach((el) => {
   };
 });
 
-const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
 
-console.log(getRandomItems(dataGifts, 4))
+// create random gifts
+const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
+createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
