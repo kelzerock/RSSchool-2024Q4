@@ -1,4 +1,6 @@
-"use strict";
+"use strict"
+import { nameConst } from "./data/const.js";
+import { getRandomItems } from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -65,6 +67,7 @@ window.onload = () => {
 
 //slider
 let arrowButtons = document.querySelectorAll(".button-arrow");
+const sliderMainBlock = document.querySelector(".slider");
 
 let counter = 0;
 let step = 0;
@@ -80,10 +83,13 @@ window.onresize = () => {
   } else {
     step = 6;
   }
+  counter = 0;
+  sliderMainBlock.style.right = "0px";
+  arrowButtons[0].classList.add(nameConst.inactive);
+  arrowButtons[1].classList.remove(nameConst.inactive)
 };
 
 arrowButtons.forEach((el) => {
-  const sliderMainBlock = document.querySelector(".slider");
   const sliderStyles = getComputedStyle(sliderMainBlock);
 
   el.onclick = () => {
@@ -93,10 +99,10 @@ arrowButtons.forEach((el) => {
     let stepSize = (totalWidth - visibleWidth) / step;
 
     if (el.classList.contains("left")) {
-      arrowButtons[1].classList.remove("inactive");
+      arrowButtons[1].classList.remove(nameConst.inactive);
 
       if (counter - 1 <= 0 || rightPropertyCSSWidth - stepSize <= 0) {
-        arrowButtons[0].classList.add("inactive");
+        arrowButtons[0].classList.add(nameConst.inactive);
         sliderMainBlock.style.right = "0px";
         counter = 0;
       } else {
@@ -104,13 +110,13 @@ arrowButtons.forEach((el) => {
         counter -= 1;
       }
     } else {
-      arrowButtons[0].classList.remove("inactive");
+      arrowButtons[0].classList.remove(nameConst.inactive);
 
       if (
         counter + 1 >= step ||
         rightPropertyCSSWidth + stepSize >= totalWidth
       ) {
-        arrowButtons[1].classList.add("inactive");
+        arrowButtons[1].classList.add(nameConst.inactive);
         sliderMainBlock.style.right = totalWidth - visibleWidth + "px";
         counter = step;
       } else {
@@ -120,3 +126,7 @@ arrowButtons.forEach((el) => {
     }
   };
 });
+
+const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
+
+console.log(getRandomItems(dataGifts, 4))
