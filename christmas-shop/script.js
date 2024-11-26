@@ -133,4 +133,6 @@ arrowButtons.forEach((el) => {
 
 // create random gifts
 const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
-createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
+const dataGifts_def = await fetch("./data/gifts_def.json").then(res => res.json())
+createElemGift(document.querySelector(".gift-block-list"), dataGifts_def.reverse())
+// createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
