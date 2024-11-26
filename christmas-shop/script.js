@@ -2,6 +2,9 @@
 import { nameConst } from "./data/const.js";
 import { createElemGift, getRandomItems } from "./data/utils.js";
 
+
+
+
 //router
 let arr = document.querySelectorAll(".button-black");
 
@@ -56,13 +59,13 @@ window.addEventListener("resize", (event) => {
 });
 
 //loading
-window.onload = () => {
-  document.querySelector(".container").classList.remove("load");
 
-  setTimeout(() => {
-    document.querySelector(".loading").classList.add("stop");
-    lockBody();
-  }, 1000);
+window.onload = () => {
+
+  document.querySelector(".container").classList.remove("load");
+  
+  document.querySelector(".loading").classList.add("stop");
+  lockBody();
 };
 
 //slider

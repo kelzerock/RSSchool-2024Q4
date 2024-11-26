@@ -21,7 +21,7 @@ export const createElemGift = (tag, gifts) => {
     let {src, alt, classGift } = giftConst[el.category];
     tag.insertAdjacentHTML("afterbegin", `
       <div class="gift-block-item">
-        <img class="gift-block-img" src="./image/${src}.png" alt="${alt}">
+        <img class="gift-block-img" loading="lazy" src="./image/${src}.png" alt="${alt}">
         <div class="gift-block-content">
           <h3 class="header-4 ${classGift}">${el.category}</h3>
           <h4 class="header-3">${el.name}</h4>
