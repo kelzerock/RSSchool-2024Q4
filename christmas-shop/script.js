@@ -1,6 +1,6 @@
 "use strict";
 import { nameConst } from "./data/const.js";
-import { createElemGift, createTimer, getRandomItems } from "./data/utils.js";
+import { createElemGift, createModalElemGift, createTimer, getRandomItems } from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -131,11 +131,15 @@ const dataGifts = await fetch("./data/gifts.json").then((res) => res.json());
 const dataGifts_def = await fetch("./data/gifts_def.json").then((res) =>
   res.json()
 );
-createElemGift(
-  document.querySelector(".gift-block-list"),
-  dataGifts_def.reverse()
-);
-// createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
+// createElemGift(
+//   document.querySelector(".gift-block-list"),
+//   dataGifts_def.reverse()
+// );
+createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
+
+
+//modal
+createModalElemGift(document.body, dataGifts[0])
 
 
 //timer
@@ -144,3 +148,4 @@ createTimer();
 setInterval(() => {
   createTimer();
 }, 1000);
+ 
