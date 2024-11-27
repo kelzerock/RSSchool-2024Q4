@@ -1,9 +1,6 @@
-"use strict"
+"use strict";
 import { nameConst } from "./data/const.js";
-import { createElemGift, getRandomItems } from "./data/utils.js";
-
-
-
+import { createElemGift, createTimer, getRandomItems } from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -61,9 +58,8 @@ window.addEventListener("resize", (event) => {
 //loading
 
 window.onload = () => {
-
   document.querySelector(".container").classList.remove("load");
-  
+
   document.querySelector(".loading").classList.add("stop");
   lockBody();
 };
@@ -89,7 +85,7 @@ window.onresize = () => {
   counter = 0;
   sliderMainBlock.style.right = "0px";
   arrowButtons[0].classList.add(nameConst.inactive);
-  arrowButtons[1].classList.remove(nameConst.inactive)
+  arrowButtons[1].classList.remove(nameConst.inactive);
 };
 
 arrowButtons.forEach((el) => {
@@ -130,9 +126,21 @@ arrowButtons.forEach((el) => {
   };
 });
 
-
 // create random gifts
-const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
-const dataGifts_def = await fetch("./data/gifts_def.json").then(res => res.json())
-createElemGift(document.querySelector(".gift-block-list"), dataGifts_def.reverse())
+const dataGifts = await fetch("./data/gifts.json").then((res) => res.json());
+const dataGifts_def = await fetch("./data/gifts_def.json").then((res) =>
+  res.json()
+);
+createElemGift(
+  document.querySelector(".gift-block-list"),
+  dataGifts_def.reverse()
+);
 // createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
+
+
+//timer
+createTimer();
+
+setInterval(() => {
+  createTimer();
+}, 1000);
