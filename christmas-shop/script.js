@@ -1,6 +1,6 @@
 "use strict";
 import { nameConst } from "./data/const.js";
-import { createElemGift, createModalElemGift, createTimer, getRandomItems } from "./data/utils.js";
+import { createElemGift, createModalElemGift, createTimer, getRandomItems, lockBody } from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -27,12 +27,10 @@ const burger = document.querySelector(".burger");
 const burgerMenu = document.querySelector(".burger-menu ");
 const burgerMenuItems = document.querySelectorAll(".burger-menu-item");
 
-const lockBody = () => bodyHTML.classList.toggle("lock");
-
 const toggleActiveStatus = () => {
   burgerLines.forEach((el) => el.classList.toggle("active"));
   burgerMenu.classList.toggle("active");
-  lockBody();
+  lockBody;
 };
 
 burger.onclick = () => {
@@ -139,7 +137,17 @@ createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGi
 
 
 //modal
-createModalElemGift(document.body, dataGifts[0])
+// createModalElemGift(document.body, dataGifts[0])
+const arrGifts = document.querySelectorAll(".gift-block-item")
+arrGifts.forEach((el) => {
+  el.onclick = () => {
+    const nameGift = el.querySelector("h4").innerHTML;
+    const giftForModal = dataGifts.find((el) => el.name.toLocaleLowerCase() === nameGift.toLocaleLowerCase())
+    console.log(giftForModal.name);
+    createModalElemGift(document.body, giftForModal)
+  }
+})
+
 
 
 //timer

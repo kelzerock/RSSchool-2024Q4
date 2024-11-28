@@ -1,5 +1,9 @@
 import { giftConst } from "./const.js";
 
+export const lockBody = () => {
+  document.body.classList.toggle("lock");
+};
+
 function randomIntFromInterval(min, max) {
   // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -55,16 +59,24 @@ export const createTimer = () => {
 };
 
 export const createModalElemGift = (tag, gift) => {
-  let { src, alt, classGift } = giftConst[gift.category];
-  let {name, description, category, superpowers : {live, create, love, dream}} = gift;
-  tag.insertAdjacentHTML(
+  let { classGift } = giftConst[gift.category];
+  let {
+    name,
+    description,
+    category,
+    superpowers: { live, create, love, dream },
+  } = gift;
+
+  lockBody();
+
+  const divModal = document.createElement("div");
+  divModal.classList.add("modal");
+  divModal.insertAdjacentHTML(
     "afterbegin",
     `
-      
-    <div class="modal">
-    <div class="modal-close"></div>
     <div class="modal-item">
-      <div class="modal-block-img  ${classGift}"></div>
+    <div class="modal-close"></div>
+    <div class="modal-block-img  ${classGift}"></div>
       <div class="modal-content">
         <div class="modal-block-content">
           <h4 class="header-4 ${classGift}">${category}</h4>
@@ -75,24 +87,49 @@ export const createModalElemGift = (tag, gift) => {
           <h4 class="header-4">Adds superpowers to:</h4>
           <span>Live</span> 
             <span class="power">${live}</span> 
-              <span class="power-rate">${showflake.repeat(Math.floor(parseInt(live)/100))}</span>
+              <span class="power-rate">${showflake.repeat(
+                Math.floor(parseInt(live) / 100)
+              )}</span>
           <span>Create</span> 
             <span class="power">${create}</span> 
-              <span class="power-rate">${showflake.repeat(Math.floor(parseInt(create)/100))}</span>
+              <span class="power-rate">${showflake.repeat(
+                Math.floor(parseInt(create) / 100)
+              )}</span>
           <span>Love</span> 
             <span class="power">${love}</span> 
-              <span class="power-rate">${showflake.repeat(Math.floor(parseInt(love)/100))}</span>
+              <span class="power-rate">${showflake.repeat(
+                Math.floor(parseInt(love) / 100)
+              )}</span>
           <span>Dream</span> 
             <span class="power">${dream}</span> 
-              <span class="power-rate">${showflake.repeat(Math.floor(parseInt(dream)/100))}</span>
+              <span class="power-rate">${showflake.repeat(
+                Math.floor(parseInt(dream) / 100)
+              )}</span>
         </div>
       </div>
     </div>
-  </div>
       `
   );
-};
 
+  const modalClose = () => divModal.remove();
+  divModal.onclick = (event) => {
+    console.log({
+      scrollY: window.scrollY,
+      height: document.documentElement.clientHeight,
+    });
+    if (
+      event.target === divModal ||
+      (event.target.closest(".modal-item") &&
+        event.target.classList.contains("modal-close"))
+    ) {
+      modalClose();
+      lockBody();
+    }
+  };
+
+  tag.prepend(divModal);
+  divModal.style.top = window.scrollY + "px";
+};
 
 export const showflake = `
 <svg class="snowflake" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,4 +142,4 @@ export const showflake = `
 </clipPath>
 </defs>
 </svg>
-`
+`;

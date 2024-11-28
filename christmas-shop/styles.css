@@ -646,24 +646,56 @@ main {
 
 .modal {
   width: 100%;
+  /* max-width: 1440px; */
   height: 100vh;
   background-color: var(--color-overlay);
   position: absolute;
   z-index: 20;
   backdrop-filter: blur(2px);
-  display: flex;
+  position: absolute;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 
   .modal-item {
+    position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     width: 400px;
-    position: relative;
+    /* position: relative; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 20px;
     overflow: hidden;
     background-color: var(--color-white);
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      transition: background .5s ease-in;
+  
+      &::after, &::before {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 2px;
+        background: var(--color-dark);
+        transition: background .5s ease-in;
+      }
+      &::after {
+        transform: rotate(45deg) translate(12px, 12px);
+      }
+      &::before {
+        transform: rotate(-45deg) translate(-13px, 13px);
+      }
+    }
+  
 
     .modal-block-img {
       height: 230px;
@@ -693,6 +725,10 @@ main {
             color: var(--color-pink);
           }
         }
+
+        p {
+          text-align: justify;
+        }
       }
 
       .modal-block-power {
@@ -706,6 +742,9 @@ main {
           margin-bottom: 8px;
         }
         .power-rate {
+          display: flex;
+          justify-content: flex-start;
+          column-gap: 8px;
           .snowflake {
             width: 16px;
             height: 16px;
@@ -941,6 +980,10 @@ main {
     &:hover .gift-block-content .header-3 {
       color: var(--color-primary);
     }
+  }
+
+  .modal-close:hover {
+    cursor: pointer;
   }
 }
 
