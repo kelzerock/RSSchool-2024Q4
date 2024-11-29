@@ -15,18 +15,21 @@ export const getRandomItems = (arr, num) => {
     let n = randomIntFromInterval(0, arr.length - 1);
     if (!randomNums.includes(n)) randomNums.push(n);
   }
-
-  return arr.filter((el, index) => randomNums.includes(index));
+  let result = [];
+  randomNums.forEach((el) => {
+    result.push(arr[el])
+  });
+  return result;
 };
 
-export const createElemGift = (tag, gifts) => {
+export const createElemGift = (tag, gifts, path = "") => {
   gifts.forEach((el) => {
     let { src, alt, classGift } = giftConst[el.category];
     tag.insertAdjacentHTML(
       "afterbegin",
       `
       <div class="gift-block-item">
-        <img class="gift-block-img" loading="lazy" src="./image/${src}.png" alt="${alt}">
+        <img class="gift-block-img" loading="lazy" src="${path}./image/${src}.png" alt="${alt}">
         <div class="gift-block-content">
           <h3 class="header-4 ${classGift}">${el.category}</h3>
           <h4 class="header-3">${el.name}</h4>
