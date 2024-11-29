@@ -653,17 +653,13 @@ main {
   z-index: 20;
   backdrop-filter: blur(2px);
   position: absolute;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 
   .modal-item {
     position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 400px;
-    /* position: relative; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -674,19 +670,20 @@ main {
     .modal-close {
       width: 40px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 10px;
       position: absolute;
       top: 12px;
       right: 12px;
-      transition: background .5s ease-in;
-  
-      &::after, &::before {
+      transition: background 0.5s ease-in;
+
+      &::after,
+      &::before {
         content: "";
         display: block;
         width: 40px;
         height: 2px;
         background: var(--color-dark);
-        transition: background .5s ease-in;
+        transition: background 0.5s ease-in;
       }
       &::after {
         transform: rotate(45deg) translate(12px, 12px);
@@ -695,12 +692,22 @@ main {
         transform: rotate(-45deg) translate(-13px, 13px);
       }
     }
-  
 
     .modal-block-img {
       height: 230px;
-      background: url("./image/gift-for-work.png") no-repeat 0px -33px/100%,
-        var(--color-content-background);
+
+      &.work {
+        background: url("./image/gift-for-work.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
+      &.health {
+        background: url("./image/gift-for-health.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
+      &.harmony {
+        background: url("./image/gift-for-harmony.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
     }
 
     .modal-content {
@@ -744,6 +751,7 @@ main {
         .power-rate {
           display: flex;
           justify-content: flex-start;
+          align-items: center;
           column-gap: 8px;
           .snowflake {
             width: 16px;
@@ -892,6 +900,29 @@ main {
 
   .button-red {
     padding: 12px 8px;
+  }
+
+  .modal {
+    .modal-item {
+      width: 364px;
+
+      .modal-block-img {
+        height: 230px;
+  
+        &.work {
+          background: url("./image/gift-for-work.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+        &.health {
+          background: url("./image/gift-for-health.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+        &.harmony {
+          background: url("./image/gift-for-harmony.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+      }
+    }
   }
 }
 

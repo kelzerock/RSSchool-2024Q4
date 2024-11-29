@@ -1,6 +1,12 @@
 "use strict";
 import { nameConst } from "./data/const.js";
-import { createElemGift, createModalElemGift, createTimer, getRandomItems, lockBody } from "./data/utils.js";
+import {
+  createElemGift,
+  createModalElemGift,
+  createTimer,
+  getRandomItems,
+  lockBody,
+} from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -133,22 +139,23 @@ const dataGifts_def = await fetch("./data/gifts_def.json").then((res) =>
 //   document.querySelector(".gift-block-list"),
 //   dataGifts_def.reverse()
 // );
-createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
-
+createElemGift(
+  document.querySelector(".gift-block-list"),
+  getRandomItems(dataGifts, 4)
+);
 
 //modal
 // createModalElemGift(document.body, dataGifts[0])
-const arrGifts = document.querySelectorAll(".gift-block-item")
+const arrGifts = document.querySelectorAll(".gift-block-item");
 arrGifts.forEach((el) => {
   el.onclick = () => {
     const nameGift = el.querySelector("h4").innerHTML;
-    const giftForModal = dataGifts.find((el) => el.name.toLocaleLowerCase() === nameGift.toLocaleLowerCase())
-    console.log(giftForModal.name);
-    createModalElemGift(document.body, giftForModal)
-  }
-})
-
-
+    const giftForModal = dataGifts.find(
+      (el) => el.name.toLocaleLowerCase() === nameGift.toLocaleLowerCase()
+    );
+    createModalElemGift(document.body, giftForModal);
+  };
+});
 
 //timer
 createTimer();
@@ -156,4 +163,3 @@ createTimer();
 setInterval(() => {
   createTimer();
 }, 1000);
- 
