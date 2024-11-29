@@ -145,6 +145,10 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  
+  &.filtered {
+    display: none;
+  }
 
   .gift-block-img {
     width: 100%;
@@ -410,7 +414,7 @@ main {
       column-gap: 21px;
       position: relative;
       right: 0px;
-      transition: right .5s ease-in-out;
+      transition: right 0.5s ease-in-out;
 
       img {
         height: 100%;
@@ -623,6 +627,11 @@ main {
   flex-direction: column;
   align-items: center;
   row-gap: 20px;
+  position: relative;
+
+  .button-arrow-top {
+    display: none;
+  }
 
   .header-1 {
     color: var(--color-white);
@@ -641,6 +650,125 @@ main {
     grid-template-columns: repeat(4, auto);
     grid-auto-rows: auto;
     gap: 12px;
+  }
+}
+
+.modal {
+  width: 100%;
+  /* max-width: 1440px; */
+  height: 100vh;
+  background-color: var(--color-overlay);
+  position: absolute;
+  z-index: 20;
+  backdrop-filter: blur(2px);
+  position: absolute;
+
+  .modal-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--color-white);
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      transition: background 0.5s ease-in;
+
+      &::after,
+      &::before {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 2px;
+        background: var(--color-dark);
+        transition: background 0.5s ease-in;
+      }
+      &::after {
+        transform: rotate(45deg) translate(12px, 12px);
+      }
+      &::before {
+        transform: rotate(-45deg) translate(-13px, 13px);
+      }
+    }
+
+    .modal-block-img {
+      height: 230px;
+
+      &.work {
+        background: url("./image/gift-for-work.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
+      &.health {
+        background: url("./image/gift-for-health.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
+      &.harmony {
+        background: url("./image/gift-for-harmony.png") no-repeat 0px -33px/100%,
+          var(--color-content-background);
+      }
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      row-gap: 20px;
+
+      .modal-block-content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+
+        h4 {
+          &.work {
+            color: var(--color-purple);
+          }
+          &.health {
+            color: var(--color-green);
+          }
+          &.harmony {
+            color: var(--color-pink);
+          }
+        }
+
+        p {
+          text-align: justify;
+        }
+      }
+
+      .modal-block-power {
+        display: grid;
+        grid-template-rows: 24px repeat(4, 24px);
+        grid-template-columns: 1fr 40px 112px;
+        column-gap: 12px;
+
+        h4 {
+          grid-column: 1 / 4;
+          margin-bottom: 8px;
+        }
+        .power-rate {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          column-gap: 8px;
+          .snowflake {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -695,7 +823,7 @@ main {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .header {
     padding: 12px 8px;
     .header-menu {
@@ -725,6 +853,34 @@ main {
         &:last-child.active {
           transform: rotate(-45deg) translateY(-2px) translateX(4px);
         }
+      }
+    }
+  }
+
+  .gifts {
+    .button-arrow-top {
+      position: fixed;
+      right: 8px;
+      bottom: 8px;
+      width: 56px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: rotate(-90deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid 1px var(--color-primary);
+  
+      &.disabled {
+        display: none;
+      }
+  
+      &:hover {
+        cursor: pointer;
+      }
+  
+      svg {
+        color: var(--color-primary);
       }
     }
   }
@@ -781,6 +937,29 @@ main {
 
   .button-red {
     padding: 12px 8px;
+  }
+
+  .modal {
+    .modal-item {
+      width: 364px;
+
+      .modal-block-img {
+        height: 230px;
+  
+        &.work {
+          background: url("./image/gift-for-work.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+        &.health {
+          background: url("./image/gift-for-health.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+        &.harmony {
+          background: url("./image/gift-for-harmony.png") no-repeat 0px -20px/100%,
+          var(--color-content-background);
+        }
+      }
+    }
   }
 }
 
@@ -869,6 +1048,10 @@ main {
     &:hover .gift-block-content .header-3 {
       color: var(--color-primary);
     }
+  }
+
+  .modal-close:hover {
+    cursor: pointer;
   }
 }
 

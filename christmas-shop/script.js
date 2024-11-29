@@ -1,9 +1,12 @@
-"use strict"
+"use strict";
 import { nameConst } from "./data/const.js";
-import { createElemGift, getRandomItems } from "./data/utils.js";
-
-
-
+import {
+  createElemGift,
+  createModalElemGift,
+  createTimer,
+  getRandomItems,
+  lockBody,
+} from "./data/utils.js";
 
 //router
 let arr = document.querySelectorAll(".button-black");
@@ -30,12 +33,10 @@ const burger = document.querySelector(".burger");
 const burgerMenu = document.querySelector(".burger-menu ");
 const burgerMenuItems = document.querySelectorAll(".burger-menu-item");
 
-const lockBody = () => bodyHTML.classList.toggle("lock");
-
 const toggleActiveStatus = () => {
   burgerLines.forEach((el) => el.classList.toggle("active"));
   burgerMenu.classList.toggle("active");
-  lockBody();
+  lockBody;
 };
 
 burger.onclick = () => {
@@ -61,9 +62,8 @@ window.addEventListener("resize", (event) => {
 //loading
 
 window.onload = () => {
-
   document.querySelector(".container").classList.remove("load");
-  
+
   document.querySelector(".loading").classList.add("stop");
   lockBody();
 };
@@ -89,7 +89,7 @@ window.onresize = () => {
   counter = 0;
   sliderMainBlock.style.right = "0px";
   arrowButtons[0].classList.add(nameConst.inactive);
-  arrowButtons[1].classList.remove(nameConst.inactive)
+  arrowButtons[1].classList.remove(nameConst.inactive);
 };
 
 arrowButtons.forEach((el) => {
@@ -130,9 +130,32 @@ arrowButtons.forEach((el) => {
   };
 });
 
-
 // create random gifts
-const dataGifts = await fetch("./data/gifts.json").then(res => res.json())
-const dataGifts_def = await fetch("./data/gifts_def.json").then(res => res.json())
-createElemGift(document.querySelector(".gift-block-list"), dataGifts_def.reverse())
-// createElemGift(document.querySelector(".gift-block-list"), getRandomItems(dataGifts,4))
+const dataGifts = await fetch("./data/gifts.json").then((res) => res.json());
+const dataGifts_def = await fetch("./data/gifts_def.json").then((res) =>
+  res.json()
+);
+createElemGift(
+  document.querySelector(".gift-block-list"),
+  getRandomItems(dataGifts, 4)
+);
+
+//modal
+// createModalElemGift(document.body, dataGifts[0])
+const arrGifts = document.querySelectorAll(".gift-block-item");
+arrGifts.forEach((el) => {
+  el.onclick = () => {
+    const nameGift = el.querySelector("h4").innerHTML;
+    const giftForModal = dataGifts.find(
+      (el) => el.name.toLocaleLowerCase() === nameGift.toLocaleLowerCase()
+    );
+    createModalElemGift(document.body, giftForModal);
+  };
+});
+
+//timer
+createTimer();
+
+setInterval(() => {
+  createTimer();
+}, 1000);
