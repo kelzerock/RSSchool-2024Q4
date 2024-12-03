@@ -1040,6 +1040,18 @@ main {
     }
   }
 
+  .burger-menu {
+    .burger-menu-item {
+      &:hover {
+        background-color: var(--color-primary-10);
+        border-radius: 20px;
+      }
+      &:hover .burger-menu-link {
+        color: var(--color-primary);
+      }
+    }
+  }
+
   .gift-block-item {
     &:hover {
       cursor: pointer;
@@ -1088,8 +1100,11 @@ main {
   }
   .burger-menu-item {
     padding: 12px 20px;
+    transition: background-color .3s ease-in ;
+
     .burger-menu-link {
       color: var(--color-dark);
+      transition: color .3s ease-in ;
     }
   }
 }
