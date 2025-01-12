@@ -1,15 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { runtime } = require("webpack");
 
 module.exports = (env) => {
-  const typeBuild = env.production ? "production" : "development";
+  const typeBuild = env.mode === "production" ? "production" : "development";
 
   return {
     mode: typeBuild,
-    entry: "./src/index.js",
+    entry: path.resolve(__dirname, "src", "index.js"),
     output: {
-      filename: "main.js",
       path: path.resolve(__dirname, "dist"),
+      filename: "bundle.[contenthash:8].js",
+      chunkFilename: "chank-[id].[chunkhash].js",
       clean: true,
     },
     plugins: [
@@ -31,7 +33,14 @@ module.exports = (env) => {
           test: /\.html$/i,
           loader: "html-loader",
         },
+        {
+          test: /\.s[ac]ss$/i,
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
       ],
+    },
+    resolve: {
+      extensions: [".js"],
     },
   };
 };
