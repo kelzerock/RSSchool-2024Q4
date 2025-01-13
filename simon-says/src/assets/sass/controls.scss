@@ -1,0 +1,50 @@
+.button {
+  border-radius: 5px;
+  margin: 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button--invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.button--disabled {
+  pointer-events: none;
+  opacity: .8;
+
+  &:hover {
+    cursor: auto;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controls-level {
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px black;
+
+  .active-level {
+    background-color: darkslategray;
+    color: whitesmoke;
+  }
+}

@@ -1,6 +1,76 @@
 import { Component } from "./node";
 import "../assets/sass/keyboard.scss";
+import { playBox } from "./playBox";
 
+const keyboardInstance = {
+  easy: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+  medium: [
+    "q",
+    "w",
+    "e",
+    "r",
+    "t",
+    "y",
+    "u",
+    "i",
+    "o",
+    "p",
+    "a",
+    "s",
+    "d",
+    "f",
+    "g",
+    "h",
+    "j",
+    "k",
+    "l",
+    "z",
+    "x",
+    "c",
+    "v",
+    "b",
+    "n",
+    "m",
+  ],
+  hard: [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "q",
+    "w",
+    "e",
+    "r",
+    "t",
+    "y",
+    "u",
+    "i",
+    "o",
+    "p",
+    "a",
+    "s",
+    "d",
+    "f",
+    "g",
+    "h",
+    "j",
+    "k",
+    "l",
+    "z",
+    "x",
+    "c",
+    "v",
+    "b",
+    "n",
+    "m",
+  ],
+};
 const easy = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 const medium = [
   "q",
@@ -37,11 +107,17 @@ export class Keyboard extends Component {
     super({ tag: "div", className: `keyboard ${className}` });
     this.difficulty = difficulty;
     this.key = [];
-    if (this.difficulty === "easy") {
-      easy.forEach((item) => {
-        this.key.push(new Key({ key: item }));
-      });
-    }
+
+    this.createKeyboard(this.difficulty);
+  }
+
+  createKeyboard(difficulty) {
+    this.difficulty = difficulty;
+    this.destroyChildren();
+    this.key = [];
+    keyboardInstance[this.difficulty].forEach((item) => {
+      this.key.push(new Key({ key: item }));
+    });
     this.appendChildren(this.key);
   }
 }
