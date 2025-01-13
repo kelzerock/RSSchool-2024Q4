@@ -123,8 +123,9 @@ class PlayBox extends Component {
             this.isPlay = false;
             this.sendMessage(RESULT.win);
             //controls
-            repeatInfo.addVisibleClassName();
+            repeatInfo.addDisActiveClass();
             if (this.level < MAX_LEVEL + 1) {
+              repeatInfo.addVisibleClassName();
               nextLevel.removeVisibleClassName();
             }
           }

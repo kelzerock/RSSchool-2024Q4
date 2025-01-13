@@ -34,10 +34,10 @@
 
 .controls {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  flex-wrap: wrap;
 }
 
 .controls-level {

@@ -103,12 +103,19 @@ const wrapperBtns = new Component(
   nextLevel,
 );
 
+const levelInfo = new Component({
+  tag: "span",
+  className: "levelInfo",
+  text: "Current level: 1",
+});
+
 const controls = new Component(
   {
     tag: "div",
     className: "controls",
   },
   wrapperBtns,
+  levelInfo,
   levelDiv,
 );
 
@@ -134,6 +141,7 @@ newGame.addListener("click", () => {
     element.removeDisActiveClass();
   });
   nextLevel.addVisibleClassName();
+  levelInfo.setTextContent(`Current level: 1`);
 
   //playbox
   playBox.isPlay = false;
@@ -151,9 +159,10 @@ nextLevel.addListener("click", (event) => {
   //control
   nextLevel.addVisibleClassName();
   repeatInfo.removeVisibleClassName();
+  levelInfo.setTextContent(`Current level: ${playBox.level}`);
 
   //playbox
   playBox.generateSequence();
 });
 
-export { controls, repeatInfo, newGame, nextLevel };
+export { controls, repeatInfo, newGame, nextLevel, levelInfo };

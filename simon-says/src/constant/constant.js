@@ -1,4 +1,4 @@
-const DELAY = 100;
+const DELAY = 500;
 const KEY_CODE = {
   easy: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57],
   medium: [
