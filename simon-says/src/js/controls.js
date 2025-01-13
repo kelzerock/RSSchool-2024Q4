@@ -130,6 +130,8 @@ startBtn.addListener("click", (event) => {
 
   //playbox
   playBox.generateSequence();
+  playBox.level = 1;
+  playBox.attempt = 1;
 });
 
 newGame.addListener("click", () => {
@@ -146,6 +148,7 @@ newGame.addListener("click", () => {
   //playbox
   playBox.isPlay = false;
   playBox.level = 1;
+  playBox.attempt = 1;
   playBox.cleanDisplay();
 });
 

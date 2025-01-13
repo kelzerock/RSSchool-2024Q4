@@ -104,7 +104,7 @@ const medium = [
 const hard = [...easy, ...medium];
 
 export class Keyboard extends Component {
-  constructor({ className, difficulty }) {
+  constructor({ className = "", difficulty }) {
     super({ tag: "div", className: `keyboard ${className}` });
     this.difficulty = difficulty;
     this.key = [];

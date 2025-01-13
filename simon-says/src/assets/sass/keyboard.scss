@@ -1,4 +1,6 @@
 .keyboard {
+  margin: 10px auto;
+  max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -30,5 +32,17 @@
     background-color: rgb(29, 43, 43);
     color: whitesmoke;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .keyboard {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .keyboard {
+    max-width: 440px;
   }
 }
