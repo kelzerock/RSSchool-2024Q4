@@ -1,6 +1,14 @@
-import { DIFFICULTY, LEVEL, KEY, KEY_CODE, DELAY } from "../constant/constant";
+import {
+  DIFFICULTY,
+  LEVEL,
+  KEY,
+  KEY_CODE,
+  DELAY,
+  RESULT,
+  MAX_LEVEL,
+} from "../constant/constant";
 import { randomIntFromInterval } from "../utils/utils";
-import { controls, newGame, repeatInfo } from "./controls";
+import { controls, newGame, nextLevel, repeatInfo } from "./controls";
 import { Display } from "./display";
 import { Key, Keyboard } from "./keyboard";
 import { Component } from "./node";
@@ -10,6 +18,7 @@ class PlayBox extends Component {
     super({ tag: "main", className }, ...items);
     this.difficulty = DIFFICULTY.easy;
     this.level = 1;
+    this.attempt = 1;
     this.display = [];
     this.sequence = [];
     this.isPlay = false;
@@ -28,7 +37,7 @@ class PlayBox extends Component {
       this.sequence.push(arrSymbols[randomNum]);
       count += 1;
     }
-    console.log({ arrSymbols: this.sequence });
+    console.log("sequence: ", this.sequence);
     this.playSequence();
   }
 
@@ -52,7 +61,7 @@ class PlayBox extends Component {
               this.cleanDisplay();
               keyNode.removeSelectClass();
               newGame.removeDisActiveClass();
-              repeatInfo.removeDisActiveClass();
+              if (this.attempt > 0) repeatInfo.removeDisActiveClass();
               this.isPlay = true;
             }, DELAY);
           }
@@ -92,18 +101,6 @@ class PlayBox extends Component {
   }
 
   startDisplay(info) {
-    const length = this.display.length;
-    // console.log({ info, length, display: this.sequence, play: this.isPlay });
-    if (info === this.sequence[length - 1] && this.isPlay) {
-      console.log("OK");
-      if (length === this.sequence.length) {
-        console.log("you are win!!");
-        this.isPlay = false;
-      }
-    } else {
-      console.log("you are lose!!");
-      this.isPlay = false;
-    }
     this.getChildren()[1].append(
       new Component({
         tag: "span",
@@ -111,6 +108,46 @@ class PlayBox extends Component {
         text: info.toUpperCase(),
       }),
     );
+
+    const length = this.display.length;
+    // console.log({ info, length, display: this.sequence, play: this.isPlay });
+    if (this.isPlay) {
+      if (info === this.sequence[length - 1]) {
+        if (length === this.sequence.length) {
+          //game logic
+          this.isPlay = false;
+          if (this.level <= MAX_LEVEL) {
+            this.level += 1;
+            this.attempt = 1;
+
+            this.isPlay = false;
+            this.sendMessage(RESULT.win);
+            //controls
+            repeatInfo.addVisibleClassName();
+            if (this.level < MAX_LEVEL + 1) {
+              nextLevel.removeVisibleClassName();
+            }
+          }
+        }
+      } else {
+        this.isPlay = false;
+        this.sendMessage(RESULT.lose);
+      }
+    }
+  }
+
+  sendMessage(result) {
+    this.cleanDisplay();
+    const addWinMsg = this.level === 6 ? "Game over! " : "";
+    const addLostMsg =
+      this.attempt === 0
+        ? " You doesn't have more attempt!"
+        : " You have one more attempt!";
+    const msg =
+      result === RESULT.win
+        ? addWinMsg + `You won! Congratulations!`
+        : `Sorry, you lost!` + addLostMsg;
+    this.startDisplay(msg);
   }
 
   cleanDisplay() {

@@ -1,4 +1,4 @@
-const DELAY = 1000;
+const DELAY = 100;
 const KEY_CODE = {
   easy: [48, 49, 50, 51, 52, 53, 54, 55, 56, 57],
   medium: [
@@ -51,5 +51,7 @@ const KEY = {
 
 const DIFFICULTY = { easy: "easy", medium: "medium", hard: "hard" };
 const LEVEL = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 };
+const RESULT = { win: "win", lose: "lose" };
+const MAX_LEVEL = 5;
 
-export { KEY, KEY_CODE, DIFFICULTY, LEVEL, DELAY };
+export { KEY, KEY_CODE, DIFFICULTY, LEVEL, DELAY, RESULT, MAX_LEVEL };

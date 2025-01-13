@@ -41,6 +41,7 @@ class StartButton extends Button {
     this.getNode().classList.add(this.visibleClassName);
   }
 }
+
 const startBtn = new StartButton({ className: "startButton", text: "start" });
 
 const easyLevelBtn = new StartButton({
@@ -85,15 +86,29 @@ const newGame = new StartButton({
   text: "new game",
   visible: false,
 });
+const nextLevel = new StartButton({
+  className: "nextLevel",
+  text: "next",
+  visible: false,
+});
+
+const wrapperBtns = new Component(
+  {
+    tag: "div",
+    className: "contols-wrapper",
+  },
+  startBtn,
+  newGame,
+  repeatInfo,
+  nextLevel,
+);
 
 const controls = new Component(
   {
     tag: "div",
     className: "controls",
   },
-  startBtn,
-  newGame,
-  repeatInfo,
+  wrapperBtns,
   levelDiv,
 );
 
@@ -118,14 +133,27 @@ newGame.addListener("click", () => {
   arrLevelBtns.forEach((element) => {
     element.removeDisActiveClass();
   });
+  nextLevel.addVisibleClassName();
 
   //playbox
   playBox.isPlay = false;
+  playBox.level = 1;
   playBox.cleanDisplay();
 });
 
 repeatInfo.addListener("click", (event) => {
+  //playbox
+  playBox.attempt -= 1;
   playBox.playSequence();
 });
 
-export { controls, repeatInfo, newGame };
+nextLevel.addListener("click", (event) => {
+  //control
+  nextLevel.addVisibleClassName();
+  repeatInfo.removeVisibleClassName();
+
+  //playbox
+  playBox.generateSequence();
+});
+
+export { controls, repeatInfo, newGame, nextLevel };
