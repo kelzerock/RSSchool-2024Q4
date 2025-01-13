@@ -25,7 +25,6 @@ export class Component {
     this.#node = node;
 
     if (children) {
-      console.log({ children });
       this.appendChildren(children);
     }
   }

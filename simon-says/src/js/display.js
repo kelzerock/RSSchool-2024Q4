@@ -1,4 +1,5 @@
 import { Component } from "./node";
+import "../assets/sass/display.scss";
 
 export class Display extends Component {
   constructor() {
