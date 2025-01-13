@@ -13,19 +13,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  border: solid black 1px;
   user-select: none;
+
+  border: 2px solid #333333;
+  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+  letter-spacing: 0.3ch;
+  background: #ffffff;
+  position: relative;
+
+  &::before {
+    content: '';
+    border: 1px solid #353535;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(5deg);
+    border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+    transition: transform .3s ease-in-out;
+  }
 
   &.select-key {
     background-color: darkslategray;
-    color: whitesmoke;
+    color: #ffffff;
   }
 
   &:hover {
     background-color: darkslategray;
-    color: whitesmoke;
+    color: #ffffff;
     cursor: pointer;
+
+    &::before {
+      transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(-5deg);
+    }
   }
 
   &:active {
