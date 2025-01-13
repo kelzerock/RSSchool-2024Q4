@@ -110,7 +110,6 @@ class PlayBox extends Component {
     );
 
     const length = this.display.length;
-    // console.log({ info, length, display: this.sequence, play: this.isPlay });
     if (this.isPlay) {
       if (info === this.sequence[length - 1]) {
         if (length === this.sequence.length) {
@@ -139,7 +138,7 @@ class PlayBox extends Component {
 
   sendMessage(result) {
     this.cleanDisplay();
-    const addWinMsg = this.level === 6 ? "Game over! " : "";
+    const addWinMsg = this.level === MAX_LEVEL + 1 ? "Game over! " : "";
     const addLostMsg =
       this.attempt === 0
         ? " You doesn't have more attempt!"
