@@ -107,7 +107,7 @@ startBtn.addListener("click", (event) => {
   });
 
   //playbox
-  playBox.isPlay = true;
+  playBox.generateSequence();
 });
 
 newGame.addListener("click", () => {
