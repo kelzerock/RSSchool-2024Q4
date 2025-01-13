@@ -73,6 +73,7 @@ class PlayBox extends Component {
     if (!this.isPlay) return;
     if (!KEY_CODE[this.difficulty].includes(keyCode)) return;
     const info = String.fromCharCode(keyCode);
+    this.display.push(info);
     this.startDisplay(info);
     const nodeKey = this.getKey(info);
     nodeKey.addSelectClass();
@@ -85,13 +86,24 @@ class PlayBox extends Component {
     if (!this.isPlay) return;
     const key = event.target.closest("span");
     if (!key) return;
-    if (!key.classList.contains("key"));
     const data = key.dataset.key;
     this.display.push(data);
     this.startDisplay(data);
   }
 
   startDisplay(info) {
+    const length = this.display.length;
+    // console.log({ info, length, display: this.sequence, play: this.isPlay });
+    if (info === this.sequence[length - 1] && this.isPlay) {
+      console.log("OK");
+      if (length === this.sequence.length) {
+        console.log("you are win!!");
+        this.isPlay = false;
+      }
+    } else {
+      console.log("you are lose!!");
+      this.isPlay = false;
+    }
     this.getChildren()[1].append(
       new Component({
         tag: "span",
