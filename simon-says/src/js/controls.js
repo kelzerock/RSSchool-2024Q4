@@ -124,4 +124,8 @@ newGame.addListener("click", () => {
   playBox.cleanDisplay();
 });
 
-export { controls };
+repeatInfo.addListener("click", (event) => {
+  playBox.playSequence();
+});
+
+export { controls, repeatInfo, newGame };

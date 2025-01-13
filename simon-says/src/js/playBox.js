@@ -1,8 +1,8 @@
-import { DIFFICULTY, LEVEL, KEY, KEY_CODE } from "../constant/constant";
+import { DIFFICULTY, LEVEL, KEY, KEY_CODE, DELAY } from "../constant/constant";
 import { randomIntFromInterval } from "../utils/utils";
-import { controls } from "./controls";
+import { controls, newGame, repeatInfo } from "./controls";
 import { Display } from "./display";
-import { Keyboard } from "./keyboard";
+import { Key, Keyboard } from "./keyboard";
 import { Component } from "./node";
 
 class PlayBox extends Component {
@@ -30,27 +30,55 @@ class PlayBox extends Component {
     }
     console.log({ arrSymbols: this.sequence });
     this.playSequence();
-    this.isPlay = true;
   }
 
   playSequence() {
+    newGame.addDisActiveClass();
+    repeatInfo.addDisActiveClass();
+    this.isPlay = false;
+    this.cleanDisplay();
+
     this.sequence.forEach((item, index) => {
       setTimeout(
         () => {
           this.startDisplay(item);
+          const keyNode = this.getKey(item);
+          keyNode.addSelectClass();
+          setTimeout(() => {
+            keyNode.removeSelectClass();
+          }, DELAY);
+          if (index === this.sequence.length - 1) {
+            setTimeout(() => {
+              this.cleanDisplay();
+              keyNode.removeSelectClass();
+              newGame.removeDisActiveClass();
+              repeatInfo.removeDisActiveClass();
+              this.isPlay = true;
+            }, DELAY);
+          }
         },
-        1000 * (index + 1),
+        DELAY * (index + 1),
       );
     });
-    this.cleanDisplay();
+    return true;
+  }
+
+  getKey(key) {
+    const keyboardNode = this.getChildren()[2];
+    const keyIndex = keyboardNode.getSelectorNode(key);
+    return keyboardNode.getChildren()[keyIndex];
   }
 
   keyDownListener({ keyCode }) {
     if (!this.isPlay) return;
     if (!KEY_CODE[this.difficulty].includes(keyCode)) return;
-    const strCode = keyCode.toString();
-    const info = KEY[strCode];
+    const info = String.fromCharCode(keyCode);
     this.startDisplay(info);
+    const nodeKey = this.getKey(info);
+    nodeKey.addSelectClass();
+    setTimeout(() => {
+      nodeKey.removeSelectClass();
+    }, 100);
   }
 
   clickKey(event) {

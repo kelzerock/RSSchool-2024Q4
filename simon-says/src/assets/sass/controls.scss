@@ -1,6 +1,8 @@
 .button {
   border-radius: 5px;
   margin: 2px;
+  outline: none;
+  border: solid rgb(24, 22, 22) 2px;
 
   &:hover {
     cursor: pointer;
@@ -22,6 +24,7 @@
 
 .button--disabled {
   pointer-events: none;
+  border-color: rgb(131, 128, 128);
   opacity: .8;
 
   &:hover {

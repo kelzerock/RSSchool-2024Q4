@@ -15,8 +15,20 @@
   border: solid black 1px;
   user-select: none;
 
+  &.select-key {
+    background-color: darkslategray;
+    color: whitesmoke;
+  }
+
   &:hover {
-    background-color: lightcyan;
+    background-color: darkslategray;
+    color: whitesmoke;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: rgb(29, 43, 43);
+    color: whitesmoke;
     cursor: pointer;
   }
 }

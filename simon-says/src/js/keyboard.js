@@ -1,6 +1,7 @@
 import { Component } from "./node";
 import "../assets/sass/keyboard.scss";
 import { playBox } from "./playBox";
+import { KEY_CODE } from "../constant/constant";
 
 const keyboardInstance = {
   easy: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -115,16 +116,51 @@ export class Keyboard extends Component {
     this.difficulty = difficulty;
     this.destroyChildren();
     this.key = [];
-    keyboardInstance[this.difficulty].forEach((item) => {
-      this.key.push(new Key({ key: item }));
+    KEY_CODE[this.difficulty].forEach((item) => {
+      this.key.push(new Key({ key: String.fromCharCode(item) }));
     });
     this.appendChildren(this.key);
   }
+
+  getSelectorNode(key) {
+    let data = false;
+    this.getChildren().forEach((item, index) => {
+      if (item.getSelectorNode(key)) {
+        data = index;
+      }
+    });
+    return data;
+  }
+
+  // addSelectClass(key) {
+  //   this.getChildren().forEach((item) => item.addSelectClass(key));
+  // }
+  // removeSelectClass(key) {
+  //   this.getChildren().forEach((item) => item.removeSelectClass());
+  // }
 }
 
-class Key extends Component {
+export class Key extends Component {
+  selectClass = "select-key";
   constructor({ className = "", key }) {
     super({ tag: "span", className: `key ${className}`, text: key });
+    this.key = key;
     this.getNode().dataset.key = key;
+  }
+
+  getSelectorNode(value) {
+    if (value === this.key) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  addSelectClass() {
+    this.getNode().classList.add(this.selectClass);
+  }
+
+  removeSelectClass() {
+    this.getNode().classList.remove(this.selectClass);
   }
 }
