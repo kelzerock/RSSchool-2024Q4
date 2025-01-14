@@ -37,7 +37,7 @@ class PlayBox extends Component {
       this.sequence.push(arrSymbols[randomNum]);
       count += 1;
     }
-    console.log("sequence: ", this.sequence);
+    console.log("sequence: ", this.sequence.join(""));
     this.playSequence();
   }
 
