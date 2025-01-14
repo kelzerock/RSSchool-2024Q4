@@ -21,6 +21,11 @@
   background: #ffffff;
   position: relative;
 
+  &.disabled-key {
+    pointer-events: none;
+    background-color: rgb(139, 139, 139);
+  }
+
   &::before {
     content: '';
     border: 1px solid #353535;

@@ -42,6 +42,8 @@ class PlayBox extends Component {
   }
 
   playSequence() {
+    const keyboard = this.getChildren()[2];
+    // keyboard.addDisabledClass();
     newGame.addDisActiveClass();
     repeatInfo.addDisActiveClass();
     this.isPlay = false;
@@ -61,6 +63,7 @@ class PlayBox extends Component {
               this.cleanDisplay();
               keyNode.removeSelectClass();
               newGame.removeDisActiveClass();
+              keyboard.removeDisabledClass();
               if (this.attempt > 0) repeatInfo.removeDisActiveClass();
               this.isPlay = true;
             }, DELAY);
@@ -109,12 +112,14 @@ class PlayBox extends Component {
       }),
     );
 
+    const keyboard = this.getChildren()[2];
     const length = this.display.length;
     if (this.isPlay) {
       if (info === this.sequence[length - 1]) {
         if (length === this.sequence.length) {
           //game logic
           this.isPlay = false;
+          keyboard.addDisabledClass();
           if (this.level <= MAX_LEVEL) {
             this.level += 1;
             this.attempt = 1;
@@ -131,6 +136,7 @@ class PlayBox extends Component {
         }
       } else {
         this.isPlay = false;
+        keyboard.addDisabledClass();
         this.sendMessage(RESULT.lose);
       }
     }
@@ -157,6 +163,7 @@ class PlayBox extends Component {
 }
 
 const keyboard = new Keyboard({ difficulty: DIFFICULTY.easy });
+keyboard.addDisabledClass();
 
 const playBox = new PlayBox(
   { className: "playBox" },

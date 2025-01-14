@@ -71,8 +71,11 @@ arrLevelBtns.forEach((element) => {
     );
     element.getNode().classList.add("active-level");
     const difficulty = element.value;
-    keyboard.createKeyboard(difficulty);
+
     playBox.difficulty = difficulty;
+    //keyboard
+    keyboard.createKeyboard(difficulty);
+    keyboard.addDisabledClass();
   });
 });
 
@@ -127,7 +130,8 @@ startBtn.addListener("click", (event) => {
   arrLevelBtns.forEach((element) => {
     element.addDisActiveClass();
   });
-
+  //keyboard
+  keyboard.addDisabledClass();
   //playbox
   playBox.generateSequence();
   playBox.level = 1;
@@ -145,6 +149,8 @@ newGame.addListener("click", () => {
   nextLevel.addVisibleClassName();
   levelInfo.setTextContent(`Current level: 1`);
 
+  //keyboard
+  keyboard.addDisabledClass();
   //playbox
   playBox.isPlay = false;
   playBox.level = 1;
@@ -156,6 +162,8 @@ repeatInfo.addListener("click", (event) => {
   //playbox
   playBox.attempt -= 1;
   playBox.playSequence();
+  //keyboard
+  keyboard.addDisabledClass();
 });
 
 nextLevel.addListener("click", (event) => {
@@ -166,6 +174,8 @@ nextLevel.addListener("click", (event) => {
 
   //playbox
   playBox.generateSequence();
+  //keyboard
+  keyboard.addDisabledClass();
 });
 
 export { controls, repeatInfo, newGame, nextLevel, levelInfo };

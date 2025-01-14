@@ -112,6 +112,17 @@ export class Keyboard extends Component {
     this.createKeyboard(this.difficulty);
   }
 
+  addDisabledClass() {
+    this.getChildren().forEach((item) => {
+      item.addDisabledClass();
+    });
+  }
+  removeDisabledClass() {
+    this.getChildren().forEach((item) => {
+      item.removeDisabledClass();
+    });
+  }
+
   createKeyboard(difficulty) {
     this.difficulty = difficulty;
     this.destroyChildren();
@@ -142,6 +153,7 @@ export class Keyboard extends Component {
 
 export class Key extends Component {
   selectClass = "select-key";
+  disabledClass = "disabled-key";
   constructor({ className = "", key }) {
     super({ tag: "span", className: `key ${className}`, text: key });
     this.key = key;
@@ -162,5 +174,12 @@ export class Key extends Component {
 
   removeSelectClass() {
     this.getNode().classList.remove(this.selectClass);
+  }
+
+  addDisabledClass() {
+    this.getNode().classList.add(this.disabledClass);
+  }
+  removeDisabledClass() {
+    this.getNode().classList.remove(this.disabledClass);
   }
 }
