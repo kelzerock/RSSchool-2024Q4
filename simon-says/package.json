@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --env mode=production",
+    "build--dev": "webpack --env mode=development",
     "check": "prettier -w .",
     "serve": "webpack serve",
     "lint": "eslint ."
