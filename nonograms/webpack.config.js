@@ -9,4 +9,15 @@ module.exports = {
     path: path.join(__dirname, "dist"),
   },
   plugins: [new HtmlWebpackPlugin()],
+  rules: [
+    {
+      test: /\.js$/,
+      enforce: "pre",
+      use: ["source-map-loader"],
+    },
+    {
+      test: /\.s[ac]ss$/i,
+      use: ["style-loader", "css-loader", "sass-loader"],
+    },
+  ],
 };
