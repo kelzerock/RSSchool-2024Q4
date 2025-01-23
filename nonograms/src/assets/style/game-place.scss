@@ -1,9 +1,19 @@
 .game-place {
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
+  border: solid 1px var(--dark-gray);
 }
 
 .row {
   display: flex;
   flex-direction: row;
+
+  &:nth-child(5n + 1) .cell {
+    border-top: solid 1px var(--dark-gray);
+  }
+
+  &:nth-child(5n) .cell {
+    border-bottom: solid 1px var(--dark-gray);
+  }
 }

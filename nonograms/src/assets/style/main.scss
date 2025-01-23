@@ -1,7 +1,17 @@
-html {
+:root {
+  --dark-gray: rgb(88, 88, 88);
+}
+
+* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

@@ -2,8 +2,22 @@
   width: 20px;
   height: 20px;
   border: 1px solid darkgray;
-  margin: -1px;
+  margin: 0px;
   background-color: white;
+  transition: background-color 0.3s ease-in-out;
+
+  &:nth-child(5n + 1) {
+    border-left: solid 1px rgb(88, 88, 88);
+  }
+
+  &:nth-child(5n) {
+    border-right: solid 1px rgb(88, 88, 88);
+  }
+
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &.cell-black {
     background-color: black;
@@ -12,16 +26,16 @@
   &.cell-cross {
     background:
       linear-gradient(to top left,
-        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) -10%,
         rgba(0, 0, 0, 0) calc(50% - 0.8px),
-        rgb(163, 79, 79) 50%,
+        rgb(0, 0, 0, 1) 50%,
         rgba(0, 0, 0, 0) calc(50% + 0.8px),
-        rgba(0, 0, 0, 0) 100%),
+        rgba(0, 0, 0, 0) 110%),
       linear-gradient(to top right,
-        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) -10%,
         rgba(0, 0, 0, 0) calc(50% - 0.8px),
         rgba(0, 0, 0, 1) 50%,
         rgba(0, 0, 0, 0) calc(50% + 0.8px),
-        rgba(0, 0, 0, 0) 100%);
+        rgba(0, 0, 0, 0) 110%);
   }
 }
