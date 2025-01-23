@@ -8,16 +8,29 @@ module.exports = {
     filename: "[contenthash]-main.js",
     path: path.join(__dirname, "dist"),
   },
-  plugins: [new HtmlWebpackPlugin()],
-  rules: [
-    {
-      test: /\.js$/,
-      enforce: "pre",
-      use: ["source-map-loader"],
-    },
-    {
-      test: /\.s[ac]ss$/i,
-      use: ["style-loader", "css-loader", "sass-loader"],
-    },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "Development",
+    }),
   ],
+  devtool: "inline-source-map",
+  devServer: {
+    static: "./dist",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
+  },
+  optimization: {
+    runtimeChunk: "single",
+  },
 };
