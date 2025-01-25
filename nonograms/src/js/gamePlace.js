@@ -1,4 +1,5 @@
 import { Cell } from "./cell";
+import { GamePlaceHeaderInfo } from "./gamePlaceHeaderInfo";
 import { Component } from "./node";
 
 export class GamePlace extends Component {
@@ -10,6 +11,23 @@ export class GamePlace extends Component {
   }
 
   createMap() {
+    const gamePlaceMain = new Component({
+      tag: "div",
+      className: "game-place-main",
+    });
+    const gamePlaceBlock = new Component({
+      tag: "div",
+      className: "game-place-block",
+    });
+    const gamePlaceHeaderInfo = new GamePlaceHeaderInfo({
+      state: this.state,
+      map: this.map,
+    });
+    const gamePlaceLeftInfo = new Component({
+      tag: "div",
+      className: "game-place-left",
+    });
+
     this.map.forEach((row, index) => {
       const elementInRow = [];
       row.forEach((cell, jIndex) => {
@@ -17,9 +35,15 @@ export class GamePlace extends Component {
         elementInRow.push(new Cell(this.state, data));
       });
 
-      this.append(
+      gamePlaceMain.append(
         new Component({ tag: "div", className: "row" }, ...elementInRow)
       );
     });
+    this.appendChildren([
+      gamePlaceBlock,
+      gamePlaceHeaderInfo,
+      gamePlaceLeftInfo,
+      gamePlaceMain,
+    ]);
   }
 }
