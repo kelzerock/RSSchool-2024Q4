@@ -1,9 +1,11 @@
 :root {
+  --main-gray: darkgray;
   --dark-gray: rgb(88, 88, 88);
+  --cell-size: 20px;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 body {

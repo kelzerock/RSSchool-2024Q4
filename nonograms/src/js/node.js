@@ -37,6 +37,14 @@ export class Component {
     this.#children.push(child);
     this.#node.append(child.getNode());
   }
+  /**
+   * Prepend a child component to the current component.
+   * @param {Component} child - The child component to be prepended.
+   */
+  prepend(child) {
+    this.#children.unshift(child);
+    this.#node.prepend(child.getNode());
+  }
 
   /**
    * Appends an array of child components to the current component.

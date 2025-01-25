@@ -1,0 +1,108 @@
+.game-place-info {
+  display: flex;
+  border: solid 3px var(--main-gray);
+
+  .column {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+
+    &.active {
+
+      .sell-info {
+        background-color: #dddddd;
+
+        &.empty {
+          background-color: #e6e6e6;
+        }
+      }
+    }
+  }
+
+  .sell-info {
+    width: var(--cell-size);
+    aspect-ratio: 1;
+    text-align: center;
+  }
+
+  &.up {
+    flex-direction: row;
+    border-bottom: none;
+
+    & .column {
+      flex-direction: column;
+      width: var(--cell-size);
+      border-right: solid 1px var(--main-gray);
+      border-left: solid 1px var(--main-gray);
+
+      &:nth-child(5n) {
+        border-right: solid 2px var(--main-gray);
+      }
+
+      &:nth-child(5n+1) {
+        border-left: solid 2px var(--main-gray);
+      }
+
+      &:first-child {
+        border-left: none;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+
+      .sell-info {
+        border-top: solid 2px var(--main-gray);
+
+        &:first-child {
+          border-top: none;
+        }
+      }
+    }
+  }
+
+  &.left {
+    flex-direction: column;
+    border-right: none;
+
+    & .column {
+      flex-direction: row;
+      height: var(--cell-size);
+      border-bottom: solid 1px var(--main-gray);
+      border-top: solid 1px var(--main-gray);
+
+      &:nth-child(5n) {
+        border-bottom: solid 2px var(--main-gray);
+      }
+
+      &:nth-child(5n+1) {
+        border-top: solid 2px var(--main-gray);
+      }
+
+      &:first-child {
+        border-top: none;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .sell-info {
+        border-left: solid 2px var(--main-gray);
+
+        &:first-child {
+          border-left: none;
+        }
+      }
+    }
+  }
+}
+
+.sell-info {
+  background-color: #c4c4c4;
+
+  &.empty {
+    background-color: #dadada;
+  }
+}

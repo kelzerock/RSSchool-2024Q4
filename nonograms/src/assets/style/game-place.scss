@@ -6,9 +6,7 @@
   ;
 
 
-  .game-place-main {
-    border: solid 1px var(--dark-gray);
-  }
+  .game-place-main {}
 }
 
 .row {
@@ -16,10 +14,18 @@
   flex-direction: row;
 
   &:nth-child(5n + 1) .cell {
-    border-top: solid 1px var(--dark-gray);
+    border-top: solid 2px var(--main-gray);
   }
 
   &:nth-child(5n) .cell {
-    border-bottom: solid 1px var(--dark-gray);
+    border-bottom: solid 2px var(--main-gray);
+  }
+
+  &:first-child .cell {
+    border-top: solid 3px var(--main-gray);
+  }
+
+  &:last-child .cell {
+    border-bottom: solid 3px var(--main-gray);
   }
 }
