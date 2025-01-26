@@ -3,6 +3,7 @@ import { compare2DArrays } from "../utils/function";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
+import { timer } from "./timer";
 
 export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
@@ -30,10 +31,13 @@ export class GamePlace extends Component {
     this.addListener("click", (e) => {
       const target = e.target;
       if (target.classList.contains("cell")) {
+        if (!timer.getStatus()) timer.startTimer();
+
         console.log({ map: this.map, state: this.state });
         let check = compare2DArrays(this.map, this.state.mapData);
         if (check) {
-          alert("You win!");
+          const durationInSeconds = timer.stopTimer();
+          console.log("You win! Time: " + durationInSeconds + " seconds");
         }
       }
     });
