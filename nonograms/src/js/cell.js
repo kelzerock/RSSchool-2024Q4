@@ -11,21 +11,36 @@ export class Cell extends Component {
 
     this.addListener("click", () => {
       this.toggleCheckedClass();
+      this.setDataBlack();
     });
 
     this.addListener("contextmenu", (e) => {
       e.preventDefault();
       this.toggleCrossClass();
+      this.setDataBlack();
     });
   }
 
   toggleCheckedClass() {
     if (this.getNode().classList.contains(this.checkedClass)) {
       this.getNode().classList.remove(this.checkedClass);
+      this.dataBlack = false;
     } else {
       this.getNode().classList.add(this.checkedClass);
       this.getNode().classList.remove(this.crossClass);
+      this.dataBlack = true;
     }
+  }
+
+  getCoordinates() {
+    const rowAttribute = this.getNode().getAttribute("data-row");
+    const colAttribute = this.getNode().getAttribute("data-col");
+    return [rowAttribute, colAttribute];
+  }
+
+  setDataBlack() {
+    const [rowAttribute, colAttribute] = this.getCoordinates();
+    this.state.mapData[rowAttribute][colAttribute] = this.dataBlack ? 1 : 0;
   }
 
   toggleCrossClass() {
@@ -34,6 +49,7 @@ export class Cell extends Component {
     } else {
       this.getNode().classList.add(this.crossClass);
       this.getNode().classList.remove(this.checkedClass);
+      this.dataBlack = false;
     }
   }
 }
