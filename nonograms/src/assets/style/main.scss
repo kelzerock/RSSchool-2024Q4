@@ -1,6 +1,11 @@
 :root {
   --main-gray: darkgray;
-  --dark-gray: rgb(88, 88, 88);
+  --dark-gray: #585858;
+  --main-black: #000;
+  --main-light-black: #333;
+  --main-white: #fff;
+  --main-light-white: #f0f0f0;
+  --main-olive: #636959;
   --cell-size: 20px;
 }
 
@@ -16,4 +21,5 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--main-olive);
 }

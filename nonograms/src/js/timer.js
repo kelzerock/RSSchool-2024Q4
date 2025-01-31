@@ -1,4 +1,5 @@
 import { Component } from "./node";
+import "../assets/style/timer.scss";
 
 class Timer extends Component {
   constructor() {
@@ -35,12 +36,8 @@ class Timer extends Component {
   }
 
   resetTimer() {
-    if (this.status) {
-      this.stopTimer();
-      this.startTimer();
-    } else {
-      this.startTimer();
-    }
+    this.stopTimer();
+    this.getNode().textContent = "00:00";
   }
 
   getStatus() {

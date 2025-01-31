@@ -3,7 +3,7 @@
   display: grid;
   grid-auto-rows: minmax(20px, auto);
   grid-template-columns: minmax(20px, auto) minmax(20px, auto);
-  ;
+  background-color: var(--main-light-black);
 
 
   .game-place-main {}

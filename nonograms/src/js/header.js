@@ -1,4 +1,5 @@
 import { Component } from "./node";
+import "../assets/style/header.scss";
 
 const header = new Component({
   tag: "header",

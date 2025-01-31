@@ -1,9 +1,13 @@
 import { DIRECTION } from "../constants/constant";
+import { map1 } from "../constants/map/map";
 import { compare2DArrays } from "../utils/function";
+import { resetGameButton } from "./buttons";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
 import { timer } from "./timer";
+
+const state = { cells: {} };
 
 export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
@@ -71,7 +75,9 @@ export class GamePlace extends Component {
         cellNode.getNode().setAttribute("data-row", index);
         cellNode.getNode().setAttribute("data-col", jIndex);
         elementInRow.push(cellNode);
+        this.state.cells[`${index}-${jIndex}`] = cellNode;
       });
+      console.log(this.state);
 
       gamePlaceMain.append(
         new Component({ tag: "div", className: "row" }, ...elementInRow)
@@ -84,4 +90,17 @@ export class GamePlace extends Component {
       gamePlaceMain,
     ]);
   }
+
+  resetMap() {
+    Object.values(this.state.cells).forEach((value) => value.resetState());
+    timer.resetTimer();
+  }
 }
+
+const gamePlace = new GamePlace({ state, map: map1 });
+
+resetGameButton.addListener("click", () => {
+  gamePlace.resetMap();
+});
+
+export { gamePlace };

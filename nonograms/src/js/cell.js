@@ -32,6 +32,13 @@ export class Cell extends Component {
     }
   }
 
+  resetState() {
+    this.getNode().classList.remove(this.checkedClass);
+    this.getNode().classList.remove(this.crossClass);
+    this.dataBlack = false;
+    this.setDataBlack();
+  }
+
   getCoordinates() {
     const rowAttribute = this.getNode().getAttribute("data-row");
     const colAttribute = this.getNode().getAttribute("data-col");
