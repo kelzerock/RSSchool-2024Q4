@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: "[contenthash]-main.js",
     path: path.join(__dirname, "dist"),
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
