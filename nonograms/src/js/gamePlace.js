@@ -15,9 +15,6 @@ export class GamePlace extends Component {
     this.state = state;
     this.map = map;
     this.createMap();
-    this.state.mapData = Array.from({ length: this.map.length }, () =>
-      Array(this.map[0].length).fill(0)
-    );
 
     this.addListener("mousemove", (e) => {
       const target = e.target;
@@ -36,18 +33,23 @@ export class GamePlace extends Component {
       const target = e.target;
       if (target.classList.contains("cell")) {
         if (!timer.getStatus()) timer.startTimer();
-
-        console.log({ map: this.map, state: this.state });
         let check = compare2DArrays(this.map, this.state.mapData);
         if (check) {
           const durationInSeconds = timer.stopTimer();
           console.log("You win! Time: " + durationInSeconds + " seconds");
+          Object.values(this.state.cells).forEach((value) => {
+            value.removeListener("click", value.handleClick);
+            value.removeListener("contextmenu", value.handleClick);
+          });
         }
       }
     });
   }
 
   createMap() {
+    this.state.mapData = Array.from({ length: this.map.length }, () =>
+      Array(this.map[0].length).fill(0)
+    );
     const gamePlaceMain = new Component({
       tag: "div",
       className: "game-place-main",
@@ -76,6 +78,8 @@ export class GamePlace extends Component {
         cellNode.getNode().setAttribute("data-col", jIndex);
         elementInRow.push(cellNode);
         this.state.cells[`${index}-${jIndex}`] = cellNode;
+        cellNode.addListener("click", cellNode.handleClick);
+        cellNode.addListener("contextmenu", cellNode.handleClick);
       });
       console.log(this.state);
 

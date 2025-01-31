@@ -8,17 +8,21 @@ export class Cell extends Component {
     super({ tag: "span", className: "cell" });
     this.dataBlack = dataBlack;
     this.state = state;
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-    this.addListener("click", () => {
-      this.toggleCheckedClass();
-      this.setDataBlack();
-    });
-
-    this.addListener("contextmenu", (e) => {
-      e.preventDefault();
-      this.toggleCrossClass();
-      this.setDataBlack();
-    });
+  handleClick(e) {
+    switch (e.type) {
+      case "click":
+        this.toggleCheckedClass();
+        this.setDataBlack();
+        break;
+      case "contextmenu":
+        e.preventDefault();
+        this.toggleCrossClass();
+        this.setDataBlack();
+        break;
+    }
   }
 
   toggleCheckedClass() {
