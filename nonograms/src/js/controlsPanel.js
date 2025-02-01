@@ -2,6 +2,7 @@ import { Component } from "./node";
 import { timer } from "./timer";
 import "../assets/style/controls-panel.scss";
 import { newGameButton, resetGameButton, startNewGame } from "./buttons";
+import { divSelectLevel, divSelectMapName } from "./select";
 
 class ControlsPanel extends Component {
   constructor() {
@@ -18,6 +19,8 @@ controlsPanel.appendChildren([
   startNewGame,
   newGameButton,
   resetGameButton,
+  divSelectLevel,
+  divSelectMapName,
 ]);
 
 export { controlsPanel };

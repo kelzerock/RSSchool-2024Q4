@@ -5,6 +5,7 @@ import { newGameButton, resetGameButton, startNewGame } from "./buttons";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
+import { divSelectLevel, divSelectMapName } from "./select";
 import { timer } from "./timer";
 
 const state = { cells: {} };
@@ -137,12 +138,16 @@ resetGameButton.addListener("click", () => {
 
 newGameButton.addListener("click", () => {
   gamePlace.hideMap();
+  divSelectLevel.show();
+  divSelectMapName.show();
 });
 
 startNewGame.addListener("click", () => {
   gamePlace.viewMap();
   gamePlace.destroyChildren();
   gamePlace.createMap();
+  divSelectLevel.hide();
+  divSelectMapName.hide();
 });
 
 export { gamePlace, messageBox };
