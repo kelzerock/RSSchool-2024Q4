@@ -1,15 +1,20 @@
 import {
   arrowUp,
   bigCross,
+  calculator,
   cross,
   figure_1,
   figure_2,
   figure_3,
+  fox,
   giraffe,
+  goat,
   heart,
+  hedgehog,
   house,
-  map3,
+  img_1,
   smile,
+  snake,
   square,
 } from "./map";
 
@@ -20,11 +25,11 @@ const playerMap = {
   },
   medium: {
     name: "medium",
-    maps: { heart, smile, house, arrowUp, bigCross },
+    maps: { heart, smile, house, arrowUp, bigCross, img_1 },
   },
   hard: {
     name: "hard",
-    maps: { map3 },
+    maps: { fox, calculator, snake, goat, hedgehog },
   },
 };
 

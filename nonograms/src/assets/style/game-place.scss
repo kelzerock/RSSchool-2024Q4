@@ -14,18 +14,18 @@
   flex-direction: row;
 
   &:nth-child(5n + 1) .cell {
-    border-top: solid 2px var(--main-gray);
+    border-top: solid 2px var(--main-black);
   }
 
   &:nth-child(5n) .cell {
-    border-bottom: solid 2px var(--main-gray);
+    border-bottom: solid 2px var(--main-black);
   }
 
   &:first-child .cell {
-    border-top: solid 3px var(--main-gray);
+    border-top: solid 3px var(--main-black);
   }
 
   &:last-child .cell {
-    border-bottom: solid 3px var(--main-gray);
+    border-bottom: solid 3px var(--main-black);
   }
 }

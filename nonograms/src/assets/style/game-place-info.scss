@@ -37,11 +37,11 @@
       border-left: solid 1px var(--main-gray);
 
       &:nth-child(5n) {
-        border-right: solid 2px var(--main-gray);
+        border-right: solid 2px var(--main-black);
       }
 
       &:nth-child(5n+1) {
-        border-left: solid 2px var(--main-gray);
+        border-left: solid 2px var(--main-black);
       }
 
       &:first-child {
@@ -73,11 +73,11 @@
       border-top: solid 1px var(--main-gray);
 
       &:nth-child(5n) {
-        border-bottom: solid 2px var(--main-gray);
+        border-bottom: solid 2px var(--main-black);
       }
 
       &:nth-child(5n+1) {
-        border-top: solid 2px var(--main-gray);
+        border-top: solid 2px var(--main-black);
       }
 
       &:first-child {
