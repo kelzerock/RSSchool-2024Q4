@@ -1,8 +1,10 @@
 .controls-panel {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  gap: 20px;
   border: solid 3px var(--main-light-white);
   background-color: var(--main-light-black);
 }

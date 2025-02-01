@@ -10,43 +10,78 @@ function createComponent({ tag, className, text, attributes = {} }) {
   return element;
 }
 
-function createSelectTag(options, attribute, labelText = "Select size") {
-  const divSelect = createComponent({ tag: "div", className: "select-place" });
-  const fieldset = createComponent({ tag: "fieldset", className: "fieldset" });
-  const labelForSelect = createComponent({
-    tag: "label",
-    className: "label label-select",
-    text: labelText,
-    attributes: { for: attribute },
-  });
+class CreateSelectTag {
+  constructor(options, attribute, labelText = "Select size") {
+    this.options = options;
+    this.attribute = attribute;
+    this.labelText = labelText;
+  }
 
-  const select = createComponent({
-    tag: "select",
-    className: "select",
-    attributes: { id: attribute },
-  });
-
-  options.forEach((el) => {
-    const option = createComponent({
-      tag: "option",
-      className: "option",
-      text: el,
-      attributes: { value: el },
+  create() {
+    const divSelect = createComponent({
+      tag: "div",
+      className: "select-place",
     });
-    select.getNode().appendChild(option.getNode());
-  });
+    console.log({ divSelect });
+    const fieldset = createComponent({
+      tag: "fieldset",
+      className: "fieldset",
+    });
+    const labelForSelect = createComponent({
+      tag: "label",
+      className: "label label-select",
+      text: this.labelText,
+      attributes: { for: this.attribute },
+    });
 
-  fieldset.appendChildren([labelForSelect, select]);
-  divSelect.appendChildren([fieldset]);
-  return divSelect;
+    const select = createComponent({
+      tag: "select",
+      className: "select",
+      attributes: { id: this.attribute },
+    });
+
+    this.options.forEach((el) => {
+      const option = createComponent({
+        tag: "option",
+        className: "option",
+        text: el,
+        attributes: { value: el },
+      });
+      select.getNode().appendChild(option.getNode());
+    });
+
+    fieldset.appendChildren([labelForSelect, select]);
+    divSelect.appendChildren([fieldset]);
+    return divSelect;
+  }
 }
 
-const divSelectLevel = createSelectTag(
+const divSelectLevel = new CreateSelectTag(
   Object.values(playerMap).map((el) => el.name),
   "level"
-);
-const divSelectMapName = createSelectTag(
-  Object.values(playerMap.easy.maps).map((el) => el.name),
+).create();
+const divSelectMapName = new CreateSelectTag(
+  Object.keys(playerMap.easy.maps),
   "mapName"
-);
+).create();
+
+const levelSelector = divSelectLevel.getNode().querySelector("select");
+const mapsSelector = divSelectMapName.getNode().querySelector("select");
+levelSelector.addEventListener("change", (e) => {
+  while (mapsSelector.firstChild) {
+    mapsSelector.removeChild(mapsSelector.firstChild);
+  }
+  Object.keys(playerMap[e.target.value].maps)
+    .map((el) => {
+      const option = createComponent({
+        tag: "option",
+        className: "option",
+        text: el,
+        attributes: { value: el },
+      });
+      return option.getNode();
+    })
+    .forEach((el) => mapsSelector.appendChild(el));
+});
+
 export { divSelectLevel, divSelectMapName };

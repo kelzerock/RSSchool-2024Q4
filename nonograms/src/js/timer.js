@@ -46,4 +46,5 @@ class Timer extends Component {
 }
 
 const timer = new Timer();
+timer.hide();
 export { timer };

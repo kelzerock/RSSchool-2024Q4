@@ -1,5 +1,6 @@
 import { DIRECTION } from "../constants/constant";
 import { map1 } from "../constants/map/map";
+import { playerMap } from "../constants/map/playerMap";
 import { compare2DArrays } from "../utils/function";
 import { newGameButton, resetGameButton, startNewGame } from "./buttons";
 import { Cell } from "./cell";
@@ -14,6 +15,7 @@ const messageBox = new Component({
   className: "message-box",
   text: "",
 });
+messageBox.hide();
 
 export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
@@ -61,6 +63,7 @@ export class GamePlace extends Component {
 
   createMap() {
     messageBox.hide();
+    console.log(this.map);
     this.state.mapData = Array.from({ length: this.map.length }, () =>
       Array(this.map[0].length).fill(0)
     );
@@ -129,6 +132,7 @@ export class GamePlace extends Component {
 }
 
 const gamePlace = new GamePlace({ state, map: map1 });
+gamePlace.hide();
 
 // buttons logic
 
@@ -137,17 +141,25 @@ resetGameButton.addListener("click", () => {
 });
 
 newGameButton.addListener("click", () => {
+  messageBox.hide();
   gamePlace.hideMap();
   divSelectLevel.show();
   divSelectMapName.show();
+  timer.hide();
 });
 
 startNewGame.addListener("click", () => {
   gamePlace.viewMap();
   gamePlace.destroyChildren();
-  gamePlace.createMap();
   divSelectLevel.hide();
   divSelectMapName.hide();
+  timer.show();
+  const level = divSelectLevel.getNode().querySelector("select").value;
+  const mapName = divSelectMapName.getNode().querySelector("select").value;
+  const map = playerMap[level].maps[mapName];
+  gamePlace.map = map;
+
+  gamePlace.createMap();
 });
 
 export { gamePlace, messageBox };
