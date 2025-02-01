@@ -1,13 +1,26 @@
-import { map1, map11, map12, map2, map3 } from "./map";
+import {
+  arrowUp,
+  bigCross,
+  cross,
+  figure_1,
+  figure_2,
+  figure_3,
+  giraffe,
+  heart,
+  house,
+  map3,
+  smile,
+  square,
+} from "./map";
 
 const playerMap = {
   easy: {
     name: "easy",
-    maps: { map1, map11, map12 },
+    maps: { square, cross, figure_1, figure_2, figure_3, giraffe },
   },
   medium: {
     name: "medium",
-    maps: { map2 },
+    maps: { heart, smile, house, arrowUp, bigCross },
   },
   hard: {
     name: "hard",

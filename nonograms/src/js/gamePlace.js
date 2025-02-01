@@ -1,5 +1,5 @@
 import { DIRECTION } from "../constants/constant";
-import { map1 } from "../constants/map/map";
+import { cross } from "../constants/map/map";
 import { playerMap } from "../constants/map/playerMap";
 import { compare2DArrays } from "../utils/function";
 import { newGameButton, resetGameButton, startNewGame } from "./buttons";
@@ -131,7 +131,11 @@ export class GamePlace extends Component {
   }
 }
 
-const gamePlace = new GamePlace({ state, map: map1 });
+const gamePlace = new GamePlace({
+  state,
+  map: Object.values(Object.values(playerMap)[0].maps)[0],
+});
+console.log(Object.values(Object.values(playerMap)[0].maps)[0]);
 gamePlace.hide();
 
 // buttons logic
