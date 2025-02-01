@@ -1,7 +1,7 @@
 import { DIRECTION } from "../constants/constant";
 import { map1 } from "../constants/map/map";
 import { compare2DArrays } from "../utils/function";
-import { resetGameButton } from "./buttons";
+import { newGameButton, resetGameButton, startNewGame } from "./buttons";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
@@ -15,6 +15,10 @@ export class GamePlace extends Component {
     this.state = state;
     this.map = map;
     this.createMap();
+
+    this.addListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
 
     this.addListener("mousemove", (e) => {
       const target = e.target;
@@ -96,15 +100,39 @@ export class GamePlace extends Component {
   }
 
   resetMap() {
-    Object.values(this.state.cells).forEach((value) => value.resetState());
+    Object.values(this.state.cells).forEach((value) => {
+      value.addListener("click", value.handleClick);
+      value.addListener("contextmenu", value.handleClick);
+      value.resetState();
+    });
     timer.resetTimer();
+  }
+
+  hideMap() {
+    this.getNode().style.display = "none";
+  }
+
+  viewMap() {
+    this.getNode().style.display = "grid";
   }
 }
 
 const gamePlace = new GamePlace({ state, map: map1 });
 
+// buttons logic
+
 resetGameButton.addListener("click", () => {
   gamePlace.resetMap();
+});
+
+newGameButton.addListener("click", () => {
+  gamePlace.hideMap();
+});
+
+startNewGame.addListener("click", () => {
+  gamePlace.viewMap();
+  gamePlace.destroyChildren();
+  gamePlace.createMap();
 });
 
 export { gamePlace };

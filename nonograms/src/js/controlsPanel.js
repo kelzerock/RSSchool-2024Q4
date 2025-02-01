@@ -1,7 +1,7 @@
 import { Component } from "./node";
 import { timer } from "./timer";
 import "../assets/style/controls-panel.scss";
-import { resetGameButton } from "./buttons";
+import { newGameButton, resetGameButton, startNewGame } from "./buttons";
 
 class ControlsPanel extends Component {
   constructor() {
@@ -13,6 +13,11 @@ class ControlsPanel extends Component {
 }
 
 const controlsPanel = new ControlsPanel();
-controlsPanel.appendChildren([timer, resetGameButton]);
+controlsPanel.appendChildren([
+  timer,
+  startNewGame,
+  newGameButton,
+  resetGameButton,
+]);
 
 export { controlsPanel };
