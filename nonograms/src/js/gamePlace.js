@@ -8,6 +8,11 @@ import { Component } from "./node";
 import { timer } from "./timer";
 
 const state = { cells: {} };
+const messageBox = new Component({
+  tag: "span",
+  className: "message-box",
+  text: "",
+});
 
 export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
@@ -40,7 +45,10 @@ export class GamePlace extends Component {
         let check = compare2DArrays(this.map, this.state.mapData);
         if (check) {
           const durationInSeconds = timer.stopTimer();
-          console.log("You win! Time: " + durationInSeconds + " seconds");
+          messageBox.setTextContent(
+            "You win! Time: " + durationInSeconds + " seconds"
+          );
+          messageBox.show();
           Object.values(this.state.cells).forEach((value) => {
             value.removeListener("click", value.handleClick);
             value.removeListener("contextmenu", value.handleClick);
@@ -51,6 +59,7 @@ export class GamePlace extends Component {
   }
 
   createMap() {
+    messageBox.hide();
     this.state.mapData = Array.from({ length: this.map.length }, () =>
       Array(this.map[0].length).fill(0)
     );
@@ -106,6 +115,7 @@ export class GamePlace extends Component {
       value.resetState();
     });
     timer.resetTimer();
+    messageBox.hide();
   }
 
   hideMap() {
@@ -135,4 +145,4 @@ startNewGame.addListener("click", () => {
   gamePlace.createMap();
 });
 
-export { gamePlace };
+export { gamePlace, messageBox };

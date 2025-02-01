@@ -142,4 +142,12 @@ export class Component {
     this.destroyChildren();
     this.#node.remove();
   }
+
+  hide() {
+    this.#node.style.display = "none";
+  }
+
+  show(position = "block") {
+    this.#node.style.display = position;
+  }
 }
