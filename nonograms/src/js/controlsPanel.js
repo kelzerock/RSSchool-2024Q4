@@ -3,6 +3,7 @@ import { timer } from "./timer";
 import "../assets/style/controls-panel.scss";
 import {
   newGameButton,
+  randomGameButton,
   resetGameButton,
   solutionButton,
   startNewGame,
@@ -27,6 +28,7 @@ controlsPanel.appendChildren([
   resetGameButton,
   divSelectLevel,
   divSelectMapName,
+  randomGameButton,
 ]);
 
 export { controlsPanel };

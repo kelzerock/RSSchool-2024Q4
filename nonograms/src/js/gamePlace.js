@@ -1,9 +1,10 @@
 import { DIRECTION } from "../constants/constant";
 import { cross } from "../constants/map/map";
 import { playerMap } from "../constants/map/playerMap";
-import { compare2DArrays } from "../utils/function";
+import { compare2DArrays, randomIntFromInterval } from "../utils/function";
 import {
   newGameButton,
+  randomGameButton,
   resetGameButton,
   solutionButton,
   startNewGame,
@@ -168,20 +169,35 @@ newGameButton.addListener("click", () => {
   timer.hide();
 });
 
-startNewGame.addListener("click", () => {
+const algorithmToStartGame = (map) => {
   gamePlace.viewMap();
   gamePlace.destroyChildren();
   divSelectLevel.hide();
   divSelectMapName.hide();
   timer.show();
   timer.resetTimer();
+  gamePlace.map = map;
+  gamePlace.createMap();
+};
+
+startNewGame.addListener("click", () => {
   const level = divSelectLevel.getNode().querySelector("select").value;
   const mapName = divSelectMapName.getNode().querySelector("select").value;
   const map = playerMap[level].maps[mapName];
-  gamePlace.map = map;
-  gamePlace.createMap();
+  algorithmToStartGame(map);
 });
 
+randomGameButton.addListener("click", () => {
+  const levelInd = randomIntFromInterval(0, Object.keys(playerMap).length - 1);
+  const level = Object.keys(playerMap)[levelInd];
+  const mapNameInd = randomIntFromInterval(
+    0,
+    Object.keys(playerMap[level].maps).length - 1
+  );
+  const mapName = Object.keys(playerMap[level].maps)[mapNameInd];
+  const map = playerMap[level].maps[mapName];
+  algorithmToStartGame(map);
+});
 solutionButton.addListener("click", () => {
   solutionButton.hide();
   gamePlace.viewSolution();

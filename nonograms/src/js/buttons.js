@@ -23,6 +23,12 @@ const resetGameButton = new Button({
   text: "Reset Game",
 });
 
+const randomGameButton = new Button({
+  tag: "button",
+  className: "random-game-button",
+  text: "Random Game",
+});
+
 const newGameButton = new Button({
   tag: "button",
   className: "new-game-button",
@@ -62,6 +68,7 @@ newGameButton.addListener("click", () => {
   resetGameButton.hideButton();
   newGameButton.hideButton();
   solutionButton.hideButton();
+  randomGameButton.showButton();
 });
 
 startNewGame.addListener("click", () => {
@@ -69,6 +76,15 @@ startNewGame.addListener("click", () => {
   resetGameButton.showButton();
   newGameButton.showButton();
   solutionButton.showButton();
+  randomGameButton.hideButton();
+});
+
+randomGameButton.addListener("click", () => {
+  startNewGame.hideButton();
+  resetGameButton.showButton();
+  newGameButton.showButton();
+  solutionButton.showButton();
+  randomGameButton.hideButton();
 });
 
 changeThemeButton.addListener("click", () => {
@@ -89,4 +105,5 @@ export {
   newGameButton,
   solutionButton,
   changeThemeButton,
+  randomGameButton,
 };

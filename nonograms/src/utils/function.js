@@ -70,4 +70,8 @@ function compare2DArrays(array1, array2) {
   return true;
 }
 
-export { maxLength, compare2DArrays };
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export { maxLength, compare2DArrays, randomIntFromInterval };
