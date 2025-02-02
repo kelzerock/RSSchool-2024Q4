@@ -15,3 +15,10 @@ const wrapper = new Component(
   footer
 );
 document.body.append(wrapper.getNode());
+
+window.addEventListener("load", () => {
+  const theme = localStorage.getItem("color-theme");
+  if (theme === "dark") {
+    document.body.classList.add("dark-theme");
+  }
+});

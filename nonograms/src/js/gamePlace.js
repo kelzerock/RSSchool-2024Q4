@@ -26,7 +26,6 @@ export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
     super({ tag: "div", className: "game-place" }, ...children);
     this.state = state;
-    this.state.rightMam = map;
     this.map = map;
     this.createMap();
 
@@ -70,6 +69,7 @@ export class GamePlace extends Component {
 
   createMap() {
     messageBox.hide();
+    this.state.rightMap = this.map;
     console.log("state", this.state);
     this.state.mapData = Array.from({ length: this.map.length }, () =>
       Array(this.map[0].length).fill(0)
@@ -92,7 +92,7 @@ export class GamePlace extends Component {
       map: this.map,
       direction: DIRECTION.left,
     });
-
+    this.state.cells = {};
     this.map.forEach((row, index) => {
       const elementInRow = [];
       row.forEach((cell, jIndex) => {

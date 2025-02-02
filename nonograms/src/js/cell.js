@@ -56,7 +56,7 @@ export class Cell extends Component {
 
   viewSolution() {
     const [rowAttribute, colAttribute] = this.getCoordinates();
-    const isBlack = this.state.rightMam[rowAttribute][colAttribute];
+    const isBlack = this.state.rightMap[rowAttribute][colAttribute];
     this.getNode().classList.remove(this.checkedClass);
     this.getNode().classList.remove(this.crossClass);
     if (isBlack) {

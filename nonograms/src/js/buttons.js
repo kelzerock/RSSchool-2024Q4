@@ -43,6 +43,13 @@ const changeThemeButton = new Button({
   className: "change-theme-button",
   text: "Change Theme to Dark",
 });
+window.addEventListener("load", () => {
+  const theme = localStorage.getItem("color-theme");
+  if (theme === "dark") {
+    changeThemeButton.setTextContent("Change Theme to Light");
+    document.body.classList.add("dark-theme");
+  }
+});
 
 solutionButton.hideButton();
 newGameButton.hideButton();
@@ -63,11 +70,14 @@ startNewGame.addListener("click", () => {
 });
 
 changeThemeButton.addListener("click", () => {
-  document.body.classList.toggle("dark-theme");
   if (changeThemeButton.getNode().textContent === "Change Theme to Dark") {
     changeThemeButton.setTextContent("Change Theme to Light");
+    document.body.classList.add("dark-theme");
+    localStorage.setItem("color-theme", "dark");
   } else {
     changeThemeButton.setTextContent("Change Theme to Dark");
+    document.body.classList.remove("dark-theme");
+    localStorage.setItem("color-theme", "light");
   }
 });
 
