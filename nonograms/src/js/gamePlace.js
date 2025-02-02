@@ -12,6 +12,7 @@ import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
 import { divSelectLevel, divSelectMapName } from "./select";
+import { soundPlayWin } from "./soundFunc";
 import { timer } from "./timer";
 
 const state = { cells: {} };
@@ -56,6 +57,7 @@ export class GamePlace extends Component {
           messageBox.setTextContent(
             "You win! Time: " + durationInSeconds + " seconds"
           );
+          soundPlayWin();
           solutionButton.hide();
           messageBox.show();
           Object.values(this.state.cells).forEach((value) => {

@@ -1,5 +1,6 @@
 import { Component } from "./node";
 import "../assets/style/cell.scss";
+import { soundPlayGame } from "./soundFunc";
 
 export class Cell extends Component {
   checkedClass = "cell-black";
@@ -9,6 +10,8 @@ export class Cell extends Component {
     this.dataBlack = dataBlack;
     this.state = state;
     this.handleClick = this.handleClick.bind(this);
+    this.addListener("click", soundPlayGame);
+    this.addListener("contextmenu", soundPlayGame);
   }
 
   handleClick(e) {

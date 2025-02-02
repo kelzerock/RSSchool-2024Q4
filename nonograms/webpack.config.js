@@ -11,7 +11,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Development",
+      template: path.join(__dirname, "src", "index.html"),
+      inject: true,
     }),
   ],
   devtool: "inline-source-map",
@@ -20,6 +21,13 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.mp3$/,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/audio/[name][ext]", // Путь для сохранения файлов mp3
+        },
+      },
       {
         test: /\.js$/,
         enforce: "pre",

@@ -1,9 +1,11 @@
 import { Component } from "./node";
 import "../assets/style/buttons.scss";
+import { soundButtonClick } from "./soundFunc";
 
 class Button extends Component {
   constructor({ tag = "button", className = "", text = "" }, ...children) {
     super({ tag, className: `button ${className}`, text }, ...children);
+    this.addListener("click", soundButtonClick);
   }
 
   hideButton() {

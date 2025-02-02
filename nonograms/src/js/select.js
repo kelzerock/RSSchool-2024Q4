@@ -1,6 +1,7 @@
 import { playerMap } from "../constants/map/playerMap";
 import { Component } from "./node";
 import "../assets/style/select.scss";
+import { soundButtonClick, soundPlayFocus } from "./soundFunc";
 
 function createComponent({ tag, className, text, attributes = {} }) {
   const element = new Component({ tag, className, text });
@@ -37,6 +38,13 @@ class CreateSelectTag {
       tag: "select",
       className: "select",
       attributes: { id: this.attribute },
+    });
+
+    select.addListener("click", () => {
+      soundButtonClick();
+    });
+    select.addListener("focus", () => {
+      soundPlayFocus();
     });
 
     this.options.forEach((el) => {
