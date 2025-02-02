@@ -1,11 +1,11 @@
 :root {
-  --main-gray: darkgray;
-  --dark-gray: #585858;
-  --main-black: #000;
-  --main-light-black: #333;
+  --main-gray: #cfcfcf;
+  --dark-gray: #868686;
+  --main-black: #414141;
+  --main-light-black: #7a7272;
   --main-white: #fff;
   --main-light-white: #f0f0f0;
-  --main-olive: #636959;
+  --main-olive: #9ba38c;
   --cell-size: 20px;
 }
 
@@ -15,6 +15,16 @@
 
 body {
   margin: 0;
+}
+
+.dark-theme {
+  --main-gray: darkgray;
+  --dark-gray: #585858;
+  --main-black: #000000;
+  --main-light-black: #333;
+  --main-white: #fff;
+  --main-light-white: #f0f0f0;
+  --main-olive: #636959;
 }
 
 .wrapper {

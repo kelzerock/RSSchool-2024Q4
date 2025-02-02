@@ -38,6 +38,11 @@ const solutionButton = new Button({
   className: "solution-button",
   text: "Solution",
 });
+const changeThemeButton = new Button({
+  tag: "button",
+  className: "change-theme-button",
+  text: "Change Theme to Dark",
+});
 
 solutionButton.hideButton();
 newGameButton.hideButton();
@@ -57,4 +62,19 @@ startNewGame.addListener("click", () => {
   solutionButton.showButton();
 });
 
-export { resetGameButton, startNewGame, newGameButton, solutionButton };
+changeThemeButton.addListener("click", () => {
+  document.body.classList.toggle("dark-theme");
+  if (changeThemeButton.getNode().textContent === "Change Theme to Dark") {
+    changeThemeButton.setTextContent("Change Theme to Light");
+  } else {
+    changeThemeButton.setTextContent("Change Theme to Dark");
+  }
+});
+
+export {
+  resetGameButton,
+  startNewGame,
+  newGameButton,
+  solutionButton,
+  changeThemeButton,
+};
