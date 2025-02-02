@@ -16,12 +16,19 @@ import { divSelectLevel, divSelectMapName } from "./select";
 import { soundPlayWin } from "./soundFunc";
 import { timer } from "./timer";
 
-const state = { cells: {} };
+const state = { cells: {}, level: null, mapName: null, rightMap: null };
 const messageBox = new Component({
   tag: "span",
   className: "message-box",
   text: "",
 });
+messageBox.hide();
+const messageInfoGame = new Component({
+  tag: "span",
+  className: "message-box",
+  text: "",
+});
+messageInfoGame.hide();
 messageBox.hide();
 
 export class GamePlace extends Component {
@@ -71,6 +78,9 @@ export class GamePlace extends Component {
   }
 
   createMap() {
+    messageInfoGame.setTextContent(
+      `Name map: "${this.state.mapName}", level: "${this.state.level}", size: ${this.map.length}x${this.map[0].length}`
+    );
     messageBox.hide();
     this.state.rightMap = this.map;
     console.log("state", this.state);
@@ -163,6 +173,7 @@ resetGameButton.addListener("click", () => {
 
 newGameButton.addListener("click", () => {
   messageBox.hide();
+  messageInfoGame.hide();
   gamePlace.hideMap();
   divSelectLevel.show();
   divSelectMapName.show();
@@ -183,8 +194,13 @@ const algorithmToStartGame = (map) => {
 startNewGame.addListener("click", () => {
   const level = divSelectLevel.getNode().querySelector("select").value;
   const mapName = divSelectMapName.getNode().querySelector("select").value;
+  console.log({ level, mapName });
+  state.level = level;
+  state.mapName = mapName;
+  console.log({ state });
   const map = playerMap[level].maps[mapName];
   algorithmToStartGame(map);
+  messageInfoGame.show();
 });
 
 randomGameButton.addListener("click", () => {
@@ -195,8 +211,11 @@ randomGameButton.addListener("click", () => {
     Object.keys(playerMap[level].maps).length - 1
   );
   const mapName = Object.keys(playerMap[level].maps)[mapNameInd];
+  state.level = level;
+  state.mapName = mapName;
   const map = playerMap[level].maps[mapName];
   algorithmToStartGame(map);
+  messageInfoGame.show();
 });
 solutionButton.addListener("click", () => {
   solutionButton.hide();
@@ -204,4 +223,4 @@ solutionButton.addListener("click", () => {
   timer.hide();
 });
 
-export { gamePlace, messageBox };
+export { gamePlace, messageBox, messageInfoGame };
