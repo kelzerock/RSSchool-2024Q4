@@ -22,7 +22,6 @@ class CreateSelectTag {
       tag: "div",
       className: "select-place",
     });
-    console.log({ divSelect });
     const fieldset = createComponent({
       tag: "fieldset",
       className: "fieldset",

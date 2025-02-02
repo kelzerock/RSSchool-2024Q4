@@ -2,7 +2,12 @@ import { DIRECTION } from "../constants/constant";
 import { cross } from "../constants/map/map";
 import { playerMap } from "../constants/map/playerMap";
 import { compare2DArrays } from "../utils/function";
-import { newGameButton, resetGameButton, startNewGame } from "./buttons";
+import {
+  newGameButton,
+  resetGameButton,
+  solutionButton,
+  startNewGame,
+} from "./buttons";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
 import { Component } from "./node";
@@ -21,6 +26,7 @@ export class GamePlace extends Component {
   constructor({ state, map }, ...children) {
     super({ tag: "div", className: "game-place" }, ...children);
     this.state = state;
+    this.state.rightMam = map;
     this.map = map;
     this.createMap();
 
@@ -51,6 +57,7 @@ export class GamePlace extends Component {
           messageBox.setTextContent(
             "You win! Time: " + durationInSeconds + " seconds"
           );
+          solutionButton.hide();
           messageBox.show();
           Object.values(this.state.cells).forEach((value) => {
             value.removeListener("click", value.handleClick);
@@ -63,7 +70,7 @@ export class GamePlace extends Component {
 
   createMap() {
     messageBox.hide();
-    console.log(this.map);
+    console.log("state", this.state);
     this.state.mapData = Array.from({ length: this.map.length }, () =>
       Array(this.map[0].length).fill(0)
     );
@@ -98,8 +105,6 @@ export class GamePlace extends Component {
         cellNode.addListener("click", cellNode.handleClick);
         cellNode.addListener("contextmenu", cellNode.handleClick);
       });
-      console.log(this.state);
-
       gamePlaceMain.append(
         new Component({ tag: "div", className: "row" }, ...elementInRow)
       );
@@ -122,6 +127,15 @@ export class GamePlace extends Component {
     messageBox.hide();
   }
 
+  viewSolution() {
+    Object.values(this.state.cells).forEach((value) => {
+      value.removeListener("click", value.handleClick);
+      value.removeListener("contextmenu", value.handleClick);
+      value.viewSolution();
+    });
+    timer.resetTimer();
+  }
+
   hideMap() {
     this.getNode().style.display = "none";
   }
@@ -135,13 +149,13 @@ const gamePlace = new GamePlace({
   state,
   map: Object.values(Object.values(playerMap)[0].maps)[0],
 });
-console.log(Object.values(Object.values(playerMap)[0].maps)[0]);
 gamePlace.hide();
 
 // buttons logic
 
 resetGameButton.addListener("click", () => {
   gamePlace.resetMap();
+  solutionButton.show();
 });
 
 newGameButton.addListener("click", () => {
@@ -158,12 +172,18 @@ startNewGame.addListener("click", () => {
   divSelectLevel.hide();
   divSelectMapName.hide();
   timer.show();
+  timer.resetTimer();
   const level = divSelectLevel.getNode().querySelector("select").value;
   const mapName = divSelectMapName.getNode().querySelector("select").value;
   const map = playerMap[level].maps[mapName];
   gamePlace.map = map;
-
   gamePlace.createMap();
+});
+
+solutionButton.addListener("click", () => {
+  solutionButton.hide();
+  gamePlace.viewSolution();
+  timer.hide();
 });
 
 export { gamePlace, messageBox };

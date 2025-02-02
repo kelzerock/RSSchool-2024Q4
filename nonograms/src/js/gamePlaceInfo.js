@@ -22,7 +22,6 @@ export class GamePlaceInfo extends Component {
   }
 
   createInfo() {
-    console.log(this.map);
     for (let i = 0; i < this.map[0].length; i++) {
       const column = new Component({ tag: "div", className: "column" });
       column.setAttribute("data-col", i);

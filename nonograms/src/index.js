@@ -6,8 +6,6 @@ import { header } from "./js/header";
 import { footer } from "./js/footer";
 import { controlsPanel } from "./js/controlsPanel";
 
-console.log("hello world");
-
 const wrapper = new Component(
   { tag: "div", className: "wrapper" },
   header,

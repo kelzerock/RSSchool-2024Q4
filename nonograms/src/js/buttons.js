@@ -33,6 +33,13 @@ const startNewGame = new Button({
   text: "Start New Game",
 });
 
+const solutionButton = new Button({
+  tag: "button",
+  className: "solution-button",
+  text: "Solution",
+});
+
+solutionButton.hideButton();
 newGameButton.hideButton();
 resetGameButton.hideButton();
 
@@ -40,12 +47,14 @@ newGameButton.addListener("click", () => {
   startNewGame.showButton();
   resetGameButton.hideButton();
   newGameButton.hideButton();
+  solutionButton.hideButton();
 });
 
 startNewGame.addListener("click", () => {
   startNewGame.hideButton();
   resetGameButton.showButton();
   newGameButton.showButton();
+  solutionButton.showButton();
 });
 
-export { resetGameButton, startNewGame, newGameButton };
+export { resetGameButton, startNewGame, newGameButton, solutionButton };

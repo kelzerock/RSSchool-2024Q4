@@ -54,6 +54,18 @@ export class Cell extends Component {
     this.state.mapData[rowAttribute][colAttribute] = this.dataBlack ? 1 : 0;
   }
 
+  viewSolution() {
+    const [rowAttribute, colAttribute] = this.getCoordinates();
+    const isBlack = this.state.rightMam[rowAttribute][colAttribute];
+    this.getNode().classList.remove(this.checkedClass);
+    this.getNode().classList.remove(this.crossClass);
+    if (isBlack) {
+      this.getNode().classList.add(this.checkedClass);
+    } else {
+      this.getNode().classList.add(this.crossClass);
+    }
+  }
+
   toggleCrossClass() {
     if (this.getNode().classList.contains(this.crossClass)) {
       this.getNode().classList.remove(this.crossClass);
