@@ -28,9 +28,10 @@ window.addEventListener("load", () => {
     document.body.classList.add("dark-theme");
   }
 
-  const winner = localStorage.getItem("winner");
-  if (winner) {
-    const data = JSON.parse(winner);
-    messagePlace.addInfo(data);
-  }
+  messagePlace.load();
+  // const winner = localStorage.getItem("winner");
+  // if (winner) {
+  //   const data = JSON.parse(winner);
+  //   messagePlace.addInfo(data);
+  // }
 });

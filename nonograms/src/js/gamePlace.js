@@ -89,9 +89,8 @@ export class GamePlace extends Component {
               saveWinners.push(data);
               localStorage.setItem("winner", JSON.stringify(saveWinners));
             }
-            messagePlace.load();
-            messagePlace.show("flex");
           }
+          messagePlace.load();
           if (!this.win) {
             soundPlayWin();
             loadGameButton.hide();
