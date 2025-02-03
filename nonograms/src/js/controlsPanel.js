@@ -2,9 +2,11 @@ import { Component } from "./node";
 import { timer } from "./timer";
 import "../assets/style/controls-panel.scss";
 import {
+  loadGameButton,
   newGameButton,
   randomGameButton,
   resetGameButton,
+  saveGameButton,
   solutionButton,
   startNewGame,
 } from "./buttons";
@@ -29,6 +31,8 @@ controlsPanel.appendChildren([
   divSelectLevel,
   divSelectMapName,
   randomGameButton,
+  saveGameButton,
+  loadGameButton,
 ]);
 
 export { controlsPanel };

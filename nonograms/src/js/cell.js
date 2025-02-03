@@ -1,6 +1,7 @@
 import { Component } from "./node";
 import "../assets/style/cell.scss";
 import { soundPlayGame } from "./soundFunc";
+import { timer } from "./timer";
 
 export class Cell extends Component {
   checkedClass = "cell-black";
@@ -10,8 +11,6 @@ export class Cell extends Component {
     this.dataBlack = dataBlack;
     this.state = state;
     this.handleClick = this.handleClick.bind(this);
-    this.addListener("click", soundPlayGame);
-    this.addListener("contextmenu", soundPlayGame);
   }
 
   handleClick(e) {
@@ -19,15 +18,27 @@ export class Cell extends Component {
       case "click":
         this.toggleCheckedClass();
         this.setDataBlack();
+        this.soundPlayGame();
+        this.startTimer();
         break;
       case "contextmenu":
         e.preventDefault();
+        this.startTimer();
         this.toggleCrossClass();
         this.setDataBlack();
+        this.soundPlayGame();
         break;
     }
   }
 
+  startTimer() {
+    if (!timer.getStatus()) timer.startTimer();
+    console.log(timer);
+  }
+
+  soundPlayGame() {
+    soundPlayGame();
+  }
   toggleCheckedClass() {
     if (this.getNode().classList.contains(this.checkedClass)) {
       this.getNode().classList.remove(this.checkedClass);
@@ -66,6 +77,17 @@ export class Cell extends Component {
       this.getNode().classList.add(this.checkedClass);
     } else {
       this.getNode().classList.add(this.crossClass);
+    }
+  }
+
+  viewSavedState() {
+    const [rowAttribute, colAttribute] = this.getCoordinates();
+    const isBlack = this.state.mapData[rowAttribute][colAttribute];
+    if (isBlack) {
+      this.getNode().classList.add(this.checkedClass);
+    } else {
+      this.getNode().classList.remove(this.checkedClass);
+      this.getNode().classList.remove(this.crossClass);
     }
   }
 

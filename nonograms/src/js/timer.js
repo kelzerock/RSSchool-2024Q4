@@ -8,10 +8,17 @@ class Timer extends Component {
     this.status = false;
   }
 
-  startTimer() {
+  startTimer(sec = 0) {
+    this.show();
+    if (this.interval) clearInterval(this.interval);
     this.status = true;
-    let seconds = 0;
-    let minutes = 0;
+    let minutes = Math.floor(sec / 60);
+    let seconds = sec % 60;
+    this.setTextContent(
+      `${minutes < 10 ? "0" + minutes : minutes}:${
+        seconds < 10 ? "0" + seconds : seconds
+      }`
+    );
     const interval = setInterval(() => {
       seconds++;
       if (seconds === 60) {
@@ -25,12 +32,16 @@ class Timer extends Component {
     this.interval = interval;
   }
 
-  stopTimer() {
-    this.status = false;
+  getDuration() {
     const [minutes, seconds] = this.getNode()
       .textContent.split(":")
       .map(Number);
-    const durationInSeconds = minutes * 60 + seconds;
+    return minutes * 60 + seconds;
+  }
+
+  stopTimer() {
+    this.status = false;
+    const durationInSeconds = this.getDuration();
     clearInterval(this.interval);
     return durationInSeconds;
   }

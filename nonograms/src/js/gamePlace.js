@@ -3,9 +3,11 @@ import { cross } from "../constants/map/map";
 import { playerMap } from "../constants/map/playerMap";
 import { compare2DArrays, randomIntFromInterval } from "../utils/function";
 import {
+  loadGameButton,
   newGameButton,
   randomGameButton,
   resetGameButton,
+  saveGameButton,
   solutionButton,
   startNewGame,
 } from "./buttons";
@@ -36,6 +38,7 @@ export class GamePlace extends Component {
     super({ tag: "div", className: "game-place" }, ...children);
     this.state = state;
     this.map = map;
+    this.win = false;
     this.createMap();
 
     this.addListener("contextmenu", (e) => {
@@ -58,14 +61,19 @@ export class GamePlace extends Component {
     this.addListener("click", (e) => {
       const target = e.target;
       if (target.classList.contains("cell")) {
-        if (!timer.getStatus()) timer.startTimer();
+        // if (!timer.getStatus()) timer.startTimer();
         let check = compare2DArrays(this.map, this.state.mapData);
         if (check) {
           const durationInSeconds = timer.stopTimer();
           messageBox.setTextContent(
             "You win! Time: " + durationInSeconds + " seconds"
           );
-          soundPlayWin();
+          if (!this.win) {
+            soundPlayWin();
+            loadGameButton.hide();
+            saveGameButton.hide();
+          }
+          this.win = true;
           solutionButton.hide();
           messageBox.show();
           Object.values(this.state.cells).forEach((value) => {
@@ -78,6 +86,7 @@ export class GamePlace extends Component {
   }
 
   createMap() {
+    this.win = false;
     messageInfoGame.setTextContent(
       `Name map: "${this.state.mapName}", level: "${this.state.level}", size: ${this.map.length}x${this.map[0].length}`
     );
@@ -138,6 +147,12 @@ export class GamePlace extends Component {
     });
     timer.resetTimer();
     messageBox.hide();
+  }
+
+  viewSavedMap(sec) {
+    Object.values(this.state.cells).forEach((value) => {
+      value.viewSavedState();
+    });
   }
 
   viewSolution() {
@@ -217,10 +232,42 @@ randomGameButton.addListener("click", () => {
   algorithmToStartGame(map);
   messageInfoGame.show();
 });
+
 solutionButton.addListener("click", () => {
   solutionButton.hide();
   gamePlace.viewSolution();
   timer.hide();
+});
+
+saveGameButton.addListener("click", () => {
+  localStorage.setItem(
+    "state",
+    JSON.stringify({
+      map: state.mapData,
+      name: state.mapName,
+      level: state.level,
+      time: timer.getDuration(),
+    })
+  );
+});
+
+loadGameButton.addListener("click", () => {
+  const { map, name, level, time } = JSON.parse(localStorage.getItem("state"));
+  console.log({ map, name, level, time });
+  state.level = level;
+  state.mapName = name;
+  const newMap = playerMap[level].maps[name];
+
+  gamePlace.viewMap();
+  gamePlace.destroyChildren();
+  divSelectLevel.hide();
+  divSelectMapName.hide();
+  gamePlace.map = newMap;
+  gamePlace.createMap();
+  state.mapData = map;
+  timer.startTimer(time);
+  gamePlace.viewSavedMap(time);
+  messageInfoGame.show();
 });
 
 export { gamePlace, messageBox, messageInfoGame };

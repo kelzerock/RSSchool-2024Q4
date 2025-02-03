@@ -46,22 +46,44 @@ const solutionButton = new Button({
   className: "solution-button",
   text: "Solution",
 });
+
 const changeThemeButton = new Button({
   tag: "button",
   className: "change-theme-button",
   text: "Change Theme to Dark",
 });
+
+const saveGameButton = new Button({
+  tag: "button",
+  className: "save-game-button",
+  text: "Save Game",
+});
+
+const loadGameButton = new Button({
+  tag: "button",
+  className: "load-game-button",
+  text: "Load Game",
+});
+
 window.addEventListener("load", () => {
   const theme = localStorage.getItem("color-theme");
   if (theme === "dark") {
     changeThemeButton.setTextContent("Change Theme to Light");
     document.body.classList.add("dark-theme");
   }
+  const saveGame = localStorage.getItem("state");
+  console.log({ saveGame });
+  if (saveGame) {
+    loadGameButton.show();
+  } else {
+    loadGameButton.hide();
+  }
 });
 
 solutionButton.hideButton();
 newGameButton.hideButton();
 resetGameButton.hideButton();
+saveGameButton.hideButton();
 
 newGameButton.addListener("click", () => {
   startNewGame.showButton();
@@ -69,6 +91,7 @@ newGameButton.addListener("click", () => {
   newGameButton.hideButton();
   solutionButton.hideButton();
   randomGameButton.showButton();
+  saveGameButton.hideButton();
 });
 
 startNewGame.addListener("click", () => {
@@ -77,6 +100,10 @@ startNewGame.addListener("click", () => {
   newGameButton.showButton();
   solutionButton.showButton();
   randomGameButton.hideButton();
+  saveGameButton.showButton();
+  if (localStorage.getItem("state")) {
+    loadGameButton.showButton();
+  }
 });
 
 randomGameButton.addListener("click", () => {
@@ -85,6 +112,10 @@ randomGameButton.addListener("click", () => {
   newGameButton.showButton();
   solutionButton.showButton();
   randomGameButton.hideButton();
+  saveGameButton.showButton();
+  if (localStorage.getItem("state")) {
+    loadGameButton.showButton();
+  }
 });
 
 changeThemeButton.addListener("click", () => {
@@ -99,6 +130,23 @@ changeThemeButton.addListener("click", () => {
   }
 });
 
+loadGameButton.addListener("click", () => {
+  startNewGame.hideButton();
+  resetGameButton.showButton();
+  newGameButton.showButton();
+  solutionButton.showButton();
+  randomGameButton.hideButton();
+  saveGameButton.showButton();
+});
+
+saveGameButton.addListener("click", () => {
+  loadGameButton.showButton();
+});
+
+solutionButton.addListener("click", () => {
+  saveGameButton.hide();
+});
+
 export {
   resetGameButton,
   startNewGame,
@@ -106,4 +154,6 @@ export {
   solutionButton,
   changeThemeButton,
   randomGameButton,
+  loadGameButton,
+  saveGameButton,
 };
