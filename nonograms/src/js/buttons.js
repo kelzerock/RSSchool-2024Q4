@@ -72,7 +72,6 @@ window.addEventListener("load", () => {
     document.body.classList.add("dark-theme");
   }
   const saveGame = localStorage.getItem("state");
-  console.log({ saveGame });
   if (saveGame) {
     loadGameButton.show();
   } else {

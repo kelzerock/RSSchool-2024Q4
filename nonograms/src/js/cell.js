@@ -33,7 +33,6 @@ export class Cell extends Component {
 
   startTimer() {
     if (!timer.getStatus()) timer.startTimer();
-    console.log(timer);
   }
 
   soundPlayGame() {

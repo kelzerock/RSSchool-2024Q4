@@ -13,6 +13,7 @@ import {
 } from "./buttons";
 import { Cell } from "./cell";
 import { GamePlaceInfo } from "./gamePlaceInfo";
+import { messagePlace } from "./messageDownBox";
 import { Component } from "./node";
 import { divSelectLevel, divSelectMapName } from "./select";
 import { soundPlayWin } from "./soundFunc";
@@ -68,6 +69,29 @@ export class GamePlace extends Component {
           messageBox.setTextContent(
             "You win! Time: " + durationInSeconds + " seconds"
           );
+          const winner = localStorage.getItem("winner");
+          const data = {
+            time: durationInSeconds + " seconds",
+            name: this.state.mapName,
+            level: this.state.level,
+          };
+          if (!winner) {
+            localStorage.setItem("winner", JSON.stringify([data]));
+          } else {
+            const saveWinners = JSON.parse(winner);
+            if (saveWinners.length < 5) {
+              saveWinners.push(data);
+              localStorage.setItem("winner", JSON.stringify(saveWinners));
+            } else {
+              while (saveWinners.length > 4) {
+                saveWinners.shift();
+              }
+              saveWinners.push(data);
+              localStorage.setItem("winner", JSON.stringify(saveWinners));
+            }
+            messagePlace.load();
+            messagePlace.show("flex");
+          }
           if (!this.win) {
             soundPlayWin();
             loadGameButton.hide();
@@ -92,7 +116,6 @@ export class GamePlace extends Component {
     );
     messageBox.hide();
     this.state.rightMap = this.map;
-    console.log("state", this.state);
     this.state.mapData = Array.from({ length: this.map.length }, () =>
       Array(this.map[0].length).fill(0)
     );
@@ -184,6 +207,7 @@ gamePlace.hide();
 resetGameButton.addListener("click", () => {
   gamePlace.resetMap();
   solutionButton.show();
+  messagePlace.hide();
 });
 
 newGameButton.addListener("click", () => {
@@ -193,6 +217,8 @@ newGameButton.addListener("click", () => {
   divSelectLevel.show();
   divSelectMapName.show();
   timer.hide();
+  messagePlace.show("flex");
+  messagePlace.load();
 });
 
 const algorithmToStartGame = (map) => {
@@ -209,13 +235,12 @@ const algorithmToStartGame = (map) => {
 startNewGame.addListener("click", () => {
   const level = divSelectLevel.getNode().querySelector("select").value;
   const mapName = divSelectMapName.getNode().querySelector("select").value;
-  console.log({ level, mapName });
   state.level = level;
   state.mapName = mapName;
-  console.log({ state });
   const map = playerMap[level].maps[mapName];
   algorithmToStartGame(map);
   messageInfoGame.show();
+  messagePlace.hide();
 });
 
 randomGameButton.addListener("click", () => {
@@ -231,6 +256,7 @@ randomGameButton.addListener("click", () => {
   const map = playerMap[level].maps[mapName];
   algorithmToStartGame(map);
   messageInfoGame.show();
+  messagePlace.hide();
 });
 
 solutionButton.addListener("click", () => {
@@ -253,7 +279,6 @@ saveGameButton.addListener("click", () => {
 
 loadGameButton.addListener("click", () => {
   const { map, name, level, time } = JSON.parse(localStorage.getItem("state"));
-  console.log({ map, name, level, time });
   state.level = level;
   state.mapName = name;
   const newMap = playerMap[level].maps[name];
@@ -268,6 +293,7 @@ loadGameButton.addListener("click", () => {
   timer.startTimer(time);
   gamePlace.viewSavedMap(time);
   messageInfoGame.show();
+  messagePlace.hide();
 });
 
 export { gamePlace, messageBox, messageInfoGame };
