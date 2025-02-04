@@ -64,7 +64,7 @@ export class GamePlace extends Component {
       if (target.classList.contains("cell")) {
         // if (!timer.getStatus()) timer.startTimer();
         let check = compare2DArrays(this.map, this.state.mapData);
-        if (check) {
+        if (check && !this.win) {
           const durationInSeconds = timer.stopTimer();
           messageBox.setTextContent(
             "You win! Time: " + durationInSeconds + " seconds"
