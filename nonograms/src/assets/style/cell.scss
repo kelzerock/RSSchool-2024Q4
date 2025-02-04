@@ -3,7 +3,7 @@
   height: 20px;
   border: 1px solid var(--main-gray);
   margin: 0px;
-  background-color: white;
+  background-color: var(--cell-bg-white);
   transition: background-color 0.3s ease-in-out;
 
 
@@ -29,7 +29,7 @@
   }
 
   &.cell-black {
-    background-color: rgb(102, 97, 97);
+    background-color: var(--cell-bg-black);
   }
 
   &.cell-cross {

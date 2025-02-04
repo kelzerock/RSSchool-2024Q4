@@ -11,7 +11,8 @@
 
 .info-row {
   display: grid;
-  grid-template-columns: repeat(3, 33%);
+  grid-template-columns: 100px repeat(3, 1fr);
+  gap: 5px;
   justify-content: space-between;
 
   .info {
@@ -21,15 +22,25 @@
     justify-content: center;
     border: solid 1px var(--main-white);
     padding: 5px 10px;
+
+  }
+
+  .id {
+    order: -1;
   }
 }
 
+
 @media (max-width: 700px) {
   .message-down-box {
-    font-size: 16px;
+    font-size: 14px;
 
     .info-row {
-      grid-template-columns: repeat(3, 33%);
+      grid-template-columns: 70px repeat(3, 1fr);
+    }
+
+    .id {
+      order: -1;
     }
   }
 }

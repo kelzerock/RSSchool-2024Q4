@@ -74,20 +74,49 @@ export class GamePlace extends Component {
             time: durationInSeconds + " seconds",
             name: this.state.mapName,
             level: this.state.level,
+            id: null,
           };
           if (!winner) {
+            data.id = 0;
             localStorage.setItem("winner", JSON.stringify([data]));
           } else {
             const saveWinners = JSON.parse(winner);
+            const maxId = saveWinners.reduce(
+              (max, item) => (item.id > max ? item.id : max),
+              0
+            );
+            data.id = maxId + 1;
+            const minId = saveWinners.reduce(
+              (min, item) => (item.id < min ? item.id : min),
+              Infinity
+            );
+
             if (saveWinners.length < 5) {
               saveWinners.push(data);
-              localStorage.setItem("winner", JSON.stringify(saveWinners));
+              localStorage.setItem(
+                "winner",
+                JSON.stringify(
+                  saveWinners.sort(
+                    (a, b) => parseInt(a.time) - parseInt(b.time)
+                  )
+                )
+              );
             } else {
-              while (saveWinners.length > 4) {
-                saveWinners.shift();
-              }
+              // while (saveWinners.length > 4) {
+              //   saveWinners.shift();
+              // }s
               saveWinners.push(data);
-              localStorage.setItem("winner", JSON.stringify(saveWinners));
+              const filteredWinners = saveWinners.filter(
+                (item) => item.id > minId
+              );
+              localStorage.setItem(
+                "winner",
+                JSON.stringify(
+                  filteredWinners.sort(
+                    (a, b) => parseInt(a.time) - parseInt(b.time)
+                  )
+                )
+              );
             }
           }
           messagePlace.load();
@@ -204,6 +233,7 @@ gamePlace.hide();
 // buttons logic
 
 resetGameButton.addListener("click", () => {
+  gamePlace.win = false;
   gamePlace.resetMap();
   solutionButton.show();
   messagePlace.hide();

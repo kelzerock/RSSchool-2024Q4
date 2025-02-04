@@ -146,6 +146,13 @@ solutionButton.addListener("click", () => {
   saveGameButton.hide();
 });
 
+resetGameButton.addListener("click", () => {
+  saveGameButton.showButton();
+  if (localStorage.getItem("state")) {
+    loadGameButton.showButton();
+  }
+});
+
 export {
   resetGameButton,
   startNewGame,
