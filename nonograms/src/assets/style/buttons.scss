@@ -18,3 +18,18 @@
     color: var(--main-white);
   }
 }
+
+
+.toggle-sound-button {
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  background: url("../img/sound-on-svgrepo-com.svg") no-repeat center / 80%;
+  background-color: var(--main-white);
+
+  &.off {
+    background: url("../img/sound-off-svgrepo-com.svg") no-repeat center / 80%;
+    background-color: var(--main-white);
+  }
+
+}

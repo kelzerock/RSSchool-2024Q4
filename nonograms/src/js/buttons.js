@@ -65,6 +65,12 @@ const loadGameButton = new Button({
   text: "Load Game",
 });
 
+const soundToggleButton = new Button({
+  tag: "button",
+  className: "toggle-sound-button",
+  text: "",
+});
+
 window.addEventListener("load", () => {
   const theme = localStorage.getItem("color-theme");
   if (theme === "dark") {
@@ -153,7 +159,12 @@ resetGameButton.addListener("click", () => {
   }
 });
 
+soundToggleButton.addListener("click", () => {
+  soundToggleButton.getNode().classList.toggle("off");
+});
+
 export {
+  soundToggleButton,
   resetGameButton,
   startNewGame,
   newGameButton,

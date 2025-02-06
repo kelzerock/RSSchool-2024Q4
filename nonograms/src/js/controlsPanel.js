@@ -8,6 +8,7 @@ import {
   resetGameButton,
   saveGameButton,
   solutionButton,
+  soundToggleButton,
   startNewGame,
 } from "./buttons";
 import { divSelectLevel, divSelectMapName } from "./select";

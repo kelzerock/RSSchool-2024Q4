@@ -1,6 +1,6 @@
 import { Component } from "./node";
 import "../assets/style/header.scss";
-import { changeThemeButton } from "./buttons";
+import { changeThemeButton, soundToggleButton } from "./buttons";
 
 const header = new Component(
   {
@@ -8,7 +8,8 @@ const header = new Component(
     className: "header",
     text: "Nonograms",
   },
-  changeThemeButton
+  changeThemeButton,
+  soundToggleButton
 );
 
 export { header };
