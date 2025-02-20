@@ -1,4 +1,4 @@
-export interface NewsAPI {
+export interface NewsApi {
     source: {
         id: string | null;
         name: string;
@@ -12,7 +12,13 @@ export interface NewsAPI {
     content: string;
 }
 
-export interface SourceAPI {
+export interface NewsApiResponse {
+    status: 'ok' | 'error';
+    totalResults: number;
+    articles: NewsApi[];
+}
+
+export interface SourceApi {
     id: string;
     name: string;
     description: string;
@@ -22,7 +28,7 @@ export interface SourceAPI {
     country: string;
 }
 
-export interface NewsAPIresponse {
-    status: string;
-    sources: NewsAPI[];
+export interface SourceApiResponse {
+    status: 'ok' | 'error';
+    sources: SourceApi[];
 }

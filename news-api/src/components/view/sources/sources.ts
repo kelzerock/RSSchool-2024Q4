@@ -1,8 +1,8 @@
-import { SourceAPI } from '../../../types/index';
+import { SourceApi } from '../../../types/index';
 import './sources.css';
 
 class Sources {
-    draw(data: SourceAPI[]) {
+    draw(data: SourceApi[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
