@@ -49,3 +49,8 @@ export enum Endpoint {
     everything = 'everything',
     topHeadlines = 'top-headlines',
 }
+
+
+export interface ProcessEnv {
+    [key: string]: string | undefined
+}
