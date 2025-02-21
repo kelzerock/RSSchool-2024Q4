@@ -21,7 +21,7 @@ const baseConfig = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(svg|jpg|jpeg)$/i,
                 type: 'asset/resource',
             },
         ],
@@ -30,7 +30,7 @@ const baseConfig = {
         extensions: ['.ts', '.js'],
     },
     output: {
-        filename: 'index.js',
+        filename: 'index-[contenthash].js',
         path: path.resolve(__dirname, './dist'),
         clean: true,
     },
@@ -44,7 +44,7 @@ const baseConfig = {
         new ESLintPlugin({ extensions: 'ts' }),
         new CopyPlugin({
             patterns: [
-                { from: 'src/favicon', to: 'favicon' },
+                { from: 'src/favicon', to: '' },
                 { from: 'src/img', to: 'img' },
             ],
         }),
