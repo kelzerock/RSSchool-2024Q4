@@ -9,13 +9,13 @@ class Loader {
         this.options = options;
     }
 
-    getResp({ endpoint, options = {} }: { endpoint: Endpoint; options: OptionsUrl }, callback?: <T>(data: T) => void) {
+    getResp<T>({ endpoint, options = {} }: { endpoint: Endpoint; options?: OptionsUrl }, callback?: (data: T) => void) {
         if (!callback) {
             callback = () => {
                 console.error('No callback for GET response');
             };
         }
-        this.load(MethodRequest.GET, endpoint, callback, options);
+        this.load<T>(MethodRequest.GET, endpoint, callback, options);
     }
 
     errorHandler(res: Response) {
@@ -42,8 +42,8 @@ class Loader {
     load<T>(method: MethodRequest, endpoint: Endpoint, callback: (data: T) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data: T) => callback(data))
+            .then((res) => res.json() as Promise<T>)
+            .then((data) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }
