@@ -1,4 +1,4 @@
-import { ApiResponse, Endpoint, MethodRequest, OptionsUrl } from '../../types/index';
+import { Endpoint, MethodRequest, OptionsUrl } from '../../types/index';
 
 class Loader {
     baseLink: string;
@@ -9,12 +9,12 @@ class Loader {
         this.options = options;
     }
 
-    getResp(
-        { endpoint, options = {} }: { endpoint: Endpoint; options: OptionsUrl },
-        callback = () => {
-            console.error('No callback for GET response');
+    getResp({ endpoint, options = {} }: { endpoint: Endpoint; options: OptionsUrl }, callback?: <T>(data: T) => void) {
+        if (!callback) {
+            callback = () => {
+                console.error('No callback for GET response');
+            };
         }
-    ) {
         this.load(MethodRequest.GET, endpoint, callback, options);
     }
 
@@ -39,11 +39,11 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: MethodRequest, endpoint: Endpoint, callback: (data: ApiResponse) => void, options = {}) {
+    load<T>(method: MethodRequest, endpoint: Endpoint, callback: (data: T) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
-            .then((data: ApiResponse) => callback(data))
+            .then((data: T) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }
