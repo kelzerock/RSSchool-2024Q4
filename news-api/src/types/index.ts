@@ -32,3 +32,20 @@ export interface SourceApiResponse {
     status: 'ok' | 'error';
     sources: SourceApi[];
 }
+
+//Loader
+export interface OptionsUrl {
+    [index: string]: string;
+}
+
+export type ApiResponse = NewsApiResponse | SourceApiResponse;
+
+export enum MethodRequest {
+    GET = 'GET',
+}
+
+export enum Endpoint {
+    source = 'sources',
+    everything = 'everything',
+    topHeadlines = 'top-headlines',
+}
