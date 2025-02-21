@@ -12,9 +12,14 @@ class App {
     }
 
     start() {
-        (document.querySelector('.sources') as HTMLDivElement).addEventListener('click', (e) =>
-            this.controller.getNews(e, (data: NewsApiResponse) => this.view.drawNews(data))
-        );
+        const sourceDiv = document.querySelector('.sources') as HTMLDivElement | null;
+        if (sourceDiv) {
+            sourceDiv.addEventListener('click', (e) =>
+                this.controller.getNews(e, (data: NewsApiResponse) => this.view.drawNews(data))
+            );
+        } else {
+            console.error("HtmlDivElement doesn't exist in HtmlDOM");
+        }
         this.controller.getSources((data: SourceApiResponse) => this.view.drawSources(data));
     }
 }

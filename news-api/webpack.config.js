@@ -20,6 +20,10 @@ const baseConfig = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
@@ -39,7 +43,10 @@ const baseConfig = {
         new CleanWebpackPlugin(),
         new ESLintPlugin({ extensions: 'ts' }),
         new CopyPlugin({
-            patterns: [{ from: 'src/favicon', to: 'assets' }],
+            patterns: [
+                { from: 'src/favicon', to: 'favicon' },
+                { from: 'src/img', to: 'img' },
+            ],
         }),
     ],
 };

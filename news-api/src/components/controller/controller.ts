@@ -32,7 +32,9 @@ class AppController extends AppLoader {
                 }
                 return;
             }
-            target = target.parentNode as HTMLElement;
+            if (target.parentNode) {
+                target = target.parentNode as HTMLElement;
+            }
         }
     }
 }
