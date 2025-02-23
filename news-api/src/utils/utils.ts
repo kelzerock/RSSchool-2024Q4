@@ -7,7 +7,7 @@ export const handleError = (args: string[]): void => {
 interface CreateHtmlElement {
     tag: string;
     parentElement: HTMLElement;
-    className: string;
+    className?: string;
     text?: string;
     attribute?: AttributeHtml;
 }
@@ -19,7 +19,9 @@ type AttributeHtml = {
 
 export const createHTMLElement = ({ tag, parentElement, className, attribute, text }: CreateHtmlElement) => {
     const node = document.createElement(tag);
-    node.classList.add(className);
+    if (className) {
+        node.classList.add(className);
+    }
     if (attribute) {
         node.setAttribute(attribute.name, attribute.value);
     }
@@ -28,4 +30,5 @@ export const createHTMLElement = ({ tag, parentElement, className, attribute, te
     }
 
     parentElement.append(node);
+    return node;
 };
