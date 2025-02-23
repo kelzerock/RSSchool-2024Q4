@@ -1,5 +1,5 @@
 import { SourceApi } from '../../../types/index';
-import { handleError } from '../../../utils/utils';
+import { createHTMLElement, handleError } from '../../../utils/utils';
 import './sources.css';
 
 enum Names {
@@ -16,13 +16,18 @@ class Sources {
 
         if (sourceDiv) {
             data.forEach((item) => {
-                const sourceItemName = document.createElement('div');
-                sourceItemName.classList.add(Names.sourceItemName);
-                const sourceItem = document.createElement('span');
+                const sourceItem = document.createElement('div');
                 sourceItem.classList.add(Names.sourceItem);
-                sourceItemName.textContent = item.name;
-                sourceItem.setAttribute(Names.dataAttr, item.id);
-                sourceItem.append(sourceItemName);
+                createHTMLElement({
+                    tag: 'span',
+                    parentElement: sourceItem,
+                    className: Names.sourceItemName,
+                    attribute: {
+                        name: Names.dataAttr,
+                        value: item.id,
+                    },
+                    text: item.name,
+                });
                 fragment.append(sourceItem);
             });
             sourceDiv.append(fragment);
