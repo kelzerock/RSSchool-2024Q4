@@ -1,8 +1,8 @@
-import { Endpoint, NewsApiResponse, SourceApiResponse } from '../../types/index';
+import { ApiResponse, Endpoint, NewsApiResponse, SourceApiResponse } from '../../types/index';
 import AppLoader from './appLoader';
 
 class AppController extends AppLoader {
-    getSources(callback: (data: SourceApiResponse) => void) {
+    public getSources(callback: (data: SourceApiResponse) => void) {
         super.getResp(
             {
                 endpoint: Endpoint.source,
@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: MouseEvent, callback: (data: NewsApiResponse) => void) {
+    public getNews(e: MouseEvent, callback: (data: Extract<ApiResponse, NewsApiResponse>) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 

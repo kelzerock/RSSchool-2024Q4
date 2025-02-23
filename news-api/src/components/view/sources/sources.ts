@@ -10,7 +10,7 @@ enum Names {
 }
 
 class Sources {
-    draw(data: SourceApi[]) {
+    public draw(data: SourceApi[]) {
         const fragment = document.createDocumentFragment();
         const sourceDiv = document.querySelector(`.${Names.sources}`);
 

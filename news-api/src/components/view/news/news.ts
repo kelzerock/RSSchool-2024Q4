@@ -3,7 +3,7 @@ import { createHTMLElement, handleError } from '../../../utils/utils';
 import './news.css';
 
 class News {
-    draw(data: NewsApi[]): void {
+    public draw(data: NewsApi[]): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
