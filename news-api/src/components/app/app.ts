@@ -17,8 +17,8 @@ class App {
     }
 
     public start() {
-        const sourceDiv = document.querySelector(`.${Names.sources}`) as HTMLDivElement | null;
-        if (sourceDiv) {
+        const sourceDiv = document.querySelector(`.${Names.sources}`);
+        if (sourceDiv && sourceDiv instanceof HTMLElement) {
             sourceDiv.addEventListener('click', (e) =>
                 this.controller.getNews(e, (data: Extract<ApiResponse, NewsApiResponse>) => this.view.drawNews(data))
             );
