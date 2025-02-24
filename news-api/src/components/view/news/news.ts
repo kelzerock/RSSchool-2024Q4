@@ -25,71 +25,78 @@ class News {
         const newsContainer = document.querySelector(`.${Names.news}`) as HTMLDivElement | null;
 
         if (newsContainer) {
-            news.forEach((item, idx) => {
-                const newsItem = document.createElement('div');
-                newsItem.classList.add(Names.item);
-                const newsMeta = createHTMLElement({ tag: 'div', parentElement: newsItem, className: Names.meta });
-                const newsMetaPhoto = createHTMLElement({
-                    tag: 'div',
-                    parentElement: newsMeta,
-                    className: Names.metaPhoto,
-                });
-                const newsMetaDetails = createHTMLElement({
-                    tag: 'ul',
-                    parentElement: newsMeta,
-                    className: Names.details,
-                });
-                createHTMLElement({
-                    tag: 'li',
-                    parentElement: newsMetaDetails,
-                    className: Names.author,
-                    text: item.author || item.source.name,
-                });
-                createHTMLElement({
-                    tag: 'li',
-                    parentElement: newsMetaDetails,
-                    className: Names.date,
-                    text: item.publishedAt.slice(0, 10).split('-').reverse().join('-'),
-                });
-                const newsDescription = createHTMLElement({
-                    tag: 'div',
-                    parentElement: newsItem,
-                    className: Names.description,
-                });
-                createHTMLElement({
-                    tag: 'h2',
-                    parentElement: newsDescription,
-                    className: Names.title,
-                    text: item.title,
-                });
-                createHTMLElement({
-                    tag: 'h3',
-                    parentElement: newsDescription,
-                    className: Names.source,
-                    text: item.source.name,
-                });
-                createHTMLElement({
-                    tag: 'p',
-                    parentElement: newsDescription,
-                    className: Names.content,
-                    text: item.description,
-                });
-                const newsReadMore = createHTMLElement({
-                    tag: 'p',
-                    parentElement: newsDescription,
-                    className: Names.readMore,
-                });
-                createHTMLElement({
-                    tag: 'a',
-                    parentElement: newsReadMore,
-                    attribute: [{ name: 'href', value: item.url }],
-                });
+            if (news.length >= 1) {
+                news.forEach((item, idx) => {
+                    const newsItem = document.createElement('div');
+                    newsItem.classList.add(Names.item);
+                    const newsMeta = createHTMLElement({ tag: 'div', parentElement: newsItem, className: Names.meta });
+                    const newsMetaPhoto = createHTMLElement({
+                        tag: 'div',
+                        parentElement: newsMeta,
+                        className: Names.metaPhoto,
+                    });
+                    const newsMetaDetails = createHTMLElement({
+                        tag: 'ul',
+                        parentElement: newsMeta,
+                        className: Names.details,
+                    });
+                    createHTMLElement({
+                        tag: 'li',
+                        parentElement: newsMetaDetails,
+                        className: Names.author,
+                        text: item.author || item.source.name,
+                    });
+                    createHTMLElement({
+                        tag: 'li',
+                        parentElement: newsMetaDetails,
+                        className: Names.date,
+                        text: item.publishedAt.slice(0, 10).split('-').reverse().join('-'),
+                    });
+                    const newsDescription = createHTMLElement({
+                        tag: 'div',
+                        parentElement: newsItem,
+                        className: Names.description,
+                    });
+                    createHTMLElement({
+                        tag: 'h2',
+                        parentElement: newsDescription,
+                        className: Names.title,
+                        text: item.title,
+                    });
+                    createHTMLElement({
+                        tag: 'h3',
+                        parentElement: newsDescription,
+                        className: Names.source,
+                        text: item.source.name,
+                    });
+                    createHTMLElement({
+                        tag: 'p',
+                        parentElement: newsDescription,
+                        className: Names.content,
+                        text: item.description,
+                    });
+                    const newsReadMore = createHTMLElement({
+                        tag: 'p',
+                        parentElement: newsDescription,
+                        className: Names.readMore,
+                    });
+                    createHTMLElement({
+                        tag: 'a',
+                        parentElement: newsReadMore,
+                        text: 'Read more',
+                        attribute: [{ name: 'href', value: item.url }],
+                    });
 
-                if (idx % 2) newsItem.classList.add('alt');
-                newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news.jpg'})`;
+                    if (idx % 2) newsItem.classList.add('alt');
+                    newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news.jpg'})`;
 
-                fragment.append(newsItem);
-            });
+                    fragment.append(newsItem);
+                });
+            } else {
+                const title = document.createElement('h3');
+                title.textContent = 'Sorry, content did not available there!';
+                fragment.append(title);
+            }
 
             newsContainer.innerHTML = '';
             newsContainer.appendChild(fragment);

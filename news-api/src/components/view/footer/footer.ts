@@ -4,6 +4,7 @@ import './footer.css';
 enum Names {
     container = 'container',
     link = 'container-link',
+    linkCourse = 'container-link-course',
     img = 'footer-img',
     title = 'footer-title',
 }
@@ -33,9 +34,18 @@ class Footer {
                     { name: 'target', value: '_blank' },
                 ],
             });
+            const linkToCourse = createHTMLElement({
+                tag: 'a',
+                parentElement: container,
+                className: Names.linkCourse,
+                attribute: [
+                    { name: 'href', value: 'https://rs.school/courses/javascript' },
+                    { name: 'target', value: '_blank' },
+                ],
+            });
             createHTMLElement({
                 tag: 'img',
-                parentElement: link,
+                parentElement: linkToCourse,
                 className: Names.img,
                 attribute: [{ name: 'src', value: 'img/rss-logo.svg' }],
             });

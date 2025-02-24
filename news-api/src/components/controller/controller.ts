@@ -4,6 +4,7 @@ import AppLoader from './appLoader';
 enum Names {
     sourceItem = 'source__item',
     dataSourceId = 'data-source-id',
+    dataName = 'source__item-name',
     dataSource = 'data-source',
 }
 
@@ -22,7 +23,7 @@ class AppController extends AppLoader {
         const newsContainer = e.currentTarget;
 
         while (target !== newsContainer) {
-            if (target instanceof HTMLElement && target.classList.contains(Names.sourceItem)) {
+            if (target instanceof HTMLElement && target.classList.contains(Names.dataName)) {
                 const sourceId = target.getAttribute(Names.dataSourceId) || '';
                 if (newsContainer instanceof HTMLElement && newsContainer.getAttribute(Names.dataSource) !== sourceId) {
                     newsContainer.setAttribute(Names.dataSource, sourceId);

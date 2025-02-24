@@ -3,6 +3,8 @@ footer {
     flex-direction: column;
 
     .container {
+        display: flex;
+        column-gap: 20px;
     }
     .container-link {
         display: flex;
