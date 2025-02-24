@@ -4,6 +4,7 @@ import './news.css';
 
 enum Names {
     news = 'news',
+    titleInfo = 'news__title',
     item = 'news__item',
     meta = 'news__meta',
     metaPhoto = 'news__meta-photo',
@@ -95,6 +96,7 @@ class News {
             } else {
                 const title = document.createElement('h3');
                 title.textContent = 'Sorry, content did not available there!';
+                title.classList.add(Names.titleInfo);
                 fragment.append(title);
             }
 
