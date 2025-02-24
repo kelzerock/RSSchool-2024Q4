@@ -37,7 +37,7 @@ class Footer {
                 tag: 'img',
                 parentElement: link,
                 className: Names.img,
-                attribute: [{ name: 'src', value: '../../../img/rss-logo.svg' }],
+                attribute: [{ name: 'src', value: 'img/rss-logo.svg' }],
             });
             createHTMLElement({
                 tag: 'span',
