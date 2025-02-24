@@ -82,7 +82,7 @@ class News {
                 createHTMLElement({
                     tag: 'a',
                     parentElement: newsReadMore,
-                    attribute: { name: 'href', value: item.url },
+                    attribute: [{ name: 'href', value: item.url }],
                 });
 
                 if (idx % 2) newsItem.classList.add('alt');

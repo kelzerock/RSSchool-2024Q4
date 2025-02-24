@@ -22,10 +22,12 @@ class Sources {
                     tag: 'span',
                     parentElement: sourceItem,
                     className: Names.sourceItemName,
-                    attribute: {
-                        name: Names.dataAttr,
-                        value: item.id,
-                    },
+                    attribute: [
+                        {
+                            name: Names.dataAttr,
+                            value: item.id,
+                        },
+                    ],
                     text: item.name,
                 });
                 fragment.append(sourceItem);

@@ -9,7 +9,7 @@ interface CreateHtmlElement {
     parentElement: HTMLElement;
     className?: string;
     text?: string;
-    attribute?: AttributeHtml;
+    attribute?: AttributeHtml[];
 }
 
 type AttributeHtml = {
@@ -23,7 +23,9 @@ export const createHTMLElement = ({ tag, parentElement, className, attribute, te
         node.classList.add(className);
     }
     if (attribute) {
-        node.setAttribute(attribute.name, attribute.value);
+        attribute.forEach((attr) => {
+            node.setAttribute(attr.name, attr.value);
+        });
     }
     if (text) {
         node.textContent = text;

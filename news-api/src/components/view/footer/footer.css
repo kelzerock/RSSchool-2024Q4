@@ -1,0 +1,25 @@
+footer {
+    display: flex;
+    flex-direction: column;
+
+    .container {
+    }
+    .container-link {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        text-decoration: none;
+        color: lightgrey;
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+    .footer-img {
+        height: auto;
+        width: 30px;
+    }
+    .footer-title {
+    }
+}

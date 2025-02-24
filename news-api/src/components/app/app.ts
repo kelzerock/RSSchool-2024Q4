@@ -26,6 +26,7 @@ class App {
             handleError([Names.sources]);
         }
         this.controller.getSources((data: Extract<ApiResponse, SourceApiResponse>) => this.view.drawSources(data));
+        this.view.drawFooter();
     }
 }
 
