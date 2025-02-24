@@ -15,6 +15,7 @@ class Sources {
         const sourceDiv = document.querySelector(`.${Names.sources}`);
 
         if (sourceDiv) {
+            sourceDiv.innerHTML = '';
             data.forEach((item) => {
                 const sourceItem = document.createElement('div');
                 sourceItem.classList.add(Names.sourceItem);
