@@ -7,7 +7,12 @@ const loaderBuilder = (): webpack.Configuration["module"]["rules"] => {
     exclude: /node_modules/,
   };
 
-  return [tsLoader];
+  const postCSS = {
+    test: /\.css$/i,
+    use: ["style-loader", "css-loader", "postcss-loader"],
+  };
+
+  return [tsLoader, postCSS];
 };
 
 export default loaderBuilder;
