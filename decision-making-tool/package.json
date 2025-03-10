@@ -7,11 +7,11 @@
     "build:dev": "webpack --env mode=development",
     "start": "webpack serve --env port=3000",
     "prepare": "cd .. && husky decision-making-tool/.husky",
-    "lint": "eslint . --fix",
+    "lint": "eslint --fix",
     "commitlint": "commitlint --edit"
   },
   "lint-staged": {
-    "src/**/*.js": "npm run lint"
+    "*.{js,ts}": "npm run lint"
   },
   "keywords": [],
   "author": "",

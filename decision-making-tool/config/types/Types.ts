@@ -1,7 +1,7 @@
-export type ModeEnv = {
+export interface ModeEnv {
   mode: "development" | "production",
   port?: number,
-};
+}
 
 interface Paths {
   public: string,

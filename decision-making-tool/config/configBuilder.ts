@@ -20,7 +20,7 @@ const configBuilder = (options: WebpackOptions) => {
     },
     plugins: pluginBuilder(options),
     module: {
-      rules: loaderBuilder(options),
+      rules: loaderBuilder(),
     },
     resolve: resolveBuilder(),
     devServer: devServerBuilder(options),
