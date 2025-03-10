@@ -8,10 +8,9 @@ const pluginBuilder = (options: WebpackOptions) => {
     new HtmlWebpackPlugin({
       template: path.resolve(options.paths.public, "index.html"),
     }),
-  ]
-
+  ];
 
   return plugins;
-}
+};
 
 export default pluginBuilder;

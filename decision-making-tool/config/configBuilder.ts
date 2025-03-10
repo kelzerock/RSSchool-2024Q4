@@ -6,8 +6,7 @@ import loaderBuilder from "./loaderBuilder";
 import devServerBuilder from "./devServerBuilder";
 
 const configBuilder = (options: WebpackOptions) => {
-
-  const isDev = options.env.mode === "development"
+  const isDev = options.env.mode === "development";
 
   const config: webpack.Configuration = {
     mode: isDev ? "development" : "production",
@@ -27,6 +26,6 @@ const configBuilder = (options: WebpackOptions) => {
   };
 
   return config;
-}
+};
 
 export default configBuilder;

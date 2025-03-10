@@ -8,5 +8,5 @@ export default tseslint.config(
   tseslint.configs.strict,
   tseslint.configs.stylistic,
   tseslint.configs.eslintRecommended,
-  { ignores: ["dist"] }
+  { ignores: ["dist"] },
 );

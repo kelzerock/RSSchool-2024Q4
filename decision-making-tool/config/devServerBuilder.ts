@@ -11,9 +11,9 @@ const devServerBuilder = (option: WebpackOptions) => {
     hot: true,
     open: true,
     historyApiFallback: true,
-  }
+  };
 
-  return devServer
-}
+  return devServer;
+};
 
 export default devServerBuilder;
