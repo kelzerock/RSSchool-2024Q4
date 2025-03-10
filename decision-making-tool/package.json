@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
     "prepare": "cd .. && husky decision-making-tool/.husky",
     "lint": "eslint . --fix",
     "commitlint": "commitlint --edit"
@@ -21,8 +21,12 @@
     "@eslint/js": "^9.22.0",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
+    "html-webpack-plugin": "^5.6.3",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
-    "typescript-eslint": "^8.26.0"
+    "ts-loader": "^9.5.2",
+    "typescript-eslint": "^8.26.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
   }
 }
