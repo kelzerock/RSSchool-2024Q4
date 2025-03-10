@@ -1,3 +1,2 @@
-let a = "test";
-let b;
+let a = "test!";
 console.log(a);

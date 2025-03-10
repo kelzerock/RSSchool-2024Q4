@@ -4,11 +4,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky",
-    "lint": "eslint . --fix"
+    "prepare": "cd .. && husky decision-making-tool/.husky",
+    "lint": "eslint . --fix",
+    "commitlint": "commitlint --edit"
   },
   "lint-staged": {
-    "*": "npm run prepare"
+    "src/**/*.js": "npm run lint"
   },
   "keywords": [],
   "author": "",

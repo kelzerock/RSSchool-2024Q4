@@ -1,2 +1,2 @@
 cd decision-making-tool
-npx lint-staged
+npm run commitlint ${1}
