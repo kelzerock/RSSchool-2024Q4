@@ -1,6 +1,6 @@
-import webpack from "webpack";
+import { ModuleOptions } from "webpack";
 
-const loaderBuilder = (): webpack.Configuration["module"]["rules"] => {
+const loaderBuilder = (): ModuleOptions["rules"] => {
   const tsLoader = {
     test: /\.tsx?$/,
     use: "ts-loader",

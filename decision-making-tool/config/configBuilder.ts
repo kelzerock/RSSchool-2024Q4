@@ -23,6 +23,9 @@ const configBuilder = (options: WebpackOptions) => {
     },
     resolve: resolveBuilder(),
     devServer: devServerBuilder(options),
+    performance: {
+      hints: isDev ? false : "warning",
+    },
   };
 
   return config;
