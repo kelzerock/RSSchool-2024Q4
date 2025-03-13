@@ -1,8 +1,9 @@
-import path from "path";
-import { ModeEnv, WebpackOptions } from "./config/types/Types";
-import configBuilder from "./config/configBuilder";
+import path from "node:path";
+import type { ModeEnvironment, WebpackOptions } from "./config/types/types";
+import configBuilder from "./config/config-builder";
+import type { Configuration } from "webpack";
 
-export default (env: ModeEnv) => {
+const webpackConfig = (env: ModeEnvironment): Configuration => {
   const webpackOptions: WebpackOptions = {
     paths: {
       public: path.resolve(__dirname, "public"),
@@ -14,3 +15,4 @@ export default (env: ModeEnv) => {
 
   return configBuilder(webpackOptions);
 };
+export default webpackConfig;

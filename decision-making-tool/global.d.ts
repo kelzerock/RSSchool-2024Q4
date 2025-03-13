@@ -1,8 +1,11 @@
-import { RouteFunc } from "./src/router/router";
+// import type { RouteFunction } from "./src/router/router";
 
-export {};
-declare global {
-  interface Window {
-    route: RouteFunc; // this will be your variable name
-  }
-}
+// export { };
+// declare global {
+//   type Window {
+//     route: RouteFunction; // this will be your variable name
+//   }
+// }
+
+declare module "*.module.css";
+declare module "*.module.scss";

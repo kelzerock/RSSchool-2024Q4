@@ -1,4 +1,4 @@
-import webpack from "webpack";
+import type webpack from "webpack";
 const resolveBuilder = (): webpack.Configuration["resolve"] => {
   return {
     extensions: [".tsx", ".ts", ".js"],

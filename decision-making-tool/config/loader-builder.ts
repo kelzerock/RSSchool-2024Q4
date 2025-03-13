@@ -1,4 +1,4 @@
-import { ModuleOptions } from "webpack";
+import type { ModuleOptions } from "webpack";
 
 const loaderBuilder = (): ModuleOptions["rules"] => {
   const tsLoader = {

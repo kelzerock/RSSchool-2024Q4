@@ -1,15 +1,15 @@
-export interface ModeEnv {
+export type ModeEnvironment = {
   mode: "development" | "production";
   port?: number;
-}
+};
 
-interface Paths {
+type Paths = {
   public: string;
   bundler: string;
   entryTS: string;
-}
+};
 
-export interface WebpackOptions {
+export type WebpackOptions = {
   paths: Paths;
-  env: ModeEnv;
-}
+  env: ModeEnvironment;
+};

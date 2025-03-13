@@ -1,4 +1,4 @@
-import { handleLocation, route } from "./router/router";
+import { handleLocation } from "./router/router";
 import "./style.css";
 
 // const a = "test!";
@@ -9,7 +9,7 @@ import "./style.css";
 
 // document.body.appendChild(test);
 
-window.onpopstate = handleLocation;
-window.route = route;
+globalThis.addEventListener("popstate", handleLocation);
+// globalThis.route = route;
 
 handleLocation();
