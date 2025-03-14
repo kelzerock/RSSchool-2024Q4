@@ -1,6 +1,7 @@
 import { appState } from "../../state/application-state";
 import { createNode } from "../../utils/node";
 import { addOption } from "./add-option";
+import { handleAddOption } from "./handle-click";
 
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
@@ -19,7 +20,9 @@ const createMainPage = (): void => {
     wrapper,
   );
 
-  addOption(appState, listOfOption);
+  appState.options.forEach((option) => {
+    addOption(option, listOfOption);
+  });
 
   const buttonAddOption = createNode(
     "button",
@@ -27,6 +30,10 @@ const createMainPage = (): void => {
     wrapper,
     "add option",
   );
+  buttonAddOption.addEventListener("click", () =>
+    handleAddOption(appState, listOfOption),
+  );
+
   const buttonPastList = createNode(
     "button",
     buttonStyle,
@@ -54,7 +61,6 @@ const createMainPage = (): void => {
   const buttonStart = createNode("button", buttonStyle, wrapper, "start");
 
   [
-    buttonAddOption,
     buttonPastList,
     buttonClearList,
     buttonSafeListToFile,

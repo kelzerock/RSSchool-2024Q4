@@ -1,7 +1,7 @@
 type optionType = {
   index: number;
   description: string;
-  weight: number;
+  weight: string;
 };
 
 type ApplicationState = {
@@ -9,4 +9,4 @@ type ApplicationState = {
   lastIndex: number;
 };
 
-export { ApplicationState };
+export { ApplicationState, optionType };
