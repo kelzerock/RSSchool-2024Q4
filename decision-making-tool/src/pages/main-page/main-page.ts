@@ -60,17 +60,13 @@ const createMainPage = (): void => {
   );
   const buttonStart = createNode("button", buttonStyle, wrapper, "start");
 
-  [
+  console.log(
     buttonPastList,
     buttonClearList,
     buttonSafeListToFile,
     buttonLoadListFromFile,
     buttonStart,
-  ].forEach((element) => {
-    element.addEventListener("click", () => {
-      console.log("hello");
-    });
-  });
+  );
 };
 
 export { createMainPage };
