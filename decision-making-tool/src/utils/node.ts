@@ -3,11 +3,12 @@ const createNode = (
   className: string,
   parent: HTMLElement,
   text = "",
-): void => {
+): HTMLElement => {
   const node = document.createElement(tag);
   node.className = className;
   node.textContent = text;
   parent.append(node);
+  return node;
 };
 
 export { createNode };

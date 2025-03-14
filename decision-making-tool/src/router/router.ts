@@ -1,4 +1,7 @@
+import { createMainPage } from "../pages/main-page";
+
 export type RouteFunction = (event: Event) => void;
+type Map = Record<string, () => void>;
 
 const route = (event: Event): void => {
   event = event || window.event;
@@ -10,17 +13,20 @@ const route = (event: Event): void => {
   handleLocation();
 };
 
-const routes: Record<string, string> = {
-  404: "<h1>/pages/404.html</h1>",
-  "/": "<h1>/pages/index.html</h1>",
-  "/decision": "<h1>/pages/decision.html</h1>",
+const routes: Map = {
+  404: createMainPage,
+  "/": createMainPage,
+  "/decision": createMainPage,
 };
 
 const handleLocation = (): void => {
   const path = globalThis.location.pathname;
   const route = routes[path] || routes[404];
-  // const html = routes;
-  document.body.innerHTML = route;
+  if (typeof route === "function") {
+    route();
+  } else {
+    document.body.innerHTML = route;
+  }
 };
 
 export { route, handleLocation };
