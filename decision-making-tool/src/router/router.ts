@@ -1,4 +1,4 @@
-import { createMainPage } from "../pages/main-page";
+import { createMainPage } from "../pages/main-page/main-page";
 
 export type RouteFunction = (event: Event) => void;
 type Map = Record<string, () => void>;

@@ -1,4 +1,6 @@
-import { createNode } from "../utils/node";
+import { appState } from "../../state/application-state";
+import { createNode } from "../../utils/node";
+import { addOption } from "./add-option";
 
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
@@ -11,11 +13,13 @@ const createMainPage = (): void => {
     "",
   );
   createNode("h1", "text-2xl", wrapper, "Decision making tool");
-  const listOfOption = createNode("ul", "list-of-option", wrapper);
+  const listOfOption = createNode(
+    "ul",
+    "flex flex-col gap-y-2 py-1 px-3",
+    wrapper,
+  );
 
-  ["test1", "test2"].forEach((element) => {
-    createNode("li", "item", listOfOption, element);
-  });
+  addOption(appState, listOfOption);
 
   const buttonAddOption = createNode(
     "button",

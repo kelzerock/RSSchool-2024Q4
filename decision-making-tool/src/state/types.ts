@@ -1,5 +1,5 @@
 type optionType = {
-  index: string;
+  index: number;
   description: string;
   weight: number;
 };
