@@ -1,7 +1,8 @@
 import { appState } from "../../state/application-state";
 import { createNode } from "../../utils/node";
+import { openModalWindow } from "../modal/open-modal-window";
 import { addOption } from "./add-option";
-import { handleAddOption } from "./handle-click";
+import { handleAddOption, handleClearList } from "./handle-click";
 
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
@@ -40,12 +41,21 @@ const createMainPage = (): void => {
     wrapper,
     "past list",
   );
+  buttonPastList.addEventListener("click", () => {
+    openModalWindow({
+      template: document.createElement("p"),
+      closeElements: [],
+    });
+  });
   const buttonClearList = createNode(
     "button",
     buttonStyle,
     wrapper,
     "clear list",
   );
+  buttonClearList.addEventListener("click", () => {
+    handleClearList(appState, listOfOption);
+  });
   const buttonSafeListToFile = createNode(
     "button",
     buttonStyle,

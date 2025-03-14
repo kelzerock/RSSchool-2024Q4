@@ -1,7 +1,7 @@
 import type { ApplicationState } from "../../state/types";
 import { addOption } from "./add-option";
 
-const handleAddOption = (
+export const handleAddOption = (
   state: ApplicationState,
   parent: HTMLElement,
 ): void => {
@@ -11,7 +11,7 @@ const handleAddOption = (
   addOption(newOption, parent);
 };
 
-const handleDeleteOption = (
+export const handleDeleteOption = (
   state: ApplicationState,
   target: HTMLElement,
   index: number,
@@ -26,4 +26,13 @@ const handleDeleteOption = (
   }
 };
 
-export { handleAddOption, handleDeleteOption };
+export const handleClearList = (
+  state: ApplicationState,
+  parent: HTMLElement,
+): void => {
+  state.options = [];
+  state.lastIndex = 0;
+  while (parent.lastChild) {
+    parent.lastChild.remove();
+  }
+};
