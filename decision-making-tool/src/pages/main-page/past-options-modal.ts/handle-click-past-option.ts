@@ -1,5 +1,4 @@
 import { DOMElements } from "../../../enums/dom-elements";
-import { appState } from "../../../state/application-state";
 import type { ApplicationState, optionType } from "../../../state/types";
 import { addOption } from "../add-option";
 
@@ -17,13 +16,14 @@ export const handleClickPastOption = (
         arrayWithCorrectValue.push({
           description: value.slice(0, indexOfLastComma),
           weight: partWithNumber,
-          index: ++appState.lastIndex,
+          index: ++state.lastIndex,
         });
       }
     }
   });
 
   arrayWithCorrectValue.forEach((option) => {
+    state.options = [...state.options, option];
     addOption(option, state.elements[DOMElements.listOfOption]);
   });
 };

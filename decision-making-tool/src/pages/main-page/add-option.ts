@@ -1,6 +1,10 @@
 import { appState } from "../../state/application-state";
 import type { optionType } from "../../state/types";
 import { createNode } from "../../utils/node";
+import {
+  handleAddOptionInput,
+  handleAddOptionInputOnlyNumber,
+} from "./handle-add-option-input";
 import { handleDeleteOption } from "./handle-click";
 
 const addOption = (option: optionType, parent: HTMLElement): void => {
@@ -24,13 +28,25 @@ const addOption = (option: optionType, parent: HTMLElement): void => {
     tag: "input",
     className: styleInput,
     parent: itemLi,
+    attributes: [{ name: "value", value: option.description }],
   });
-  inputDescription.setAttribute("value", option.description);
+  if (inputDescription instanceof HTMLInputElement) {
+    inputDescription.addEventListener("input", () => {
+      handleAddOptionInput(inputDescription, option.index, "description");
+    });
+  }
+
   const inputWeight = createNode({
     tag: "input",
     className: styleInput,
     parent: itemLi,
+    attributes: [{ name: "value", value: option.weight }],
   });
+  if (inputWeight instanceof HTMLInputElement) {
+    inputWeight.addEventListener("input", () => {
+      handleAddOptionInputOnlyNumber(inputWeight, option.index, "weight");
+    });
+  }
   inputWeight.setAttribute("value", option.weight);
   const buttonDeleteOption = createNode({
     tag: "button",

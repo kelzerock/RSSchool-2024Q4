@@ -81,13 +81,7 @@ const createMainPage = (): void => {
 
   appState.elements[DOMElements.listOfOption] = listOfOption;
 
-  console.log(
-    buttonPastList,
-    buttonClearList,
-    buttonSafeListToFile,
-    buttonLoadListFromFile,
-    buttonStart,
-  );
+  console.log(buttonSafeListToFile, buttonLoadListFromFile, buttonStart);
 };
 
 export { createMainPage };
