@@ -1,8 +1,8 @@
 import { createNode } from "../../utils/node";
 import { handleCloseModal } from "./handle-close-modal";
 
-type modalTypes = {
-  template: HTMLElement;
+export type modalTypes = {
+  template: HTMLElement | DocumentFragment;
   closeElements: HTMLElement[];
 };
 
@@ -15,15 +15,23 @@ export const openModalWindow = ({
   const styleFormModal =
     "w-[90%] h-min py-2 px-2 border-3 border-emerald-600 bg-emerald-300 rounded-lg";
 
-  const dialog = createNode("dialog", styleModalWindow, document.body);
+  const dialog = createNode({
+    tag: "dialog",
+    className: styleModalWindow,
+    parent: document.body,
+  });
   dialog.setAttribute("open", "true");
-  const form = createNode("form", styleFormModal, dialog);
+  const form = createNode({
+    tag: "form",
+    className: styleFormModal,
+    parent: dialog,
+  });
   form.setAttribute("method", "dialog");
   form.append(template);
-  createNode("button", "", form, "close");
 
   [dialog, ...closeElements].forEach((element) => {
     element.addEventListener("click", function addListener(event): void {
+      event.preventDefault();
       if (event.target === element) {
         element.removeEventListener("click", addListener);
         handleCloseModal(event, element, dialog);

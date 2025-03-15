@@ -13,18 +13,31 @@ const addOption = (option: optionType, parent: HTMLElement): void => {
     styleButton =
       "bg-emerald-600 text-white rounded-md hover:bg-emerald-700 hover:cursor-pointer";
 
-  const itemLi = createNode("li", styleLiElement, parent);
-  createNode("span", styleSpanElement, itemLi, `#${option.index}`);
-  const inputDescription = createNode("input", styleInput, itemLi);
+  const itemLi = createNode({ tag: "li", className: styleLiElement, parent });
+  createNode({
+    tag: "span",
+    className: styleSpanElement,
+    parent: itemLi,
+    text: `#${option.index}`,
+  });
+  const inputDescription = createNode({
+    tag: "input",
+    className: styleInput,
+    parent: itemLi,
+  });
   inputDescription.setAttribute("value", option.description);
-  const inputWeight = createNode("input", styleInput, itemLi);
+  const inputWeight = createNode({
+    tag: "input",
+    className: styleInput,
+    parent: itemLi,
+  });
   inputWeight.setAttribute("value", option.weight);
-  const buttonDeleteOption = createNode(
-    "button",
-    styleButton,
-    itemLi,
-    "delete",
-  );
+  const buttonDeleteOption = createNode({
+    tag: "button",
+    className: styleButton,
+    parent: itemLi,
+    text: "delete",
+  });
   buttonDeleteOption.addEventListener("click", () => {
     handleDeleteOption(appState, itemLi, option.index);
   });

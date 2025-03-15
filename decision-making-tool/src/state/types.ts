@@ -4,8 +4,11 @@ type optionType = {
   weight: string;
 };
 
+type elements = Record<string, HTMLElement>;
+
 type ApplicationState = {
   options: optionType[];
+  elements: elements;
   lastIndex: number;
 };
 
