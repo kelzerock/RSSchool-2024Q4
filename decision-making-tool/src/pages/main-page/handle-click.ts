@@ -1,4 +1,5 @@
 import type { ApplicationState } from "../../state/types";
+import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
 import { addOption } from "./add-option";
 import { createMainPage } from "./main-page";
@@ -115,4 +116,14 @@ const isAppStateDataCorrect = (
     return true;
   }
   return false;
+};
+
+export const handleStart = (state: ApplicationState): void => {
+  if (isReadyToMakeDecision(state)) {
+    console.log("start");
+  } else {
+    const message = `Please add at least 2 valid options.
+    An option is considered valid if its title is not empty and its weight is greater than 0`;
+    modalWithMessage(message);
+  }
 };

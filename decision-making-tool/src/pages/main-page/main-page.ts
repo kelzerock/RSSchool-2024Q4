@@ -9,6 +9,7 @@ import {
   handleClearList,
   handleLoadFileWithOptions,
   handleSafeOption,
+  handleStart,
 } from "./handle-click";
 import { templateForModal } from "./modal-past-options/template-for-modal";
 
@@ -94,7 +95,7 @@ const createMainPage = (): void => {
     parent: wrapper,
     text: "start",
   });
-  buttonStart.addEventListener("click", () => console.log(appState));
+  buttonStart.addEventListener("click", () => handleStart(appState));
 
   appState.elements[DOMElements.listOfOption] = listOfOption;
 };
