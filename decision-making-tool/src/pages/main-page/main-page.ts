@@ -1,5 +1,6 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { wrapperStyles } from "../../styles/styles";
 import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
 import { openModalWindow } from "../modal/open-modal-window";
@@ -20,13 +21,12 @@ export const createMainPage = (): void => {
   removeAllChildren(document.body);
   const wrapper = createNode({
     tag: "div",
-    className:
-      "flex justify-start flex-col items-center bg-emerald-300 grow py-6 max-w-2xl w-5/6 mx-auto gap-y-2",
+    className: wrapperStyles,
     parent: document.body,
   });
   createNode({
     tag: "h1",
-    className: "text-2xl",
+    className: "text-3xl font-bold text-emerald-900",
     parent: wrapper,
     text: "Decision making tool",
   });

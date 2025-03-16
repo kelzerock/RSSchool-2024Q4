@@ -1,3 +1,4 @@
+import { handleLocation } from "../../router/router";
 import type { ApplicationState } from "../../state/types";
 import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
@@ -120,7 +121,8 @@ const isAppStateDataCorrect = (
 
 export const handleStart = (state: ApplicationState): void => {
   if (isReadyToMakeDecision(state)) {
-    console.log("start");
+    globalThis.history.pushState({}, "", "/decision");
+    handleLocation();
   } else {
     const message = `Please add at least 2 valid options.
     An option is considered valid if its title is not empty and its weight is greater than 0`;

@@ -1,4 +1,5 @@
 import { create404page } from "../pages/404-page/404-page";
+import { createDecisionPage } from "../pages/decision-page/decision-page";
 import { createMainPage } from "../pages/main-page/main-page";
 
 export type RouteFunction = (event: Event) => void;
@@ -17,7 +18,7 @@ const route = (event: Event): void => {
 const routes: Map = {
   404: create404page,
   "/": createMainPage,
-  "/decision": createMainPage,
+  "/decision": createDecisionPage,
 };
 
 const handleLocation = (): void => {
