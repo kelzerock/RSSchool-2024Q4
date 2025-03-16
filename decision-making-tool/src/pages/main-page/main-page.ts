@@ -1,11 +1,13 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
 import { createNode } from "../../utils/node";
+import { removeAllChildren } from "../../utils/remove-all-children";
 import { openModalWindow } from "../modal/open-modal-window";
 import { addOption } from "./add-option";
 import {
   handleAddOption,
   handleClearList,
+  handleLoadFileWithOptions,
   handleSafeOption,
 } from "./handle-click";
 import { templateForModal } from "./past-options-modal.ts/template-for-modal";
@@ -14,6 +16,7 @@ const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
 
 const createMainPage = (): void => {
+  removeAllChildren(document.body);
   const wrapper = createNode({
     tag: "div",
     className:
@@ -80,16 +83,20 @@ const createMainPage = (): void => {
     parent: wrapper,
     text: "load list from file",
   });
+
+  buttonLoadListFromFile.addEventListener("click", () =>
+    handleLoadFileWithOptions(appState),
+  );
+
   const buttonStart = createNode({
     tag: "button",
     className: buttonStyle,
     parent: wrapper,
     text: "start",
   });
+  buttonStart.addEventListener("click", () => console.log(appState));
 
   appState.elements[DOMElements.listOfOption] = listOfOption;
-
-  console.log(buttonSafeListToFile, buttonLoadListFromFile, buttonStart);
 };
 
 export { createMainPage };
