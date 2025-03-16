@@ -10,7 +10,7 @@ import {
   handleLoadFileWithOptions,
   handleSafeOption,
 } from "./handle-click";
-import { templateForModal } from "./past-options-modal.ts/template-for-modal";
+import { templateForModal } from "./modal-past-options/template-for-modal";
 
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";

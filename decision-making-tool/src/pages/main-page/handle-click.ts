@@ -2,6 +2,7 @@ import type { ApplicationState } from "../../state/types";
 import { createNode } from "../../utils/node";
 import { addOption } from "./add-option";
 import { createMainPage } from "./main-page";
+import { modalWithMessage } from "./modal-with-message/modal-with.message";
 
 export const handleAddOption = (
   state: ApplicationState,
@@ -48,7 +49,9 @@ export const handleSafeOption = (state: ApplicationState): void => {
   URL.revokeObjectURL(link.href);
 };
 
-export const handleLoadFileWithOptions = (state: ApplicationState): void => {
+export const handleLoadFileWithOptions = async (
+  state: ApplicationState,
+): Promise<void> => {
   const input = createNode({
     tag: "input",
     attributes: [
@@ -58,44 +61,47 @@ export const handleLoadFileWithOptions = (state: ApplicationState): void => {
   });
   input.click();
 
-  input.addEventListener("change", (event) => {
+  input.addEventListener("change", async (event) => {
     if (event.target instanceof HTMLInputElement && event.target.files) {
       const file = event.target.files[0];
 
       if (file) {
-        file
-          .text()
-          .then((content: string) => {
-            const parsedData: unknown =
-              typeof content === "string" ? JSON.parse(content) : "";
+        try {
+          const content = await file.text();
+          let parsedData: unknown;
+          try {
+            parsedData = JSON.parse(content);
+          } catch (error) {
+            modalWithMessage("Parsing completed with mistake!");
+            console.error("Ошибка парсинга JSON:", error);
+            return;
+          }
 
-            if (isAppStateDataCorrect(parsedData)) {
-              state.lastIndex = parsedData.lastIndex;
-              state.options = parsedData.options;
-            } else {
-              console.log("Данные некорректны");
-            }
-            console.log(state);
-
+          if (isAppStateDataCorrect(parsedData)) {
+            state.lastIndex = parsedData.lastIndex;
+            state.options = parsedData.options;
             createMainPage();
-          })
-          .catch((error) => {
-            console.error("Ошибка при чтении файла:", error);
-          });
+          } else {
+            modalWithMessage("Be careful! Loaded data was incorrect!");
+            console.error("Данные некорректны");
+          }
+        } catch (error) {
+          modalWithMessage("Mistake in process to read file!");
+          console.error("Ошибка при чтении файла:", error);
+        }
       }
     }
   });
 };
 
-const isAppStateDataCorrect = (data: unknown): data is ApplicationState => {
+const isAppStateDataCorrect = (
+  data: unknown,
+): data is Omit<ApplicationState, "elements"> => {
   if (
     typeof data === "object" &&
     data !== null &&
     "lastIndex" in data &&
     typeof data.lastIndex === "number" &&
-    "elements" in data &&
-    typeof data.elements === "object" &&
-    data.elements !== null &&
     "options" in data &&
     Array.isArray(data.options) &&
     data.options.every(
