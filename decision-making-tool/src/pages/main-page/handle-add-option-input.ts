@@ -20,7 +20,7 @@ export const handleAddOptionInputOnlyNumber = (
   index: number,
   info: "description" | "weight",
 ): void => {
-  let newValue = input.value.replaceAll(/[^0-9.]/g, "");
+  let newValue = input.value.replace(/[^0-9.]/g, "");
   const parts = newValue.split(".");
   if (parts.length > 1) {
     newValue = parts.shift() + "." + parts.join("");

@@ -12,7 +12,10 @@ export const handleClickPastOption = (
     const indexOfLastComma = value.lastIndexOf(",");
     if (indexOfLastComma !== -1) {
       const partWithNumber = value.slice(indexOfLastComma + 1).trim();
-      if (!Number.isNaN(Number.parseFloat(partWithNumber))) {
+      if (
+        !Number.isNaN(Number.parseFloat(partWithNumber)) &&
+        partWithNumber.split(".").length <= 2
+      ) {
         arrayWithCorrectValue.push({
           description: value.slice(0, indexOfLastComma),
           weight: partWithNumber,

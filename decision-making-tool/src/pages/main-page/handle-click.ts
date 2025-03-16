@@ -36,3 +36,12 @@ export const handleClearList = (
     parent.lastChild.remove();
   }
 };
+
+export const handleSafeOption = (state: ApplicationState): void => {
+  const link = document.createElement("a");
+  link.download = "state.json";
+  const blob = new Blob([JSON.stringify(state)], { type: "application/json" });
+  link.href = URL.createObjectURL(blob);
+  link.click();
+  URL.revokeObjectURL(link.href);
+};

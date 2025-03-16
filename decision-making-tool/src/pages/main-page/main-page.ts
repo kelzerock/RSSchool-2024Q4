@@ -3,7 +3,11 @@ import { appState } from "../../state/application-state";
 import { createNode } from "../../utils/node";
 import { openModalWindow } from "../modal/open-modal-window";
 import { addOption } from "./add-option";
-import { handleAddOption, handleClearList } from "./handle-click";
+import {
+  handleAddOption,
+  handleClearList,
+  handleSafeOption,
+} from "./handle-click";
 import { templateForModal } from "./past-options-modal.ts/template-for-modal";
 
 const buttonStyle =
@@ -65,6 +69,10 @@ const createMainPage = (): void => {
     className: buttonStyle,
     parent: wrapper,
     text: "safe list to file",
+  });
+
+  buttonSafeListToFile.addEventListener("click", () => {
+    handleSafeOption(appState);
   });
   const buttonLoadListFromFile = createNode({
     tag: "button",

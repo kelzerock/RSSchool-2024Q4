@@ -34,6 +34,7 @@ export default tseslint.config(
       ],
       "@typescript-eslint/member-ordering": "error",
       "class-methods-use-this": "error",
+      "unicorn/prefer-string-replace-all": "off",
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "max-lines-per-function": "warn",
       "unicorn/no-array-callback-reference": "off",
