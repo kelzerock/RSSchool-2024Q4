@@ -16,7 +16,7 @@ import { templateForModal } from "./modal-past-options/template-for-modal";
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
 
-const createMainPage = (): void => {
+export const createMainPage = (): void => {
   removeAllChildren(document.body);
   const wrapper = createNode({
     tag: "div",
@@ -99,5 +99,3 @@ const createMainPage = (): void => {
 
   appState.elements[DOMElements.listOfOption] = listOfOption;
 };
-
-export { createMainPage };
