@@ -44,7 +44,7 @@ export const createDecisionPage = (): void => {
     parent: buttonsBlock,
     text: "sound: off",
   });
-  const labelTimer = createNode({
+  createNode({
     tag: "label",
     className:
       "bg-teal-700 border-2 border-teal-800 h-[35px] px-4 text-teal-200 hover:bg-teal-800 hover:cursor-pointer hover:border-teal-700 -mx-[2px] flex items-center justify-center rounded-l-sm rounded-r-none",
@@ -106,13 +106,5 @@ export const createDecisionPage = (): void => {
     });
   };
 
-  drawCircle(canvasBlock, activateButtons);
-  console.log(
-    buttonsBlock,
-    buttonSound,
-    labelTimer,
-    inputTimer,
-    informationDisplay,
-    canvasBlock,
-  );
+  drawCircle(canvasBlock, activateButtons, informationDisplay);
 };

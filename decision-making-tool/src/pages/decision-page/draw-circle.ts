@@ -5,9 +5,29 @@ import { drawSector } from "./draw/draw-sector";
 import { drawTriangle } from "./draw/draw-triangle";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
 
+const transformed = (array: number[]): number[] => {
+  let sum = 0;
+  const newArray: number[] = [0];
+  [...array].reverse().forEach((value) => {
+    sum += value;
+    newArray.push(sum);
+  });
+  return newArray.reverse();
+};
+
+const findIndex = (number_: number, array: number[]): number => {
+  let count = 1;
+  while (count < array.length) {
+    if (number_ <= array[count - 1] && number_ > array[count]) return count - 1;
+    count += 1;
+  }
+  return array.length;
+};
+
 export const drawCircle = (
   element: HTMLElement,
   callback: () => void,
+  display: HTMLElement,
 ): void => {
   if (element instanceof HTMLCanvasElement) {
     const widthElement = 500;
@@ -28,8 +48,18 @@ export const drawCircle = (
       if (storageAngle) {
         startAngle = Number.parseFloat(storageAngle);
       }
+
       const draw = (startAngle: number): void => {
         let angle = startAngle;
+        const offsetAngle =
+          ((angle % (Math.PI * 2)) + Math.PI / 2) % (Math.PI * 2);
+        const array = prepareData.map(
+          (element_) => element_.proportion * Math.PI * 2,
+        );
+        const transformArray = transformed(array);
+
+        display.textContent =
+          prepareData[findIndex(offsetAngle, transformArray)].description;
 
         prepareData.forEach((option) => {
           const endAngle = angle + Math.PI * 2 * option.proportion;
