@@ -1,5 +1,6 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { drawInnerCircle } from "./draw/draw-inner-circle";
 import { drawSector } from "./draw/draw-sector";
 import { drawTriangle } from "./draw/draw-triangle";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
@@ -77,20 +78,23 @@ export const drawCircle = (
           }
 
           drawTriangle(context, widthElement, centerX, centerY, radius);
+          drawInnerCircle(context, centerX, centerY, 30);
           angle = endAngle;
         });
       };
       draw(startAngle);
 
-      const quad = (timeFraction: number): number => {
-        return Math.pow(timeFraction, 2);
+      const inOutQuad = (n: number): number => {
+        n *= 2;
+        if (n < 1) return 0.5 * n * n;
+        return -0.5 * (--n * (n - 2) - 1);
       };
 
       appState.elements[DOMElements.buttonPlay].addEventListener(
         "click",
         () => {
           animate({
-            timing: quad,
+            timing: inOutQuad,
             draw,
             duration: appState.animation.duration,
             ctx: context,
