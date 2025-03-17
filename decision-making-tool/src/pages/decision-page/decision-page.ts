@@ -24,7 +24,7 @@ export const createDecisionPage = (): void => {
 
   const buttonsBlock = createNode({
     tag: "div",
-    className: "",
+    className: "flex flex-row items-center",
     parent: wrapper,
   });
 
@@ -46,17 +46,21 @@ export const createDecisionPage = (): void => {
   });
   const labelTimer = createNode({
     tag: "label",
-    className: simpleButton,
+    className:
+      "bg-teal-700 border-2 border-teal-800 h-[35px] px-4 text-teal-200 hover:bg-teal-800 hover:cursor-pointer hover:border-teal-700 -mx-[2px] flex items-center justify-center rounded-l-sm rounded-r-none",
     parent: buttonsBlock,
     text: "time",
+    attributes: [{ name: "for", value: "timer" }],
   });
   const inputTimer = createNode({
     tag: "input",
-    className: "",
+    className:
+      "bg-teal-300 rounded-r-sm rounded-l-none  border-2 border-teal-800 h-[35px] w-[80px] px-4 text-teal-200 hover:bg-teal-400 hover:cursor-pointer outline-none text-teal-900 text-right disabled:bg-stone-700 disabled:opacity-50 disabled:cursor-not-allowed",
     parent: buttonsBlock,
     attributes: [
       { name: "value", value: (appState.animation.duration / 1000).toString() },
       { name: "type", value: "number" },
+      { name: "id", value: "timer" },
     ],
   });
   inputTimer.addEventListener("input", () => {
@@ -69,6 +73,12 @@ export const createDecisionPage = (): void => {
     className: simpleButton,
     parent: wrapper,
     text: "start",
+  });
+
+  buttonPlay.addEventListener("click", () => {
+    [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {
+      element.setAttribute("disabled", "true");
+    });
   });
   appState.elements[DOMElements.buttonPlay] = buttonPlay;
 
@@ -89,12 +99,13 @@ export const createDecisionPage = (): void => {
     className: "border-2 border-black",
   });
 
-  buttonSound.addEventListener("click", () => {
-    console.log({ appState });
-    console.log(localStorage.getItem("appState"));
-  });
+  const activateButtons = (): void => {
+    [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {
+      element.removeAttribute("disabled");
+    });
+  };
 
-  drawCircle(canvasBlock);
+  drawCircle(canvasBlock, activateButtons);
   console.log(
     buttonsBlock,
     buttonSound,

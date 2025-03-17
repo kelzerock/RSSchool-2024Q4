@@ -1,5 +1,18 @@
 /* stylelint-disable-next-line import-notation */
 @import "tailwindcss";
+/* stylelint-disable-next-line import-notation */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+}
+
+/* Firefox */
+input[type="number"] {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -moz-appearance: textfield;
+}
 
 body {
   display: flex;

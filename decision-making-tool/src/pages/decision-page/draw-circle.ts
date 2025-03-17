@@ -2,7 +2,10 @@ import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
 
-export const drawCircle = (element: HTMLElement): void => {
+export const drawCircle = (
+  element: HTMLElement,
+  callback: () => void,
+): void => {
   if (element instanceof HTMLCanvasElement) {
     const widthElement = 200;
     const heightElement = 200;
@@ -75,6 +78,7 @@ export const drawCircle = (element: HTMLElement): void => {
             ctx: context,
             width: widthElement,
             height: heightElement,
+            callback,
           });
         },
       );
@@ -89,6 +93,7 @@ function animate({
   ctx,
   width,
   height,
+  callback,
 }: {
   timing: (t: number) => number;
   draw: (angle: number) => void;
@@ -96,6 +101,7 @@ function animate({
   ctx: CanvasRenderingContext2D;
   width: number;
   height: number;
+  callback: () => void;
 }): void {
   const start = performance.now();
   const fullRotations = Math.floor(Math.random() * 5 + 1);
@@ -122,6 +128,7 @@ function animate({
       requestAnimationFrame(render);
     } else {
       localStorage.setItem("angle", rotationAngle.toString());
+      callback();
     }
   }
 
