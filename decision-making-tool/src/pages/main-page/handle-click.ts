@@ -1,4 +1,5 @@
 import { handleLocation } from "../../router/router";
+import { saveToLocalStorage } from "../../state/application-state";
 import type { ApplicationState } from "../../state/types";
 import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
@@ -29,6 +30,7 @@ export const handleDeleteOption = (
   if (state.options.length === 0) {
     state.lastIndex = 0;
   }
+  saveToLocalStorage();
 };
 
 export const handleClearList = (
@@ -82,6 +84,7 @@ export const handleLoadFileWithOptions = async (
           if (isAppStateDataCorrect(parsedData)) {
             state.lastIndex = parsedData.lastIndex;
             state.options = parsedData.options;
+            saveToLocalStorage();
             createMainPage();
           } else {
             modalWithMessage("Be careful! Loaded data was incorrect!");
@@ -96,7 +99,7 @@ export const handleLoadFileWithOptions = async (
   });
 };
 
-const isAppStateDataCorrect = (
+export const isAppStateDataCorrect = (
   data: unknown,
 ): data is Omit<ApplicationState, "elements"> => {
   if (
@@ -121,6 +124,7 @@ const isAppStateDataCorrect = (
 
 export const handleStart = (state: ApplicationState): void => {
   if (isReadyToMakeDecision(state)) {
+    saveToLocalStorage();
     globalThis.history.pushState({}, "", "/decision");
     handleLocation();
   } else {

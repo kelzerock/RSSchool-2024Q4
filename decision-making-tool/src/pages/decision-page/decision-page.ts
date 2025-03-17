@@ -83,6 +83,11 @@ export const createDecisionPage = (): void => {
     className: "border-2 border-black",
   });
 
+  buttonSound.addEventListener("click", () => {
+    console.log({ appState });
+    console.log(localStorage.getItem("appState"));
+  });
+
   drawCircle(canvasBlock);
   console.log(
     buttonsBlock,

@@ -6,4 +6,7 @@ const appState: ApplicationState = {
   lastIndex: 0,
 };
 
+export const saveToLocalStorage = (): void =>
+  localStorage.setItem("appState", JSON.stringify(appState));
+
 export { appState };

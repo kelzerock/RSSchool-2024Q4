@@ -1,4 +1,4 @@
-import { appState } from "../../state/application-state";
+import { appState, saveToLocalStorage } from "../../state/application-state";
 
 export const handleAddOptionInput = (
   input: HTMLInputElement,
@@ -13,6 +13,7 @@ export const handleAddOptionInput = (
     }
     return option;
   });
+  saveToLocalStorage();
 };
 
 export const handleAddOptionInputOnlyNumber = (
