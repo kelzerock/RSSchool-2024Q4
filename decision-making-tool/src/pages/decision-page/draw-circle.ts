@@ -34,6 +34,7 @@ export const drawCircle = (
     const heightElement = 500;
     element.width = widthElement;
     element.height = heightElement;
+    let isAnimationStart = false;
 
     const context = element.getContext("2d");
     const radius = 230;
@@ -58,8 +59,12 @@ export const drawCircle = (
         );
         const transformArray = transformed(array);
 
-        display.textContent =
-          prepareData[findIndex(offsetAngle, transformArray)].description;
+        if (isAnimationStart) {
+          display.textContent =
+            prepareData[findIndex(offsetAngle, transformArray)].description;
+          display.classList.remove("bg-lime-500");
+          display.classList.add("bg-teal-600");
+        }
 
         prepareData.forEach((option) => {
           const endAngle = angle + Math.PI * 2 * option.proportion;
@@ -123,6 +128,7 @@ export const drawCircle = (
       appState.elements[DOMElements.buttonPlay].addEventListener(
         "click",
         () => {
+          isAnimationStart = true;
           animate({
             timing: inOutQuad,
             draw,

@@ -85,7 +85,8 @@ export const createDecisionPage = (): void => {
 
   const informationDisplay = createNode({
     tag: "div",
-    className: "",
+    className:
+      "w-[300px] border-2 text-center border-teal-800 rounded-sm bg-teal-600 select-none",
     parent: wrapper,
     text: "for start - push the play button",
   });
@@ -104,6 +105,8 @@ export const createDecisionPage = (): void => {
     [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {
       element.removeAttribute("disabled");
     });
+    informationDisplay.classList.add("bg-lime-500");
+    informationDisplay.classList.remove("bg-teal-600");
   };
 
   drawCircle(canvasBlock, activateButtons, informationDisplay);
