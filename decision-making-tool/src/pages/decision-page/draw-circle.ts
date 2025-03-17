@@ -1,5 +1,7 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { drawSector } from "./draw/draw-sector";
+import { drawTriangle } from "./draw/draw-triangle";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
 
 export const drawCircle = (
@@ -7,22 +9,18 @@ export const drawCircle = (
   callback: () => void,
 ): void => {
   if (element instanceof HTMLCanvasElement) {
-    const widthElement = 200;
-    const heightElement = 200;
+    const widthElement = 500;
+    const heightElement = 500;
     element.width = widthElement;
     element.height = heightElement;
 
     const context = element.getContext("2d");
-    const radius = 70;
+    const radius = 230;
 
     if (context) {
       const centerX = element.width / 2;
       const centerY = element.height / 2;
       const prepareData = getInfoOfOptionsWithProportion(appState);
-      console.log({ prepareData });
-
-      // const proportions = [0.3, 0.2, 0.5];
-      // const colors = ["red", "green", "blue"];
 
       const storageAngle = localStorage.getItem("angle");
       let startAngle = 0;
@@ -36,29 +34,49 @@ export const drawCircle = (
           const endAngle = angle + Math.PI * 2 * option.proportion;
 
           if (context) {
-            context.beginPath();
-            context.moveTo(centerX, centerY);
-            context.arc(centerX, centerY, radius, angle, endAngle);
-            context.closePath();
-            context.fillStyle = option.color;
-            context.fill();
+            drawSector(
+              context,
+              centerX,
+              centerY,
+              radius,
+              angle,
+              endAngle,
+              option.color,
+            );
 
-            context.beginPath();
-            context.moveTo(centerX, centerY);
-            context.lineTo(
-              centerX + radius * Math.cos(angle),
-              centerY + radius * Math.sin(angle),
-            );
-            context.moveTo(centerX, centerY);
-            context.lineTo(
-              centerX + radius * Math.cos(endAngle),
-              centerY + radius * Math.sin(endAngle),
-            );
-            context.strokeStyle = "black";
+            const text =
+              option.proportion < 0.03
+                ? ""
+                : option.description.length > 7
+                  ? option.description.slice(0, 7) + "..."
+                  : option.description;
+
+            const textAngle = angle + (endAngle - angle) / 2;
+            const textX =
+              centerX +
+              (radius / 1.5) * Math.cos(angle + (endAngle - angle) / 2);
+            const textY =
+              centerY +
+              (radius / 1.5) * Math.sin(angle + (endAngle - angle) / 2);
+
+            context.save();
+            context.translate(textX, textY);
+            context.rotate(textAngle);
+
+            context.font = "bold 16px sans-serif";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+
+            context.fillStyle = "#ffffff";
+            context.fillText(text, 0, 0);
+
+            context.strokeStyle = "#0000000";
             context.lineWidth = 1;
-            context.stroke();
+            context.strokeText(text, 0, 0);
+            context.restore();
           }
 
+          drawTriangle(context, widthElement, centerX, centerY, radius);
           angle = endAngle;
         });
       };
@@ -104,7 +122,7 @@ function animate({
   callback: () => void;
 }): void {
   const start = performance.now();
-  const fullRotations = Math.floor(Math.random() * 5 + 1);
+  const fullRotations = Math.floor(Math.random() * 5 + 5);
   const extraAngle = Math.random() * Math.PI * 2;
   const finalAngle = Math.PI * 2 * fullRotations + extraAngle;
 

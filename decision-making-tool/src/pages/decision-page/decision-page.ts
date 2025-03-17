@@ -60,6 +60,7 @@ export const createDecisionPage = (): void => {
     attributes: [
       { name: "value", value: (appState.animation.duration / 1000).toString() },
       { name: "type", value: "number" },
+      { name: "min", value: "3" },
       { name: "id", value: "timer" },
     ],
   });
