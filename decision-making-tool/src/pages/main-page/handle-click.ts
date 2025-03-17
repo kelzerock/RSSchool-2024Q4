@@ -108,6 +108,11 @@ export const isAppStateDataCorrect = (
     "lastIndex" in data &&
     typeof data.lastIndex === "number" &&
     "options" in data &&
+    "animation" in data &&
+    typeof data.animation === "object" &&
+    data.animation &&
+    "duration" in data.animation &&
+    typeof data.animation.duration === "number" &&
     Array.isArray(data.options) &&
     data.options.every(
       (option) =>

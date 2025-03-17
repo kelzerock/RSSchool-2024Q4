@@ -1,10 +1,24 @@
+import { isAppStateDataCorrect } from "../pages/main-page/handle-click";
 import type { ApplicationState } from "./types";
 
 const appState: ApplicationState = {
   options: [],
   elements: {},
   lastIndex: 0,
+  animation: { duration: 10000 },
 };
+
+const oldState = localStorage.getItem("appState");
+if (oldState) {
+  const parseState = JSON.parse(oldState);
+  console.log({ parseState });
+  if (isAppStateDataCorrect(parseState)) {
+    appState.lastIndex = parseState.lastIndex;
+    appState.options = [...parseState.options];
+    appState.animation.duration = parseState.animation.duration;
+  }
+  console.log({ appState });
+}
 
 export const saveToLocalStorage = (): void =>
   localStorage.setItem("appState", JSON.stringify(appState));

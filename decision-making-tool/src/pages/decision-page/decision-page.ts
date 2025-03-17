@@ -5,6 +5,7 @@ import { simpleButton, wrapperStyles } from "../../styles/styles";
 import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
 import { drawCircle } from "./draw-circle";
+import { handleInput } from "./handle-input";
 
 export const createDecisionPage = (): void => {
   removeAllChildren(document.body);
@@ -54,9 +55,14 @@ export const createDecisionPage = (): void => {
     className: "",
     parent: buttonsBlock,
     attributes: [
-      { name: "value", value: "10" },
+      { name: "value", value: (appState.animation.duration / 1000).toString() },
       { name: "type", value: "number" },
     ],
+  });
+  inputTimer.addEventListener("input", () => {
+    if (inputTimer instanceof HTMLInputElement) {
+      handleInput(inputTimer, appState);
+    }
   });
   const buttonPlay = createNode({
     tag: "button",

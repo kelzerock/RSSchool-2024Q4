@@ -1,5 +1,6 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
 
 export const drawCircle = (element: HTMLElement): void => {
   if (element instanceof HTMLCanvasElement) {
@@ -14,22 +15,29 @@ export const drawCircle = (element: HTMLElement): void => {
     if (context) {
       const centerX = element.width / 2;
       const centerY = element.height / 2;
+      const prepareData = getInfoOfOptionsWithProportion(appState);
+      console.log({ prepareData });
 
-      const proportions = [0.3, 0.2, 0.5];
-      const colors = ["red", "green", "blue"];
+      // const proportions = [0.3, 0.2, 0.5];
+      // const colors = ["red", "green", "blue"];
 
+      const storageAngle = localStorage.getItem("angle");
+      let startAngle = 0;
+      if (storageAngle) {
+        startAngle = Number.parseFloat(storageAngle);
+      }
       const draw = (startAngle: number): void => {
         let angle = startAngle;
 
-        proportions.forEach((proportion, index) => {
-          const endAngle = angle + Math.PI * 2 * proportion;
+        prepareData.forEach((option) => {
+          const endAngle = angle + Math.PI * 2 * option.proportion;
 
           if (context) {
             context.beginPath();
             context.moveTo(centerX, centerY);
             context.arc(centerX, centerY, radius, angle, endAngle);
             context.closePath();
-            context.fillStyle = colors[index];
+            context.fillStyle = option.color;
             context.fill();
 
             context.beginPath();
@@ -44,14 +52,14 @@ export const drawCircle = (element: HTMLElement): void => {
               centerY + radius * Math.sin(endAngle),
             );
             context.strokeStyle = "black";
-            context.lineWidth = 2;
+            context.lineWidth = 1;
             context.stroke();
           }
 
           angle = endAngle;
         });
       };
-      draw(0);
+      draw(startAngle);
 
       const quad = (timeFraction: number): number => {
         return Math.pow(timeFraction, 2);
@@ -63,7 +71,7 @@ export const drawCircle = (element: HTMLElement): void => {
           animate({
             timing: quad,
             draw,
-            duration: 7000,
+            duration: appState.animation.duration,
             ctx: context,
             width: widthElement,
             height: heightElement,
@@ -94,11 +102,17 @@ function animate({
   const extraAngle = Math.random() * Math.PI * 2;
   const finalAngle = Math.PI * 2 * fullRotations + extraAngle;
 
+  const storageAngle = localStorage.getItem("angle");
+  let startAngle = 0;
+  if (storageAngle) {
+    startAngle = Number.parseFloat(storageAngle);
+  }
+
   function render(time: number): void {
     const timeFraction = Math.min((time - start) / duration, 1);
     const progress = timing(timeFraction);
 
-    const rotationAngle = finalAngle * progress;
+    const rotationAngle = finalAngle * progress + startAngle;
     if (ctx) {
       ctx.clearRect(0, 0, width, height);
     }
@@ -106,6 +120,8 @@ function animate({
 
     if (timeFraction < 1) {
       requestAnimationFrame(render);
+    } else {
+      localStorage.setItem("angle", rotationAngle.toString());
     }
   }
 

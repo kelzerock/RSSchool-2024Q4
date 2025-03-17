@@ -10,6 +10,7 @@ type ApplicationState = {
   options: optionType[];
   elements: elements;
   lastIndex: number;
+  animation: { duration: number };
 };
 
 export { ApplicationState, optionType };
