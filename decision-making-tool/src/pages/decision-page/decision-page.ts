@@ -6,7 +6,7 @@ import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
 import { drawCircle } from "./draw-circle";
 import { handleInput } from "./handle-input";
-import { handleClickSoundButton } from "./sound-button";
+import { handleClickSoundButton, playingWinSound } from "./sound-button";
 
 export const createDecisionPage = (): void => {
   removeAllChildren(document.body);
@@ -111,6 +111,7 @@ export const createDecisionPage = (): void => {
     });
     informationDisplay.classList.add("bg-lime-500");
     informationDisplay.classList.remove("bg-teal-600");
+    playingWinSound(buttonSound);
   };
 
   drawCircle(canvasBlock, activateButtons, informationDisplay);

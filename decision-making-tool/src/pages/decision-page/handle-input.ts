@@ -7,6 +7,7 @@ export const handleInput = (
 ): void => {
   const value = input.value;
   if (value) {
+    if (Number.parseFloat(value) < 0.1) input.value = "1";
     state.animation.duration = Number.parseFloat(value) * 1000;
     saveToLocalStorage();
   }
