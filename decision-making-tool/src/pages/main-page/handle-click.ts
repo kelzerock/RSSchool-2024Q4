@@ -1,4 +1,4 @@
-import { handleLocation, handlePath } from "../../router/router";
+import { handleLocation } from "../../router/router";
 import type { ApplicationState } from "../../state/types";
 import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
@@ -121,7 +121,7 @@ const isAppStateDataCorrect = (
 
 export const handleStart = (state: ApplicationState): void => {
   if (isReadyToMakeDecision(state)) {
-    globalThis.history.pushState({}, "", handlePath("/decision"));
+    globalThis.history.pushState({}, "", "/decision");
     handleLocation();
   } else {
     const message = `Please add at least 2 valid options.

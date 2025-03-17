@@ -17,8 +17,10 @@
       "npm run lint:fix",
       "prettier --write"
     ],
-    "!(*.{js,ts})": "prettier --write",
-    "*.{css, scss}": "npm run stylelint"
+    "*.{css,scss}": [
+      "prettier --write",
+      "npm run stylelint"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -31,6 +33,7 @@
     "@types/node": "^22.13.10",
     "@types/webpack": "^5.28.5",
     "@types/webpack-dev-server": "^4.7.1",
+    "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
     "eslint": "^9.22.0",
     "eslint-plugin-unicorn": "^57.0.0",

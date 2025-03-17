@@ -1,4 +1,3 @@
-import { GITHUB_LINK } from "../constants/constants";
 import { create404page } from "../pages/404-page/404-page";
 import { createDecisionPage } from "../pages/decision-page/decision-page";
 import { createMainPage } from "../pages/main-page/main-page";
@@ -23,23 +22,17 @@ const routes: Map = {
 };
 
 const handleLocation = (): void => {
-  let path = globalThis.location.pathname;
-
-  console.log(path);
-  if (path.startsWith(GITHUB_LINK)) {
-    path = path.slice(GITHUB_LINK.length) || "/";
-    console.log(path);
-  }
+  const path = globalThis.location.pathname;
   const route = routes[path] || routes[404];
   route();
 };
 
-const handlePath = (newPath: string): string => {
-  const path = globalThis.location.pathname;
-  if (path.startsWith(GITHUB_LINK)) {
-    return GITHUB_LINK + newPath;
-  }
-  return newPath;
-};
+// const handlePath = (newPath: string): string => {
+//   const path = globalThis.location.pathname;
+//   if (path.startsWith(GITHUB_LINK)) {
+//     return GITHUB_LINK + newPath;
+//   }
+//   return newPath;
+// };
 
-export { route, handleLocation, handlePath };
+export { route, handleLocation };

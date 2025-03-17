@@ -1,4 +1,4 @@
-import { handleLocation, handlePath } from "../../router/router";
+import { handleLocation } from "../../router/router";
 import { visuallyHidden } from "../../styles/styles";
 import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
@@ -31,14 +31,14 @@ export const create404page = (): void => {
   });
 
   const timeoutID = setTimeout(() => {
-    globalThis.history.pushState({}, "", handlePath("/"));
+    globalThis.history.pushState({}, "", "/");
     handleLocation();
   }, 5000);
 
   link.addEventListener("click", (event) => {
     event.preventDefault();
     clearTimeout(timeoutID);
-    globalThis.history.pushState({}, "", handlePath("/"));
+    globalThis.history.pushState({}, "", "/");
     handleLocation();
   });
 };
