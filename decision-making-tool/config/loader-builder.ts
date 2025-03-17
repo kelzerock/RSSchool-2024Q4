@@ -12,7 +12,12 @@ const loaderBuilder = (): ModuleOptions["rules"] => {
     use: ["style-loader", "css-loader", "postcss-loader"],
   };
 
-  return [tsLoader, postCSS];
+  const assetsLoader = {
+    test: /\.(mp3)$/i,
+    type: "asset/resource",
+  };
+
+  return [tsLoader, postCSS, assetsLoader];
 };
 
 export default loaderBuilder;

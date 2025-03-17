@@ -6,6 +6,7 @@ import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
 import { drawCircle } from "./draw-circle";
 import { handleInput } from "./handle-input";
+import { handleClickSoundButton } from "./sound-button";
 
 export const createDecisionPage = (): void => {
   removeAllChildren(document.body);
@@ -43,6 +44,9 @@ export const createDecisionPage = (): void => {
     className: simpleButton,
     parent: buttonsBlock,
     text: "sound: off",
+  });
+  buttonSound.addEventListener("click", () => {
+    handleClickSoundButton(buttonSound);
   });
   createNode({
     tag: "label",
