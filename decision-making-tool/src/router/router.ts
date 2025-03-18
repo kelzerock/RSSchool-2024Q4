@@ -1,3 +1,4 @@
+import type { PathRoute } from "../enums/path";
 import { create404page } from "../pages/404-page/404-page";
 import { createDecisionPage } from "../pages/decision-page/decision-page";
 import { createMainPage } from "../pages/main-page/main-page";
@@ -5,7 +6,7 @@ import { createMainPage } from "../pages/main-page/main-page";
 export type RouteFunction = (event: Event) => void;
 type Map = Record<string, () => void>;
 
-const route = (event: Event): void => {
+export const route = (event: Event): void => {
   event = event || window.event;
   event.preventDefault();
   const { target } = event;
@@ -21,11 +22,14 @@ const routes: Map = {
   "/decision": createDecisionPage,
 };
 
-const handleLocation = (): void => {
+export const handleLocation = (): void => {
   const path = globalThis.location.pathname;
   const route = routes[path] || routes[404];
 
   route();
 };
 
-export { route, handleLocation };
+export const routeTo = (path: PathRoute): void => {
+  globalThis.history.pushState({}, "", path);
+  handleLocation();
+};

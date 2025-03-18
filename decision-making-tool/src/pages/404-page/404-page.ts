@@ -1,4 +1,5 @@
-import { handleLocation } from "../../router/router";
+import { PathRoute } from "../../enums/path";
+import { routeTo } from "../../router/router";
 import { visuallyHidden } from "../../styles/styles";
 import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
@@ -27,18 +28,14 @@ export const create404page = (): void => {
     parent: template,
     text: "main page",
     className: "font-bold mt-4  text-xl underline uppercase text-emerald-900",
-    attributes: [{ name: "href", value: "/" }],
+    attributes: [{ name: "href", value: PathRoute.home }],
   });
 
-  const timeoutID = setTimeout(() => {
-    globalThis.history.pushState({}, "", "/");
-    handleLocation();
-  }, 5000);
+  const timeoutID = setTimeout(() => routeTo(PathRoute.home), 5000);
 
   link.addEventListener("click", (event) => {
     event.preventDefault();
     clearTimeout(timeoutID);
-    globalThis.history.pushState({}, "", "/");
-    handleLocation();
+    routeTo(PathRoute.home);
   });
 };
