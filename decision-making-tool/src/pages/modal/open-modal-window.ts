@@ -28,6 +28,7 @@ export const openModalWindow = ({
   });
   form.setAttribute("method", "dialog");
   form.append(template);
+  document.body.classList.add("overflow-hidden");
 
   [dialog, ...closeElements].forEach((element) => {
     element.addEventListener("click", function addListener(event): void {

@@ -7,6 +7,7 @@ export const handleCloseModal = (
 ): void => {
   const { target } = event;
   if (target === element) {
+    document.body.classList.remove("overflow-hidden");
     removeElementWithChildren(modalWindow);
   }
 };
