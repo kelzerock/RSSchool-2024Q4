@@ -18,18 +18,19 @@ export const getInfoOfOptionsWithProportion = (
         color: getRandomColor(),
       };
     })
-    .filter((option) => {
-      if (!Number.isNaN(option.proportion) && option.description.length > 0) {
-        return true;
-      }
-      return false;
-    });
+    .filter(
+      (option) =>
+        !Number.isNaN(option.proportion) && option.description.length > 0,
+    );
+
   const sum = correctState.reduce(
     (acc, option) => (acc += option.proportion),
     0,
   );
 
-  return correctState.map((option) => {
-    return { ...option, proportion: option.proportion / sum };
-  });
+  return correctState
+    .map((option) => {
+      return { ...option, proportion: option.proportion / sum };
+    })
+    .sort(() => Math.random() - 0.5);
 };
