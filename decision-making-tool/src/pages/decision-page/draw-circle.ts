@@ -1,8 +1,10 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { drawInformationTitle } from "./draw/draw-information-title";
 import { drawInnerCircle } from "./draw/draw-inner-circle";
 import { drawSector } from "./draw/draw-sector";
 import { drawTriangle } from "./draw/draw-triangle";
+import { inOutQuad } from "./draw/timing-functions";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
 
 const transformed = (array: number[]): number[] => {
@@ -80,36 +82,16 @@ export const drawCircle = (
               option.color,
             );
 
-            const text =
-              option.proportion < 0.03
-                ? ""
-                : option.description.length > 7
-                  ? option.description.slice(0, 7) + "..."
-                  : option.description;
-
-            const textAngle = angle + (endAngle - angle) / 2;
-            const textX =
-              centerX +
-              (radius / 1.5) * Math.cos(angle + (endAngle - angle) / 2);
-            const textY =
-              centerY +
-              (radius / 1.5) * Math.sin(angle + (endAngle - angle) / 2);
-
-            context.save();
-            context.translate(textX, textY);
-            context.rotate(textAngle);
-
-            context.font = "bold 16px sans-serif";
-            context.textAlign = "center";
-            context.textBaseline = "middle";
-
-            context.fillStyle = "#ffffff";
-            context.fillText(text, 0, 0);
-
-            context.strokeStyle = "#0000000";
-            context.lineWidth = 1;
-            context.strokeText(text, 0, 0);
-            context.restore();
+            drawInformationTitle(
+              context,
+              option.proportion,
+              option.description,
+              angle,
+              endAngle,
+              centerX,
+              centerY,
+              radius,
+            );
           }
 
           drawTriangle(context, widthElement, centerX, centerY, radius);
@@ -118,12 +100,6 @@ export const drawCircle = (
         });
       };
       draw(startAngle);
-
-      const inOutQuad = (n: number): number => {
-        n *= 2;
-        if (n < 1) return 0.5 * n * n;
-        return -0.5 * (--n * (n - 2) - 1);
-      };
 
       appState.elements[DOMElements.buttonPlay].addEventListener(
         "click",

@@ -2,9 +2,9 @@ import { isAppStateDataCorrect } from "../pages/main-page/handle-click";
 import type { ApplicationState } from "./types";
 
 const appState: ApplicationState = {
-  options: [],
+  options: [{ index: 1, description: "", weight: "" }],
   elements: {},
-  lastIndex: 0,
+  lastIndex: 1,
   animation: { duration: 10000 },
 };
 
