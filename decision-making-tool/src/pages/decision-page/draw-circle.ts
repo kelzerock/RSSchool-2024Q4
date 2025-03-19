@@ -108,7 +108,7 @@ export const drawCircle = (
         () => {
           if (
             input instanceof HTMLInputElement &&
-            (Number.parseFloat(input.value) < 6 ||
+            (Number.parseFloat(input.value) < 5 ||
               Number.parseFloat(input.value) > 30)
           ) {
             return modalWithMessage(

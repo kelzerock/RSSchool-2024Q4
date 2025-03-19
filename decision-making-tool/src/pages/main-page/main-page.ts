@@ -54,7 +54,7 @@ export const createMainPage = (): void => {
     tag: "button",
     className: buttonStyle,
     parent: wrapper,
-    text: "past list",
+    text: "paste list",
   });
   buttonPastList.addEventListener("click", () => {
     openModalWindow(templateForModal());
@@ -72,7 +72,7 @@ export const createMainPage = (): void => {
     tag: "button",
     className: buttonStyle,
     parent: wrapper,
-    text: "safe list to file",
+    text: "save list to file",
   });
 
   buttonSafeListToFile.addEventListener("click", () => {
