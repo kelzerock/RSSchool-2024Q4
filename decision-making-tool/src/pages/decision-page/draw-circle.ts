@@ -1,5 +1,6 @@
 import { DOMElements } from "../../enums/dom-elements";
 import { appState } from "../../state/application-state";
+import { modalWithMessage } from "../main-page/modal-with-message/modal-with.message";
 import { drawInformationTitle } from "./draw/draw-information-title";
 import { drawInnerCircle } from "./draw/draw-inner-circle";
 import { drawSector } from "./draw/draw-sector";
@@ -30,6 +31,7 @@ export const drawCircle = (
   element: HTMLElement,
   callback: () => void,
   display: HTMLElement,
+  input: HTMLElement,
 ): void => {
   if (element instanceof HTMLCanvasElement) {
     const widthElement = 500;
@@ -104,6 +106,16 @@ export const drawCircle = (
       appState.elements[DOMElements.buttonPlay].addEventListener(
         "click",
         () => {
+          if (
+            input instanceof HTMLInputElement &&
+            (Number.parseFloat(input.value) < 6 ||
+              Number.parseFloat(input.value) > 30)
+          ) {
+            return modalWithMessage(
+              `Duration must me over than 5 seconds and less than 30 seconds. Your value is ${input.value}!`,
+            );
+          }
+
           isAnimationStart = true;
           animate({
             timing: inOutQuad,

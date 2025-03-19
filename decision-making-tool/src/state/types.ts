@@ -11,6 +11,7 @@ type ApplicationState = {
   elements: elements;
   lastIndex: number;
   animation: { duration: number };
+  sound: boolean;
 };
 
 export { ApplicationState, optionType };

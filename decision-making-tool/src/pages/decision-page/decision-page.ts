@@ -1,14 +1,22 @@
 import { DOMElements } from "../../enums/dom-elements";
-import { handleLocation } from "../../router/router";
+import { PathRoute } from "../../enums/path";
+import { handleLocation, routeTo } from "../../router/router";
 import { appState } from "../../state/application-state";
 import { simpleButton, wrapperStyles } from "../../styles/styles";
+import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
 import { removeAllChildren } from "../../utils/remove-all-children";
+import { createMainPage } from "../main-page/main-page";
 import { drawCircle } from "./draw-circle";
 import { handleInput } from "./handle-input";
 import { handleClickSoundButton, playingWinSound } from "./sound-button";
 
 export const createDecisionPage = (): void => {
+  if (!isReadyToMakeDecision(appState)) {
+    routeTo(PathRoute.home);
+    return createMainPage();
+  }
+
   removeAllChildren(document.body);
   const wrapper = createNode({
     tag: "div",
@@ -43,7 +51,8 @@ export const createDecisionPage = (): void => {
     tag: "button",
     className: simpleButton,
     parent: buttonsBlock,
-    text: "sound: off",
+    text: appState.sound ? "sound: on" : "sound: off",
+    attributes: [{ name: "data-sound", value: `${appState.sound}` }],
   });
   buttonSound.addEventListener("click", () => {
     handleClickSoundButton(buttonSound);
@@ -81,6 +90,12 @@ export const createDecisionPage = (): void => {
   });
 
   buttonPlay.addEventListener("click", () => {
+    if (
+      inputTimer instanceof HTMLInputElement &&
+      (Number.parseFloat(inputTimer.value) < 6 ||
+        Number.parseFloat(inputTimer.value) > 30)
+    )
+      return;
     [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {
       element.setAttribute("disabled", "true");
     });
@@ -114,5 +129,5 @@ export const createDecisionPage = (): void => {
     playingWinSound(buttonSound);
   };
 
-  drawCircle(canvasBlock, activateButtons, informationDisplay);
+  drawCircle(canvasBlock, activateButtons, informationDisplay, inputTimer);
 };

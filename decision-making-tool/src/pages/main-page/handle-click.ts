@@ -44,10 +44,18 @@ export const handleClearList = (
   }
 };
 
+const createCopyForSafePartOfState = (
+  state: ApplicationState,
+): Pick<ApplicationState, "options" | "lastIndex"> => {
+  return { options: [...state.options], lastIndex: state.lastIndex };
+};
+
 export const handleSafeOption = (state: ApplicationState): void => {
   const link = document.createElement("a");
   link.download = "state.json";
-  const blob = new Blob([JSON.stringify(state)], { type: "application/json" });
+  const blob = new Blob([JSON.stringify(createCopyForSafePartOfState(state))], {
+    type: "application/json",
+  });
   link.href = URL.createObjectURL(blob);
   link.click();
   URL.revokeObjectURL(link.href);
@@ -81,7 +89,7 @@ export const handleLoadFileWithOptions = async (
             return;
           }
 
-          if (isAppStateDataCorrect(parsedData)) {
+          if (isLoadDataCorrect(parsedData)) {
             state.lastIndex = parsedData.lastIndex;
             state.options = parsedData.options;
             saveToLocalStorage();
@@ -99,6 +107,29 @@ export const handleLoadFileWithOptions = async (
   });
 };
 
+export const isLoadDataCorrect = (
+  data: unknown,
+): data is Pick<ApplicationState, "options" | "lastIndex"> => {
+  if (
+    typeof data === "object" &&
+    data !== null &&
+    "lastIndex" in data &&
+    typeof data.lastIndex === "number" &&
+    "options" in data &&
+    Array.isArray(data.options) &&
+    data.options.every(
+      (option) =>
+        option &&
+        typeof option.index === "number" &&
+        typeof option.description === "string" &&
+        typeof option.weight === "string",
+    )
+  ) {
+    return true;
+  }
+  return false;
+};
+
 export const isAppStateDataCorrect = (
   data: unknown,
 ): data is Omit<ApplicationState, "elements"> => {
@@ -111,6 +142,8 @@ export const isAppStateDataCorrect = (
     "animation" in data &&
     typeof data.animation === "object" &&
     data.animation &&
+    "sound" in data &&
+    typeof data.sound === "boolean" &&
     "duration" in data.animation &&
     typeof data.animation.duration === "number" &&
     Array.isArray(data.options) &&

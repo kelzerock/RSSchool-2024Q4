@@ -6,6 +6,7 @@ const appState: ApplicationState = {
   elements: {},
   lastIndex: 1,
   animation: { duration: 10000 },
+  sound: true,
 };
 
 const oldState = localStorage.getItem("appState");
@@ -15,6 +16,7 @@ if (oldState) {
     appState.lastIndex = parseState.lastIndex;
     appState.options = [...parseState.options];
     appState.animation.duration = parseState.animation.duration;
+    appState.sound = parseState.sound;
   }
 }
 
