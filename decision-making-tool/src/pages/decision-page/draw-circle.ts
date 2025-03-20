@@ -108,11 +108,10 @@ export const drawCircle = (
         () => {
           if (
             input instanceof HTMLInputElement &&
-            (Number.parseFloat(input.value) < 5 ||
-              Number.parseFloat(input.value) > 30)
+            Number.parseFloat(input.value) < 5
           ) {
             return modalWithMessage(
-              `Duration must me over than 5 seconds and less than 30 seconds. Your value is ${input.value}!`,
+              `Duration must me over than 5 seconds (inclusive). Your value is ${input.value}!`,
             );
           }
 

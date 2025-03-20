@@ -92,8 +92,7 @@ export const createDecisionPage = (): void => {
   buttonPlay.addEventListener("click", () => {
     if (
       inputTimer instanceof HTMLInputElement &&
-      (Number.parseFloat(inputTimer.value) < 5 ||
-        Number.parseFloat(inputTimer.value) > 30)
+      Number.parseFloat(inputTimer.value) < 5
     )
       return;
     [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {

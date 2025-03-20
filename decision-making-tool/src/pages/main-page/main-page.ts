@@ -30,15 +30,6 @@ export const createMainPage = (): void => {
     parent: wrapper,
     text: "Decision making tool",
   });
-  const listOfOption = createNode({
-    tag: "ul",
-    className: "flex flex-col gap-y-2 py-1 px-3",
-    parent: wrapper,
-  });
-
-  appState.options.forEach((option) => {
-    addOption(option, listOfOption);
-  });
 
   const buttonAddOption = createNode({
     tag: "button",
@@ -95,6 +86,18 @@ export const createMainPage = (): void => {
     parent: wrapper,
     text: "start",
   });
+
+  const listOfOption = createNode({
+    tag: "ul",
+    className:
+      "flex flex-col gap-y-2 py-1 px-3 max-h-60 overflow-y-auto scrollbar",
+    parent: wrapper,
+  });
+
+  appState.options.forEach((option) => {
+    addOption(option, listOfOption);
+  });
+
   buttonStart.addEventListener("click", () => handleStart(appState));
 
   appState.elements[DOMElements.listOfOption] = listOfOption;
