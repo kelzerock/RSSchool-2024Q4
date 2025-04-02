@@ -1,2 +1,2 @@
 const sum = (a: number, b: number): number => a + b;
-sum(5, 3);
+console.log(sum(5, 3));

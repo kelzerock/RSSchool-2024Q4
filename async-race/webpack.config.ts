@@ -1,39 +1,21 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack"
+import { bundleConfig } from "./webpack-config/bundle-config";
+import { mode, optionsWebpack } from "./webpack-config/types/types";
 
+type env = { mode: mode }
 
-module.exports = (env) => {
-  const config: webpack.Configuration = {
-    mode: "development",
-    devtool: "inline-source-map",
-    entry: "./src/index.ts",
-    output: {
-      filename: "main-[contenthash].js",
-      path: path.resolve(__dirname, "dist"),
-      clean: true,
+module.exports = (env: env) => {
+  const options: optionsWebpack = {
+    path: {
+      entry: path.resolve(__dirname, "src"),
+      build: path.resolve(__dirname, "build"),
+      template: path.resolve(__dirname, "template"),
     },
-    devServer: {
-      static: "./dist",
-    },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "template", "index.html"),
-      }),
-    ],
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          use: "ts-loader",
-          exclude: /node_modules/,
-        },
-      ],
-    },
-    resolve: {
-      extensions: [".tsx", ".ts", ".js"],
-    },
-  };
+    mode: env.mode,
+    port: 3000
+  }
 
-  return config;
+  return bundleConfig(options);
 };
