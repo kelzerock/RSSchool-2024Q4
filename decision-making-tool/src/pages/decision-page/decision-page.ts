@@ -92,9 +92,12 @@ export const createDecisionPage = (): void => {
   buttonPlay.addEventListener("click", () => {
     if (
       inputTimer instanceof HTMLInputElement &&
-      Number.parseFloat(inputTimer.value) < 5
+      (Number.parseFloat(inputTimer.value) < 5 || !inputTimer.value)
     )
       return;
+    if (inputTimer instanceof HTMLInputElement) {
+      console.log("tt:", `"${inputTimer.value}"`);
+    }
     [buttonBack, buttonSound, inputTimer, buttonPlay].forEach((element) => {
       element.setAttribute("disabled", "true");
     });

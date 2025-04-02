@@ -39,6 +39,7 @@ export const handleClearList = (
 ): void => {
   state.options = [];
   state.lastIndex = 0;
+  saveToLocalStorage();
   while (parent.lastChild) {
     parent.lastChild.remove();
   }
