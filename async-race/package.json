@@ -5,7 +5,9 @@
   "scripts": {
     "start": "webpack serve --open --env mode=dev",
     "build:dev": "webpack --env mode=dev",
-    "build:prod": "webpack --env mode=prod"
+    "build:prod": "webpack --env mode=prod",
+    "prepare": "git config core.hooksPath async-race/.git-hooks || echo 'Not in a git repo'",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "Aleaksei Zhuchkov",

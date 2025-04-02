@@ -1,0 +1,10 @@
+#!/bin/sh
+cd async-race
+npm run lint
+
+if [ $? -ne 0 ]; then
+  echo "Lint failed, aborting commit."
+  exit 1
+fi
+
+touch PreCommitHookRan
