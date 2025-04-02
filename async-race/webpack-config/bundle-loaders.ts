@@ -1,7 +1,6 @@
 import { Configuration } from "webpack";
-import { optionsWebpack } from "./types/types";
 
-export const bundleLoaders = (option: optionsWebpack): Configuration["module"] => {
+export const bundleLoaders = (): Configuration["module"] => {
 
   const tsLoader = {
     test: /\.tsx?$/,

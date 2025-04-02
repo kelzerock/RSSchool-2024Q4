@@ -1,21 +1,22 @@
-import path from "path";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import webpack from "webpack"
+import path from "node:path";
 import { bundleConfig } from "./webpack-config/bundle-config";
 import { mode, optionsWebpack } from "./webpack-config/types/types";
 
-type env = { mode: mode }
+interface Environment { mode: mode }
 
-module.exports = (env: env) => {
+const webpackConfig = (environment: Environment) => {
   const options: optionsWebpack = {
     path: {
       entry: path.resolve(__dirname, "src"),
       build: path.resolve(__dirname, "build"),
       template: path.resolve(__dirname, "template"),
     },
-    mode: env.mode,
+    mode: environment.mode,
     port: 3000
   }
 
   return bundleConfig(options);
 };
+
+
+export default webpackConfig;

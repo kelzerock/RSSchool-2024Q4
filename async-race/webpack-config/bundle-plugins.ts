@@ -1,5 +1,5 @@
 import { optionsWebpack } from "./types/types";
-import path from "path";
+import path from "node:path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack"
 

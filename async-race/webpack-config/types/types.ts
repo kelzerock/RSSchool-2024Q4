@@ -1,6 +1,6 @@
 export type mode = "prod" | "dev"
 
-export type optionsWebpack = {
+export interface optionsWebpack {
   path: {
     entry: string,
     build: string,

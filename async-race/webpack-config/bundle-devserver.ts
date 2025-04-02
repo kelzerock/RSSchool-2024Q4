@@ -1,13 +1,13 @@
 import { optionsWebpack } from "./types/types";
-import { Configuration, Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+import { Configuration } from "webpack-dev-server";
 
-export const bundleDevServer = (option: optionsWebpack): Configuration => {
-  const devServer: Configuration = {
+export const bundleDevelopmentServer = (option: optionsWebpack): Configuration => {
+  const developmentServer: Configuration = {
     historyApiFallback: true,
     hot: true,
     port: option.port,
     static: option.path.build,
   }
 
-  return devServer;
+  return developmentServer;
 }
