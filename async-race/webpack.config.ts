@@ -13,6 +13,7 @@ const webpackConfig = (environment: Environment): Configuration => {
       entry: path.resolve(__dirname, 'src'),
       build: path.resolve(__dirname, 'build'),
       template: path.resolve(__dirname, 'template'),
+      favicon: path.resolve(__dirname, 'src', 'assets', 'favicon'),
     },
     mode: environment.mode,
     port: 3000,

@@ -5,6 +5,7 @@ export type optionsWebpack = {
     entry: string;
     build: string;
     template: string;
+    favicon: string;
   };
   mode: mode;
   port: number;

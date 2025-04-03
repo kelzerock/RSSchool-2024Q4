@@ -2,6 +2,7 @@ import { type optionsWebpack } from './types/types';
 import path from 'node:path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { type Configuration } from 'webpack';
+import CopyPlugin from 'copy-webpack-plugin';
 
 export const bundlePlugins = (
   option: optionsWebpack
@@ -9,6 +10,9 @@ export const bundlePlugins = (
   const plugins = [
     new HtmlWebpackPlugin({
       template: path.resolve(option.path.template, 'index.html'),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: option.path.favicon, to: option.path.build }],
     }),
   ];
 
