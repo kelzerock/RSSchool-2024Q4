@@ -8,7 +8,8 @@
     "build:prod": "webpack --env mode=prod",
     "prepare": "git config core.hooksPath async-race/.git-hooks || echo 'Not in a git repo'",
     "lint": "eslint .",
-    "prettier": "npx prettier . --write"
+    "prettier": "prettier . --write",
+    "check": "eslint . && prettier . --check"
   },
   "keywords": [],
   "author": "Aleaksei Zhuchkov",
