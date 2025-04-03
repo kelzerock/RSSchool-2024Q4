@@ -15,7 +15,7 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true,
+    "useUnknownInCatchVariables": true
   },
   "ts-node": {
     "compilerOptions": {

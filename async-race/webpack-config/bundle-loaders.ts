@@ -1,18 +1,15 @@
-import { Configuration } from "webpack";
+import { type Configuration } from 'webpack';
 
-export const bundleLoaders = (): Configuration["module"] => {
-
+export const bundleLoaders = (): Configuration['module'] => {
   const tsLoader = {
     test: /\.tsx?$/,
-    use: "ts-loader",
+    use: 'ts-loader',
     exclude: /node_modules/,
-  }
+  };
 
-  const module: Configuration["module"] = {
-    rules: [
-      tsLoader,
-    ],
-  }
+  const module: Configuration['module'] = {
+    rules: [tsLoader],
+  };
 
   return module;
-}
+};

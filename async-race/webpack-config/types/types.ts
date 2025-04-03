@@ -1,11 +1,11 @@
-export type mode = "prod" | "dev"
+export type mode = 'prod' | 'dev';
 
-export interface optionsWebpack {
+export type optionsWebpack = {
   path: {
-    entry: string,
-    build: string,
-    template: string,
-  },
-  mode: mode,
-  port: number
-}
+    entry: string;
+    build: string;
+    template: string;
+  };
+  mode: mode;
+  port: number;
+};

@@ -1,9 +1,9 @@
-import { Configuration } from "webpack"
+import { type Configuration } from 'webpack';
 
-export const bundleResolves = (): Configuration["resolve"] => {
-  const resolve: Configuration["resolve"] = {
-    extensions: [".tsx", ".ts", ".js"],
-  }
+export const bundleResolves = (): Configuration['resolve'] => {
+  const resolve: Configuration['resolve'] = {
+    extensions: ['.tsx', '.ts', '.js'],
+  };
 
   return resolve;
-}
+};

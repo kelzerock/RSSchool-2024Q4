@@ -1,0 +1,10 @@
+{
+  "*.{md, json}": "npm run prettier",
+  "*.{ts, mts}": [
+    "npm run lint",
+    "npm run prettier"
+  ],
+  "*.{css, scss}": [
+    "npm run prettier"
+  ]
+}

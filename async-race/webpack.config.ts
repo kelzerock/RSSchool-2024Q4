@@ -1,22 +1,24 @@
-import path from "node:path";
-import { bundleConfig } from "./webpack-config/bundle-config";
-import { mode, optionsWebpack } from "./webpack-config/types/types";
+import path from 'node:path';
+import { type Configuration } from 'webpack';
+import { bundleConfig } from './webpack-config/bundle-config';
+import { type mode, type optionsWebpack } from './webpack-config/types/types';
 
-interface Environment { mode: mode }
+type Environment = {
+  mode: mode;
+};
 
-const webpackConfig = (environment: Environment) => {
+const webpackConfig = (environment: Environment): Configuration => {
   const options: optionsWebpack = {
     path: {
-      entry: path.resolve(__dirname, "src"),
-      build: path.resolve(__dirname, "build"),
-      template: path.resolve(__dirname, "template"),
+      entry: path.resolve(__dirname, 'src'),
+      build: path.resolve(__dirname, 'build'),
+      template: path.resolve(__dirname, 'template'),
     },
     mode: environment.mode,
-    port: 3000
-  }
+    port: 3000,
+  };
 
   return bundleConfig(options);
 };
-
 
 export default webpackConfig;

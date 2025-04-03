@@ -1,10 +1,8 @@
 #!/bin/sh
 cd async-race
-npm run lint
+npx lint-staged
 
 if [ $? -ne 0 ]; then
   echo "Lint failed, aborting commit."
   exit 1
 fi
-
-touch PreCommitHookRan

@@ -7,7 +7,8 @@
     "build:dev": "webpack --env mode=dev",
     "build:prod": "webpack --env mode=prod",
     "prepare": "git config core.hooksPath async-race/.git-hooks || echo 'Not in a git repo'",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier": "npx prettier . --write"
   },
   "keywords": [],
   "author": "Aleaksei Zhuchkov",
@@ -22,6 +23,8 @@
     "eslint-plugin-unicorn": "^58.0.0",
     "html-webpack-plugin": "^5.6.3",
     "jiti": "^2.4.2",
+    "lint-staged": "^15.5.0",
+    "prettier": "3.5.3",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
