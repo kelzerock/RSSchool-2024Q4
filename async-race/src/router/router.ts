@@ -1,3 +1,7 @@
+import { mainPage } from '../pages/main/main-page';
+import { page404 } from '../pages/page404/page404';
+import { winnersPage } from '../pages/winners/winners-page';
+
 // export type RouteFunction = (event: Event) => void;
 export enum PathRoute {
   home = '/',
@@ -16,9 +20,9 @@ export const route = (event: Event): void => {
 };
 
 const routes: Map = {
-  404: create404page,
-  '/': createMainPage,
-  '/winners': createWinnerPage,
+  404: page404,
+  '/': mainPage,
+  '/winners': winnersPage,
 };
 
 export const handleLocation = (): void => {
@@ -32,17 +36,3 @@ export const routeTo = (path: PathRoute): void => {
   globalThis.history.pushState({}, '', path);
   handleLocation();
 };
-
-function create404page(): void {
-  document.body.innerHTML = '<h1>404 page</h1>';
-}
-
-function createMainPage(): void {
-  console.log('main page');
-  document.body.innerHTML = '<h1>Main page</h1>';
-}
-
-function createWinnerPage(): void {
-  console.log('winners page');
-  document.body.innerHTML = '<h1>Winners page</h1>';
-}
