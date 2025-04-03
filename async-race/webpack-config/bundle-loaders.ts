@@ -7,8 +7,24 @@ export const bundleLoaders = (): Configuration['module'] => {
     exclude: /node_modules/,
   };
 
+  const postCssLoader = {
+    test: /\.css$/i,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            plugins: [['@tailwindcss/postcss']],
+          },
+        },
+      },
+    ],
+  };
+
   const module: Configuration['module'] = {
-    rules: [tsLoader],
+    rules: [tsLoader, postCssLoader],
   };
 
   return module;
