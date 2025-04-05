@@ -1,7 +1,14 @@
 import { handleLocation, route } from './router/router';
+import { stateRace } from './state/state';
 import './styles.css';
 
-globalThis.addEventListener('popstate', handleLocation);
-globalThis.route = route;
+const startApp = async (): Promise<void> => {
+  await stateRace.getCars();
+  globalThis.addEventListener('popstate', handleLocation);
+  globalThis.route = route;
 
-handleLocation();
+  handleLocation();
+  console.log(stateRace.state);
+};
+
+startApp();

@@ -2,6 +2,7 @@ import { mainElement } from '../../components/main-elements/main-elements';
 import { stateRace } from '../../state/state';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
+import { raceArea } from './components/race-area';
 
 const styles = {
   title: 'text-2xl',
@@ -32,4 +33,5 @@ export const mainPage = (): void => {
     await stateRace.getCars();
     console.log(stateRace.state.garage);
   });
+  raceArea(mainElement);
 };

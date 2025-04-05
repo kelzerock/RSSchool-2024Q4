@@ -1,6 +1,6 @@
 const URL_API = 'http://127.0.0.1:3000';
 
-type Car = {
+export type Car = {
   name: string;
   color: string;
   id: number;
