@@ -1,16 +1,14 @@
+import { type PathRoute } from '../enums/path-routes';
 import { mainPage } from '../pages/main/main-page';
 import { page404 } from '../pages/page404/page404';
 import { winnersPage } from '../pages/winners/winners-page';
 
 // export type RouteFunction = (event: Event) => void;
-export enum PathRoute {
-  home = '/',
-  winners = '/winners',
-}
 type Map = Record<string, () => void>;
 
 export const route = (event: Event): void => {
-  event = event || window.event;
+  event = event || globalThis.event;
+  console.log({ event });
   event.preventDefault();
   const { target } = event;
   if (target instanceof HTMLAnchorElement) {

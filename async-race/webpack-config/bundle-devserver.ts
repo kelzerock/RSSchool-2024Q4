@@ -8,7 +8,6 @@ export const bundleDevelopmentServer = (
     historyApiFallback: true,
     hot: true,
     port: option.port,
-    static: option.path.build,
   };
 
   return developmentServer;
