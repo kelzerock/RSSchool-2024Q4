@@ -3,9 +3,9 @@ import { createNavigationMenu } from '../navigation-menu/navigation-menu';
 const styles = {
   mainWrapper:
     'flex flex-col max-w-600 bg-teal-900 mx-auto my-0 px-5 py-8 h-full',
-  headerElement: 'px-5 py-3',
-  mainElement: 'grow px-5 py-8',
-  footerElement: 'px-5 py-8',
+  headerElement: 'px-5 py-2',
+  mainElement: 'grow px-5 py-2',
+  footerElement: 'px-5 py-2',
   headerTitle: 'text-4xl text-center font-bold uppercase text-emerald-500 my-1',
 };
 

@@ -16,7 +16,7 @@ const webpackConfig = (environment: Environment): Configuration => {
       favicon: path.resolve(__dirname, 'src', 'assets', 'favicon'),
     },
     mode: environment.mode,
-    port: 3000,
+    port: 5000,
   };
 
   return bundleConfig(options);

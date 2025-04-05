@@ -7,8 +7,6 @@ import { winnersPage } from '../pages/winners/winners-page';
 type Map = Record<string, () => void>;
 
 export const route = (event: Event): void => {
-  event = event || globalThis.event;
-  console.log({ event });
   event.preventDefault();
   const { target } = event;
   if (target instanceof HTMLAnchorElement) {
