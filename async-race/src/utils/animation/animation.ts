@@ -8,6 +8,7 @@ type AnimationData = {
   };
   element: HTMLElement;
   box: HTMLElement;
+  cancelFlag: { flag: boolean };
 };
 
 const endOfFraction = 1;
@@ -18,6 +19,7 @@ export const animate = ({
   durationData,
   element,
   box,
+  cancelFlag,
 }: AnimationData): void => {
   let start = performance.now();
   const offset = 3;
@@ -34,7 +36,7 @@ export const animate = ({
     if (start === null) {
       start = timestamp;
     }
-    if (aborted) {
+    if (aborted || cancelFlag.flag) {
       console.log('Анимация остановлена из-за кода 500');
       return;
     }
@@ -45,7 +47,6 @@ export const animate = ({
     }
     const progress = timing(timeFraction);
     draw(progress * width, element);
-
     if (timeFraction < endOfFraction) {
       requestAnimationFrame(step);
     }

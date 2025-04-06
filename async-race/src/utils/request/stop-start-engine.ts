@@ -10,7 +10,8 @@ const controllers: Map<number, AbortController> = new Map<
 
 export const stopStartEngine = async (
   car: Car,
-  direction: 'started' | 'stopped'
+  direction: 'started' | 'stopped',
+  flag?: { flag: boolean }
 ): Promise<
   { duration: number; promise: Promise<undefined | string> } | undefined
 > => {
@@ -18,7 +19,6 @@ export const stopStartEngine = async (
   if (direction === 'started') {
     const controller = new AbortController();
     controllers.set(id, controller);
-
     const response = await fetch(
       `${URL_API}/engine?id=${car.id}&status=${direction}`,
       { method: 'PATCH' }
@@ -35,15 +35,14 @@ export const stopStartEngine = async (
     const controller = controllers.get(id);
     if (controller) {
       controller.abort();
-
       const response = await fetch(
         `${URL_API}/engine?id=${car.id}&status=${direction}`,
         { method: 'PATCH' }
       );
       if (response.ok) {
+        if (flag) flag.flag = true;
         return await response.json();
       }
-
       controllers.delete(id);
     }
   }

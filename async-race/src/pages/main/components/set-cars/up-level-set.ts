@@ -21,6 +21,7 @@ const createElements = (
     parent,
     attributes: [
       { attr: 'type', value: 'text' },
+      { attr: 'value', value: car.name },
       { attr: 'placeholder', value: 'name car' },
     ],
   });
@@ -45,28 +46,37 @@ const createElements = (
   return [inputText, inputColor, buttonCreateCar];
 };
 
-export const createUpLevelSetCars = (parent: HTMLElement): void => {
-  const initialData: DataCar = { name: '', color: '#ffffff' };
-  const carDataForCreate: DataCar = { ...initialData };
+const createCarStorage = 'createCarStorage';
+const saveData = (data: DataCar): void => {
+  localStorage.setItem(createCarStorage, JSON.stringify(data));
+};
 
+export const createUpLevelSetCars = (parent: HTMLElement): void => {
+  const data: string | null = localStorage.getItem(createCarStorage);
+  let initialData: DataCar = { name: '', color: '#ffffff' };
+  if (data) {
+    initialData = { ...initialData, ...JSON.parse(data) };
+  }
+  const carDataForCreate: DataCar = { ...initialData };
   const wrapper = createElement({
     tagName: 'div',
     className: styles.wrapperLevel,
     parent,
   });
-
   const [inputText, inputColor, buttonCreateCar] = createElements(
     wrapper,
     carDataForCreate
   );
 
-  inputColor.addEventListener('change', (event: Event) =>
-    handleEventUpLevel(event, carDataForCreate, inputColor)
-  );
+  inputColor.addEventListener('change', (event: Event) => {
+    handleEventUpLevel(event, carDataForCreate, inputColor);
+    saveData(carDataForCreate);
+  });
 
-  inputText.addEventListener('input', (event: Event) =>
-    handleEventUpLevel(event, carDataForCreate, inputText)
-  );
+  inputText.addEventListener('input', (event: Event) => {
+    handleEventUpLevel(event, carDataForCreate, inputText);
+    saveData(carDataForCreate);
+  });
 
   const clearInputs = (): void => {
     inputColor.value = initialData.color;

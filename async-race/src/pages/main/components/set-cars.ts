@@ -1,5 +1,6 @@
 import { type Car } from '../../../state/state';
 import { createElement } from '../../../utils/create-element';
+import { downLevelSet } from './set-cars/down-level-set';
 import { createMiddleLevelSetCars } from './set-cars/middle-level-set';
 import { createUpLevelSetCars } from './set-cars/up-level-set';
 
@@ -15,5 +16,6 @@ export const createSetCars = (parent: HTMLElement): ((car: Car) => void) => {
   });
   createUpLevelSetCars(wrapperForSetCars);
   const callback = createMiddleLevelSetCars(wrapperForSetCars);
+  downLevelSet(wrapperForSetCars);
   return callback;
 };

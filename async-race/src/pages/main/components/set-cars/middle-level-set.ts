@@ -1,5 +1,6 @@
 import { stateRace, type Car } from '../../../../state/state';
 import { createElement } from '../../../../utils/create-element';
+import { setDisabledElements } from '../../../../utils/set-disabled-elements';
 import { handleEventUpLevel } from './handle-event-up-level';
 
 const disabledStyle =
@@ -49,14 +50,6 @@ const createElements = (
   });
 
   return [inputText, inputColor, buttonUpdateCar];
-};
-
-const setDisabledElements = (array: HTMLElement[], value: boolean): void => {
-  if (value) {
-    array.forEach((item) => item.setAttribute('disabled', ``));
-  } else {
-    array.forEach((item) => item.removeAttribute('disabled'));
-  }
 };
 
 export const createMiddleLevelSetCars = (

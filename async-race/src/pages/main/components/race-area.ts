@@ -4,6 +4,10 @@ import { drawAnimate } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';
 import { createElement } from '../../../utils/create-element';
 import { stopStartEngine } from '../../../utils/request/stop-start-engine';
+import { setDisabledElements } from '../../../utils/set-disabled-elements';
+
+const disabledStyle =
+  'disabled:bg-stone-500 disabled:hover:cursor-not-allowed disabled:hover:text-stone-900 disabled:text-900';
 
 const styles = {
   raceArea:
@@ -12,7 +16,8 @@ const styles = {
   upLevelRace: 'flex gap-x-2',
   middleLevelRace: 'flex gap-x-2',
   button:
-    'flex bg-red-800 rounded-md px-2 py-1 text-xs font-bold uppercase text-red-990 hover:bg-red-900 hover:text-red-100 transition-colors duration-300 hover:cursor-pointer',
+    'flex bg-red-800 rounded-md px-2 py-1 text-xs font-bold uppercase text-red-990 hover:bg-red-900 hover:text-red-100 transition-colors duration-300 hover:cursor-pointer ' +
+    disabledStyle,
   boxForButtons: 'flex flex-row gap-x-1',
   raceBox: 'flex relative border-dashed border-b-2 w-full',
   carImg: 'absolute top-[0px] left-[0px] w-[40px] bottom-[3px]',
@@ -105,6 +110,7 @@ const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
     text: 'B',
     parent: boxForButtons,
     className: styles.button,
+    attributes: [{ attr: 'disabled', value: '' }],
   });
   const raceBox = createElement({
     tagName: 'div',
@@ -126,10 +132,13 @@ const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
 };
 
 const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
+  const abort = { flag: false };
   const [startCarEngine, stopCarEngine, raceBox, carImg] =
     createElementsForMiddleLevel(parent);
   carImg.style.background = car.color;
   startCarEngine.addEventListener('click', async () => {
+    setDisabledElements([startCarEngine], true);
+    setDisabledElements([stopCarEngine], false);
     const data = await stopStartEngine(car, 'started');
     if (data) {
       animate({
@@ -138,11 +147,14 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
         durationData: data,
         element: carImg,
         box: raceBox,
+        cancelFlag: abort,
       });
     }
   });
   stopCarEngine.addEventListener('click', async () => {
-    await stopStartEngine(car, 'stopped');
+    setDisabledElements([startCarEngine], false);
+    setDisabledElements([stopCarEngine], true);
+    await stopStartEngine(car, 'stopped', abort);
     carImg.style.left = '0px';
   });
 };
