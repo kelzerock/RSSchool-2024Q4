@@ -1,4 +1,7 @@
 import { type Car, stateRace } from '../../../state/state';
+import { animate } from '../../../utils/animation/animation';
+import { drawAnimate } from '../../../utils/animation/draw-animation';
+import { linear } from '../../../utils/animation/timing';
 import { createElement } from '../../../utils/create-element';
 import { stopStartEngine } from '../../../utils/request/stop-start-engine';
 
@@ -14,7 +17,7 @@ const styles = {
   raceBox: 'flex relative border-dashed border-b-2 w-full',
   carImg: 'absolute top-[0px] left-[0px] w-[40px] bottom-[3px]',
   finishLine:
-    'absolute w-[40px] h-full right-[0px] border-l-2 border-dotted border-white',
+    'absolute w-[46px] h-full right-[0px] border-l-2 border-dotted border-white',
 };
 
 type CarForRaceItem = {
@@ -85,7 +88,7 @@ const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
   });
 };
 
-const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
+const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
   const boxForButtons = createElement({
     tagName: 'div',
     parent,
@@ -103,12 +106,6 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     parent: boxForButtons,
     className: styles.button,
   });
-  startCarEngine.addEventListener('click', () =>
-    stopStartEngine(car, 'started')
-  );
-  stopCarEngine.addEventListener('click', () =>
-    stopStartEngine(car, 'stopped')
-  );
   const raceBox = createElement({
     tagName: 'div',
     parent,
@@ -119,10 +116,33 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     parent: raceBox,
     className: styles.carImg,
   });
-  carImg.style.background = car.color;
   createElement({
     tagName: 'div',
     parent: raceBox,
     className: styles.finishLine,
+  });
+
+  return [startCarEngine, stopCarEngine, raceBox, carImg];
+};
+
+const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
+  const [startCarEngine, stopCarEngine, raceBox, carImg] =
+    createElementsForMiddleLevel(parent);
+  carImg.style.background = car.color;
+  startCarEngine.addEventListener('click', async () => {
+    const data = await stopStartEngine(car, 'started');
+    if (data) {
+      animate({
+        timing: linear,
+        draw: drawAnimate,
+        durationData: data,
+        element: carImg,
+        box: raceBox,
+      });
+    }
+  });
+  stopCarEngine.addEventListener('click', async () => {
+    await stopStartEngine(car, 'stopped');
+    carImg.style.left = '0px';
   });
 };

@@ -1,8 +1,7 @@
 import { type Car } from '../state/state';
 
 export const isCar = (car: unknown): car is Car => {
-  if (
-    car &&
+  return car &&
     typeof car === 'object' &&
     'name' in car &&
     'id' in car &&
@@ -10,7 +9,6 @@ export const isCar = (car: unknown): car is Car => {
     typeof car.name === 'string' &&
     typeof car.id === 'number' &&
     typeof car.color === 'string'
-  )
-    return true;
-  return false;
+    ? true
+    : false;
 };
