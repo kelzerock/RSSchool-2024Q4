@@ -34,6 +34,7 @@ export const mainPage = (): void => {
     await stateRace.getCars();
     console.log(stateRace.state);
   });
-  createSetCars(mainElement);
-  raceArea(mainElement);
+  const callback = createSetCars(mainElement);
+  const wrapperForArea = createElement({ tagName: 'div', parent: mainElement });
+  raceArea(wrapperForArea, callback);
 };

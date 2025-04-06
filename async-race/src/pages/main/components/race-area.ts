@@ -16,9 +16,16 @@ const styles = {
     'absolute w-[40px] h-full right-[0px] border-l-2 border-dotted border-white',
 };
 
-type CarForRaceItem = { car: Car; parent: HTMLElement };
+type CarForRaceItem = {
+  car: Car;
+  parent: HTMLElement;
+  callback?: (car: Car) => void;
+};
 
-export const raceArea = (parent: HTMLElement): void => {
+export const raceArea = (
+  parent: HTMLElement,
+  callback: (car: Car) => void
+): void => {
   const raceAreaForCars = createElement({
     tagName: 'div',
     className: styles.raceArea,
@@ -26,11 +33,15 @@ export const raceArea = (parent: HTMLElement): void => {
   });
   const garageCars = stateRace.state.garage;
   garageCars.forEach((car) => {
-    raceItem(car, raceAreaForCars);
+    raceItem(car, raceAreaForCars, callback);
   });
 };
 
-const raceItem = (car: Car, parent: HTMLElement): void => {
+const raceItem = (
+  car: Car,
+  parent: HTMLElement,
+  callback: (car: Car) => void
+): void => {
   const mainRaceItem = createElement({
     tagName: 'div',
     parent,
@@ -42,7 +53,7 @@ const raceItem = (car: Car, parent: HTMLElement): void => {
     parent: mainRaceItem,
     className: styles.upLevelRace,
   });
-  createUpLevelRace({ parent: upLevelRace, car });
+  createUpLevelRace({ parent: upLevelRace, car, callback });
   const middleLevelRace = createElement({
     tagName: 'div',
     parent: mainRaceItem,
@@ -51,20 +62,26 @@ const raceItem = (car: Car, parent: HTMLElement): void => {
   createMiddleLevelRace({ parent: middleLevelRace, car });
 };
 
-const createUpLevelRace = ({ car, parent }: CarForRaceItem): void => {
-  createElement({
+const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
+  const selectCarButton = createElement({
     tagName: 'button',
     text: 'select',
     parent,
     className: styles.button,
   });
-  createElement({
+  selectCarButton.addEventListener('click', () => {
+    if (callback) callback(car);
+  });
+  const removeCarButton = createElement({
     tagName: 'button',
     text: 'remove',
     parent,
     className: styles.button,
   });
   createElement({ tagName: 'span', text: car.name, parent });
+  removeCarButton.addEventListener('click', () => {
+    stateRace.deleteCar(car.id);
+  });
 };
 
 const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
@@ -101,5 +118,4 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     parent: raceBox,
     className: styles.finishLine,
   });
-  console.log({ car });
 };

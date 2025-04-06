@@ -1,3 +1,4 @@
+import { mainPage } from '../pages/main/main-page';
 import { isCar } from '../utils/is-car';
 
 const URL_API = 'http://127.0.0.1:3000';
@@ -51,9 +52,46 @@ class State {
       if (isCar(carInfo)) {
         this.state.garage.push(carInfo);
         console.log({ carInfo });
+        mainPage();
       } else {
         console.warn("Attention, your data don't equal need format data!");
       }
+    }
+  };
+
+  public deleteCar = async (id: number): Promise<void> => {
+    const data = await fetch(`${URL_API}/garage/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (data.ok) {
+      console.log('car deleted');
+      this.state.garage = this.state.garage.filter((car) => car.id !== id);
+      this.state.winners = this.state.winners.filter((car) => car.id !== id);
+      mainPage();
+    }
+  };
+
+  public updateCar = async (car: Car): Promise<void> => {
+    console.log({ car });
+    const data = await fetch(`${URL_API}/garage/${car.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: car.name, color: car.color }),
+    });
+
+    if (data.ok) {
+      console.log('car update');
+      console.log({ car });
+      this.state.garage = this.state.garage.map((item) =>
+        item.id === car.id ? { ...item, ...car } : item
+      );
+      this.state.winners = this.state.winners.map((item) =>
+        item.id === car.id ? { ...item, ...car } : item
+      );
+      mainPage();
     }
   };
 }
