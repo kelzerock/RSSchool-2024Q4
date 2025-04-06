@@ -3,6 +3,7 @@ import { stateRace } from '../../state/state';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
 import { raceArea } from './components/race-area';
+import { createSetCars } from './components/set-cars';
 
 const styles = {
   title: 'text-2xl',
@@ -25,13 +26,14 @@ export const mainPage = (): void => {
   });
   const button = createElement({
     tagName: 'button',
-    text: 'button',
+    text: 'view state',
     parent: mainElement,
-    className: 'border-2 bg-white',
+    className: 'border-2 bg-white px-2',
   });
   button.addEventListener('click', async () => {
     await stateRace.getCars();
-    console.log(stateRace.state.garage);
+    console.log(stateRace.state);
   });
+  createSetCars(mainElement);
   raceArea(mainElement);
 };

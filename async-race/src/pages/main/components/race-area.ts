@@ -11,7 +11,7 @@ const styles = {
     'flex bg-red-800 rounded-md px-2 py-1 text-xs font-bold uppercase text-red-990 hover:bg-red-900 hover:text-red-100 transition-colors duration-300 hover:cursor-pointer',
   boxForButtons: 'flex flex-row gap-x-1',
   raceBox: 'flex relative border-dashed border-b-2 w-full',
-  carImg: 'absolute top-[0px] left-[0px] w-[40px] bottom-[3px] bg-green-500',
+  carImg: 'absolute top-[0px] left-[0px] w-[40px] bottom-[3px]',
   finishLine:
     'absolute w-[40px] h-full right-[0px] border-l-2 border-dotted border-white',
 };
@@ -90,7 +90,12 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     parent,
     className: styles.raceBox,
   });
-  createElement({ tagName: 'span', parent: raceBox, className: styles.carImg });
+  const carImg = createElement({
+    tagName: 'span',
+    parent: raceBox,
+    className: styles.carImg,
+  });
+  carImg.style.background = car.color;
   createElement({
     tagName: 'div',
     parent: raceBox,

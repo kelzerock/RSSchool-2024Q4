@@ -1,4 +1,4 @@
-type DataToCreateElement<T extends keyof HTMLElementTagNameMap> = {
+export type DataToCreateElement<T extends keyof HTMLElementTagNameMap> = {
   tagName: T;
   className?: string;
   parent?: HTMLElement;

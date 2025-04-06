@@ -47,9 +47,8 @@ const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
       attributes: [{ attr: 'href', value: link.href }],
     });
 
-    linkAnchor.addEventListener('click', function add(event) {
+    linkAnchor.addEventListener('click', (event) => {
       route(event);
-      linkAnchor.removeEventListener('click', add);
     });
   });
 

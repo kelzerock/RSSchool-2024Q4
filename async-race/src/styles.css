@@ -19,4 +19,25 @@ body {
     clip: rect(0 0 0 0);
     overflow: hidden;
   }
+
+  .colorInput {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .colorInput::-webkit-color-swatch {
+    border-radius: 50%;
+    border: 1px solid #000000;
+  }
+
+  .colorInput::-moz-color-swatch {
+    border-radius: 50%;
+    border: 1px solid #000000;
+  }
 }
