@@ -1,5 +1,6 @@
 import { type Car, stateRace } from '../../../state/state';
 import { createElement } from '../../../utils/create-element';
+import { stopStartEngine } from '../../../utils/request/stop-start-engine';
 
 const styles = {
   raceArea:
@@ -90,18 +91,24 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     parent,
     className: styles.boxForButtons,
   });
-  createElement({
+  const startCarEngine = createElement({
     tagName: 'button',
     text: 'A',
     parent: boxForButtons,
     className: styles.button,
   });
-  createElement({
+  const stopCarEngine = createElement({
     tagName: 'button',
     text: 'B',
     parent: boxForButtons,
     className: styles.button,
   });
+  startCarEngine.addEventListener('click', () =>
+    stopStartEngine(car, 'started')
+  );
+  stopCarEngine.addEventListener('click', () =>
+    stopStartEngine(car, 'stopped')
+  );
   const raceBox = createElement({
     tagName: 'div',
     parent,

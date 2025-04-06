@@ -1,7 +1,6 @@
+import { URL_API } from '../constants/api';
 import { mainPage } from '../pages/main/main-page';
 import { isCar } from '../utils/is-car';
-
-const URL_API = 'http://127.0.0.1:3000';
 
 export type Car = {
   name: string;
