@@ -21,9 +21,9 @@ export const animate = ({
   box,
   cancelFlag,
 }: AnimationData): void => {
+  const fullWidth = 100;
   let start = performance.now();
-  const offset = 3;
-  const width = box.offsetWidth - element.offsetWidth - offset;
+  const width = fullWidth - (element.offsetWidth / box.offsetWidth) * fullWidth;
   let aborted = false;
 
   durationData.promise.then((result) => {

@@ -9,6 +9,7 @@ import { mainPage } from '../../main-page';
 import { animate } from '../../../../utils/animation/animation';
 import { linear } from '../../../../utils/animation/timing';
 import { drawAnimate } from '../../../../utils/animation/draw-animation';
+import { createModal } from '../../../../components/modal/modal';
 
 type dataForRace = {
   id: number;
@@ -98,16 +99,24 @@ const handleRaceClick = async (): Promise<void> => {
           performAnimation(elements, data);
           const newInfo = await data.promise;
           if (checkSuccess(newInfo)) {
-            resolve(element.value.id);
+            resolve({ id: element.value.id, duration: data.duration });
           }
         }
       }
     });
   }).then((data) => {
-    console.log(
-      'winner',
-      stateRace.state.garage.find((car) => car.id === data)
-    );
+    if (
+      data &&
+      typeof data === 'object' &&
+      'id' in data &&
+      'duration' in data &&
+      typeof data.duration === 'number'
+    ) {
+      const car = stateRace.state.garage.find((car) => car.id === data.id);
+      if (car) {
+        createModal(car, data.duration);
+      }
+    }
   });
 };
 

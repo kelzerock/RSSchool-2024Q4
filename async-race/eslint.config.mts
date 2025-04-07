@@ -33,12 +33,14 @@ export default tseslint.config(
         'error',
         { accessibility: 'explicit', overrides: { constructors: 'off' } },
       ],
-      '@typescript-eslint/member-ordering': ['error', {
-        classes: {
-          order:
-            'alphabetically'
-        }
-      }],
+      '@typescript-eslint/member-ordering': [
+        'error',
+        {
+          classes: {
+            order: 'alphabetically',
+          },
+        },
+      ],
       'class-methods-use-this': 'error',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       'unicorn/no-array-callback-reference': 'off',

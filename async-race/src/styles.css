@@ -4,6 +4,11 @@ html,
 body {
   height: 100%;
   background-color: #022f2e;
+  position: relative;
+}
+
+body.lock {
+  overflow: hidden;
 }
 
 @layer components {
