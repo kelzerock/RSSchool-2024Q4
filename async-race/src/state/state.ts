@@ -72,7 +72,6 @@ class State {
       if (isCar(carInfo)) {
         this.state.garage.push(carInfo);
         this.filteredToView();
-        mainPage();
       } else {
         console.warn("Attention, your data don't equal need format data!");
       }

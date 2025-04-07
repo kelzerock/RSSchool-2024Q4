@@ -1,5 +1,6 @@
 import { stateRace } from '../../../../state/state';
 import { createElement } from '../../../../utils/create-element';
+import { mainPage } from '../../main-page';
 import { handleEventUpLevel, type DataCar } from './handle-event-up-level';
 
 const styles = {
@@ -69,7 +70,6 @@ export const createUpLevelSetCars = (parent: HTMLElement): void => {
     wrapper,
     carDataForCreate
   );
-
   inputColor.addEventListener('change', (event: Event) => {
     handleEventUpLevel(event, carDataForCreate, inputColor);
     saveData(carDataForCreate);
@@ -89,5 +89,6 @@ export const createUpLevelSetCars = (parent: HTMLElement): void => {
   buttonCreateCar.addEventListener('click', () => {
     stateRace.createCar(carDataForCreate);
     clearInputs();
+    mainPage();
   });
 };

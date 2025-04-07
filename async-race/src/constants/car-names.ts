@@ -1,0 +1,22 @@
+export const carNames = {
+  type: [
+    'AeroLux',
+    '3000',
+    'XR',
+    'Pro',
+    '7',
+    'GTR',
+    'One',
+    '8',
+    'Z5',
+    '1000',
+    'RS',
+    'Lite',
+    'Era',
+    'X9',
+    'X1',
+    'X3',
+    'Emgrand',
+  ],
+  model: ['audi', 'BMW', 'WV', 'Geely', 'Opel', 'TAZ', 'GAZ', 'Zeekr', 'BYD'],
+};
