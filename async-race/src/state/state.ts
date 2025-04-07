@@ -9,61 +9,51 @@ export type Car = {
   id: number;
 };
 
+export type TypesForAnimation = {
+  element: HTMLElement;
+  box: HTMLElement;
+  cancelFlag: { flag: boolean };
+  info: Car;
+  startButton: HTMLElement;
+  stopButton: HTMLElement;
+};
+
 type CarForCreate = Omit<Car, 'id'>;
 const maxViewCar = 7;
 const startNumber = 0;
 
 class State {
-  public state: { garage: Car[]; winners: Car[] };
-  public viewCars: Car[];
-  public page: number;
-  public maxViewCar = maxViewCar;
-  public viewStateModels: Map<
-    number,
-    {
-      element: HTMLElement;
-      box: HTMLElement;
-      cancelFlag: { flag: boolean };
-      info: Car;
-      startButton: HTMLElement;
-      stopButton: HTMLElement;
-    }
-  >;
-
-  constructor() {
-    this.state = { garage: [], winners: [] };
-    this.viewCars = [];
-    this.viewStateModels = new Map();
-    const pageString = localStorage.getItem('currentPage');
-    const page = pageString ? Number.parseInt(pageString) : startNumber;
-    this.page = page;
+  public get _activeStopEngineButtons(): number {
+    return this.activeStopEngineButtons;
   }
 
+  public set _activeStopEngineButtons(number: number) {
+    this.activeStopEngineButtons = number;
+  }
   public get _page(): number {
     return this.page;
   }
-
   public set _page(number: number) {
     this.page = number;
     localStorage.setItem('currentPage', number.toString());
     this.filteredToView();
     mainPage();
   }
+  public activeStopEngineButtons: number;
+  public buttonsForRace: {
+    startRace: HTMLElement | null;
+    resetRace: HTMLElement | null;
+  };
 
-  public async getCars(query?: { limit: number; page: number }): Promise<void> {
-    const data = await fetch(
-      `${URL_API}/garage${query ? '?_limit=' + query.limit + '&_page=' + query.page : ''}`,
-      {
-        method: 'GET',
-      }
-    );
-    // const count = data.headers.get('X-Total-Count');
-
-    if (data.ok) {
-      const garageCars = await data.json();
-      this.state.garage = garageCars;
-      this.filteredToView();
-    }
+  constructor() {
+    this.activeStopEngineButtons = 0;
+    this.buttonsForRace = { startRace: null, resetRace: null };
+    const pageString = localStorage.getItem('currentPage');
+    const page = pageString ? Number.parseInt(pageString) : startNumber;
+    this.page = page;
+    this.state = { garage: [], winners: [] };
+    this.viewCars = [];
+    this.viewStateModels = new Map();
   }
 
   public createCar = async (car: CarForCreate): Promise<void> => {
@@ -102,6 +92,32 @@ class State {
     }
   };
 
+  private filteredToView = (): void => {
+    this.viewCars = filteredDataForPagination(
+      this.maxViewCar,
+      this._page,
+      this.state.garage
+    );
+  };
+
+  public async getCars(query?: { limit: number; page: number }): Promise<void> {
+    const data = await fetch(
+      `${URL_API}/garage${query ? '?_limit=' + query.limit + '&_page=' + query.page : ''}`,
+      {
+        method: 'GET',
+      }
+    );
+
+    if (data.ok) {
+      const garageCars = await data.json();
+      this.state.garage = garageCars;
+      this.filteredToView();
+    }
+  }
+
+  public maxViewCar = maxViewCar;
+  public page: number;
+  public state: { garage: Car[]; winners: Car[] };
   public updateCar = async (car: Car): Promise<void> => {
     const data = await fetch(`${URL_API}/garage/${car.id}`, {
       method: 'PUT',
@@ -121,14 +137,9 @@ class State {
       mainPage();
     }
   };
+  public viewCars: Car[];
 
-  private filteredToView = (): void => {
-    this.viewCars = filteredDataForPagination(
-      this.maxViewCar,
-      this._page,
-      this.state.garage
-    );
-  };
+  public viewStateModels: Map<number, TypesForAnimation>;
 }
 
 export const stateRace = new State();

@@ -1,5 +1,5 @@
 import { carNames } from '../../../../constants/car-names';
-import { stateRace } from '../../../../state/state';
+import { stateRace, type TypesForAnimation } from '../../../../state/state';
 import { createElement } from '../../../../utils/create-element';
 import { getRandomDataFromArray } from '../../../../utils/get-random-data-from-array';
 import { randomHexColor } from '../../../../utils/random-color';
@@ -57,6 +57,29 @@ const checkSuccess = (element: unknown): element is { success: boolean } => {
     : false;
 };
 
+function performAnimation(
+  elements: TypesForAnimation,
+  data: {
+    duration: number;
+    promise: Promise<
+      | undefined
+      | string
+      | {
+          success: boolean;
+        }
+    >;
+  }
+): void {
+  animate({
+    timing: linear,
+    draw: drawAnimate,
+    durationData: data,
+    element: elements.element,
+    box: elements.box,
+    cancelFlag: elements.cancelFlag,
+  });
+}
+
 const handleRaceClick = async (): Promise<void> => {
   const dataPromises: dataForRace[] = [];
   stateRace.viewCars.forEach((car) => {
@@ -72,14 +95,7 @@ const handleRaceClick = async (): Promise<void> => {
           setDisabledElements([elements.startButton], true);
           setDisabledElements([elements.stopButton], false);
           elements.cancelFlag.flag = false;
-          animate({
-            timing: linear,
-            draw: drawAnimate,
-            durationData: data,
-            element: elements.element,
-            box: elements.box,
-            cancelFlag: elements.cancelFlag,
-          });
+          performAnimation(elements, data);
           const newInfo = await data.promise;
           if (checkSuccess(newInfo)) {
             resolve(element.value.id);
@@ -99,6 +115,15 @@ const handleResetClick = async (): Promise<void> => {
   stateRace.viewStateModels.forEach((car) => {
     car.stopButton.click();
   });
+};
+
+const handleClickGenerateButton = async (
+  button: HTMLElement
+): Promise<void> => {
+  setDisabledElements([button], true);
+  await generateCars();
+  mainPage();
+  setDisabledElements([button], false);
 };
 
 const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
@@ -121,25 +146,22 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
     text: 'generate cars',
     className: styles.button,
   });
-
   raceButton.addEventListener('click', () => {
     handleRaceClick();
+    stateRace._activeStopEngineButtons = stateRace.viewCars.length;
+    console.log(stateRace._activeStopEngineButtons);
     setDisabledElements([raceButton], true);
     setDisabledElements([resetButton], false);
   });
-
   resetButton.addEventListener('click', async () => {
     setDisabledElements([resetButton], true);
     await handleResetClick();
     setDisabledElements([raceButton], false);
   });
   generateButton.addEventListener('click', async () => {
-    setDisabledElements([generateButton], true);
-    await generateCars();
-    mainPage();
-    setDisabledElements([generateButton], false);
+    await handleClickGenerateButton(generateButton);
   });
-  return [raceButton, resetButton, generateButton];
+  return [raceButton, resetButton];
 };
 
 export const downLevelSet = (parent: HTMLElement): void => {
@@ -148,5 +170,7 @@ export const downLevelSet = (parent: HTMLElement): void => {
     className: styles.wrapper,
     parent,
   });
-  createButtons(wrapper);
+  const [raceButton, resetButton] = createButtons(wrapper);
+  stateRace.buttonsForRace.resetRace = resetButton;
+  stateRace.buttonsForRace.startRace = raceButton;
 };

@@ -41,6 +41,7 @@ export const raceArea = (
     parent,
   });
   const garageCars = stateRace.viewCars;
+  stateRace._activeStopEngineButtons = garageCars.length;
   garageCars.forEach((car) => {
     raceItem(car, raceAreaForCars, callback);
   });
@@ -131,10 +132,49 @@ const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
   return [startCarEngine, stopCarEngine, raceBox, carImg];
 };
 
+const handleClickStartCarEngine = async (
+  startCarEngine: HTMLElement,
+  stopCarEngine: HTMLElement,
+  car: Car,
+  carImg: HTMLElement,
+  raceBox: HTMLElement,
+  abort: { flag: boolean }
+): Promise<void> => {
+  setDisabledElements([startCarEngine], true);
+  setDisabledElements([stopCarEngine], false);
+  const data = await stopStartEngine(car, 'started');
+  abort.flag = false;
+  if (data) {
+    animate({
+      timing: linear,
+      draw: drawAnimate,
+      durationData: data,
+      element: carImg,
+      box: raceBox,
+      cancelFlag: abort,
+    });
+  }
+};
+
+const changeStateButtonsRace = (): void => {
+  const noneButtonActive = 0;
+  const step = 1;
+  stateRace._activeStopEngineButtons =
+    stateRace._activeStopEngineButtons - step;
+  if (stateRace._activeStopEngineButtons === noneButtonActive) {
+    const { startRace, resetRace } = stateRace.buttonsForRace;
+    if (startRace && resetRace) {
+      setDisabledElements([startRace], false);
+      setDisabledElements([resetRace], true);
+    }
+  }
+};
+
 const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
   const abort = { flag: false };
   const [startCarEngine, stopCarEngine, raceBox, carImg] =
     createElementsForMiddleLevel(parent);
+
   carImg.style.background = car.color;
   stateRace.viewStateModels.set(car.id, {
     element: carImg,
@@ -144,28 +184,24 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     startButton: startCarEngine,
     stopButton: stopCarEngine,
   });
+
   startCarEngine.addEventListener('click', async () => {
-    setDisabledElements([startCarEngine], true);
-    setDisabledElements([stopCarEngine], false);
-    const data = await stopStartEngine(car, 'started');
-    abort.flag = false;
-    if (data) {
-      animate({
-        timing: linear,
-        draw: drawAnimate,
-        durationData: data,
-        element: carImg,
-        box: raceBox,
-        cancelFlag: abort,
-      });
-    }
+    await handleClickStartCarEngine(
+      startCarEngine,
+      stopCarEngine,
+      car,
+      carImg,
+      raceBox,
+      abort
+    );
   });
+
   stopCarEngine.addEventListener('click', async () => {
+    changeStateButtonsRace();
     setDisabledElements([startCarEngine], false);
     setDisabledElements([stopCarEngine], true);
     abort.flag = true;
     await stopStartEngine(car, 'stopped', abort);
     carImg.style.left = '0px';
-    console.log('test', { abort });
   });
 };
