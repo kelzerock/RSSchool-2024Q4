@@ -25,6 +25,8 @@ class State {
       box: HTMLElement;
       cancelFlag: { flag: boolean };
       info: Car;
+      startButton: HTMLElement;
+      stopButton: HTMLElement;
     }
   >;
 

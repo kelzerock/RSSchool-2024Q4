@@ -65,16 +65,13 @@ const handleRaceClick = async (): Promise<void> => {
   const info = await Promise.allSettled(dataPromises);
   new Promise((resolve) => {
     info.forEach(async (element) => {
-      if (
-        element.status === 'fulfilled' &&
-        element &&
-        typeof element.value === 'object' &&
-        'promise' in element.value &&
-        'id' in element.value
-      ) {
+      if (element.status === 'fulfilled' && typeof element.value === 'object') {
         const elements = stateRace.viewStateModels.get(element.value.id);
         const data = await element.value.promise;
         if (elements && data) {
+          setDisabledElements([elements.startButton], true);
+          setDisabledElements([elements.stopButton], false);
+          elements.cancelFlag.flag = false;
           animate({
             timing: linear,
             draw: drawAnimate,
@@ -98,6 +95,12 @@ const handleRaceClick = async (): Promise<void> => {
   });
 };
 
+const handleResetClick = async (): Promise<void> => {
+  stateRace.viewStateModels.forEach((car) => {
+    car.stopButton.click();
+  });
+};
+
 const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
   const raceButton = createElement({
     tagName: 'button',
@@ -110,6 +113,7 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
     parent,
     text: 'reset',
     className: styles.button,
+    attributes: [{ attr: 'disabled', value: '' }],
   });
   const generateButton = createElement({
     tagName: 'button',
@@ -118,8 +122,17 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
     className: styles.button,
   });
 
-  raceButton.addEventListener('click', handleRaceClick);
+  raceButton.addEventListener('click', () => {
+    handleRaceClick();
+    setDisabledElements([raceButton], true);
+    setDisabledElements([resetButton], false);
+  });
 
+  resetButton.addEventListener('click', async () => {
+    setDisabledElements([resetButton], true);
+    await handleResetClick();
+    setDisabledElements([raceButton], false);
+  });
   generateButton.addEventListener('click', async () => {
     setDisabledElements([generateButton], true);
     await generateCars();

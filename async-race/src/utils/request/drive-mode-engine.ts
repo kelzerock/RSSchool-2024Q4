@@ -10,7 +10,6 @@ export const driveModeEngine = async (
 
   const timeoutPromise = new Promise<{ success: boolean }>((resolve) => {
     setTimeout(() => {
-      console.log('timer');
       resolve({ success: true });
     }, duration);
   });

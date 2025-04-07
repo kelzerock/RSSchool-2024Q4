@@ -56,8 +56,9 @@ const stopEngine = async (
       { method: 'PATCH' }
     );
     if (response.ok) {
+      const result = await response.json();
       if (flag) flag.flag = true;
-      return await response.json();
+      return result;
     }
     controllers.delete(car.id);
   }

@@ -25,6 +25,7 @@ export const animate = ({
   const offset = 3;
   const width = box.offsetWidth - element.offsetWidth - offset;
   let aborted = false;
+  console.log({ aborted, cancelFlag });
 
   durationData.promise.then((result) => {
     if (result === 'car need stop') {

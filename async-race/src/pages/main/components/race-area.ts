@@ -141,11 +141,14 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     box: raceBox,
     cancelFlag: abort,
     info: car,
+    startButton: startCarEngine,
+    stopButton: stopCarEngine,
   });
   startCarEngine.addEventListener('click', async () => {
     setDisabledElements([startCarEngine], true);
     setDisabledElements([stopCarEngine], false);
     const data = await stopStartEngine(car, 'started');
+    abort.flag = false;
     if (data) {
       animate({
         timing: linear,
@@ -160,7 +163,9 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
   stopCarEngine.addEventListener('click', async () => {
     setDisabledElements([startCarEngine], false);
     setDisabledElements([stopCarEngine], true);
+    abort.flag = true;
     await stopStartEngine(car, 'stopped', abort);
     carImg.style.left = '0px';
+    console.log('test', { abort });
   });
 };
