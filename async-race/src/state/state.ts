@@ -1,5 +1,6 @@
 import { URL_API } from '../constants/api';
 import { mainPage } from '../pages/main/main-page';
+import { filteredDataForPagination } from '../utils/filtered-data-for-pagination';
 import { isCar } from '../utils/is-car';
 
 export type Car = {
@@ -9,12 +10,32 @@ export type Car = {
 };
 
 type CarForCreate = Omit<Car, 'id'>;
+const maxViewCar = 7;
+const startNumber = 0;
 
 class State {
   public state: { garage: Car[]; winners: Car[] };
+  public viewCars: Car[];
+  public page: number;
+  public maxViewCar = maxViewCar;
 
   constructor() {
     this.state = { garage: [], winners: [] };
+    this.viewCars = [];
+    const pageString = localStorage.getItem('currentPage');
+    const page = pageString ? Number.parseInt(pageString) : startNumber;
+    this.page = page;
+  }
+
+  public get _page(): number {
+    return this.page;
+  }
+
+  public set _page(number: number) {
+    this.page = number;
+    localStorage.setItem('currentPage', number.toString());
+    this.filteredToView();
+    mainPage();
   }
 
   public async getCars(query?: { limit: number; page: number }): Promise<void> {
@@ -30,7 +51,7 @@ class State {
     if (data.ok) {
       const garageCars = await data.json();
       this.state.garage = garageCars;
-      console.log({ garageCars });
+      this.filteredToView();
     }
   }
 
@@ -50,7 +71,7 @@ class State {
       const carInfo = await data.json();
       if (isCar(carInfo)) {
         this.state.garage.push(carInfo);
-        console.log({ carInfo });
+        this.filteredToView();
         mainPage();
       } else {
         console.warn("Attention, your data don't equal need format data!");
@@ -67,6 +88,7 @@ class State {
       console.log('car deleted');
       this.state.garage = this.state.garage.filter((car) => car.id !== id);
       this.state.winners = this.state.winners.filter((car) => car.id !== id);
+      this.filteredToView();
       mainPage();
     }
   };
@@ -92,6 +114,14 @@ class State {
       );
       mainPage();
     }
+  };
+
+  private filteredToView = (): void => {
+    this.viewCars = filteredDataForPagination(
+      this.maxViewCar,
+      this._page,
+      this.state.garage
+    );
   };
 }
 

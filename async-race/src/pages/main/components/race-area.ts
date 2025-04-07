@@ -40,7 +40,7 @@ export const raceArea = (
     className: styles.raceArea,
     parent,
   });
-  const garageCars = stateRace.state.garage;
+  const garageCars = stateRace.viewCars;
   garageCars.forEach((car) => {
     raceItem(car, raceAreaForCars, callback);
   });

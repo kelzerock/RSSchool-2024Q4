@@ -53,11 +53,13 @@ const saveData = (data: DataCar): void => {
 
 export const createUpLevelSetCars = (parent: HTMLElement): void => {
   const data: string | null = localStorage.getItem(createCarStorage);
-  let initialData: DataCar = { name: '', color: '#ffffff' };
-  if (data) {
-    initialData = { ...initialData, ...JSON.parse(data) };
-  }
+  const initialData: DataCar = { name: '', color: '#ffffff' };
   const carDataForCreate: DataCar = { ...initialData };
+  if (data) {
+    const { name, color } = JSON.parse(data);
+    carDataForCreate.color = color;
+    carDataForCreate.name = name;
+  }
   const wrapper = createElement({
     tagName: 'div',
     className: styles.wrapperLevel,
@@ -72,17 +74,16 @@ export const createUpLevelSetCars = (parent: HTMLElement): void => {
     handleEventUpLevel(event, carDataForCreate, inputColor);
     saveData(carDataForCreate);
   });
-
   inputText.addEventListener('input', (event: Event) => {
     handleEventUpLevel(event, carDataForCreate, inputText);
     saveData(carDataForCreate);
   });
-
   const clearInputs = (): void => {
     inputColor.value = initialData.color;
     inputText.value = initialData.name;
     carDataForCreate.color = initialData.color;
     carDataForCreate.name = initialData.name;
+    saveData(carDataForCreate);
   };
 
   buttonCreateCar.addEventListener('click', () => {
