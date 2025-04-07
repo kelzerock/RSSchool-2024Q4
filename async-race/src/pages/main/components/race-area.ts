@@ -136,6 +136,12 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
   const [startCarEngine, stopCarEngine, raceBox, carImg] =
     createElementsForMiddleLevel(parent);
   carImg.style.background = car.color;
+  stateRace.viewStateModels.set(car.id, {
+    element: carImg,
+    box: raceBox,
+    cancelFlag: abort,
+    info: car,
+  });
   startCarEngine.addEventListener('click', async () => {
     setDisabledElements([startCarEngine], true);
     setDisabledElements([stopCarEngine], false);

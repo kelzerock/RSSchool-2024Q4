@@ -18,10 +18,20 @@ class State {
   public viewCars: Car[];
   public page: number;
   public maxViewCar = maxViewCar;
+  public viewStateModels: Map<
+    number,
+    {
+      element: HTMLElement;
+      box: HTMLElement;
+      cancelFlag: { flag: boolean };
+      info: Car;
+    }
+  >;
 
   constructor() {
     this.state = { garage: [], winners: [] };
     this.viewCars = [];
+    this.viewStateModels = new Map();
     const pageString = localStorage.getItem('currentPage');
     const page = pageString ? Number.parseInt(pageString) : startNumber;
     this.page = page;
@@ -45,8 +55,7 @@ class State {
         method: 'GET',
       }
     );
-    const count = data.headers.get('X-Total-Count');
-    console.log({ count });
+    // const count = data.headers.get('X-Total-Count');
 
     if (data.ok) {
       const garageCars = await data.json();
@@ -84,7 +93,6 @@ class State {
     });
 
     if (data.ok) {
-      console.log('car deleted');
       this.state.garage = this.state.garage.filter((car) => car.id !== id);
       this.state.winners = this.state.winners.filter((car) => car.id !== id);
       this.filteredToView();
@@ -93,7 +101,6 @@ class State {
   };
 
   public updateCar = async (car: Car): Promise<void> => {
-    console.log({ car });
     const data = await fetch(`${URL_API}/garage/${car.id}`, {
       method: 'PUT',
       headers: {
@@ -103,8 +110,6 @@ class State {
     });
 
     if (data.ok) {
-      console.log('car update');
-      console.log({ car });
       this.state.garage = this.state.garage.map((item) =>
         item.id === car.id ? { ...item, ...car } : item
       );

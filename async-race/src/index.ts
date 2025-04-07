@@ -8,7 +8,6 @@ const startApp = async (): Promise<void> => {
   globalThis.route = route;
 
   handleLocation();
-  console.log(stateRace.state);
 };
 
 startApp();

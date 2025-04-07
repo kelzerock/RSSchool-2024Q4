@@ -4,7 +4,7 @@ type AnimationData = {
   draw: Draw;
   durationData: {
     duration: number;
-    promise: Promise<undefined | string>;
+    promise: Promise<undefined | string | { success: boolean }>;
   };
   element: HTMLElement;
   box: HTMLElement;
@@ -27,7 +27,6 @@ export const animate = ({
   let aborted = false;
 
   durationData.promise.then((result) => {
-    console.log({ result });
     if (result === 'car need stop') {
       aborted = true;
     }
@@ -37,7 +36,7 @@ export const animate = ({
       start = timestamp;
     }
     if (aborted || cancelFlag.flag) {
-      console.log('Анимация остановлена из-за кода 500');
+      // 'Анимация остановлена из-за кода 500;
       return;
     }
     const elapsed = timestamp - start;

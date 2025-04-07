@@ -3,8 +3,23 @@ import { stateRace } from '../../../../state/state';
 import { createElement } from '../../../../utils/create-element';
 import { getRandomDataFromArray } from '../../../../utils/get-random-data-from-array';
 import { randomHexColor } from '../../../../utils/random-color';
+import { stopStartEngine } from '../../../../utils/request/stop-start-engine';
 import { setDisabledElements } from '../../../../utils/set-disabled-elements';
 import { mainPage } from '../../main-page';
+import { animate } from '../../../../utils/animation/animation';
+import { linear } from '../../../../utils/animation/timing';
+import { drawAnimate } from '../../../../utils/animation/draw-animation';
+
+type dataForRace = {
+  id: number;
+  promise: Promise<
+    | undefined
+    | {
+        duration: number;
+        promise: Promise<undefined | string | { success: boolean }>;
+      }
+  >;
+};
 
 const disabledStyle =
   'disabled:bg-stone-500 disabled:hover:cursor-not-allowed disabled:hover:text-stone-900 disabled:text-900';
@@ -33,6 +48,56 @@ const generateCars = async (): Promise<void> => {
   }
 };
 
+const checkSuccess = (element: unknown): element is { success: boolean } => {
+  return element &&
+    typeof element === 'object' &&
+    'success' in element &&
+    element.success
+    ? true
+    : false;
+};
+
+const handleRaceClick = async (): Promise<void> => {
+  const dataPromises: dataForRace[] = [];
+  stateRace.viewCars.forEach((car) => {
+    dataPromises.push({ id: car.id, promise: stopStartEngine(car, 'started') });
+  });
+  const info = await Promise.allSettled(dataPromises);
+  new Promise((resolve) => {
+    info.forEach(async (element) => {
+      if (
+        element.status === 'fulfilled' &&
+        element &&
+        typeof element.value === 'object' &&
+        'promise' in element.value &&
+        'id' in element.value
+      ) {
+        const elements = stateRace.viewStateModels.get(element.value.id);
+        const data = await element.value.promise;
+        if (elements && data) {
+          animate({
+            timing: linear,
+            draw: drawAnimate,
+            durationData: data,
+            element: elements.element,
+            box: elements.box,
+            cancelFlag: elements.cancelFlag,
+          });
+          const newInfo = await data.promise;
+          if (checkSuccess(newInfo)) {
+            resolve(element.value.id);
+          }
+        }
+      }
+    });
+  }).then((data) => {
+    console.log(
+      'winner',
+      stateRace.state.garage.find((car) => car.id === data)
+    );
+  });
+};
+
 const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
   const raceButton = createElement({
     tagName: 'button',
@@ -53,6 +118,8 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
     className: styles.button,
   });
 
+  raceButton.addEventListener('click', handleRaceClick);
+
   generateButton.addEventListener('click', async () => {
     setDisabledElements([generateButton], true);
     await generateCars();
@@ -68,6 +135,5 @@ export const downLevelSet = (parent: HTMLElement): void => {
     className: styles.wrapper,
     parent,
   });
-  const [raceButton, resetButton, generateButton] = createButtons(wrapper);
-  console.log(raceButton, resetButton, generateButton);
+  createButtons(wrapper);
 };

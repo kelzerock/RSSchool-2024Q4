@@ -86,8 +86,8 @@ export const createUpLevelSetCars = (parent: HTMLElement): void => {
     saveData(carDataForCreate);
   };
 
-  buttonCreateCar.addEventListener('click', () => {
-    stateRace.createCar(carDataForCreate);
+  buttonCreateCar.addEventListener('click', async () => {
+    await stateRace.createCar(carDataForCreate);
     clearInputs();
     mainPage();
   });
