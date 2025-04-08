@@ -24,12 +24,6 @@ export const createNavigationMenu = (parent: HTMLElement): void => {
   parent.append(navigationMenu(menuItems));
 };
 
-const handleResetClick = async (): Promise<void> => {
-  stateRace.viewStateModels.forEach((car) => {
-    car.stopButton.click();
-  });
-};
-
 const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
   const navigation = createElement({
     tagName: 'nav',
@@ -55,8 +49,7 @@ const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
     });
 
     linkAnchor.addEventListener('click', async (event) => {
-      await handleResetClick();
-
+      stateRace.buttonsForRace.resetRace?.click();
       route(event);
     });
   });

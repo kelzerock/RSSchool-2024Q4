@@ -74,11 +74,16 @@ class State {
   public buttonsForRace: {
     startRace: HTMLElement | null;
     resetRace: HTMLElement | null;
+    readyToRace: boolean;
   };
 
   constructor() {
     this.activeStopEngineButtons = 0;
-    this.buttonsForRace = { startRace: null, resetRace: null };
+    this.buttonsForRace = {
+      startRace: null,
+      resetRace: null,
+      readyToRace: true,
+    };
     this.countWinner = 0;
     const pageString = localStorage.getItem('currentPage');
     const page = pageString ? Number.parseInt(pageString) : startNumber;

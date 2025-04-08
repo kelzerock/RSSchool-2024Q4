@@ -1,5 +1,5 @@
 import { createModal } from '../../../components/modal/modal';
-import { type Car } from '../../../state/state';
+import { stateRace, type Car } from '../../../state/state';
 import { isWinner } from '../../../utils/is-winner';
 import { createWinner } from '../../../utils/request/create-winner';
 import { getWinners } from '../../../utils/request/get-winners';
@@ -16,6 +16,9 @@ export const handleWinner = async (
   duration: number
 ): Promise<void> => {
   try {
+    if (!stateRace.buttonsForRace.readyToRace) {
+      return;
+    }
     const durationInSeconds = msToSeconds(duration);
     createModal(car, duration);
     const allWinners = (await getWinners()) || [];

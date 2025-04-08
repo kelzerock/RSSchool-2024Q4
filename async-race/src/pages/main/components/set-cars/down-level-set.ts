@@ -121,6 +121,7 @@ const handleRaceClick = async (): Promise<void> => {
 };
 
 const handleResetClick = async (): Promise<void> => {
+  stateRace.buttonsForRace.readyToRace = false;
   stateRace.viewStateModels.forEach((car) => {
     car.stopButton.click();
   });
@@ -156,6 +157,7 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
     className: styles.button,
   });
   raceButton.addEventListener('click', () => {
+    stateRace.buttonsForRace.readyToRace = true;
     handleRaceClick();
     stateRace._activeStopEngineButtons = stateRace.viewCars.length;
     setDisabledElements([raceButton], true);
