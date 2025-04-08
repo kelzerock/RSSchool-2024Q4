@@ -135,9 +135,7 @@ class State {
     });
 
     if (data.ok) {
-      this.state.garage = this.state.garage.map((item) =>
-        item.id === car.id ? { ...item, ...car } : item
-      );
+      await this.getCars();
       mainPage();
     }
   };

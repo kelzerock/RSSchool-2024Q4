@@ -3,6 +3,7 @@ import { animate } from '../../../utils/animation/animation';
 import { drawAnimate } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';
 import { createElement } from '../../../utils/create-element';
+import { handleName } from '../../../utils/handle-name';
 import { deleteWinner } from '../../../utils/request/delete-winner';
 import { getWinners } from '../../../utils/request/get-winners';
 import { stopStartEngine } from '../../../utils/request/stop-start-engine';
@@ -22,7 +23,8 @@ const styles = {
     disabledStyle,
   boxForButtons: 'flex flex-row gap-x-1',
   raceBox: 'flex relative border-dashed border-b-2 w-full',
-  carImg: 'absolute top-[0px] left-[0px] w-[40px] bottom-[3px]',
+  carImg:
+    'absolute top-[0px] left-[0px] w-[40px] bottom-[3px] rounded-tl-[15px] rounded-tr-[40px]',
   finishLine:
     'absolute w-[46px] h-full right-[0px] border-l-2 border-dotted border-white',
 };
@@ -90,7 +92,7 @@ const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
     parent,
     className: styles.button,
   });
-  createElement({ tagName: 'span', text: car.name, parent });
+  createElement({ tagName: 'span', text: handleName(car.name), parent });
   removeCarButton.addEventListener('click', async () => {
     await stateRace.deleteCar(car.id);
     const allWinners = (await getWinners()) || [];

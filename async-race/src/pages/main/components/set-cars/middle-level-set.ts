@@ -61,13 +61,11 @@ export const createMiddleLevelSetCars = (
     className: styles.wrapperLevel,
     parent,
   });
-
   const setButtons = createElements(wrapper);
   const [inputText, inputColor, buttonUpdateCar] = setButtons;
   buttonUpdateCar.addEventListener('click', () => {
     setDisabledElements(setButtons, true);
   });
-
   inputColor.addEventListener('change', (event: Event) =>
     handleEventUpLevel(event, carDataForCreate, inputColor)
   );
@@ -80,8 +78,9 @@ export const createMiddleLevelSetCars = (
     inputColor.value = '#79716b';
     inputText.value = '';
   };
-  buttonUpdateCar.addEventListener('click', () => {
-    stateRace.updateCar({ ...carDataForCreate });
+  buttonUpdateCar.addEventListener('click', async () => {
+    console.log({ carDataForCreate });
+    await stateRace.updateCar({ ...carDataForCreate });
     clearInputs();
   });
   const callback = (car: Car): void => {
