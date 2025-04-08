@@ -9,7 +9,7 @@ import { mainPage } from '../../main-page';
 import { animate } from '../../../../utils/animation/animation';
 import { linear } from '../../../../utils/animation/timing';
 import { drawAnimate } from '../../../../utils/animation/draw-animation';
-import { createModal } from '../../../../components/modal/modal';
+import { handleWinner } from '../handle-winner';
 
 type dataForRace = {
   id: number;
@@ -114,7 +114,7 @@ const handleRaceClick = async (): Promise<void> => {
     ) {
       const car = stateRace.state.garage.find((car) => car.id === data.id);
       if (car) {
-        createModal(car, data.duration);
+        handleWinner(car, data.duration);
       }
     }
   });
@@ -158,7 +158,6 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
   raceButton.addEventListener('click', () => {
     handleRaceClick();
     stateRace._activeStopEngineButtons = stateRace.viewCars.length;
-    console.log(stateRace._activeStopEngineButtons);
     setDisabledElements([raceButton], true);
     setDisabledElements([resetButton], false);
   });

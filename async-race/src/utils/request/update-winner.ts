@@ -15,7 +15,7 @@ export const updateWinner = async (
 
   if (response.ok) {
     const winner = await response.json();
-    console.log('winner created');
+    console.log('winner updated');
     if (isWinner(winner)) {
       return winner;
     }

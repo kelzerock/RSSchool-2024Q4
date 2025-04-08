@@ -1,5 +1,6 @@
 import { URL_API } from '../../constants/api';
-import { stateRace } from '../../state/state';
+import { type Winner } from '../../state/state';
+import { isWinner } from '../is-winner';
 type Sort = 'id' | 'wins' | 'time';
 type Order = 'ASC' | 'DESC';
 type Query = {
@@ -27,7 +28,9 @@ const createQueryPath = (query: Query | undefined): null | string => {
   return `?` + dataForString.join('&');
 };
 
-export const getWinners = async (query?: Query): Promise<void> => {
+export const getWinners = async (
+  query?: Query
+): Promise<Winner[] | undefined> => {
   const queryPath = createQueryPath(query);
 
   const data = await fetch(`${URL_API}/winners${queryPath || ''}`, {
@@ -36,6 +39,8 @@ export const getWinners = async (query?: Query): Promise<void> => {
 
   if (data.ok) {
     const winners = await data.json();
-    stateRace.state.winners = winners;
+    if (winners.every(isWinner)) {
+      return winners;
+    }
   }
 };

@@ -30,7 +30,6 @@ export const winnersPage = async (): Promise<void> => {
     parent: mainElement,
   });
 
-  await getWinners();
+  stateRace.state.winners = (await getWinners()) || [];
   createWinnersTable(wrapper);
-  console.log(stateRace.state.winners);
 };

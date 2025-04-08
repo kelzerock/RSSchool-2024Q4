@@ -3,6 +3,8 @@ import { animate } from '../../../utils/animation/animation';
 import { drawAnimate } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';
 import { createElement } from '../../../utils/create-element';
+import { deleteWinner } from '../../../utils/request/delete-winner';
+import { getWinners } from '../../../utils/request/get-winners';
 import { stopStartEngine } from '../../../utils/request/stop-start-engine';
 import { setDisabledElements } from '../../../utils/set-disabled-elements';
 
@@ -89,8 +91,12 @@ const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
     className: styles.button,
   });
   createElement({ tagName: 'span', text: car.name, parent });
-  removeCarButton.addEventListener('click', () => {
-    stateRace.deleteCar(car.id);
+  removeCarButton.addEventListener('click', async () => {
+    await stateRace.deleteCar(car.id);
+    const allWinners = (await getWinners()) || [];
+    if (allWinners.some((winner) => winner.id === car.id)) {
+      await deleteWinner(car.id);
+    }
   });
 };
 
