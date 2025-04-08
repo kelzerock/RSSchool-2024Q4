@@ -1,4 +1,4 @@
-import { stateRace } from '../../state/state';
+import { type Car, stateRace, type Winner } from '../../state/state';
 import { createElement } from '../../utils/create-element';
 const styles = {
   title: 'flex flex-row gap-x-2',
@@ -7,6 +7,40 @@ const styles = {
   text: 'basis-20 flex items-center justify-center',
   colorInfo: 'rounded-[50%] h-full aspect-square',
 };
+
+const createRowWinner = (
+  carData: Car | undefined,
+  winner: Winner,
+  row: HTMLElement
+): void => {
+  const { wins, time } = winner;
+  if (carData) {
+    const { id, color, name } = carData;
+    [id, name, color, wins, time].forEach((element) => {
+      if (element === color) {
+        const colorElementWrapper = createElement({
+          tagName: 'div',
+          className: styles.text,
+          parent: row,
+        });
+        const colorElement = createElement({
+          tagName: 'div',
+          className: styles.colorInfo,
+          parent: colorElementWrapper,
+        });
+        colorElement.style.background = color;
+      } else {
+        createElement({
+          tagName: 'div',
+          className: styles.text,
+          parent: row,
+          text: element.toString(),
+        });
+      }
+    });
+  }
+};
+
 export const createWinnersTable = (parent: HTMLElement): void => {
   const title = createElement({
     tagName: 'div',
@@ -24,36 +58,12 @@ export const createWinnersTable = (parent: HTMLElement): void => {
 
   stateRace.state.winners.forEach((winner) => {
     const carData = stateRace.state.garage.find((car) => car.id === winner.id);
-    const { wins, time } = winner;
+
     const row = createElement({
       tagName: 'div',
       className: styles.row,
       parent,
     });
-    if (carData) {
-      const { id, color, name } = carData;
-      [id, name, color, wins, time].forEach((element) => {
-        if (element === color) {
-          const colorElementWrapper = createElement({
-            tagName: 'div',
-            className: styles.text,
-            parent: row,
-          });
-          const colorElement = createElement({
-            tagName: 'div',
-            className: styles.colorInfo,
-            parent: colorElementWrapper,
-          });
-          colorElement.style.background = color;
-        } else {
-          createElement({
-            tagName: 'div',
-            className: styles.text,
-            parent: row,
-            text: element.toString(),
-          });
-        }
-      });
-    }
+    createRowWinner(carData, winner, row);
   });
 };
