@@ -1,4 +1,5 @@
 import { PathRoute } from '../../enums/path-routes';
+import { stateRace } from '../../state/state';
 import { createElement } from '../../utils/create-element';
 
 type InformationAboutLinks = {
@@ -21,6 +22,12 @@ const menuItems: InformationAboutLinks[] = [
 
 export const createNavigationMenu = (parent: HTMLElement): void => {
   parent.append(navigationMenu(menuItems));
+};
+
+const handleResetClick = async (): Promise<void> => {
+  stateRace.viewStateModels.forEach((car) => {
+    car.stopButton.click();
+  });
 };
 
 const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
@@ -47,7 +54,9 @@ const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
       attributes: [{ attr: 'href', value: link.href }],
     });
 
-    linkAnchor.addEventListener('click', (event) => {
+    linkAnchor.addEventListener('click', async (event) => {
+      await handleResetClick();
+
       route(event);
     });
   });

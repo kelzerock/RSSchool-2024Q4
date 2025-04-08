@@ -54,19 +54,45 @@ const createRowWinner = (
   }
 };
 
+const dataForWinnersTable = [
+  { text: 'id', attr: Sort.id },
+  { text: 'car' },
+  { text: 'color' },
+  { text: 'wins', attr: Sort.wins },
+  { text: 'best time', attr: Sort.time },
+];
+
+const sortingHandle = async (
+  item:
+    | {
+        text: string;
+        attr: Sort;
+      }
+    | {
+        text: string;
+        attr?: undefined;
+      }
+): Promise<void> => {
+  if (item.attr === stateRace.pageWinnersData.sort) {
+    const nextOrder =
+      Order.ASC === stateRace.pageWinnersData.order ? Order.DESC : Order.ASC;
+    stateRace.pageWinnersData.order = nextOrder;
+  } else {
+    if (item.attr) {
+      stateRace.pageWinnersData.sort = item.attr;
+    }
+  }
+  saveDataWinners(stateRace.pageWinnersData);
+  await winnersPage();
+};
+
 export const createWinnersTable = (parent: HTMLElement): void => {
   const title = createElement({
     tagName: 'div',
     parent,
     className: styles.title,
   });
-  [
-    { text: 'id', attr: Sort.id },
-    { text: 'car' },
-    { text: 'color' },
-    { text: 'wins', attr: Sort.wins },
-    { text: 'best time', attr: Sort.time },
-  ].forEach((item, index) => {
+  dataForWinnersTable.forEach((item, index) => {
     const element = createElement({
       tagName: 'div',
       parent: title,
@@ -80,19 +106,7 @@ export const createWinnersTable = (parent: HTMLElement): void => {
         'hover:rounded-lg'
       );
       element.dataset['type'] = item.attr;
-      element.addEventListener('click', async () => {
-        if (item.attr === stateRace.pageWinnersData.sort) {
-          const nextOrder =
-            Order.ASC === stateRace.pageWinnersData.order
-              ? Order.DESC
-              : Order.ASC;
-          stateRace.pageWinnersData.order = nextOrder;
-        } else {
-          stateRace.pageWinnersData.sort = item.attr;
-        }
-        saveDataWinners(stateRace.pageWinnersData);
-        await winnersPage();
-      });
+      element.addEventListener('click', () => sortingHandle(item));
     }
   });
 
