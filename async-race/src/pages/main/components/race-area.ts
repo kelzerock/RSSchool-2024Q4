@@ -24,7 +24,7 @@ const styles = {
   boxForButtons: 'flex flex-row gap-x-1',
   raceBox: 'flex relative border-dashed border-b-2 w-full',
   carImg:
-    'absolute top-[0px] left-[0px] w-[40px] bottom-[3px] rounded-tl-[15px] rounded-tr-[40px]',
+    'absolute top-[0px] left-[0px] w-[40px] bottom-[3px] rounded-tl-[15px] rounded-tr-[40px] relative',
   finishLine:
     'absolute w-[46px] h-full right-[0px] border-l-2 border-dotted border-white',
 };
@@ -102,6 +102,22 @@ const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
   });
 };
 
+const createWheels = (parent: HTMLElement): void => {
+  createElement({
+    tagName: 'div',
+    parent: parent,
+    className:
+      'w-[14px] h-[14px] bg-stone-950 rounded-full -bottom-[5px] left-[3px] absolute border-amber-800 border-2',
+  });
+
+  createElement({
+    tagName: 'div',
+    parent: parent,
+    className:
+      'w-[14px] h-[14px] bg-stone-950 rounded-full -bottom-[5px] right-[3px] absolute border-amber-800 border-2',
+  });
+};
+
 const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
   const boxForButtons = createElement({
     tagName: 'div',
@@ -131,6 +147,7 @@ const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
     parent: raceBox,
     className: styles.carImg,
   });
+  createWheels(carImg);
   createElement({
     tagName: 'div',
     parent: raceBox,
