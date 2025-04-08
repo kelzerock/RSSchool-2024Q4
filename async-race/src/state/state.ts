@@ -9,6 +9,12 @@ export type Car = {
   id: number;
 };
 
+export type Winner = {
+  id: number;
+  wins: number;
+  time: number;
+};
+
 export type TypesForAnimation = {
   element: HTMLElement;
   box: HTMLElement;
@@ -117,7 +123,8 @@ class State {
 
   public maxViewCar = maxViewCar;
   public page: number;
-  public state: { garage: Car[]; winners: Car[] };
+  public state: { garage: Car[]; winners: Winner[] };
+
   public updateCar = async (car: Car): Promise<void> => {
     const data = await fetch(`${URL_API}/garage/${car.id}`, {
       method: 'PUT',
@@ -129,9 +136,6 @@ class State {
 
     if (data.ok) {
       this.state.garage = this.state.garage.map((item) =>
-        item.id === car.id ? { ...item, ...car } : item
-      );
-      this.state.winners = this.state.winners.map((item) =>
         item.id === car.id ? { ...item, ...car } : item
       );
       mainPage();
