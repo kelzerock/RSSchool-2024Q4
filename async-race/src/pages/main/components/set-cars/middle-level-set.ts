@@ -79,7 +79,6 @@ export const createMiddleLevelSetCars = (
     inputText.value = '';
   };
   buttonUpdateCar.addEventListener('click', async () => {
-    console.log({ carDataForCreate });
     await stateRace.updateCar({ ...carDataForCreate });
     clearInputs();
   });

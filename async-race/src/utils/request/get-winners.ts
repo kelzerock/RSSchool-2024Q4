@@ -1,8 +1,8 @@
 import { URL_API } from '../../constants/api';
-import { type Winner } from '../../state/state';
+import { stateRace, type Winner } from '../../state/state';
 import { isWinner } from '../is-winner';
-type Sort = 'id' | 'wins' | 'time';
-type Order = 'ASC' | 'DESC';
+export type Sort = 'id' | 'wins' | 'time';
+export type Order = 'ASC' | 'DESC';
 type Query = {
   page?: number;
   limit?: number;
@@ -33,12 +33,16 @@ export const getWinners = async (
 ): Promise<Winner[] | undefined> => {
   const queryPath = createQueryPath(query);
 
-  const data = await fetch(`${URL_API}/winners${queryPath || ''}`, {
+  const response = await fetch(`${URL_API}/winners${queryPath || ''}`, {
     method: 'GET',
   });
 
-  if (data.ok) {
-    const winners = await data.json();
+  if (response.ok) {
+    const count = response.headers.get('X-Total-Count');
+    if (count) {
+      stateRace.countWinner = Number.parseInt(count);
+    }
+    const winners = await response.json();
     if (winners.every(isWinner)) {
       return winners;
     }
