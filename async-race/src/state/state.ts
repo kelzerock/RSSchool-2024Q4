@@ -2,7 +2,6 @@ import { URL_API } from '../constants/api';
 import { mainPage } from '../pages/main/main-page';
 import { filteredDataForPagination } from '../utils/filtered-data-for-pagination';
 import { isCar } from '../utils/is-car';
-import type { Order, Sort } from '../utils/request/get-winners';
 
 export type Car = {
   name: string;
@@ -24,6 +23,17 @@ export type TypesForAnimation = {
   startButton: HTMLElement;
   stopButton: HTMLElement;
 };
+
+export enum Sort {
+  wins = 'wins',
+  time = 'time',
+  id = 'id',
+}
+
+export enum Order {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
 
 export type pageDataParameters = {
   page: number;
@@ -73,7 +83,12 @@ class State {
     const pageString = localStorage.getItem('currentPage');
     const page = pageString ? Number.parseInt(pageString) : startNumber;
     this.page = page;
-    this.pageWinnersData = { page: 1, limit: 10, sort: 'time', order: 'ASC' };
+    this.pageWinnersData = {
+      page: 1,
+      limit: 10,
+      sort: Sort.time,
+      order: Order.ASC,
+    };
     this.state = { garage: [], winners: [] };
     this.viewCars = [];
     this.viewStateModels = new Map();

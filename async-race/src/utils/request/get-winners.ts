@@ -1,8 +1,11 @@
 import { URL_API } from '../../constants/api';
-import { stateRace, type Winner } from '../../state/state';
+import {
+  type Sort,
+  type Order,
+  stateRace,
+  type Winner,
+} from '../../state/state';
 import { isWinner } from '../is-winner';
-export type Sort = 'id' | 'wins' | 'time';
-export type Order = 'ASC' | 'DESC';
 type Query = {
   page?: number;
   limit?: number;

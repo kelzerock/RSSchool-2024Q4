@@ -1,6 +1,13 @@
-import { type Car, stateRace, type Winner } from '../../state/state';
+import {
+  type Car,
+  Order,
+  Sort,
+  stateRace,
+  type Winner,
+} from '../../state/state';
 import { createElement } from '../../utils/create-element';
 import { handleName } from '../../utils/handle-name';
+import { saveDataWinners, winnersPage } from './winners-page';
 
 const INDEX_NAME = 1;
 const styles = {
@@ -53,13 +60,40 @@ export const createWinnersTable = (parent: HTMLElement): void => {
     parent,
     className: styles.title,
   });
-  ['id', 'car', 'color', 'wins', 'best time'].forEach((text, index) => {
-    createElement({
+  [
+    { text: 'id', attr: Sort.id },
+    { text: 'car' },
+    { text: 'color' },
+    { text: 'wins', attr: Sort.wins },
+    { text: 'best time', attr: Sort.time },
+  ].forEach((item, index) => {
+    const element = createElement({
       tagName: 'div',
       parent: title,
       className: index === INDEX_NAME ? styles.textTitleWide : styles.textTitle,
-      text,
+      text: item.text,
     });
+    if (item.attr) {
+      element.classList.add(
+        'cursor-pointer',
+        'hover:bg-stone-500',
+        'hover:rounded-lg'
+      );
+      element.dataset['type'] = item.attr;
+      element.addEventListener('click', async () => {
+        if (item.attr === stateRace.pageWinnersData.sort) {
+          const nextOrder =
+            Order.ASC === stateRace.pageWinnersData.order
+              ? Order.DESC
+              : Order.ASC;
+          stateRace.pageWinnersData.order = nextOrder;
+        } else {
+          stateRace.pageWinnersData.sort = item.attr;
+        }
+        saveDataWinners(stateRace.pageWinnersData);
+        await winnersPage();
+      });
+    }
   });
 
   stateRace.state.winners.forEach((winner) => {

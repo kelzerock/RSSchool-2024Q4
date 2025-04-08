@@ -13,7 +13,7 @@ const styles = {
   wrapperButtons: 'flex-row flex my-1 gap-x-1',
 };
 
-const saveDataWinners = (data: pageDataParameters): void => {
+export const saveDataWinners = (data: pageDataParameters): void => {
   localStorage.setItem('winners', JSON.stringify(data));
 };
 
