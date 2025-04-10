@@ -9,7 +9,6 @@ const controllers: Map<number, AbortController> = new Map<
 >();
 
 type direction = 'started' | 'stopped';
-type flag = { flag: boolean };
 
 const startEngine = async (
   car: Car,
@@ -31,7 +30,7 @@ const startEngine = async (
     const data = await response.json();
     if (isVelocityData(data)) {
       const duration = data.distance / data.velocity;
-      const promise = driveModeEngine(car, controller, duration);
+      const promise = driveModeEngine(car, controller);
       return { promise, duration };
     }
   }
@@ -39,8 +38,7 @@ const startEngine = async (
 
 const stopEngine = async (
   car: Car,
-  direction: direction,
-  flag?: flag
+  direction: direction
 ): Promise<
   | {
       duration: number;
@@ -56,8 +54,8 @@ const stopEngine = async (
       { method: 'PATCH' }
     );
     if (response.ok) {
+      // if (flag) flag.flag = true;
       const result = await response.json();
-      if (flag) flag.flag = true;
       return result;
     }
     controllers.delete(car.id);
@@ -66,8 +64,7 @@ const stopEngine = async (
 
 export const stopStartEngine = async (
   car: Car,
-  direction: direction,
-  flag?: flag
+  direction: direction
 ): Promise<
   | {
       duration: number;
@@ -78,6 +75,6 @@ export const stopStartEngine = async (
   if (direction === 'started') {
     return await startEngine(car, direction);
   } else if (direction === 'stopped') {
-    return await stopEngine(car, direction, flag);
+    return await stopEngine(car, direction);
   }
 };

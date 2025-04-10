@@ -3,16 +3,9 @@ import { type Car } from '../../state/state';
 
 export const driveModeEngine = async (
   car: Car,
-  controller: AbortController,
-  duration: number
+  controller: AbortController
 ): Promise<undefined | string | { success: boolean }> => {
   const stopCarCode = 500;
-
-  const timeoutPromise = new Promise<{ success: boolean }>((resolve) => {
-    setTimeout(() => {
-      resolve({ success: true });
-    }, duration);
-  });
 
   const fetchPromise = (async (): Promise<
     undefined | string | { success: boolean }
@@ -37,7 +30,7 @@ export const driveModeEngine = async (
     }
   })();
 
-  return Promise.race([timeoutPromise, fetchPromise]);
+  return fetchPromise;
 };
 
 function handleError(error: unknown): void {

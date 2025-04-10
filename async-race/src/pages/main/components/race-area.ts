@@ -167,8 +167,8 @@ const handleClickStartCarEngine = async (
 ): Promise<void> => {
   setDisabledElements([startCarEngine], true);
   setDisabledElements([stopCarEngine], false);
-  const data = await stopStartEngine(car, 'started');
   abort.flag = false;
+  const data = await stopStartEngine(car, 'started');
   if (data) {
     animate({
       timing: linear,
@@ -226,7 +226,7 @@ const createMiddleLevelRace = ({ car, parent }: CarForRaceItem): void => {
     setDisabledElements([startCarEngine], false);
     setDisabledElements([stopCarEngine], true);
     abort.flag = true;
-    await stopStartEngine(car, 'stopped', abort);
     carImg.style.left = '0px';
+    await stopStartEngine(car, 'stopped');
   });
 };

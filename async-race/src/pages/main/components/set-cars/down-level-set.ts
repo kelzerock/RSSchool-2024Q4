@@ -11,16 +11,19 @@ import { linear } from '../../../../utils/animation/timing';
 import { drawAnimate } from '../../../../utils/animation/draw-animation';
 import { handleWinner } from '../handle-winner';
 
-type dataForRace = {
+type dataForPromise = {
   id: number;
-  promise: Promise<
-    | undefined
-    | {
-        duration: number;
-        promise: Promise<undefined | string | { success: boolean }>;
-      }
-  >;
+  duration: number;
+  promise: Promise<void>; // Если промис возвращает void
 };
+
+type dataForRace = Promise<
+  | {
+      duration: number;
+      promise: Promise<string | { success: boolean } | undefined>;
+    }
+  | undefined
+>;
 
 const disabledStyle =
   'disabled:bg-stone-500 disabled:hover:cursor-not-allowed disabled:hover:text-stone-900 disabled:text-900';
@@ -70,8 +73,8 @@ function performAnimation(
         }
     >;
   }
-): void {
-  animate({
+): Promise<void> {
+  return animate({
     timing: linear,
     draw: drawAnimate,
     durationData: data,
@@ -84,37 +87,34 @@ function performAnimation(
 const handleRaceClick = async (): Promise<void> => {
   const dataPromises: dataForRace[] = [];
   stateRace.viewCars.forEach((car) => {
-    dataPromises.push({ id: car.id, promise: stopStartEngine(car, 'started') });
+    dataPromises.push(stopStartEngine(car, 'started'));
   });
   const info = await Promise.allSettled(dataPromises);
-  new Promise((resolve) => {
-    info.forEach(async (element) => {
+  new Promise((resolve: (value: dataForPromise | undefined) => void) => {
+    info.forEach(async (element, index) => {
       if (element.status === 'fulfilled' && typeof element.value === 'object') {
-        const elements = stateRace.viewStateModels.get(element.value.id);
-        const data = await element.value.promise;
+        const idCar = stateRace.viewCars[index].id;
+        const elements = stateRace.viewStateModels.get(idCar);
+        const data = element.value;
         if (elements && data) {
           setDisabledElements([elements.startButton], true);
           setDisabledElements([elements.stopButton], false);
           elements.cancelFlag.flag = false;
-          performAnimation(elements, data);
+          const promise = performAnimation(elements, data);
           const newInfo = await data.promise;
-          if (checkSuccess(newInfo)) {
-            resolve({ id: element.value.id, duration: data.duration });
+          if (checkSuccess(newInfo) && !elements.cancelFlag.flag) {
+            resolve({ id: idCar, duration: data.duration, promise });
           }
         }
       }
     });
-  }).then((data) => {
-    if (
-      data &&
-      typeof data === 'object' &&
-      'id' in data &&
-      'duration' in data &&
-      typeof data.duration === 'number'
-    ) {
+  }).then((data: dataForPromise | undefined): void => {
+    if (data) {
       const car = stateRace.state.garage.find((car) => car.id === data.id);
       if (car) {
-        handleWinner(car, data.duration);
+        data.promise.then(() => {
+          handleWinner(car, data.duration);
+        });
       }
     }
   });
