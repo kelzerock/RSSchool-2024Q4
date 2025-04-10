@@ -1,5 +1,5 @@
-export type TypeCreateNode = {
-  tag: keyof HTMLElementTagNameMap;
+export type TypeCreateNode<T extends keyof HTMLElementTagNameMap> = {
+  tag: T;
   className?: string;
   parent?: HTMLElement | DocumentFragment;
   text?: string;

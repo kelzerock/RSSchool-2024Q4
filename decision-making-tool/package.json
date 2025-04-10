@@ -7,8 +7,9 @@
     "build:dev": "webpack --env mode=development",
     "start": "webpack serve --env mode=development --env port=3000",
     "prepare": "cd .. && husky decision-making-tool/.husky",
-    "lint:fix": "eslint --fix",
-    "lint": "eslint",
+    "prettier": "prettier --write .",
+    "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
     "commitlint": "commitlint --edit",
     "stylelint": "npx stylelint '**/*.css'"
   },
