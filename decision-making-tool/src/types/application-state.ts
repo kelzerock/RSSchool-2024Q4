@@ -1,4 +1,4 @@
-import { OptionType } from "./option-type";
+import { type OptionType } from "./option-type";
 
 type Elements = Record<string, HTMLElement>;
 

@@ -1,4 +1,4 @@
-import { ApplicationState } from "../types/application-state";
+import { type ApplicationState } from "../types/application-state";
 
 export const isReadyToMakeDecision = (state: ApplicationState): boolean => {
   const resultRightArray = state.options.filter(

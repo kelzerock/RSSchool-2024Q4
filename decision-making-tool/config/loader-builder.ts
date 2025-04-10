@@ -12,11 +12,6 @@ const loaderBuilder = (): ModuleOptions["rules"] => {
     use: ["style-loader", "css-loader", "postcss-loader"],
   };
 
-  // const assetsLoader = {
-  //   test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
-  //   type: 'asset/resource',
-  // }
-
   const fileLoader = {
     test: /\.mp3$/,
     loader: "file-loader",

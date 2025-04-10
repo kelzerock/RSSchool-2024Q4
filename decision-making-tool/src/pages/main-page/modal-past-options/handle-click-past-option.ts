@@ -1,7 +1,7 @@
 import { DOMElements } from "../../../enums/dom-elements";
 import { saveToLocalStorage } from "../../../state/application-state";
-import { ApplicationState } from "../../../types/application-state";
-import { OptionType } from "../../../types/option-type";
+import { type ApplicationState } from "../../../types/application-state";
+import { type OptionType } from "../../../types/option-type";
 import { addOption } from "../add-option";
 
 export const handleClickPastOption = (

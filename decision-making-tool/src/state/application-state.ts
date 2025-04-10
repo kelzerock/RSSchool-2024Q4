@@ -1,5 +1,5 @@
 import { isAppStateDataCorrect } from "../pages/main-page/handle-click";
-import { ApplicationState } from "../types/application-state";
+import { type ApplicationState } from "../types/application-state";
 
 const appState: ApplicationState = {
   options: [{ index: 1, description: "", weight: "" }],

@@ -84,16 +84,16 @@ export const drawCircle = (
               option.color,
             );
 
-            drawInformationTitle(
+            drawInformationTitle({
               context,
-              option.proportion,
-              option.description,
+              proportion: option.proportion,
+              description: option.description,
               angle,
               endAngle,
               centerX,
               centerY,
               radius,
-            );
+            });
           }
 
           drawTriangle(context, widthElement, centerX, centerY, radius);

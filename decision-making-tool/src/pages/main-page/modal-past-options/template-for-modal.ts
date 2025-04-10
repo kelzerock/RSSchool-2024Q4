@@ -1,5 +1,5 @@
 import { appState } from "../../../state/application-state";
-import { ModalTypes } from "../../../types/modal-types";
+import { type ModalTypes } from "../../../types/modal-types";
 import { createNode } from "../../../utils/node";
 import { handleClickPastOption } from "./handle-click-past-option";
 

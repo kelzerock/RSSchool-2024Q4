@@ -1,8 +1,8 @@
-import type { PathRoute } from "../enums/path";
+import { type PathRoute } from "../enums/path";
 import { create404page } from "../pages/404-page/404-page";
 import { createDecisionPage } from "../pages/decision-page/decision-page";
 import { createMainPage } from "../pages/main-page/main-page";
-import { RoutesMap } from "../types/routes";
+import { type RoutesMap } from "../types/routes";
 
 export const route = (event: Event): void => {
   event = event || window.event;

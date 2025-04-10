@@ -1,4 +1,4 @@
-import { TypeCreateNode } from "../types/type-create-node";
+import { type TypeCreateNode } from "../types/type-create-node";
 
 export const createNode = ({
   tag,

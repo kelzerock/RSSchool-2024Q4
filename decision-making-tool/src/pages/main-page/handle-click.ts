@@ -1,6 +1,6 @@
 import { handleLocation } from "../../router/router";
 import { saveToLocalStorage } from "../../state/application-state";
-import { ApplicationState } from "../../types/application-state";
+import { type ApplicationState } from "../../types/application-state";
 import { isReadyToMakeDecision } from "../../utils/is-ready-to-make-decision";
 import { createNode } from "../../utils/node";
 import { addOption } from "./add-option";

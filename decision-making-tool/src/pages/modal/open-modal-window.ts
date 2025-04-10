@@ -1,4 +1,4 @@
-import { ModalTypes } from "../../types/modal-types";
+import type { ModalTypes } from "../../types/modal-types";
 import { createNode } from "../../utils/node";
 import { removeElementWithChildren } from "../../utils/remove-element-with-children";
 import { handleCloseModal } from "./handle-close-modal";
@@ -9,7 +9,6 @@ export const openModalWindow = ({
 }: ModalTypes): void => {
   const styleModalWindow =
     "fixed top-0 left-0 right-0 bottom-0 w-full h-full bg-amber-900/70 flex justify-center items-center";
-  // "absolute top-0 left-0 right-0 bottom-0 w-screen h-screen bg-amber-900/70 flex justify-center items-center";
   const styleFormModal =
     "w-[90%] max-w-[600px] h-min py-2 px-2 border-3 border-emerald-600 bg-emerald-300 rounded-lg";
 

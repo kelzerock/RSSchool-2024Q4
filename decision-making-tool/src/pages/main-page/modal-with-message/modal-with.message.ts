@@ -1,5 +1,5 @@
 import { simpleButton } from "../../../styles/styles";
-import { ModalTypes } from "../../../types/modal-types";
+import { type ModalTypes } from "../../../types/modal-types";
 import { createNode } from "../../../utils/node";
 import { openModalWindow } from "../../modal/open-modal-window";
 

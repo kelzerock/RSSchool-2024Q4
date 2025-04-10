@@ -1,19 +1,23 @@
-export const drawInformationTitle = (
-  context: CanvasRenderingContext2D,
-  proportion: number,
-  description: string,
-  angle: number,
-  endAngle: number,
-  centerX: number,
-  centerY: number,
-  radius: number,
-): void => {
-  const text =
-    proportion < 0.03
-      ? ""
-      : description.length > 7
-        ? description.slice(0, 7) + "..."
-        : description;
+import type { DrawInformationTitle } from "../../../types/draw-information-title";
+
+export const drawInformationTitle = (data: DrawInformationTitle): void => {
+  const {
+    context,
+    proportion,
+    description,
+    angle,
+    endAngle,
+    centerX,
+    centerY,
+    radius,
+  } = data;
+
+  let text = description;
+  if (proportion < 0.03) {
+    text = "";
+  } else if (description.length > 7) {
+    text = description.slice(0, 7);
+  }
 
   const textAngle = angle + (endAngle - angle) / 2;
   const textX =
