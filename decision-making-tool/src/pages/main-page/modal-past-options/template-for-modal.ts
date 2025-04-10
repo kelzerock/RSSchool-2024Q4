@@ -1,6 +1,6 @@
 import { appState } from "../../../state/application-state";
+import { ModalTypes } from "../../../types/modal-types";
 import { createNode } from "../../../utils/node";
-import type { modalTypes } from "../../modal/open-modal-window";
 import { handleClickPastOption } from "./handle-click-past-option";
 
 const stylesForModalButton = `bg-teal-700 rounded border-2 border-teal-800 py-1 px-4 text-teal-200 hover:bg-teal-800 hover:cursor-pointer hover:border-teal-700 mr-2`;
@@ -8,7 +8,7 @@ const stylesForModalButton = `bg-teal-700 rounded border-2 border-teal-800 py-1 
 const stylesForTextarea =
   "w-full bg-teal-600 py-2 px-2 outline-none resize-none h-[150px]";
 
-export const templateForModal = (): modalTypes => {
+export const templateForModal = (): ModalTypes => {
   const fragmentForModal = new DocumentFragment();
   const textArea = createNode({
     tag: "textarea",

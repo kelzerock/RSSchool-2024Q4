@@ -1,9 +1,9 @@
 import { simpleButton } from "../../../styles/styles";
+import { ModalTypes } from "../../../types/modal-types";
 import { createNode } from "../../../utils/node";
-import type { modalTypes } from "../../modal/open-modal-window";
 import { openModalWindow } from "../../modal/open-modal-window";
 
-export const modalWithMessageTemplate = (text: string): modalTypes => {
+export const modalWithMessageTemplate = (text: string): ModalTypes => {
   const template = createNode({ tag: "div", className: "p-3" });
   createNode({ tag: "p", className: "p-2", text, parent: template });
   const button = createNode({

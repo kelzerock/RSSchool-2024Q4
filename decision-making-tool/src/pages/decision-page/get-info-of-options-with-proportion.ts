@@ -1,15 +1,10 @@
-import type { ApplicationState } from "../../state/types";
+import { ApplicationState } from "../../types/application-state";
+import { correctStateType } from "../../types/shape-state-type";
 import { getRandomColor } from "../../utils/random-color";
-
-type correctStateType = {
-  proportion: number;
-  description: string;
-  color: string;
-}[];
 
 export const getInfoOfOptionsWithProportion = (
   state: ApplicationState,
-): correctStateType => {
+): correctStateType[] => {
   const correctState = state.options
     .map((option) => {
       return {

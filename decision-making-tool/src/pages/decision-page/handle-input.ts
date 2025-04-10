@@ -1,5 +1,5 @@
 import { saveToLocalStorage } from "../../state/application-state";
-import type { ApplicationState } from "../../state/types";
+import { ApplicationState } from "../../types/application-state";
 
 export const handleInput = (
   input: HTMLInputElement,

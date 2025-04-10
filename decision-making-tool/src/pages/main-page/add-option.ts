@@ -1,5 +1,5 @@
 import { appState } from "../../state/application-state";
-import type { optionType } from "../../state/types";
+import { OptionType } from "../../types/option-type";
 import { createNode } from "../../utils/node";
 import {
   handleAddOptionInput,
@@ -7,9 +7,9 @@ import {
 } from "./handle-add-option-input";
 import { handleDeleteOption } from "./handle-click";
 
-const addOption = (option: optionType, parent: HTMLElement): void => {
+const addOption = (option: OptionType, parent: HTMLElement): void => {
   const styleLiElement =
-      "bg-emerald-400 grid grid-cols-[40px_1fr_100px_150px] gap-x-1 px-1 py-1 rounded-sm",
+    "bg-emerald-400 grid grid-cols-[40px_1fr_100px_150px] gap-x-1 px-1 py-1 rounded-sm",
     styleSpanElement =
       "bg-emerald-600 rounded-md flex items-center justify-center text-white",
     styleInput =

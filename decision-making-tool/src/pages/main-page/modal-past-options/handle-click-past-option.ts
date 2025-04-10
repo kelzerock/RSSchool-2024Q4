@@ -1,6 +1,7 @@
 import { DOMElements } from "../../../enums/dom-elements";
 import { saveToLocalStorage } from "../../../state/application-state";
-import type { ApplicationState, optionType } from "../../../state/types";
+import { ApplicationState } from "../../../types/application-state";
+import { OptionType } from "../../../types/option-type";
 import { addOption } from "../add-option";
 
 export const handleClickPastOption = (
@@ -8,7 +9,7 @@ export const handleClickPastOption = (
   state: ApplicationState,
 ): void => {
   const arrayWithValues = value.split("\n");
-  const arrayWithCorrectValue: optionType[] = [];
+  const arrayWithCorrectValue: OptionType[] = [];
   arrayWithValues.forEach((value) => {
     const indexOfLastComma = value.lastIndexOf(",");
     if (indexOfLastComma !== -1) {

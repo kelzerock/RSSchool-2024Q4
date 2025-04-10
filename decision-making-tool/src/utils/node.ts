@@ -1,15 +1,4 @@
-type typeCreateNode = {
-  tag: keyof HTMLElementTagNameMap;
-  className?: string;
-  parent?: HTMLElement | DocumentFragment;
-  text?: string;
-  attributes?: attributes[];
-};
-
-type attributes = {
-  name: string;
-  value: string;
-};
+import { TypeCreateNode } from "../types/type-create-node";
 
 export const createNode = ({
   tag,
@@ -17,7 +6,7 @@ export const createNode = ({
   parent,
   text,
   attributes,
-}: typeCreateNode): HTMLElement => {
+}: TypeCreateNode): HTMLElement => {
   const node = document.createElement(tag);
   node.className = className || "";
   node.textContent = text || "";
