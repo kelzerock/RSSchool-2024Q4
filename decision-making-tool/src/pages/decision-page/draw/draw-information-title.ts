@@ -20,6 +20,7 @@ export const drawInformationTitle = (data: DrawInformationTitle): void => {
   }
 
   const textAngle = angle + (endAngle - angle) / 2;
+
   const textX =
     centerX + (radius / 1.5) * Math.cos(angle + (endAngle - angle) / 2);
   const textY =

@@ -1,3 +1,11 @@
+import {
+  BACKGROUND_COLOR_TRIANGLE,
+  LINE_WIDTH_TRIANGLE,
+  RATIO_FOR_TRIANGLE,
+  RATIO_TO_MAIN_ELEMENT,
+  STROKE_COLOR_TRIANGLE,
+} from "../../../constants/constants";
+
 export const drawTriangle = (
   context: CanvasRenderingContext2D,
   widthElement: number,
@@ -5,14 +13,20 @@ export const drawTriangle = (
   centerY: number,
   radius: number,
 ): void => {
-  const widthTriangle = widthElement / 10;
+  const widthTriangle = widthElement / RATIO_TO_MAIN_ELEMENT;
   context.beginPath();
-  context.moveTo(centerX - widthTriangle / 2, centerY - radius);
+  context.moveTo(
+    centerX - widthTriangle / RATIO_FOR_TRIANGLE,
+    centerY - radius,
+  );
   context.lineTo(centerX, centerY - radius + widthTriangle);
-  context.lineTo(centerX + widthTriangle / 2, centerY - radius);
-  context.fillStyle = "#009689";
+  context.lineTo(
+    centerX + widthTriangle / RATIO_FOR_TRIANGLE,
+    centerY - radius,
+  );
+  context.fillStyle = BACKGROUND_COLOR_TRIANGLE;
   context.fill();
-  context.lineWidth = 2;
-  context.strokeStyle = "#0b4f4a";
+  context.lineWidth = LINE_WIDTH_TRIANGLE;
+  context.strokeStyle = STROKE_COLOR_TRIANGLE;
   context.stroke();
 };

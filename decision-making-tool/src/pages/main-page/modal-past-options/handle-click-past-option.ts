@@ -10,6 +10,7 @@ export const handleClickPastOption = (
 ): void => {
   const arrayWithValues = value.split("\n");
   const arrayWithCorrectValue: OptionType[] = [];
+
   arrayWithValues.forEach((value) => {
     const indexOfLastComma = value.lastIndexOf(",");
     if (indexOfLastComma !== -1) {
@@ -31,5 +32,6 @@ export const handleClickPastOption = (
     state.options = [...state.options, option];
     addOption(option, state.elements[DOMElements.listOfOption]);
   });
+
   saveToLocalStorage();
 };

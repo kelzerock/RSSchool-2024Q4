@@ -16,10 +16,13 @@ import {
   type InputDataForAnimation,
 } from "../../types/input-data-for-animation";
 import { type CorrectStateType } from "../../types/shape-state-type";
-
-const SIZE_CANVAS = 500;
-const RADIUS = 230;
-const START_ANGLE = 0;
+import { createFinalRandomAngle } from "../../utils/create-final-random-angle";
+import {
+  RADIUS,
+  RATIO_CANVAS,
+  SIZE_CANVAS,
+  START_ANGLE,
+} from "../../constants/constants";
 
 const findIndex = (number_: number, array: number[]): number => {
   let count = 1;
@@ -132,8 +135,8 @@ const getSizeMainShape = (
 } => {
   const widthElement = size;
   const heightElement = size;
-  const centerX = size / 2;
-  const centerY = size / 2;
+  const centerX = size / RATIO_CANVAS;
+  const centerY = size / RATIO_CANVAS;
   return { widthElement, heightElement, centerX, centerY, radius };
 };
 
@@ -187,9 +190,8 @@ function animate(data: InputDataForAnimation): void {
   const { duration, timing, context, widthElement, heightElement, callback } =
     data;
   const start = performance.now();
-  const fullRotations = Math.floor(Math.random() * 5 + 5);
-  const extraAngle = Math.random() * Math.PI * 2;
-  const finalAngle = Math.PI * 2 * fullRotations + extraAngle;
+
+  const finalAngle = createFinalRandomAngle(duration);
 
   const storageAngle = localStorage.getItem("angle");
   let startAngle = 0;

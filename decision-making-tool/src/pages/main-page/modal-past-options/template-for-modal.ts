@@ -10,6 +10,7 @@ const stylesForTextarea =
 
 export const templateForModal = (): ModalTypes => {
   const fragmentForModal = new DocumentFragment();
+
   const textArea = createNode({
     tag: "textarea",
     className: stylesForTextarea,
@@ -25,6 +26,7 @@ title with "quotes",4   -> title="title with "quotes"", wight=4`,
       },
     ],
   });
+
   const buttonsWrapper = createNode({ tag: "div", parent: fragmentForModal });
   const buttonCancel = createNode({
     tag: "button",
@@ -32,12 +34,14 @@ title with "quotes",4   -> title="title with "quotes"", wight=4`,
     parent: buttonsWrapper,
     text: "cancel",
   });
+
   const buttonConfirm = createNode({
     tag: "button",
     className: stylesForModalButton,
     parent: buttonsWrapper,
     text: "confirm",
   });
+
   buttonConfirm.addEventListener("click", function handleClick() {
     if (textArea instanceof HTMLTextAreaElement) {
       const value = textArea.value;
@@ -45,6 +49,7 @@ title with "quotes",4   -> title="title with "quotes"", wight=4`,
     }
     buttonConfirm.removeEventListener("click", handleClick);
   });
+
   return {
     template: fragmentForModal,
     closeElements: [buttonCancel, buttonConfirm],

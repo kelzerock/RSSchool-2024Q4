@@ -3,6 +3,7 @@ import { appState, saveToLocalStorage } from "../../state/application-state";
 
 export const handleClickSoundButton = (element: HTMLElement): void => {
   const context = element.textContent;
+
   if (context === "sound: off") {
     element.textContent = "sound: on";
     element.dataset.sound = "true";
@@ -12,6 +13,7 @@ export const handleClickSoundButton = (element: HTMLElement): void => {
     element.dataset.sound = "false";
     appState.sound = false;
   }
+
   saveToLocalStorage();
 };
 

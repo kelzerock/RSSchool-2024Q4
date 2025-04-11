@@ -1,3 +1,15 @@
-export const GITHUB_LINK = "/kelzerock-JSFE2024Q4/decision-making-tool";
-
 export const DISABLED = "disabled";
+export const MS_IN_MINUTE = 1000;
+export const FULL_ROTATE_CIRCLE = 5;
+export const FULL_CIRCLE = Math.PI * 2;
+export const LINE_WEIGHT = 1;
+export const STROKE_COLOR_SECTOR = "black";
+export const BACKGROUND_COLOR_TRIANGLE = "#009689";
+export const LINE_WIDTH_TRIANGLE = 2;
+export const STROKE_COLOR_TRIANGLE = "#0b4f4a";
+export const RATIO_TO_MAIN_ELEMENT = 10;
+export const RATIO_FOR_TRIANGLE = 2;
+export const SIZE_CANVAS = 500;
+export const RADIUS = 230;
+export const START_ANGLE = 0;
+export const RATIO_CANVAS = 2;

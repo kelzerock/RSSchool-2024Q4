@@ -1,3 +1,5 @@
+import { LINE_WEIGHT, STROKE_COLOR_SECTOR } from "../../../constants/constants";
+
 export const drawSector = (
   context: CanvasRenderingContext2D,
   centerX: number,
@@ -25,7 +27,7 @@ export const drawSector = (
     centerX + radius * Math.cos(endAngle),
     centerY + radius * Math.sin(endAngle),
   );
-  context.strokeStyle = "black";
-  context.lineWidth = 1;
+  context.strokeStyle = STROKE_COLOR_SECTOR;
+  context.lineWidth = LINE_WEIGHT;
   context.stroke();
 };

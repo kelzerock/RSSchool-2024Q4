@@ -99,11 +99,10 @@ export const handleLoadFileWithOptions = async (
             createMainPage();
           } else {
             modalWithMessage("Be careful! Loaded data was incorrect!");
-            console.error("Данные некорректны");
           }
         } catch (error) {
           modalWithMessage("Mistake in process to read file!");
-          console.error("Ошибка при чтении файла:", error);
+          console.error(error);
         }
       }
     }
