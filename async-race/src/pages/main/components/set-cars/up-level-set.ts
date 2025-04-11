@@ -2,7 +2,7 @@ import { stateRace } from '../../../../state/state';
 import type { CarForCreate } from '../../../../types/car-for-create';
 import { createElement } from '../../../../utils/create-element';
 import { mainPage } from '../../main-page';
-import { handleEventUpLevel } from './handle-event-up-level';
+import { handleEventInput } from './handle-functions/handle-event-input';
 
 const styles = {
   wrapperLevel: 'flex flex-row gap-x-2 items-center ',
@@ -72,11 +72,11 @@ export const createUpLevelSetCars = (parent: HTMLElement): void => {
     carDataForCreate
   );
   inputColor.addEventListener('change', (event: Event) => {
-    handleEventUpLevel(event, carDataForCreate, inputColor);
+    handleEventInput(event, carDataForCreate, inputColor);
     saveData(carDataForCreate);
   });
   inputText.addEventListener('input', (event: Event) => {
-    handleEventUpLevel(event, carDataForCreate, inputText);
+    handleEventInput(event, carDataForCreate, inputText);
     saveData(carDataForCreate);
   });
   const clearInputs = (): void => {

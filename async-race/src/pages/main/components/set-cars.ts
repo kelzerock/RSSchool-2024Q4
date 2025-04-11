@@ -1,7 +1,7 @@
 import type { Car } from '../../../types/car';
 import { createElement } from '../../../utils/create-element';
 import { createButtonsRaceGroup } from './set-cars/buttons-race-group';
-import { createMiddleLevelSetCars } from './set-cars/middle-level-set';
+import { createUpdateGroupSet } from './set-cars/buttons-update-group';
 import { createUpLevelSetCars } from './set-cars/up-level-set';
 
 const styles = {
@@ -15,7 +15,7 @@ export const createSetCars = (parent: HTMLElement): ((car: Car) => void) => {
     parent,
   });
   createUpLevelSetCars(wrapperForSetCars);
-  const callback = createMiddleLevelSetCars(wrapperForSetCars);
+  const callback = createUpdateGroupSet(wrapperForSetCars);
   createButtonsRaceGroup(wrapperForSetCars);
   return callback;
 };
