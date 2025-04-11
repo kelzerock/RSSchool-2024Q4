@@ -1,17 +1,8 @@
 import { URL_API } from '../../constants/api';
-import {
-  type Sort,
-  type Order,
-  stateRace,
-  type Winner,
-} from '../../state/state';
+import { stateRace } from '../../state/state';
+import type { Query } from '../../types/query';
+import type { Winner } from '../../types/winner';
 import { isWinner } from '../is-winner';
-type Query = {
-  page?: number;
-  limit?: number;
-  sort?: Sort;
-  order?: Order;
-};
 
 const createQueryPath = (query: Query | undefined): null | string => {
   if (query === undefined) return null;

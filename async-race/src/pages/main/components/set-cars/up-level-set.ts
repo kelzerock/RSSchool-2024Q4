@@ -1,7 +1,8 @@
 import { stateRace } from '../../../../state/state';
+import type { CarForCreate } from '../../../../types/car-for-create';
 import { createElement } from '../../../../utils/create-element';
 import { mainPage } from '../../main-page';
-import { handleEventUpLevel, type DataCar } from './handle-event-up-level';
+import { handleEventUpLevel } from './handle-event-up-level';
 
 const styles = {
   wrapperLevel: 'flex flex-row gap-x-2 items-center ',
@@ -14,7 +15,7 @@ const styles = {
 
 const createElements = (
   parent: HTMLElement,
-  car: DataCar
+  car: CarForCreate
 ): [HTMLInputElement, HTMLInputElement, HTMLButtonElement] => {
   const inputText = createElement({
     tagName: 'input',
@@ -48,14 +49,14 @@ const createElements = (
 };
 
 const createCarStorage = 'createCarStorage';
-const saveData = (data: DataCar): void => {
+const saveData = (data: CarForCreate): void => {
   localStorage.setItem(createCarStorage, JSON.stringify(data));
 };
 
 export const createUpLevelSetCars = (parent: HTMLElement): void => {
   const data: string | null = localStorage.getItem(createCarStorage);
-  const initialData: DataCar = { name: '', color: '#ffffff' };
-  const carDataForCreate: DataCar = { ...initialData };
+  const initialData: CarForCreate = { name: '', color: '#ffffff' };
+  const carDataForCreate: CarForCreate = { ...initialData };
   if (data) {
     const { name, color } = JSON.parse(data);
     carDataForCreate.color = color;

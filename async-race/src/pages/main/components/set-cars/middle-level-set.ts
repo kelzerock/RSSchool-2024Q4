@@ -1,4 +1,5 @@
-import { stateRace, type Car } from '../../../../state/state';
+import { stateRace } from '../../../../state/state';
+import type { Car } from '../../../../types/car';
 import { createElement } from '../../../../utils/create-element';
 import { setDisabledElements } from '../../../../utils/set-disabled-elements';
 import { handleEventUpLevel } from './handle-event-up-level';

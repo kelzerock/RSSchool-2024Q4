@@ -1,4 +1,4 @@
-import type { TypesForAnimation } from '../../state/state';
+import type { TypesForAnimation } from '../../types/types-for-animation';
 import { animate } from './animation';
 import { draw } from './draw-animation';
 import { linear } from './timing';

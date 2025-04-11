@@ -1,4 +1,4 @@
-import type { CarForCreate } from '../state/state';
+import type { CarForCreate } from '../types/car-for-create';
 import { generateRandomCarName } from './generate-random-car-name';
 import { randomHexColor } from './random-color';
 

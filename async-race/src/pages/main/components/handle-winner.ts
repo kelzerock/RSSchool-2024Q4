@@ -1,5 +1,6 @@
 import { createModal } from '../../../components/modal/modal';
-import { stateRace, type Car } from '../../../state/state';
+import { stateRace } from '../../../state/state';
+import type { Car } from '../../../types/car';
 import { isWinner } from '../../../utils/is-winner';
 import { createWinner } from '../../../utils/request/create-winner';
 import { getWinners } from '../../../utils/request/get-winners';

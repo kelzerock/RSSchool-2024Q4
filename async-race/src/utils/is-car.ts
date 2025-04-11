@@ -1,4 +1,4 @@
-import { type Car } from '../state/state';
+import type { Car } from '../types/car';
 
 export const isCar = (car: unknown): car is Car => {
   return car &&

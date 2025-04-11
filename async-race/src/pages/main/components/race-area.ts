@@ -1,4 +1,5 @@
-import { type Car, stateRace } from '../../../state/state';
+import { stateRace } from '../../../state/state';
+import type { Car } from '../../../types/car';
 import { animate } from '../../../utils/animation/animation';
 import { draw } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';

@@ -1,5 +1,5 @@
 import { URL_API } from '../../constants/api';
-import { type Car } from '../../state/state';
+import type { Car } from '../../types/car';
 
 export const driveModeEngine = async (
   car: Car,

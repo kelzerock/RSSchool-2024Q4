@@ -1,10 +1,8 @@
-import {
-  type Car,
-  Order,
-  Sort,
-  stateRace,
-  type Winner,
-} from '../../state/state';
+import { Order } from '../../enums/order';
+import { Sort } from '../../enums/sort';
+import { stateRace } from '../../state/state';
+import type { Car } from '../../types/car';
+import type { Winner } from '../../types/winner';
 import { createElement } from '../../utils/create-element';
 import { handleName } from '../../utils/handle-name';
 import { saveDataWinners, winnersPage } from './winners-page';

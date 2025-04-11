@@ -2,8 +2,8 @@ import { stateRace } from '../../../../../state/state';
 import type { dataForPromise } from '../../../../../types/data-for-promise';
 import type { DataForRace } from '../../../../../types/data-for-race';
 import { stopStartEngine } from '../../../../../utils/request/stop-start-engine';
-import { setDisabledElements } from '../../../../../utils/set-disabled-elements';
-import { handleWinnerPromise } from '../handle-winner-promise';
+import { toggleDisabledStatus } from '../../../../../utils/toggle-disabled-status';
+import { handleWinnerPromise } from './handle-winner-promise';
 import { overwatchToRace } from '../overwatch-to-race';
 
 export const handleClickRaceButton = async (
@@ -12,8 +12,7 @@ export const handleClickRaceButton = async (
 ): Promise<void> => {
   stateRace.buttonsForRace.readyToRace = true;
   stateRace._activeStopEngineButtons = stateRace.viewCars.length;
-  setDisabledElements([raceButton], true);
-  setDisabledElements([resetButton], false);
+  toggleDisabledStatus([raceButton], [resetButton]);
 
   const carsPromises: DataForRace[] = [];
   stateRace.viewCars.forEach((car) => {

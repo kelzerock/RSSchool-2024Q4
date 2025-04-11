@@ -1,7 +1,4 @@
-export type VelocityInfo = {
-  velocity: number;
-  distance: number;
-};
+import type { VelocityInfo } from '../types/velocity-info';
 
 export const isVelocityData = (data: unknown): data is VelocityInfo => {
   return data &&

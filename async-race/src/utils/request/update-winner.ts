@@ -1,5 +1,5 @@
 import { URL_API } from '../../constants/api';
-import { type Winner } from '../../state/state';
+import type { Winner } from '../../types/winner';
 import { isWinner } from '../is-winner';
 
 const notFound = 404;

@@ -1,5 +1,5 @@
-import { type optionsWebpack } from './types/types';
 import { type Configuration } from 'webpack';
+import { type optionsWebpack } from '../src/types/options-webpack';
 
 export const bundleOutput = (
   options: optionsWebpack

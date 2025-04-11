@@ -1,6 +1,7 @@
 import { mainElement } from '../../components/main-elements/main-elements';
 import { cssButton } from '../../global-styles';
-import { type pageDataParameters, stateRace } from '../../state/state';
+import { stateRace } from '../../state/state';
+import type { pageDataParameters } from '../../types/page-data-parameters';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
 import { getWinners } from '../../utils/request/get-winners';

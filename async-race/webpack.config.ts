@@ -1,7 +1,8 @@
 import path from 'node:path';
 import { type Configuration } from 'webpack';
 import { bundleConfig } from './webpack-config/bundle-config';
-import { type mode, type optionsWebpack } from './webpack-config/types/types';
+import type { mode } from './src/types/mode';
+import type { optionsWebpack } from './src/types/options-webpack';
 
 type Environment = {
   mode: mode;

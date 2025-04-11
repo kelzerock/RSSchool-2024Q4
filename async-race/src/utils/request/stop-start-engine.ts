@@ -1,5 +1,5 @@
 import { URL_API } from '../../constants/api';
-import { type Car } from '../../state/state';
+import type { Car } from '../../types/car';
 import { isVelocityData } from '../is-velocity-data';
 import { driveModeEngine } from './drive-mode-engine';
 

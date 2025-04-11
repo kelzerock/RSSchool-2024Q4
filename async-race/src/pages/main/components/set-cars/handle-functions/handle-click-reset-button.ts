@@ -1,13 +1,13 @@
 import { stateRace } from '../../../../../state/state';
-import { setDisabledElements } from '../../../../../utils/set-disabled-elements';
+import { toggleDisabledStatus } from '../../../../../utils/toggle-disabled-status';
 
 export const handleClickResetButton = (
   resetButton: HTMLButtonElement,
   raceButton: HTMLButtonElement
 ): void => {
-  setDisabledElements([resetButton], true);
-  setDisabledElements([raceButton], false);
+  toggleDisabledStatus([resetButton], [raceButton]);
   stateRace.buttonsForRace.readyToRace = false;
+
   stateRace.viewStateModels.forEach((car) => {
     car.stopButton.click();
   });

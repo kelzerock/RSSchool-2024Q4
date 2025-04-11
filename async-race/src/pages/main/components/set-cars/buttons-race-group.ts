@@ -1,9 +1,9 @@
 import { stateRace } from '../../../../state/state';
 import { createElement } from '../../../../utils/create-element';
 import { cssButton } from '../../../../global-styles';
-import { handleClickResetButton } from './handle-click.ts/handle-click-reset-button';
-import { handleClickGenerateButton } from './handle-click.ts/handle-click-generate-button';
-import { handleClickRaceButton } from './handle-click.ts/handle-click-race-button';
+import { handleClickResetButton } from './handle-functions/handle-click-reset-button';
+import { handleClickGenerateButton } from './handle-functions/handle-click-generate-button';
+import { handleClickRaceButton } from './handle-functions/handle-click-race-button';
 
 const styles = {
   wrapper: 'flex flex-row gap-x-1',

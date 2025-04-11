@@ -1,4 +1,4 @@
-import { type Car } from '../../../state/state';
+import type { Car } from '../../../types/car';
 import { createElement } from '../../../utils/create-element';
 import { createButtonsRaceGroup } from './set-cars/buttons-race-group';
 import { createMiddleLevelSetCars } from './set-cars/middle-level-set';

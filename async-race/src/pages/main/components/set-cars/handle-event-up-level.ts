@@ -1,16 +1,12 @@
-export type DataCar = { name: string; color: string };
-
-const isInputElement = (
-  target: EventTarget | null
-): target is HTMLInputElement => target instanceof HTMLInputElement;
+import type { CarForCreate } from '../../../../types/car-for-create';
 
 export const handleEventUpLevel = (
   event: Event,
-  dataCar: DataCar,
-  element: HTMLElement
+  dataCar: CarForCreate,
+  element: HTMLInputElement
 ): void => {
   const { target } = event;
-  if (isInputElement(target)) {
+  if (target instanceof HTMLInputElement) {
     const { value } = target;
     if (element.getAttribute('type') === 'color') {
       dataCar.color = value;

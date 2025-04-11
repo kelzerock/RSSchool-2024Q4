@@ -1,4 +1,4 @@
-export type mode = 'prod' | 'dev';
+import type { mode } from './mode';
 
 export type optionsWebpack = {
   path: {

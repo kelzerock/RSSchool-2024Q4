@@ -1,5 +1,5 @@
 import { Styles } from '../../enums/styles';
-import { type Car } from '../../state/state';
+import type { Car } from '../../types/car';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
 

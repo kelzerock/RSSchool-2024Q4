@@ -1,48 +1,15 @@
 import { URL_API } from '../constants/api';
+import { Order } from '../enums/order';
+import { Sort } from '../enums/sort';
 import { mainPage } from '../pages/main/main-page';
+import type { Car } from '../types/car';
+import type { CarForCreate } from '../types/car-for-create';
+import type { pageDataParameters } from '../types/page-data-parameters';
+import type { TypesForAnimation } from '../types/types-for-animation';
+import type { Winner } from '../types/winner';
 import { filteredDataForPagination } from '../utils/filtered-data-for-pagination';
 import { isCar } from '../utils/is-car';
 
-export type Car = {
-  name: string;
-  color: string;
-  id: number;
-};
-
-export type Winner = {
-  id: number;
-  wins: number;
-  time: number;
-};
-
-export type TypesForAnimation = {
-  element: HTMLElement;
-  box: HTMLElement;
-  cancelFlag: { flag: boolean };
-  info: Car;
-  startButton: HTMLElement;
-  stopButton: HTMLElement;
-};
-
-export enum Sort {
-  wins = 'wins',
-  time = 'time',
-  id = 'id',
-}
-
-export enum Order {
-  ASC = 'ASC',
-  DESC = 'DESC',
-}
-
-export type pageDataParameters = {
-  page: number;
-  limit: number;
-  sort: Sort;
-  order: Order;
-};
-
-export type CarForCreate = Omit<Car, 'id'>;
 const maxViewCar = 7;
 const startNumber = 0;
 

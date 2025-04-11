@@ -1,11 +1,11 @@
 import { type Configuration } from 'webpack';
 import path from 'node:path';
-import { type optionsWebpack } from './types/types';
 import { bundleDevelopmentServer } from './bundle-devserver';
 import { bundlePlugins } from './bundle-plugins';
 import { bundleResolves } from './bundle-resolves';
 import { bundleLoaders } from './bundle-loaders';
 import { bundleOutput } from './bundle-output';
+import { type optionsWebpack } from '../src/types/options-webpack';
 
 export const bundleConfig = (options: optionsWebpack): Configuration => {
   const isDevelopment = options.mode === 'dev' ? true : false;
