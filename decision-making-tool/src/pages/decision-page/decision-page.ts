@@ -12,7 +12,9 @@ import { drawCircle } from "./draw-circle";
 import { handleInput } from "./handle-input";
 import { handleClickSoundButton, playingWinSound } from "./sound-button";
 
-const createMainElements = (parent: HTMLElement): HTMLElement[] => {
+const createMainElements = (
+  parent: HTMLElement,
+): [HTMLDivElement, HTMLButtonElement, HTMLDivElement, HTMLCanvasElement] => {
   createNode({
     tag: "h1",
     className: "text-3xl font-bold text-emerald-900",
@@ -124,9 +126,12 @@ export const createDecisionPage = (): void => {
 
   const [buttonsBlock, buttonPlay, informationDisplay, canvasBlock] =
     createMainElements(wrapper);
+
   const [buttonBack, buttonSound, inputTimer] = createButtons(buttonsBlock);
+
   const buttonsForHandle = [buttonBack, buttonSound, inputTimer, buttonPlay];
-  appState.elements[DOMElements.buttonPlay] = buttonPlay;
+
+  appState.elements[DOMElements.buttonPlay] = buttonPlay; //add buttonPlay to the state
 
   inputTimer.addEventListener("input", () => handleInput(inputTimer, appState));
 

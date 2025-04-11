@@ -5,18 +5,21 @@ import { drawInformationTitle } from "./draw/draw-information-title";
 import { drawInnerCircle } from "./draw/draw-inner-circle";
 import { drawSector } from "./draw/draw-sector";
 import { drawTriangle } from "./draw/draw-triangle";
-import { inOutQuad } from "./draw/timing-functions";
+import { inOutQuad } from "../../utils/timing-functions";
 import { getInfoOfOptionsWithProportion } from "./get-info-of-options-with-proportion";
+import { transformedArrayWithAccumulateSum } from "../../utils/transformed-array-with-accumulate-sum";
+import { calculateOffsetAngle } from "../../utils/calculate-offset-angle";
+import { calculateItemAngle } from "../../utils/calculate-item-angle";
+import { type DataForDraw } from "../../types/data-for-draw";
+import {
+  type InputDataForButtonPlay,
+  type InputDataForAnimation,
+} from "../../types/input-data-for-animation";
+import { type CorrectStateType } from "../../types/shape-state-type";
 
-const transformed = (array: number[]): number[] => {
-  let sum = 0;
-  const newArray: number[] = [0];
-  [...array].reverse().forEach((value) => {
-    sum += value;
-    newArray.push(sum);
-  });
-  return newArray.reverse();
-};
+const SIZE_CANVAS = 500;
+const RADIUS = 230;
+const START_ANGLE = 0;
 
 const findIndex = (number_: number, array: number[]): number => {
   let count = 1;
@@ -27,130 +30,162 @@ const findIndex = (number_: number, array: number[]): number => {
   return array.length;
 };
 
-export const drawCircle = (
-  element: HTMLElement,
-  callback: () => void,
-  display: HTMLElement,
-  input: HTMLElement,
-): void => {
-  if (element instanceof HTMLCanvasElement) {
-    const widthElement = 500;
-    const heightElement = 500;
-    element.width = widthElement;
-    element.height = heightElement;
-    let isAnimationStart = false;
+const handleClickPlayButton = (data: InputDataForButtonPlay): void => {
+  const { input, isAnimationStart } = data;
+  if (Number.parseFloat(input.value) < 5 || !input.value) {
+    let dataForModal: null | string = null;
+    if (input.value) dataForModal = "null";
 
-    const context = element.getContext("2d");
-    const radius = 230;
+    return modalWithMessage(
+      `Duration must me over than 5 seconds (inclusive). Your value is ${dataForModal}!`,
+    );
+  }
+
+  isAnimationStart.isStart = true;
+
+  animate({
+    timing: inOutQuad,
+    duration: appState.animation.duration,
+    ...data,
+  });
+};
+
+const changeDisplayInfo = (
+  display: HTMLElement,
+  prepareData: CorrectStateType[],
+  offsetAngle: number,
+  transformArray: number[],
+): void => {
+  display.textContent =
+    prepareData[findIndex(offsetAngle, transformArray)].description;
+  display.classList.remove("bg-lime-500");
+  display.classList.add("bg-teal-600");
+};
+
+const draw = (data: DataForDraw): void => {
+  const {
+    startAngle,
+    prepareData,
+    isAnimationStart,
+    display,
+    context,
+    centerX,
+    centerY,
+    radius,
+    widthElement,
+  } = data;
+
+  let angle = startAngle;
+
+  const offsetAngle = calculateOffsetAngle(angle);
+  const array = prepareData.map(calculateItemAngle);
+  const transformArray = transformedArrayWithAccumulateSum(array);
+
+  if (isAnimationStart.isStart)
+    changeDisplayInfo(display, prepareData, offsetAngle, transformArray);
+
+  prepareData.forEach((option) => {
+    const endAngle = angle + Math.PI * 2 * option.proportion;
 
     if (context) {
-      const centerX = element.width / 2;
-      const centerY = element.height / 2;
-      const prepareData = getInfoOfOptionsWithProportion(appState);
-
-      const storageAngle = localStorage.getItem("angle");
-      let startAngle = 0;
-      if (storageAngle) {
-        startAngle = Number.parseFloat(storageAngle);
-      }
-
-      const draw = (startAngle: number): void => {
-        let angle = startAngle;
-        const offsetAngle =
-          ((angle % (Math.PI * 2)) + Math.PI / 2) % (Math.PI * 2);
-        const array = prepareData.map(
-          (element_) => element_.proportion * Math.PI * 2,
-        );
-        const transformArray = transformed(array);
-
-        if (isAnimationStart) {
-          display.textContent =
-            prepareData[findIndex(offsetAngle, transformArray)].description;
-          display.classList.remove("bg-lime-500");
-          display.classList.add("bg-teal-600");
-        }
-
-        prepareData.forEach((option) => {
-          const endAngle = angle + Math.PI * 2 * option.proportion;
-
-          if (context) {
-            drawSector(
-              context,
-              centerX,
-              centerY,
-              radius,
-              angle,
-              endAngle,
-              option.color,
-            );
-
-            drawInformationTitle({
-              context,
-              proportion: option.proportion,
-              description: option.description,
-              angle,
-              endAngle,
-              centerX,
-              centerY,
-              radius,
-            });
-          }
-
-          drawTriangle(context, widthElement, centerX, centerY, radius);
-          drawInnerCircle(context, centerX, centerY, 30);
-          angle = endAngle;
-        });
-      };
-      draw(startAngle);
-
-      appState.elements[DOMElements.buttonPlay].addEventListener(
-        "click",
-        () => {
-          if (
-            input instanceof HTMLInputElement &&
-            (Number.parseFloat(input.value) < 5 || !input.value)
-          ) {
-            let dataForModal: null | string = null;
-            if (input.value) dataForModal = "null";
-
-            return modalWithMessage(
-              `Duration must me over than 5 seconds (inclusive). Your value is ${dataForModal}!`,
-            );
-          }
-
-          isAnimationStart = true;
-          animate({
-            timing: inOutQuad,
-            draw,
-            duration: appState.animation.duration,
-            ctx: context,
-            width: widthElement,
-            height: heightElement,
-            callback,
-          });
-        },
+      drawSector(
+        context,
+        centerX,
+        centerY,
+        radius,
+        angle,
+        endAngle,
+        option.color,
       );
+
+      drawInformationTitle({
+        ...data,
+        proportion: option.proportion,
+        description: option.description,
+        angle,
+        endAngle,
+      });
     }
+
+    drawTriangle(context, widthElement, centerX, centerY, radius);
+    drawInnerCircle(context, centerX, centerY, 30);
+    angle = endAngle;
+  });
+};
+
+const addEventListenerToButtonPlay = (
+  element: HTMLElement,
+  data: InputDataForButtonPlay,
+): void => {
+  element.addEventListener("click", () => handleClickPlayButton(data));
+};
+
+const getSizeMainShape = (
+  size: number,
+  radius: number,
+): {
+  widthElement: number;
+  heightElement: number;
+  centerX: number;
+  centerY: number;
+  radius: number;
+} => {
+  const widthElement = size;
+  const heightElement = size;
+  const centerX = size / 2;
+  const centerY = size / 2;
+  return { widthElement, heightElement, centerX, centerY, radius };
+};
+
+export const drawCircle = (
+  element: HTMLCanvasElement,
+  callback: () => void,
+  display: HTMLElement,
+  input: HTMLInputElement,
+): void => {
+  const data = getSizeMainShape(SIZE_CANVAS, RADIUS);
+
+  element.width = data.widthElement;
+  element.height = data.heightElement;
+  const isAnimationStart = { isStart: false };
+
+  const context = element.getContext("2d");
+
+  if (context) {
+    const prepareData = getInfoOfOptionsWithProportion(appState);
+
+    const storageAngle = localStorage.getItem("angle");
+    let startAngle = START_ANGLE;
+    if (storageAngle) {
+      startAngle = Number.parseFloat(storageAngle);
+    }
+
+    const config = {
+      element,
+      ...data,
+      display,
+      prepareData,
+      isAnimationStart,
+      context,
+    };
+
+    draw({
+      startAngle,
+      ...config,
+    });
+
+    addEventListenerToButtonPlay(appState.elements[DOMElements.buttonPlay], {
+      ...config,
+      draw,
+      input,
+      callback,
+    });
   }
 };
 
-function animate({
-  timing,
-  draw,
-  duration,
-  ctx,
-  width,
-  height,
-  callback,
-}: {
-  timing: (t: number) => number;
-  draw: (angle: number) => void;
-  duration: number;
-  ctx: CanvasRenderingContext2D;
-  width: number;
-  height: number;
-  callback: () => void;
-}): void {
+function animate(data: InputDataForAnimation): void {
+  const { duration, timing, context, widthElement, heightElement, callback } =
+    data;
   const start = performance.now();
   const fullRotations = Math.floor(Math.random() * 5 + 5);
   const extraAngle = Math.random() * Math.PI * 2;
@@ -165,12 +200,15 @@ function animate({
   function render(time: number): void {
     const timeFraction = Math.min((time - start) / duration, 1);
     const progress = timing(timeFraction);
-
     const rotationAngle = finalAngle * progress + startAngle;
-    if (ctx) {
-      ctx.clearRect(0, 0, width, height);
+
+    if (context) {
+      context.clearRect(0, 0, widthElement, heightElement);
+      draw({
+        ...data,
+        startAngle: rotationAngle,
+      });
     }
-    draw(rotationAngle);
 
     if (timeFraction < 1) {
       requestAnimationFrame(render);
