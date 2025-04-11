@@ -17,82 +17,101 @@ import { templateForModal } from "./modal-past-options/template-for-modal";
 const buttonStyle =
   "bg-indigo-300 border rounded-md border-black px-5 py-1 hover:cursor-pointer hover:bg-indigo-500 w-5/6";
 
-export const createMainPage = (): void => {
-  removeAllChildren(document.body);
-  const wrapper = createNode({
-    tag: "div",
-    className: wrapperStyles,
-    parent: document.body,
-  });
+const dataToButtonsForMainPage: { className: string; text: string }[] = [
+  {
+    className: buttonStyle,
+    text: "add option",
+  },
+  {
+    className: buttonStyle,
+    text: "paste list",
+  },
+  {
+    className: buttonStyle,
+    text: "clear list",
+  },
+  {
+    className: buttonStyle,
+    text: "save list to file",
+  },
+  {
+    className: buttonStyle,
+    text: "load list from file",
+  },
+  {
+    className: buttonStyle,
+    text: "start",
+  },
+];
+
+const createElementsForMainPage = (
+  parent: HTMLDivElement,
+): { buttons: HTMLButtonElement[]; ulElement: HTMLUListElement } => {
   createNode({
     tag: "h1",
     className: "text-3xl font-bold text-emerald-900",
-    parent: wrapper,
+    parent: parent,
     text: "Decision making tool",
   });
 
-  const buttonAddOption = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "add option",
-  });
-  buttonAddOption.addEventListener("click", () =>
-    handleAddOption(appState, listOfOption),
-  );
-
-  const buttonPastList = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "paste list",
-  });
-  buttonPastList.addEventListener("click", () => {
-    openModalWindow(templateForModal());
-  });
-  const buttonClearList = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "clear list",
-  });
-  buttonClearList.addEventListener("click", () => {
-    handleClearList(appState, listOfOption);
-  });
-  const buttonSafeListToFile = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "save list to file",
-  });
-
-  buttonSafeListToFile.addEventListener("click", () => {
-    handleSafeOption(appState);
-  });
-  const buttonLoadListFromFile = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "load list from file",
-  });
-
-  buttonLoadListFromFile.addEventListener("click", () =>
-    handleLoadFileWithOptions(appState),
-  );
-
-  const buttonStart = createNode({
-    tag: "button",
-    className: buttonStyle,
-    parent: wrapper,
-    text: "start",
+  const buttonsArray = dataToButtonsForMainPage.map((element) => {
+    return createNode({
+      ...element,
+      parent,
+      tag: "button",
+    });
   });
 
   const listOfOption = createNode({
     tag: "ul",
     className:
       "flex flex-col gap-y-2 py-1 px-3 max-h-60 overflow-y-auto scrollbar",
-    parent: wrapper,
+    parent: parent,
   });
+
+  return { buttons: buttonsArray, ulElement: listOfOption };
+};
+
+export const createMainPage = (): void => {
+  removeAllChildren(document.body);
+
+  const wrapper = createNode({
+    tag: "div",
+    className: wrapperStyles,
+    parent: document.body,
+  });
+
+  const {
+    buttons: [
+      buttonAddOption,
+      buttonPastList,
+      buttonClearList,
+      buttonSafeListToFile,
+      buttonLoadListFromFile,
+      buttonStart,
+    ],
+    ulElement: listOfOption,
+  } = createElementsForMainPage(wrapper);
+
+  buttonPastList.addEventListener("click", () => {
+    openModalWindow(templateForModal());
+  });
+
+  buttonAddOption.addEventListener("click", () =>
+    handleAddOption(appState, listOfOption),
+  );
+
+  buttonClearList.addEventListener("click", () => {
+    handleClearList(appState, listOfOption);
+  });
+
+  buttonSafeListToFile.addEventListener("click", () => {
+    handleSafeOption(appState);
+  });
+
+  buttonLoadListFromFile.addEventListener("click", () =>
+    handleLoadFileWithOptions(appState),
+  );
 
   appState.options.forEach((option) => {
     addOption(option, listOfOption);
