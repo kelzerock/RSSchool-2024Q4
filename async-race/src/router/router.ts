@@ -2,20 +2,20 @@ import { type PathRoute } from '../enums/path-routes';
 import { mainPage } from '../pages/main/main-page';
 import { page404 } from '../pages/page404/page404';
 import { winnersPage } from '../pages/winners/winners-page';
-
-// export type RouteFunction = (event: Event) => void;
-type Map = Record<string, () => void>;
+import { type MapRoutes } from '../types/map-routes';
 
 export const route = (event: Event): void => {
   event.preventDefault();
   const { target } = event;
+
   if (target instanceof HTMLAnchorElement) {
     globalThis.history.pushState({}, '', target.href);
   }
+
   handleLocation();
 };
 
-const routes: Map = {
+const routes: MapRoutes = {
   404: page404,
   '/': mainPage,
   '/winners': winnersPage,

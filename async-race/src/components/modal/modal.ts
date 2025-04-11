@@ -1,3 +1,4 @@
+import { Styles } from '../../enums/styles';
 import { type Car } from '../../state/state';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
@@ -47,7 +48,7 @@ const createHTML = (car: Car, duration: number): HTMLElement[] => {
 };
 
 export const createModal = (car: Car, duration: number): void => {
-  document.body.classList.add('lock');
+  document.body.classList.add(Styles.lock);
   const [wrapper, infoBlock, wrapperForWinner] = createHTML(car, duration);
 
   const colorCar = createElement({
@@ -65,12 +66,10 @@ export const createModal = (car: Car, duration: number): void => {
   colorCar.style.background = car.color;
 
   [button, wrapper].forEach((element) => {
-    element.addEventListener('click', (event: Event) => {
-      if (event.target === button || event.target === wrapper) {
-        cleanerElementFromChildren(wrapper);
-        wrapper.remove();
-        document.body.classList.remove('lock');
-      }
+    element.addEventListener('click', () => {
+      cleanerElementFromChildren(wrapper);
+      wrapper.remove();
+      document.body.classList.remove(Styles.lock);
     });
   });
 };

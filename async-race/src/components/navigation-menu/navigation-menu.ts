@@ -1,11 +1,7 @@
 import { PathRoute } from '../../enums/path-routes';
 import { stateRace } from '../../state/state';
+import { type InformationAboutLinks } from '../../types/information-about-links';
 import { createElement } from '../../utils/create-element';
-
-type InformationAboutLinks = {
-  href: PathRoute;
-  text: string;
-};
 
 const styles = {
   navigation: 'flex ',
@@ -29,17 +25,20 @@ const navigationMenu = (links: InformationAboutLinks[]): HTMLElement => {
     tagName: 'nav',
     className: styles.navigation,
   });
+
   const listOfLinks = createElement({
     tagName: 'ul',
     parent: navigation,
     className: styles.listOfLinks,
   });
+
   links.forEach((link) => {
     const linkItem = createElement({
       tagName: 'li',
       parent: listOfLinks,
       className: styles.linkItem,
     });
+
     const linkAnchor = createElement({
       tagName: 'a',
       parent: linkItem,
