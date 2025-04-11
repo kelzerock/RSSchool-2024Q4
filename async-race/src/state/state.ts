@@ -42,7 +42,7 @@ export type pageDataParameters = {
   order: Order;
 };
 
-type CarForCreate = Omit<Car, 'id'>;
+export type CarForCreate = Omit<Car, 'id'>;
 const maxViewCar = 7;
 const startNumber = 0;
 

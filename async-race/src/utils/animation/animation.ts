@@ -1,4 +1,5 @@
-import { type Draw } from './draw-animation';
+import type { Draw } from '../../types/draw';
+
 type AnimationData = {
   timing: (fraction: number) => number;
   draw: Draw;

@@ -1,5 +1,5 @@
-export type Draw = (progress: number, element: HTMLElement) => void;
+import type { Draw } from '../../types/draw';
 
-export const drawAnimate: Draw = (progress, element) => {
+export const draw: Draw = (progress, element) => {
   element.style.left = progress + '%';
 };

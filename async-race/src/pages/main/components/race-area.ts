@@ -1,6 +1,6 @@
 import { type Car, stateRace } from '../../../state/state';
 import { animate } from '../../../utils/animation/animation';
-import { drawAnimate } from '../../../utils/animation/draw-animation';
+import { draw } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';
 import { createElement } from '../../../utils/create-element';
 import { handleName } from '../../../utils/handle-name';
@@ -172,7 +172,7 @@ const handleClickStartCarEngine = async (
   if (data) {
     animate({
       timing: linear,
-      draw: drawAnimate,
+      draw: draw,
       durationData: data,
       element: carImg,
       box: raceBox,
