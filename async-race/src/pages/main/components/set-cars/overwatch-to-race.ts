@@ -28,11 +28,11 @@ export const overwatchToRace = async (
 
     if (elements && data) {
       toggleDisabledStatus([elements.startButton], [elements.stopButton]);
-      elements.cancelFlag.flag = false;
+      elements.abort.flag = false;
       const promise = performAnimation(elements, data);
       const newInfo = await data.promise;
 
-      if (isSuccess(newInfo) && !elements.cancelFlag.flag) {
+      if (isSuccess(newInfo) && !elements.abort.flag) {
         resolve({ id: idCar, duration: data.duration, promise });
       }
     }

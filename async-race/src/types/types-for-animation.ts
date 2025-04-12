@@ -1,10 +1,11 @@
+import type { Abort } from './abort';
 import type { Car } from './car';
 
 export type TypesForAnimation = {
-  element: HTMLElement;
-  box: HTMLElement;
-  cancelFlag: { flag: boolean };
-  info: Car;
+  carImg: HTMLElement;
+  raceBox: HTMLElement;
+  abort: Abort;
+  car: Car;
   startButton: HTMLElement;
   stopButton: HTMLElement;
 };

@@ -1,3 +1,4 @@
+import type { Abort } from '../../types/abort';
 import type { Draw } from '../../types/draw';
 
 type AnimationData = {
@@ -7,21 +8,29 @@ type AnimationData = {
     duration: number;
     promise: Promise<undefined | string | { success: boolean }>;
   };
-  element: HTMLElement;
-  box: HTMLElement;
-  cancelFlag: { flag: boolean };
+  carImg: HTMLElement;
+  raceBox: HTMLElement;
+  abort: Abort;
 };
+
+//   carImg: HTMLElement;
+//   raceBox: HTMLElement;
+//   abort: Abort;
+//   car: Car;
+//   startButton: HTMLElement;
+//   stopButton: HTMLElement;
+// };
 
 const endOfFraction = 1;
 
 export const animate = (animationData: AnimationData): Promise<void> => {
   return new Promise((resolve) => {
-    const { timing, draw, durationData, element, box, cancelFlag } =
+    const { timing, draw, durationData, carImg, raceBox, abort } =
       animationData;
     const fullWidth = 100;
     let start = performance.now();
     const width =
-      fullWidth - (element.offsetWidth / box.offsetWidth) * fullWidth;
+      fullWidth - (carImg.offsetWidth / raceBox.offsetWidth) * fullWidth;
     let aborted = false;
     durationData.promise.then((result) => {
       if (result === 'car need stop') {
@@ -32,7 +41,7 @@ export const animate = (animationData: AnimationData): Promise<void> => {
       if (start === null) {
         start = timestamp;
       }
-      if (aborted || cancelFlag.flag) {
+      if (aborted || abort.flag) {
         return;
       }
       const elapsed = timestamp - start;
@@ -41,7 +50,7 @@ export const animate = (animationData: AnimationData): Promise<void> => {
         timeFraction = endOfFraction;
       }
       const progress = timing(timeFraction);
-      draw(progress * width, element);
+      draw(progress * width, carImg);
       if (timeFraction < endOfFraction) {
         requestAnimationFrame(step);
       } else {

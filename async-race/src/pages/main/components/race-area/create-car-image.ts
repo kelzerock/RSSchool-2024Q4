@@ -21,7 +21,7 @@ export const createCarImage = (parent: HTMLElement): HTMLDivElement => {
   const elements = dataForElements.map((element) =>
     createElement({ ...element, tagName: 'div', parent })
   );
-  const carImage = elements[1];
+  const carImage = elements[0];
 
   createWheels(carImage);
 
