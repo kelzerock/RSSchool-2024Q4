@@ -1,3 +1,4 @@
+import { Localstorage } from '../../enums/localstorage';
 import { Order } from '../../enums/order';
 import { Sort } from '../../enums/sort';
 import { stateRace } from '../../state/state';
@@ -5,7 +6,8 @@ import type { Car } from '../../types/car';
 import type { Winner } from '../../types/winner';
 import { createElement } from '../../utils/create-element';
 import { handleName } from '../../utils/handle-name';
-import { saveDataWinners, winnersPage } from './winners-page';
+import { saveToLocalstorage } from '../../utils/save-to-localstorage';
+import { winnersPage } from './winners-page';
 
 const INDEX_NAME = 1;
 const styles = {
@@ -80,7 +82,7 @@ const sortingHandle = async (
       stateRace.pageWinnersData.sort = item.attr;
     }
   }
-  saveDataWinners(stateRace.pageWinnersData);
+  saveToLocalstorage(Localstorage.winners, stateRace.pageWinnersData);
   await winnersPage();
 };
 

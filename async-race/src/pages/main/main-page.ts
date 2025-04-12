@@ -60,7 +60,7 @@ const createButtons = (parent: HTMLElement): void => {
   };
 
   previousPage.addEventListener('click', () =>
-    handleClickChangePage(Pagination.prev)
+    handleClickChangePage(Pagination.previous)
   );
   nextPage.addEventListener('click', () =>
     handleClickChangePage(Pagination.next)
