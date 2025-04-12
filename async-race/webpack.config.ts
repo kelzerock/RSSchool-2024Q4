@@ -1,15 +1,15 @@
 import path from 'node:path';
 import { type Configuration } from 'webpack';
 import { bundleConfig } from './webpack-config/bundle-config';
-import type { mode } from './src/types/mode';
-import type { optionsWebpack } from './src/types/options-webpack';
+import type { Mode } from './src/types/mode';
+import type { OptionsWebpack } from './src/types/options-webpack';
 
 type Environment = {
-  mode: mode;
+  mode: Mode;
 };
 
 const webpackConfig = (environment: Environment): Configuration => {
-  const options: optionsWebpack = {
+  const options: OptionsWebpack = {
     path: {
       entry: path.resolve(__dirname, 'src'),
       build: path.resolve(__dirname, 'build'),

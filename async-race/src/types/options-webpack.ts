@@ -1,12 +1,12 @@
-import type { mode } from './mode';
+import type { Mode } from './mode';
 
-export type optionsWebpack = {
+export type OptionsWebpack = {
   path: {
     entry: string;
     build: string;
     template: string;
     favicon: string;
   };
-  mode: mode;
+  mode: Mode;
   port: number;
 };

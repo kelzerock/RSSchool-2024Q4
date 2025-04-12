@@ -1,5 +1,6 @@
 import { URL_API } from '../../constants/api';
 import type { Car } from '../../types/car';
+import type { Direction } from '../../types/direction';
 import type { Success } from '../../types/success';
 import { isVelocityData } from '../is-velocity-data';
 import { driveModeEngine } from './drive-mode-engine';
@@ -9,11 +10,9 @@ const controllers: Map<number, AbortController> = new Map<
   AbortController
 >();
 
-type direction = 'started' | 'stopped';
-
 const startEngine = async (
   car: Car,
-  direction: direction
+  direction: Direction
 ): Promise<
   | {
       duration: number;
@@ -39,7 +38,7 @@ const startEngine = async (
 
 const stopEngine = async (
   car: Car,
-  direction: direction
+  direction: Direction
 ): Promise<
   | {
       duration: number;
@@ -64,7 +63,7 @@ const stopEngine = async (
 
 export const stopStartEngine = async (
   car: Car,
-  direction: direction
+  direction: Direction
 ): Promise<
   | {
       duration: number;

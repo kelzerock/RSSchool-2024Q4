@@ -1,1 +1,1 @@
-export type mode = 'prod' | 'dev';
+export type Mode = 'prod' | 'dev';

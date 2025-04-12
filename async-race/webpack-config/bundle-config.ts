@@ -5,9 +5,9 @@ import { bundlePlugins } from './bundle-plugins';
 import { bundleResolves } from './bundle-resolves';
 import { bundleLoaders } from './bundle-loaders';
 import { bundleOutput } from './bundle-output';
-import { type optionsWebpack } from '../src/types/options-webpack';
+import { type OptionsWebpack } from '../src/types/options-webpack';
 
-export const bundleConfig = (options: optionsWebpack): Configuration => {
+export const bundleConfig = (options: OptionsWebpack): Configuration => {
   const isDevelopment = options.mode === 'dev' ? true : false;
 
   const config: Configuration = {

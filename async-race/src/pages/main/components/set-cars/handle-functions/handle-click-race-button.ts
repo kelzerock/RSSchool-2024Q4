@@ -1,10 +1,10 @@
 import { stateRace } from '../../../../../state/state';
-import type { dataForPromise } from '../../../../../types/data-for-promise';
 import type { DataForRace } from '../../../../../types/data-for-race';
 import { stopStartEngine } from '../../../../../utils/request/stop-start-engine';
 import { toggleDisabledStatus } from '../../../../../utils/toggle-disabled-status';
 import { handleWinnerPromise } from './handle-winner-promise';
 import { overwatchToRace } from '../overwatch-to-race';
+import type { DataForPromise } from '../../../../../types/data-for-promise';
 
 export const handleClickRaceButton = async (
   raceButton: HTMLButtonElement,
@@ -21,9 +21,9 @@ export const handleClickRaceButton = async (
 
   const carsVelocityForRace = await Promise.allSettled(carsPromises);
 
-  new Promise((resolve: (value: dataForPromise) => void) => {
+  new Promise((resolve: (value: DataForPromise) => void) => {
     carsVelocityForRace.forEach((element, index) =>
       overwatchToRace(element, index, resolve)
     );
-  }).then((data: dataForPromise): void => handleWinnerPromise(data));
+  }).then((data: DataForPromise): void => handleWinnerPromise(data));
 };

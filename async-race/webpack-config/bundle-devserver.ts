@@ -1,8 +1,8 @@
 import { type Configuration } from 'webpack-dev-server';
-import { type optionsWebpack } from '../src/types/options-webpack';
+import { type OptionsWebpack } from '../src/types/options-webpack';
 
 export const bundleDevelopmentServer = (
-  option: optionsWebpack
+  option: OptionsWebpack
 ): Configuration => {
   const developmentServer: Configuration = {
     historyApiFallback: true,

@@ -1,8 +1,8 @@
 import { type Configuration } from 'webpack';
-import { type optionsWebpack } from '../src/types/options-webpack';
+import { type OptionsWebpack } from '../src/types/options-webpack';
 
 export const bundleOutput = (
-  options: optionsWebpack
+  options: OptionsWebpack
 ): Configuration['output'] => {
   const output: Configuration['output'] = {
     filename: 'main-[contenthash].js',

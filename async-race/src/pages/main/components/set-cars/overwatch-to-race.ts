@@ -1,5 +1,5 @@
 import { stateRace } from '../../../../state/state';
-import type { dataForPromise } from '../../../../types/data-for-promise';
+import type { DataForPromise } from '../../../../types/data-for-promise';
 import { performAnimation } from '../../../../utils/animation/perform-animation';
 import { isSuccess } from '../../../../utils/is-success';
 import { toggleDisabledStatus } from '../../../../utils/toggle-disabled-status';
@@ -19,8 +19,8 @@ export const overwatchToRace = async (
     | undefined
   >,
   index: number,
-  resolve: (value: dataForPromise) => void
-): Promise<undefined | dataForPromise> => {
+  resolve: (value: DataForPromise) => void
+): Promise<undefined | DataForPromise> => {
   if (element.status === 'fulfilled') {
     const idCar = stateRace.viewCars[index].id;
     const elements = stateRace.viewStateModels.get(idCar);

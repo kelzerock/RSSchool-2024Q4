@@ -2,10 +2,10 @@ import path from 'node:path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { type Configuration } from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
-import { type optionsWebpack } from '../src/types/options-webpack';
+import { type OptionsWebpack } from '../src/types/options-webpack';
 
 export const bundlePlugins = (
-  option: optionsWebpack
+  option: OptionsWebpack
 ): Configuration['plugins'] => {
   const plugins = [
     new HtmlWebpackPlugin({

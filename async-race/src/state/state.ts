@@ -4,7 +4,7 @@ import { Sort } from '../enums/sort';
 import { mainPage } from '../pages/main/main-page';
 import type { Car } from '../types/car';
 import type { CarForCreate } from '../types/car-for-create';
-import type { pageDataParameters } from '../types/page-data-parameters';
+import type { PageDataParameters } from '../types/page-data-parameters';
 import type { TypesForAnimation } from '../types/types-for-animation';
 import type { Winner } from '../types/winner';
 import { filteredDataForPagination } from '../utils/filtered-data-for-pagination';
@@ -129,7 +129,7 @@ class State {
 
   public maxViewCar = maxViewCar;
   public page: number;
-  public pageWinnersData: pageDataParameters;
+  public pageWinnersData: PageDataParameters;
   public state: { garage: Car[]; winners: Winner[] };
 
   public updateCar = async (car: Car): Promise<void> => {

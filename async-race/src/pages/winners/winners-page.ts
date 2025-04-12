@@ -1,7 +1,7 @@
 import { mainElement } from '../../components/main-elements/main-elements';
 import { cssButton } from '../../global-styles';
 import { stateRace } from '../../state/state';
-import type { pageDataParameters } from '../../types/page-data-parameters';
+import type { PageDataParameters } from '../../types/page-data-parameters';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
 import { getWinners } from '../../utils/request/get-winners';
@@ -14,11 +14,11 @@ const styles = {
   wrapperButtons: 'flex-row flex my-1 gap-x-1',
 };
 
-export const saveDataWinners = (data: pageDataParameters): void => {
+export const saveDataWinners = (data: PageDataParameters): void => {
   localStorage.setItem('winners', JSON.stringify(data));
 };
 
-const isDataWinner = (data: unknown): data is pageDataParameters => {
+const isDataWinner = (data: unknown): data is PageDataParameters => {
   return data &&
     typeof data === 'object' &&
     'page' in data &&
