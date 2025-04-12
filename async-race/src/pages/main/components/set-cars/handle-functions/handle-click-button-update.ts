@@ -1,7 +1,7 @@
-import { stateRace } from '../../../../../state/state';
 import type { Car } from '../../../../../types/car';
 import { clearInputs } from '../../../../../utils/crear-inputs';
 import { setDisabledElements } from '../../../../../utils/set-disabled-elements';
+import { handleUpdateCar } from '../../race-area/handle-functions/handle-update-car';
 
 export const handleClickButtonUpdate = async (
   setButtons: HTMLElement[],
@@ -10,6 +10,6 @@ export const handleClickButtonUpdate = async (
   inputText: HTMLInputElement
 ): Promise<void> => {
   setDisabledElements(setButtons, true);
-  await stateRace.updateCar({ ...carDataForCreate });
+  handleUpdateCar(carDataForCreate);
   clearInputs(inputColor, inputText);
 };

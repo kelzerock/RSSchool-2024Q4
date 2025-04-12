@@ -1,6 +1,9 @@
 import { mainElement } from '../../components/main-elements/main-elements';
+import { START_COUNT, STEP } from '../../constants/global-constants';
+import { Pagination } from '../../enums/pagination';
 import { cssButton } from '../../global-styles';
 import { stateRace } from '../../state/state';
+import type { DataToCreateElement } from '../../types/data-to-create-element';
 import { cleanerElementFromChildren } from '../../utils/cleaner-element-from-children';
 import { createElement } from '../../utils/create-element';
 import { setDisabledElements } from '../../utils/set-disabled-elements';
@@ -12,46 +15,59 @@ const styles = {
   wrapper: 'flex flex-row gap-x-2 my-2',
 };
 
-const createButtons = (parent: HTMLElement): void => {
-  const offset = 1;
-  const wrapper = createElement({
+const dataForElements: [
+  DataToCreateElement<'div'>,
+  DataToCreateElement<'button'>,
+  DataToCreateElement<'button'>,
+] = [
+  {
     tagName: 'div',
     className: styles.wrapper,
-    parent,
-  });
-  const previousPage = createElement({
+  },
+  {
     tagName: 'button',
     className: cssButton,
     text: 'prev',
-    parent: wrapper,
-  });
-  const nextPage = createElement({
+  },
+  {
     tagName: 'button',
     className: cssButton,
     text: 'next',
+  },
+];
+
+const createButtons = (parent: HTMLElement): void => {
+  const wrapper = createElement({ ...dataForElements[0], parent });
+  const previousPage = createElement({
+    ...dataForElements[1],
     parent: wrapper,
   });
+  const nextPage = createElement({ ...dataForElements[2], parent: wrapper });
+
   if (
     stateRace.state.garage.length <= stateRace.maxViewCar ||
-    (stateRace._page + offset) * stateRace.maxViewCar >
+    (stateRace._page + STEP) * stateRace.maxViewCar >
       stateRace.state.garage.length
   ) {
     setDisabledElements([nextPage], true);
   }
-  const startPage = 0;
-  if (stateRace._page === startPage) setDisabledElements([previousPage], true);
 
-  const handleClickChangePage = (direction: '+' | '-'): void => {
-    stateRace._page += direction === '+' ? offset : -offset;
+  if (stateRace._page === START_COUNT)
+    setDisabledElements([previousPage], true);
+
+  const handleClickChangePage = (direction: Pagination): void => {
+    stateRace._page += direction === Pagination.next ? STEP : -STEP;
   };
 
-  previousPage.addEventListener('click', () => handleClickChangePage('-'));
-  nextPage.addEventListener('click', () => handleClickChangePage('+'));
+  previousPage.addEventListener('click', () =>
+    handleClickChangePage(Pagination.prev)
+  );
+  nextPage.addEventListener('click', () =>
+    handleClickChangePage(Pagination.next)
+  );
 };
 
 export const mainPage = (): void => {
-  const offset = 1;
-  const startNumber = 0;
   cleanerElementFromChildren(mainElement);
 
   createElement({
@@ -62,8 +78,8 @@ export const mainPage = (): void => {
   });
 
   const carsText =
-    stateRace.state.garage.length === startNumber ||
-    stateRace.state.garage.length > offset
+    stateRace.state.garage.length === START_COUNT ||
+    stateRace.state.garage.length > STEP
       ? 'cars'
       : 'car';
   createElement({
@@ -74,7 +90,7 @@ export const mainPage = (): void => {
   });
   createElement({
     tagName: 'h3',
-    text: `Page #${stateRace._page + offset}`,
+    text: `Page #${stateRace._page + STEP}`,
     parent: mainElement,
   });
 
