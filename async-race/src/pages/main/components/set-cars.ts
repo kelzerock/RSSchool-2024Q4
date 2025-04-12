@@ -2,7 +2,7 @@ import type { Car } from '../../../types/car';
 import { createElement } from '../../../utils/create-element';
 import { createButtonsRaceGroup } from './set-cars/buttons-race-group';
 import { createUpdateGroupSet } from './set-cars/buttons-update-group';
-import { createUpLevelSetCars } from './set-cars/up-level-set';
+import { createUpLevelSetCars } from './set-cars/buttons-create-group';
 
 const styles = {
   wrapper: 'flex flex-col gap-y-2',

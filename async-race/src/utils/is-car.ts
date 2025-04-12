@@ -1,14 +1,8 @@
 import type { Car } from '../types/car';
+import { isCarForCreate } from './is-car-for-create';
 
 export const isCar = (car: unknown): car is Car => {
-  return car &&
-    typeof car === 'object' &&
-    'name' in car &&
-    'id' in car &&
-    'color' in car &&
-    typeof car.name === 'string' &&
-    typeof car.id === 'number' &&
-    typeof car.color === 'string'
+  return isCarForCreate(car) && 'id' in car && typeof car.id === 'number'
     ? true
     : false;
 };
