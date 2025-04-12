@@ -28,9 +28,8 @@ const createButtons = (parent: HTMLElement): HTMLButtonElement[] => {
       return createElement({
         tagName: 'button',
         parent,
-        text: element.text,
         className: cssButton,
-        attributes: element.attributes || [],
+        ...element,
       });
     }
   );
