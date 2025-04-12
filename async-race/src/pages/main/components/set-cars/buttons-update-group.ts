@@ -11,7 +11,7 @@ import {
 import { setDisabledElements } from '../../../../utils/set-disabled-elements';
 import { DEFAULT_COLOR } from '../../../../constants/global-constants';
 
-export const createUpdateGroupSet = (
+export const createButtonsUpdateGroup = (
   parent: HTMLElement
 ): ((car: Car) => void) => {
   let carDataForCreate: Car;

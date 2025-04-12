@@ -1,5 +1,6 @@
 import { stateRace } from '../../../state/state';
 import type { Car } from '../../../types/car';
+import type { CarForRaceItem } from '../../../types/car-for-race-item';
 import { animate } from '../../../utils/animation/animation';
 import { draw } from '../../../utils/animation/draw-animation';
 import { linear } from '../../../utils/animation/timing';
@@ -9,6 +10,8 @@ import { deleteWinner } from '../../../utils/request/delete-winner';
 import { getWinners } from '../../../utils/request/get-winners';
 import { stopStartEngine } from '../../../utils/request/stop-start-engine';
 import { setDisabledElements } from '../../../utils/set-disabled-elements';
+import { createBoxButtonsForCar } from './race-area/create-box-buttons-for-car';
+import { createCarImage } from './race-area/create-car-image';
 
 const disabledStyle =
   'disabled:bg-stone-500 disabled:hover:cursor-not-allowed disabled:hover:text-stone-900 disabled:text-900';
@@ -24,16 +27,6 @@ const styles = {
     disabledStyle,
   boxForButtons: 'flex flex-row gap-x-1',
   raceBox: 'flex relative border-dashed border-b-2 w-full',
-  carImg:
-    'absolute top-[0px] left-[0px] w-[40px] bottom-[3px] rounded-tl-[15px] rounded-tr-[40px] relative',
-  finishLine:
-    'absolute w-[46px] h-full right-[0px] border-l-2 border-dotted border-white',
-};
-
-type CarForRaceItem = {
-  car: Car;
-  parent: HTMLElement;
-  callback?: (car: Car) => void;
 };
 
 export const raceArea = (
@@ -103,57 +96,15 @@ const createUpLevelRace = ({ car, parent, callback }: CarForRaceItem): void => {
   });
 };
 
-const createWheels = (parent: HTMLElement): void => {
-  createElement({
-    tagName: 'div',
-    parent: parent,
-    className:
-      'w-[14px] h-[14px] bg-stone-950 rounded-full -bottom-[5px] left-[3px] absolute border-amber-800 border-2',
-  });
-
-  createElement({
-    tagName: 'div',
-    parent: parent,
-    className:
-      'w-[14px] h-[14px] bg-stone-950 rounded-full -bottom-[5px] right-[3px] absolute border-amber-800 border-2',
-  });
-};
-
 const createElementsForMiddleLevel = (parent: HTMLElement): HTMLElement[] => {
-  const boxForButtons = createElement({
-    tagName: 'div',
-    parent,
-    className: styles.boxForButtons,
-  });
-  const startCarEngine = createElement({
-    tagName: 'button',
-    text: 'A',
-    parent: boxForButtons,
-    className: styles.button,
-  });
-  const stopCarEngine = createElement({
-    tagName: 'button',
-    text: 'B',
-    parent: boxForButtons,
-    className: styles.button,
-    attributes: [{ attr: 'disabled', value: '' }],
-  });
+  const [startCarEngine, stopCarEngine] = createBoxButtonsForCar(parent);
+
   const raceBox = createElement({
     tagName: 'div',
     parent,
     className: styles.raceBox,
   });
-  const carImg = createElement({
-    tagName: 'span',
-    parent: raceBox,
-    className: styles.carImg,
-  });
-  createWheels(carImg);
-  createElement({
-    tagName: 'div',
-    parent: raceBox,
-    className: styles.finishLine,
-  });
+  const carImg = createCarImage(raceBox);
 
   return [startCarEngine, stopCarEngine, raceBox, carImg];
 };

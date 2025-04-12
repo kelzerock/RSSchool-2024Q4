@@ -22,7 +22,7 @@ const wrapperTemplate: DataToCreateElement<'div'> = {
   className: styles.wrapperLevel,
 };
 
-export const createUpLevelSetCars = (parent: HTMLElement): void => {
+export const createButtonsCreateGroup = (parent: HTMLElement): void => {
   const saveCarInLocalStorage = loadFromLocalstorage(
     Localstorage.createCarStorage
   );
