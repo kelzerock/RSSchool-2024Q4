@@ -1,15 +1,14 @@
 import { URL_API } from '../../constants/api';
 import type { Car } from '../../types/car';
+import type { Success } from '../../types/success';
 
 export const driveModeEngine = async (
   car: Car,
   controller: AbortController
-): Promise<undefined | string | { success: boolean }> => {
+): Promise<undefined | string | Success> => {
   const stopCarCode = 500;
 
-  const fetchPromise = (async (): Promise<
-    undefined | string | { success: boolean }
-  > => {
+  const fetchPromise = (async (): Promise<undefined | string | Success> => {
     try {
       const response = await fetch(
         `${URL_API}/engine?id=${car.id}&status=drive`,

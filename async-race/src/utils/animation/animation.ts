@@ -1,25 +1,4 @@
-import type { Abort } from '../../types/abort';
-import type { Draw } from '../../types/draw';
-
-type AnimationData = {
-  timing: (fraction: number) => number;
-  draw: Draw;
-  durationData: {
-    duration: number;
-    promise: Promise<undefined | string | { success: boolean }>;
-  };
-  carImg: HTMLElement;
-  raceBox: HTMLElement;
-  abort: Abort;
-};
-
-//   carImg: HTMLElement;
-//   raceBox: HTMLElement;
-//   abort: Abort;
-//   car: Car;
-//   startButton: HTMLElement;
-//   stopButton: HTMLElement;
-// };
+import type { AnimationData } from '../../types/animation-data';
 
 const endOfFraction = 1;
 

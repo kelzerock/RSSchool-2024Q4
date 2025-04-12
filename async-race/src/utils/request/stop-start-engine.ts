@@ -1,5 +1,6 @@
 import { URL_API } from '../../constants/api';
 import type { Car } from '../../types/car';
+import type { Success } from '../../types/success';
 import { isVelocityData } from '../is-velocity-data';
 import { driveModeEngine } from './drive-mode-engine';
 
@@ -16,7 +17,7 @@ const startEngine = async (
 ): Promise<
   | {
       duration: number;
-      promise: Promise<undefined | string | { success: boolean }>;
+      promise: Promise<undefined | string | Success>;
     }
   | undefined
 > => {
@@ -42,7 +43,7 @@ const stopEngine = async (
 ): Promise<
   | {
       duration: number;
-      promise: Promise<undefined | string | { success: boolean }>;
+      promise: Promise<undefined | string | Success>;
     }
   | undefined
 > => {
@@ -54,7 +55,6 @@ const stopEngine = async (
       { method: 'PATCH' }
     );
     if (response.ok) {
-      // if (flag) flag.flag = true;
       const result = await response.json();
       return result;
     }
@@ -68,7 +68,7 @@ export const stopStartEngine = async (
 ): Promise<
   | {
       duration: number;
-      promise: Promise<undefined | string | { success: boolean }>;
+      promise: Promise<undefined | string | Success>;
     }
   | undefined
 > => {
