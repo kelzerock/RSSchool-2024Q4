@@ -9,7 +9,7 @@ export const counterActiveStartEngineButtons = (): void => {
   if (stateRace._activeStopEngineButtons === noneButtonActive) {
     const { startRace, resetRace } = stateRace.buttonsForRace;
     if (startRace && resetRace) {
-      toggleDisabledStatus([startRace], [resetRace]);
+      toggleDisabledStatus([resetRace], [startRace]);
     }
   }
 };
