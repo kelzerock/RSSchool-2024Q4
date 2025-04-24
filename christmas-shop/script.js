@@ -1,0 +1,161 @@
+"use strict";
+import { nameConst } from "./data/const.js";
+import {
+  createElemGift,
+  createModalElemGift,
+  createTimer,
+  getRandomItems,
+  lockBody,
+} from "./data/utils.js";
+
+//router
+let arr = document.querySelectorAll(".button-black");
+
+arr.forEach((el) => {
+  el.addEventListener("click", () => {
+    let path = window.location.href;
+    if (path.includes("localhost")) {
+      let position = path.lastIndexOf("/");
+      path = path.slice(0, position);
+      window.location.href = path + "/gifts/";
+    } else {
+      let pathProduction =
+        "https://rolling-scopes-school.github.io/kelzerock-JSFE2024Q4/christmas-shop/gifts/";
+      window.location.href = pathProduction;
+    }
+  });
+});
+
+//burger
+const bodyHTML = document.body;
+const burgerLines = document.querySelectorAll(".header-burger-button-line");
+const burger = document.querySelector(".burger");
+const burgerMenu = document.querySelector(".burger-menu ");
+const burgerMenuItems = document.querySelectorAll(".burger-menu-item");
+
+const toggleActiveStatus = () => {
+  burgerLines.forEach((el) => el.classList.toggle("active"));
+  burgerMenu.classList.toggle("active");
+  lockBody;
+};
+
+burger.onclick = () => {
+  toggleActiveStatus();
+};
+
+burgerMenu.onclick = (event) => {
+  const liTag = event.target.closest("li");
+  if (Array.from(burgerMenuItems).includes(liTag)) {
+    toggleActiveStatus();
+  }
+};
+
+window.addEventListener("resize", (event) => {
+  const widthWindow = window.innerWidth;
+  if (widthWindow > 768) {
+    if (burgerMenu.classList.contains("active")) {
+      toggleActiveStatus();
+    }
+  }
+});
+
+//loading
+
+window.onload = () => {
+  document.querySelector(".container").classList.remove("load");
+
+  document.querySelector(".loading").classList.add("stop");
+  lockBody();
+};
+
+//slider
+let arrowButtons = document.querySelectorAll(".button-arrow");
+const sliderMainBlock = document.querySelector(".slider");
+
+let counter = 0;
+let step = 0;
+if (window.innerWidth >= 768) {
+  step = 3;
+} else {
+  step = 6;
+}
+
+window.onresize = () => {
+  if (window.innerWidth >= 768) {
+    step = 3;
+  } else {
+    step = 6;
+  }
+  counter = 0;
+  sliderMainBlock.style.right = "0px";
+  arrowButtons[0].classList.add(nameConst.inactive);
+  arrowButtons[1].classList.remove(nameConst.inactive);
+};
+
+arrowButtons.forEach((el) => {
+  const sliderStyles = getComputedStyle(sliderMainBlock);
+
+  el.onclick = () => {
+    let rightPropertyCSSWidth = parseFloat(sliderStyles.right);
+    let totalWidth = sliderMainBlock.scrollWidth;
+    let visibleWidth = sliderMainBlock.offsetWidth;
+    let stepSize = (totalWidth - visibleWidth) / step;
+
+    if (el.classList.contains("left")) {
+      arrowButtons[1].classList.remove(nameConst.inactive);
+
+      if (counter - 1 <= 0 || rightPropertyCSSWidth - stepSize <= 0) {
+        arrowButtons[0].classList.add(nameConst.inactive);
+        sliderMainBlock.style.right = "0px";
+        counter = 0;
+      } else {
+        sliderMainBlock.style.right = rightPropertyCSSWidth - stepSize + "px";
+        counter -= 1;
+      }
+    } else {
+      arrowButtons[0].classList.remove(nameConst.inactive);
+
+      if (
+        counter + 1 >= step ||
+        rightPropertyCSSWidth + stepSize >= totalWidth
+      ) {
+        arrowButtons[1].classList.add(nameConst.inactive);
+        sliderMainBlock.style.right = totalWidth - visibleWidth + "px";
+        counter = step;
+      } else {
+        sliderMainBlock.style.right = rightPropertyCSSWidth + stepSize + "px";
+        counter += 1;
+      }
+    }
+  };
+});
+
+// create random gifts
+const dataGifts = await fetch("./data/gifts.json").then((res) => res.json());
+const dataGifts_def = await fetch("./data/gifts_def.json").then((res) =>
+  res.json()
+);
+createElemGift(
+  document.querySelector(".gift-block-list"),
+  getRandomItems(dataGifts, 4)
+);
+
+//modal
+// createModalElemGift(document.body, dataGifts[0])
+const arrGifts = document.querySelectorAll(".gift-block-item");
+arrGifts.forEach((el) => {
+  el.onclick = () => {
+    const nameGift = el.querySelector("h4").innerHTML;
+    const giftForModal = dataGifts.find(
+      (el) => el.name.toLocaleLowerCase() === nameGift.toLocaleLowerCase()
+    );
+    createModalElemGift(document.body, giftForModal);
+  };
+});
+
+//timer
+createTimer();
+
+setInterval(() => {
+  createTimer();
+}, 1000);
